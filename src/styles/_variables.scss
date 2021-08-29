@@ -1,0 +1,20 @@
+:root {
+  /* =====================================================================
+    -> COLOR PALETTE
+  ===================================================================== */
+  // Primary
+  --color-primary: hsl(282, 83%, 52%);
+
+  // Secondary
+  --color-secondary: hsl(230, 76%, 59%);
+  --color-secondary-light--01: hsl(231, 100%, 97%);
+  --color-secondary-light--02: hsl(230, 60%, 98%);
+  --color-secondary-dark--01: hsl(230, 31%, 31%);
+  --color-secondary-dark--02: hsl(231, 33%, 34%);
+  --color-secondary-dark--02: hsl(224, 20%, 49%);
+
+  // Complementary
+  --color-complementary--01: hsl(14, 83%, 74%);
+  --color-complementary--02: hsl(204, 94%, 68%);
+  --color-danger: #c00c00;
+}

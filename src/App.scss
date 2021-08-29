@@ -1,5 +1,5 @@
-$danger: #c00c00;
+@import 'styles/variables';
 
 .App {
-  background-color: $danger;
+  background-color: var(--color-danger);
 }
