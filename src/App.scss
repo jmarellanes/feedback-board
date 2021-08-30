@@ -1,5 +1,4 @@
 @import 'styles/variables';
-
-.App {
-  background-color: var(--color-danger);
-}
+@import 'styles/abstracts';
+@import 'styles/base';
+@import 'styles/typography';

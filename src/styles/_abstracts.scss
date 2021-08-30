@@ -1,0 +1,41 @@
+/* =====================================================================
+  -> MIXINS
+===================================================================== */
+@mixin fn_text-properties {
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* =====================================================================
+  -> FUNCTIONS
+===================================================================== */
+/*
+  Convert px to rem
+  $size = font size value in px
+  $rem-default = default rem value
+*/
+@function fn_calculate-rem($size) {
+  $rem-default: 16;
+  $rem-size: $size / $rem-default;
+  @return #{$rem-size}rem;
+}
+
+/*
+  Calculate line-height
+  $lh = line height value in px
+  $size = font size value in px
+*/
+@function fn_calculate-lh($lh, $size) {
+  @return $lh / $size;
+}
+
+/*
+  Convert rem to px
+  $rem = font size value in rem
+  $rem-default = default rem value
+*/
+@function fn_calculate-px($rem) {
+  $rem-default: 16;
+  $px-size: $rem * $rem-default;
+  @return #{$px-size}px;
+}

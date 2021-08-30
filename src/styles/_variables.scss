@@ -11,10 +11,40 @@
   --color-secondary-light--02: hsl(230, 60%, 98%);
   --color-secondary-dark--01: hsl(230, 31%, 31%);
   --color-secondary-dark--02: hsl(231, 33%, 34%);
-  --color-secondary-dark--02: hsl(224, 20%, 49%);
+  --color-secondary-dark--03: hsl(224, 20%, 49%);
 
   // Complementary
   --color-complementary--01: hsl(14, 83%, 74%);
   --color-complementary--02: hsl(204, 94%, 68%);
-  --color-danger: #c00c00;
-}
+
+  /* =====================================================================
+    -> MARGINS AND PADDINGS
+  ===================================================================== */
+  // Base 16
+  --spacer-4: 0.25rem;
+  --spacer-8: 0.5rem;
+  --spacer-16: 1rem;
+  --spacer-24: 1.5rem;
+  --spacer-32: 2rem;
+  --spacer-40: 2.5rem;
+  --spacer-48: 3rem;
+  --spacer-56: 3.5rem;
+  --spacer-64: 4rem;
+  --spacer-72: 4.5rem;
+  --spacer-80: 5rem;
+  --spacer-96: 6rem;
+  --spacer-112: 7rem;
+  --spacer-128: 8rem;
+  --spacer-160: 10rem;
+  --spacer-176: 11rem;
+  --spacer-192: 12rem;
+  --spacer-208: 13rem;
+  --spacer-256: 16rem;
+
+  /* =====================================================================
+    -> FONTS
+  ===================================================================== */
+  --font-headings: 'jost_bold', serif;
+  --font-primary: 'jost_regular', sans-serif;
+  --font-primary--semibold: 'jost_semibold', sans-serif;
+} // -> :root
