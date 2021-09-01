@@ -6,33 +6,34 @@
 @font-face {
   font-family: 'jost_regular';
   font-display: swap;
-  src: url('../fonts/jost-regular.woff2') format('woff2'),
-    url('../fonts/jost-regular.woff') format('woff'),
-    url('../fonts/jost-regular.ttf') format('truetype');
+  src: url('../assets/fonts/jost-regular.woff2') format('woff2'),
+    url('../assets/fonts/jost-regular.woff') format('woff'),
+    url('../assets/fonts/jost-regular.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'jost_semibold';
   font-display: swap;
-  src: url('../fonts/jost-semibold.woff2') format('woff2'),
-    url('../fonts/jost-semibold.woff') format('woff'),
-    url('../fonts/jost-semibold.ttf') format('truetype');
+  src: url('../assets/fonts/jost-semibold.woff2') format('woff2'),
+    url('../assets/fonts/jost-semibold.woff') format('woff'),
+    url('../assets/fonts/jost-semibold.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'jost_bold';
   font-display: swap;
-  src: url('../fonts/jost-bold.woff2') format('woff2'),
-    url('../fonts/jost-bold.woff') format('woff'),
-    url('../fonts/jost-bold.ttf') format('truetype');
+  src: url('../assets/fonts/jost-bold.woff2') format('woff2'),
+    url('../assets/fonts/jost-bold.woff') format('woff'),
+    url('../assets/fonts/jost-bold.ttf') format('truetype');
 }
 
 /* =====================================================================
   -> GENERAL
 ===================================================================== */
 body {
-  font-family: var(--font-primary);
+  font-family: var(--font__primary);
   line-height: fn_calculate-lh(23, 16);
+  @include fn_text-properties;
 }
 
 /* =====================================================================
@@ -42,7 +43,8 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-headings);
+  font-family: var(--font__headings);
+  @include fn_text-properties;
 }
 
 h1 {

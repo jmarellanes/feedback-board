@@ -3,48 +3,58 @@
     -> COLOR PALETTE
   ===================================================================== */
   // Primary
-  --color-primary: hsl(282, 83%, 52%);
+  --color__primary: hsl(282, 83%, 52%);
+  --color__primary--light: hsl(282, 83%, 62%);
 
   // Secondary
-  --color-secondary: hsl(230, 76%, 59%);
-  --color-secondary-light--01: hsl(231, 100%, 97%);
-  --color-secondary-light--02: hsl(230, 60%, 98%);
-  --color-secondary-dark--01: hsl(230, 31%, 31%);
-  --color-secondary-dark--02: hsl(231, 33%, 34%);
-  --color-secondary-dark--03: hsl(224, 20%, 49%);
+  --color__secondary: hsl(230, 76%, 59%);
+  --color__secondary--light-01: hsl(230, 76%, 65%);
+  --color__secondary--light-02: hsl(230, 100%, 97%);
+  --color__secondary--light-03: hsl(230, 60%, 98%);
+
+  // Color Tertiary
+  --color__tertiary: hsl(231, 33%, 34%);
+  --color__tertiary--light-01: hsl(231, 33%, 50%);
+  --color__tertiary--light-02: hsl(224, 20%, 49%);
+
+  // Color Danger
+  --color__danger: hsl(0, 67%, 53%);
+  --color__danger--light: hsl(0, 67%, 65%);
 
   // Complementary
-  --color-complementary--01: hsl(14, 83%, 74%);
-  --color-complementary--02: hsl(204, 94%, 68%);
+  --color__complementary--01: hsl(14, 83%, 74%);
+  --color__complementary--02: hsl(204, 94%, 68%);
+  --color__light: #ffffff;
 
   /* =====================================================================
     -> MARGINS AND PADDINGS
   ===================================================================== */
   // Base 16
-  --spacer-4: 0.25rem;
-  --spacer-8: 0.5rem;
-  --spacer-16: 1rem;
-  --spacer-24: 1.5rem;
-  --spacer-32: 2rem;
-  --spacer-40: 2.5rem;
-  --spacer-48: 3rem;
-  --spacer-56: 3.5rem;
-  --spacer-64: 4rem;
-  --spacer-72: 4.5rem;
-  --spacer-80: 5rem;
-  --spacer-96: 6rem;
-  --spacer-112: 7rem;
-  --spacer-128: 8rem;
-  --spacer-160: 10rem;
-  --spacer-176: 11rem;
-  --spacer-192: 12rem;
-  --spacer-208: 13rem;
-  --spacer-256: 16rem;
+  --spacer__4: 0.25rem;
+  --spacer__8: 0.5rem;
+  --spacer__12: 0.75rem;
+  --spacer__16: 1rem;
+  --spacer__24: 1.5rem;
+  --spacer__32: 2rem;
+  --spacer__40: 2.5rem;
+  --spacer__48: 3rem;
+  --spacer__56: 3.5rem;
+  --spacer__64: 4rem;
+  --spacer__72: 4.5rem;
+  --spacer__80: 5rem;
+  --spacer__96: 6rem;
+  --spacer__112: 7rem;
+  --spacer__128: 8rem;
+  --spacer__160: 10rem;
+  --spacer__176: 11rem;
+  --spacer__192: 12rem;
+  --spacer__208: 13rem;
+  --spacer__256: 16rem;
 
   /* =====================================================================
     -> FONTS
   ===================================================================== */
-  --font-headings: 'jost_bold', serif;
-  --font-primary: 'jost_regular', sans-serif;
-  --font-primary--semibold: 'jost_semibold', sans-serif;
+  --font__headings: 'jost_bold', serif;
+  --font__primary: 'jost_regular', sans-serif;
+  --font__primary--semibold: 'jost_semibold', sans-serif;
 } // -> :root

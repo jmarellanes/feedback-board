@@ -1,3 +1,5 @@
+import Button from '../components/Button';
+
 export default function DesignSystem() {
   return (
     <div>
@@ -27,6 +29,16 @@ export default function DesignSystem() {
         necessitatibus exercitationem maxime culpa architecto repellendus amet
         aspernatur.
       </p>
+      <Button buttonStyle='button--primary'>Button Primary</Button>
+      <Button buttonStyle='button--secondary'>Button Secondary</Button>
+      <Button buttonStyle='button--tertiary'>Button Tertiary</Button>
+      <Button buttonStyle='button--danger'>Button Danger</Button>
+      <Button buttonStyle='button--back-light' svgIcon={true}>
+        Go Back
+      </Button>
+      <Button buttonStyle='button--back-dark' svgIcon={true}>
+        Go Back
+      </Button>
     </div>
   );
 }
