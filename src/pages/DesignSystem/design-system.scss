@@ -1,7 +1,10 @@
 .ds {
   max-width: 69rem;
-  margin: 0 auto;
+  margin: var(--spacer__24) auto;
   padding: var(--spacer__32) var(--spacer__48);
+
+  border-radius: 2rem;
+  background-color: white;
 
   &__section {
     margin-bottom: var(--spacer__48);
@@ -59,9 +62,10 @@
 
   &__element {
     margin-bottom: var(--spacer__24);
+
     &:last-child {
-      background-color: var(--color__secondary);
-      border-radius: 0.6rem;
+      background-color: var(--color__tertiary);
+      border-radius: 0.75rem;
     }
   }
 }

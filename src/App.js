@@ -4,7 +4,7 @@ import './App.scss';
 function App() {
   return (
     <div className='App'>
-      <div className='title'>Feedback Board</div>
+      {/* <div className='title'>Feedback Board</div> */}
       <DesignSystem />
     </div>
   );

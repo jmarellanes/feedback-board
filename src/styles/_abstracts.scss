@@ -1,9 +1,15 @@
 /* =====================================================================
   -> MIXINS
 ===================================================================== */
-@mixin fn_text-properties {
+@mixin fb_text-properties {
   font-weight: normal;
   font-style: normal;
+}
+
+@mixin fb_paragraph-semibold {
+  font-family: var(--font__primary--semibold);
+  font-size: fn_calculate-rem(13);
+  line-height: fn_calculate-lh(17, 13);
 }
 
 /* =====================================================================

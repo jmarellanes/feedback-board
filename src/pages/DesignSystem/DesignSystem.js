@@ -1,5 +1,5 @@
 import Button from '../../components/Button';
-import Upvote from '../../components/Upvote';
+import Upvotes from '../../components/Upvotes';
 import './design-system.scss';
 
 export default function DesignSystem() {
@@ -57,6 +57,21 @@ export default function DesignSystem() {
               architecto repellendus amet aspernatur.
             </p>
           </dd>
+          <dd className='ds-typography__element'>
+            <p className='ds-typography__details'>
+              Body 2 - Jost Semibold | 13px; 19px Line
+            </p>
+            <p className='paragraph--semibold'>
+              Facere sed eius, deserunt, nesciunt unde harum distinctio illum
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
+              consequuntur id maiores accusamus nam magnam tempora numquam
+              voluptas soluta mollitia praesentium! Nesciunt, enim repudiandae
+              modi placeat iste ab, odit cupiditate voluptate officiis laborum
+              architecto voluptatem quasi cum assumenda error expedita. Eveniet
+              doloribus numquam necessitatibus exercitationem maxime culpa
+              architecto repellendus amet aspernatur.
+            </p>
+          </dd>
         </dl>
       </section>
 
@@ -98,7 +113,7 @@ export default function DesignSystem() {
           </dt>
 
           <dd className='ds-interactive__element'>
-            <Upvote />
+            <Upvotes />
           </dd>
           <dd className='ds-interactive__element'></dd>
         </dl>

@@ -4,7 +4,7 @@
 
   color: var(--color__light);
   border: none;
-  border-radius: var(--spacer__12);
+  border-radius: 0.75rem;
   padding: var(--spacer__12) var(--spacer__24);
   cursor: pointer;
 
@@ -72,14 +72,14 @@
     }
 
     &:hover {
-      color: var(--color__tertiary--light-01);
+      color: var(--color__secondary--light-02);
 
       h4 {
         text-decoration: underline;
       }
 
       .icon--chevron-left {
-        stroke: var(--color__tertiary--light-01);
+        stroke: var(--color__secondary--light-02);
       }
     }
   }

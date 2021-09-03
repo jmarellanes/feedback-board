@@ -33,7 +33,7 @@
 body {
   font-family: var(--font__primary);
   line-height: fn_calculate-lh(23, 16);
-  @include fn_text-properties;
+  @include fb_text-properties;
 }
 
 /* =====================================================================
@@ -44,7 +44,7 @@ h2,
 h3,
 h4 {
   font-family: var(--font__headings);
-  @include fn_text-properties;
+  @include fb_text-properties;
 }
 
 h1 {
@@ -69,4 +69,12 @@ h4 {
   font-size: fn_calculate-rem(14);
   line-height: fn_calculate-lh(20, 14);
   letter-spacing: -0.2px;
+}
+
+/* =====================================================================
+-> PARAGRAPHS
+===================================================================== */
+.upvotes__quantity,
+.paragraph--semibold {
+  @include fb_paragraph-semibold;
 }
