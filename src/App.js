@@ -1,4 +1,4 @@
-import DesignSystem from './pages/DesignSystem';
+import DesignSystem from './pages/DesignSystem/DesignSystem';
 import './App.scss';
 
 function App() {
