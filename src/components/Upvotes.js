@@ -7,12 +7,12 @@ export default function Upvote() {
 
   function addUpvote() {
     if (isUpvoted) {
-      setIsUpvoted(!isUpvoted);
-      return setUpvotes(upvotes - 1);
+      setUpvotes((prevUpvotes) => prevUpvotes - 1);
+      return setIsUpvoted(!isUpvoted);
     }
 
+    setUpvotes((prevUpvotes) => prevUpvotes + 1);
     setIsUpvoted(!isUpvoted);
-    setUpvotes(upvotes + 1);
   }
 
   return (
