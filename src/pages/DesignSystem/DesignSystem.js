@@ -1,4 +1,5 @@
 import Button from '../../components/Button';
+import Category from '../../components/Category';
 import Upvotes from '../../components/Upvotes';
 import './design-system.scss';
 
@@ -115,7 +116,9 @@ export default function DesignSystem() {
           <dd className='ds-interactive__element'>
             <Upvotes />
           </dd>
-          <dd className='ds-interactive__element'></dd>
+          <dd className='ds-interactive__element'>
+            <Category>Ux</Category>
+          </dd>
         </dl>
       </section>
     </div>

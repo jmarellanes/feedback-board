@@ -46,14 +46,10 @@
 }
 
 .ds-buttons {
-  width: 100%;
-
   &__container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-
-    width: inherit;
   }
 
   &__title {
@@ -61,11 +57,30 @@
   }
 
   &__element {
-    margin-bottom: var(--spacer__24);
+    @media (max-width: 59rem) {
+      margin-bottom: var(--spacer__24);
+    }
 
     &:last-child {
       background-color: var(--color__tertiary);
       border-radius: 0.75rem;
+    }
+  }
+}
+
+.ds-interactive {
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__title {
+    flex-basis: 100%;
+  }
+
+  &__element {
+    &:not(:first-of-type) {
+      margin-left: var(--spacer__40);
     }
   }
 }

@@ -21,7 +21,7 @@ exports.handler = async (event) => {
   } catch (err) {
     return {
       statusCode: 500,
-      body: JSON.stringify('Faled to query records on Database'),
+      body: JSON.stringify('Failed to query records on Database'),
     };
   }
 };

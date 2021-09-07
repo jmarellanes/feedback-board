@@ -1,0 +1,29 @@
+.category {
+  background-color: var(--color__secondary--light-03);
+  color: var(--color__tertiary);
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--color__secondary--light-02);
+    color: var(--color__secondary);
+  }
+
+  &:active,
+  &--active {
+    background-color: var(--color__secondary);
+    color: var(--color__light);
+
+    &:hover {
+      background-color: var(--color__secondary--light-01);
+      color: var(--color__light);
+    }
+  }
+
+  &__name {
+    display: inline-block;
+    text-transform: uppercase;
+    padding: var(--spacer__8) var(--spacer__16);
+  }
+}
