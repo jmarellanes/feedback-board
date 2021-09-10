@@ -1,0 +1,81 @@
+@mixin field-focus {
+  border-color: red;
+  outline: 2px solid transparent;
+}
+
+@mixin field-disabled {
+  // border-color: gray;
+  // background-color: gray;
+  // cursor: not-allowed;
+
+  // &,
+  // option {
+  //   color: rgba(black, 0.45);
+  // }
+}
+
+// FORM RESET
+.form {
+  &__field {
+    --form-field-width: 46ch;
+    display: flex;
+
+    background-color: var(--color__secondary--light-03);
+    border: none;
+    border-radius: 0.25rem;
+    padding-left: 1.5rem;
+
+    font-family: inherit;
+
+    // fallback
+    font-size: 16px;
+    // Capitalized to prevent Sass thinking it's the Sass max()
+    font-size: Max(16px, 1rem);
+
+    max-width: 100%;
+    width: var(--form-field-width);
+
+    &:not(textarea) {
+      line-height: 1;
+      height: 3rem;
+    }
+
+    & select,
+    input {
+      appearance: none;
+      background-color: transparent;
+      border: none;
+      padding: 0 1.5rem 0 0;
+      margin: 0;
+      width: 100%;
+      font-family: inherit;
+      font-size: inherit;
+      font-style: inherit;
+      color: inherit;
+      cursor: inherit;
+      line-height: inherit;
+
+      // Remove focus ouline, will ad on alternate element
+      outline: none;
+    }
+  }
+}
+
+// GENERAL
+.form {
+  &__group {
+    & + .form__group {
+      margin-top: 1.5rem;
+    }
+  }
+
+  &__field {
+    &:focus {
+      @include field-focus;
+    }
+
+    &:disabled {
+      @include field-disabled;
+    }
+  }
+}

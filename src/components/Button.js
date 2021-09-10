@@ -1,6 +1,6 @@
 import { ReactComponent as ChevronLeft } from '../assets/images/chevron-left.svg';
 
-export default function Button({ children, buttonStyle, svgIcon }) {
+function Button({ children, buttonStyle, svgIcon }) {
   return (
     <button className={`button ${buttonStyle || ''}`}>
       {svgIcon ? <ChevronLeft /> : null}
@@ -8,3 +8,5 @@ export default function Button({ children, buttonStyle, svgIcon }) {
     </button>
   );
 }
+
+export default Button;

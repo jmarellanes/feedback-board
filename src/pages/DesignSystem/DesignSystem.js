@@ -1,5 +1,6 @@
 import Button from '../../components/Button';
 import Category from '../../components/Category';
+import SortBy from '../../components/SortBy';
 import Upvotes from '../../components/Upvotes';
 import './design-system.scss';
 
@@ -118,6 +119,9 @@ export default function DesignSystem() {
           </dd>
           <dd className='ds-interactive__element'>
             <Category>Ux</Category>
+          </dd>
+          <dd className='ds-interactive__element'>
+            <SortBy />
           </dd>
         </dl>
       </section>

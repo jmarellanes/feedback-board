@@ -82,5 +82,11 @@
     &:not(:first-of-type) {
       margin-left: var(--spacer__40);
     }
+
+    &:nth-child(4) {
+      flex-grow: 1;
+
+      max-width: 16rem;
+    }
   }
 }

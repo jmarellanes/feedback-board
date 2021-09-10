@@ -1,0 +1,8 @@
+.sortby {
+  display: flex;
+  align-items: center;
+
+  &__container {
+    flex-grow: 1;
+  }
+}
