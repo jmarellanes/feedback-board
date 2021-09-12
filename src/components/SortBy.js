@@ -20,55 +20,28 @@ const options = [
   },
 ];
 
-const sortByStyles = {
-  control: (styles) => {
-    return [
-      // console.log({ control: styles }),
-      {
-        ...styles,
-        backgroundColor: 'var(--color__tertiary)',
-        border: 'none',
-      },
-    ];
-  },
-  menu: (styles) => {
-    return [
-      // console.log({ menu: styles }),
-      {
-        ...styles,
-        backgroundColor: 'white',
-        borderRadius: '.75rem',
-        boxShadow: '0px 10px 40px -5px rgba(55, 63, 104, 0.3)',
-      },
-    ];
-  },
-  placeholder: (styles) => ({
-    ...styles,
-    color: 'var(--color__light)',
-  }),
-  groupHeading: (styles) => {
-    return [console.log(styles), ''];
-  },
-};
-
 function SortBy() {
   const [sortedBy, isSortedBy] = useState('Most Upvotes');
 
   return (
     <div className='sortby'>
-      <label htmlFor='sortby'>Sort By</label>
-      <div className='sortby__container'>
-        <Select
-          placeholder={sortedBy}
-          label='Sort By'
-          options={options}
-          onChange={(value) => isSortedBy(value.label)}
-          styles={sortByStyles}
-          name='sortby'
-          inputId='sortby'
-          openMenuOnFocus
-        />
-      </div>
+      <label htmlFor='sortby' className='sortby__label'>
+        Sort By:
+      </label>
+      <Select
+        defaultValue={{
+          label: 'Most Upvotes',
+          value: 'Most Upvotes',
+        }}
+        placeholder={sortedBy}
+        options={options}
+        onChange={(value) => isSortedBy(value.label)}
+        classNamePrefix='sortby'
+        className='sortby__container'
+        name='sortby'
+        inputId='sortby'
+        openMenuOnFocus
+      />
     </div>
   );
 }

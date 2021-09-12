@@ -13,6 +13,7 @@ export default function DesignSystem() {
             <h2>Colors</h2>
           </dt>
         </dl>
+        <SortBy />
       </section>
 
       <section className='ds-typography ds__section'>
