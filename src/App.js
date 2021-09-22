@@ -6,14 +6,16 @@ import Home from './pages/Home';
 function App() {
   return (
     <Router>
-      <Switch>
-        <Route exact path='/'>
-          <Home />
-        </Route>
-        <Route path='/design-system'>
-          <DesignSystem />
-        </Route>
-      </Switch>
+      <main className='main'>
+        <Switch>
+          <Route exact path='/'>
+            <Home />
+          </Route>
+          <Route path='/design-system'>
+            <DesignSystem />
+          </Route>
+        </Switch>
+      </main>
     </Router>
   );
 }

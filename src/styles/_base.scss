@@ -12,6 +12,11 @@
   box-sizing: inherit;
 }
 
+html,
+body {
+  height: 100%;
+}
+
 html {
   box-sizing: border-box;
   font-size: 100%; // 1rem = 16px

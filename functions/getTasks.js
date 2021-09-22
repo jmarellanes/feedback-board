@@ -9,14 +9,14 @@ const table = base(process.env.AIRTABLE_TABLE);
 
 exports.handler = async (event) => {
   try {
-    const records = await table.select().firstPage();
-    const formattedRecords = records.map((record) => ({
-      field: record.fields,
+    const tasks = await table.select().firstPage();
+    const formattedTasks = tasks.map((task) => ({
+      fields: task.fields,
     }));
 
     return {
       statusCode: 200,
-      body: JSON.stringify(formattedRecords),
+      body: JSON.stringify(formattedTasks),
     };
   } catch (err) {
     return {
