@@ -1,16 +1,12 @@
-import { Link } from 'react-router-dom';
-
-function FeedbackItem({ title, description, upvotes, category, comments, id }) {
+function FeedbackItem({ title, description, upvotes, category, comments }) {
   return (
-    <Link to={`/details/${id}`}>
-      <article>
-        <h2>{title}</h2>
-        <p>{upvotes}</p>
-        <p>{description}</p>
-        <p>{category}</p>
-        <p>{comments}</p>
-      </article>
-    </Link>
+    <article>
+      <h2>{title}</h2>
+      <p>{upvotes}</p>
+      <p>{description}</p>
+      <p>{category}</p>
+      <p>{comments}</p>
+    </article>
   );
 }
 

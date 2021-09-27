@@ -1,4 +1,5 @@
 import FeedbackItem from './FeedbackItem';
+import { Link } from 'react-router-dom';
 
 function FeedbackList({ feedbackList }) {
   const noFeedback = () => (
@@ -11,17 +12,21 @@ function FeedbackList({ feedbackList }) {
 
   const isFeedback = () =>
     feedbackList.map((feedback) => (
-      <FeedbackItem
-        title={feedback.fields.Title}
-        key={feedback.fields.TaskId}
-        description={feedback.fields.Description}
-        upvotes={feedback.fields.Upvotes}
-        category={feedback.fields.Category}
-        comments={
-          feedback.fields.Comments ? feedback.fields.Comments.length : 0
-        }
-        id={feedback.fields.TaskId}
-      />
+      <Link
+        to={`/feedback/${feedback.fields.FeedbackId}`}
+        aria-label={`Read all details for: ${feedback.fields.Title} feedback`}
+        key={feedback.fields.FeedbackId}
+      >
+        <FeedbackItem
+          title={feedback.fields.Title}
+          description={feedback.fields.Description}
+          upvotes={feedback.fields.Upvotes}
+          category={feedback.fields.Category}
+          comments={
+            feedback.fields.Comments ? feedback.fields.Comments.length : 0
+          }
+        />
+      </Link>
     ));
 
   return (

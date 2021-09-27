@@ -1,19 +1,12 @@
 const { feedbackTable } = require('./utils/airtable');
 
 exports.handler = async (event) => {
+  const feedback_id = event.queryStringParameters.id;
+
   try {
     const feedbackList = await feedbackTable
-      .select({
-        fields: [
-          'Title',
-          'FeedbackId',
-          'Description',
-          'Upvotes',
-          'Category',
-          'Comments',
-        ],
-      })
-      .firstPage();
+      .select({ filterByFormula: `RECORD_ID() = '${feedback_id}'` })
+      .all();
     const formattedFeedbackList = feedbackList.map((feedback) => ({
       fields: feedback.fields,
     }));
@@ -22,7 +15,7 @@ exports.handler = async (event) => {
       statusCode: 200,
       body: JSON.stringify(formattedFeedbackList),
     };
-  } catch (err) {
+  } catch (error) {
     return {
       statusCode: 500,
       body: JSON.stringify('Failed to query records on Database'),
