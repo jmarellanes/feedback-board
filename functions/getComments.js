@@ -2,18 +2,33 @@ const { commentsTable } = require('./utils/airtable');
 
 exports.handler = async (event) => {
   const feedback_id = event.queryStringParameters.id;
+  let comments = [];
+  let replies = [];
 
   try {
     const commentsList = await commentsTable
-      .select({ filterByFormula: `{FeedbackId} = '${feedback_id}'` })
+      .select({
+        filterByFormula: `{FeedbackId} = '${feedback_id}'`,
+        sort: [{ field: 'Timestamp' }],
+      })
       .all();
-    const formattedCommentList = commentsList.map((feedback) => ({
-      fields: feedback.fields,
-    }));
+
+    commentsList
+      .map((comment) => ({
+        fields: comment.fields,
+      }))
+      .filter(function (comment) {
+        if (!comment.fields.ParentId) {
+          comments.push(comment);
+          return true;
+        }
+        replies.push(comment);
+        return false;
+      });
 
     return {
       statusCode: 200,
-      body: JSON.stringify(formattedCommentList),
+      body: JSON.stringify({ comments, replies }),
     };
   } catch (error) {
     return {

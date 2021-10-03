@@ -1,4 +1,19 @@
-function FeedbackComments({ name, username, image, comment }) {
+import CommentsReply from './CommentsReply';
+
+function FeedbackComments({
+  name,
+  username,
+  image,
+  comment,
+  commentId,
+  parentId,
+  replies,
+}) {
+  // function test(replies) {
+  //   replies.map((reply) => {
+  //     return
+  //   })
+  // }
   return (
     <article>
       <header className='comment__info'>
@@ -12,6 +27,13 @@ function FeedbackComments({ name, username, image, comment }) {
         <p>{comment}</p>
       </div>
       <footer className='comment__reply-button'>Reply</footer>
+      {replies.map((reply) => (
+        <CommentsReply
+          key={reply.fields.CommentId}
+          name={reply.fields.Name}
+          id={reply.fields.ParentId}
+        />
+      ))}
     </article>
   );
 }

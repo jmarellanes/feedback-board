@@ -6,6 +6,7 @@ import FeedbackComments from '../components/FeedbackComments';
 function FeedbackDetails() {
   const [feedback, setFeedback] = useState([]);
   const [comments, setComments] = useState([]);
+  const [replies, setReplies] = useState([]);
   const { id } = useParams();
 
   const loadFeedbackDetails = async () => {
@@ -22,7 +23,8 @@ function FeedbackDetails() {
     try {
       const res = await fetch(`/api/getComments?id=${id}`);
       const commentsList = await res.json();
-      setComments(commentsList);
+      setComments(commentsList.comments);
+      setReplies(commentsList.replies);
     } catch (error) {
       console.log(error);
     }
@@ -53,14 +55,23 @@ function FeedbackDetails() {
             />
           </section>
           <section>
-            <h3>{`${feedback[0].fields.Comments.length} Comments`}</h3>
+            <h3>
+              {feedback[0].fields.Comments
+                ? `${feedback[0].fields.Comments.length} Comments`
+                : `0 Comments`}
+            </h3>
             {comments.map((comment) => (
               <FeedbackComments
-                key={comment.fields.CommentID}
+                key={comment.fields.CommentId}
                 image={comment.fields.Image}
                 name={comment.fields.Name}
                 username={comment.fields.Username}
                 comment={comment.fields.Comment}
+                commentId={comment.fields.CommentId}
+                parentId={
+                  comment.fields.ParentId ? comment.fields.ParentId : null
+                }
+                replies={replies}
               />
             ))}
           </section>
