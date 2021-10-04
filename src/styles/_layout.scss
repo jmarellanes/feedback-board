@@ -1,0 +1,19 @@
+.wrapper {
+  max-width: 69rem;
+  margin: 0 auto;
+}
+
+.header {
+  &-main {
+    display: inline-block;
+    vertical-align: top;
+
+    width: 20%;
+  }
+}
+
+.main {
+  display: inline-block;
+
+  width: 80%;
+}

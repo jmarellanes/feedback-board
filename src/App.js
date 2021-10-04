@@ -7,19 +7,17 @@ import './App.scss';
 function App() {
   return (
     <Router>
-      <main className='main'>
-        <Switch>
-          <Route path='/feedback/:id'>
-            <FeedbackDetails />
-          </Route>
-          <Route exact path='/'>
-            <Home />
-          </Route>
-          <Route path='/design-system'>
-            <DesignSystem />
-          </Route>
-        </Switch>
-      </main>
+      <Switch>
+        <Route path='/feedback/:id'>
+          <FeedbackDetails />
+        </Route>
+        <Route exact path='/'>
+          <Home />
+        </Route>
+        <Route path='/design-system'>
+          <DesignSystem />
+        </Route>
+      </Switch>
     </Router>
   );
 }
