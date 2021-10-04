@@ -1,14 +1,9 @@
 .wrapper {
   display: flex;
+
   max-width: 69rem;
   margin: 0 auto;
-}
-
-.header {
-  &-main {
-    width: 16rem;
-    margin-right: 2rem;
-  }
+  padding: 5rem 0 8rem;
 }
 
 .main {

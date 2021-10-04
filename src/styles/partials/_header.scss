@@ -1,0 +1,24 @@
+.header-main {
+  width: 16rem;
+  margin-right: 2rem;
+
+  &__brandmark {
+    border-radius: var(--rounded-corners);
+    background-image: url(../../assets/images/bg-radial.svg);
+    background-position: center bottom;
+  }
+
+  &__title,
+  &__user {
+    padding-left: 1.5rem;
+    color: var(--color__light);
+  }
+
+  &__title {
+    padding-top: 4rem;
+  }
+
+  &__user {
+    padding-bottom: 1.5rem;
+  }
+}

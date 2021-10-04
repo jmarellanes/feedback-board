@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="336" height="208" fill="none">
+  <path fill="url(#a)" d="M0 0h336v208H0z"/>
+  <mask id="b" width="336" height="208" x="0" y="0" maskUnits="userSpaceOnUse" style="mask-type:alpha">
+    <path fill="#fff" d="M0 0h336v208H0z"/>
+  </mask>
+  <g mask="url(#b)">
+    <g filter="url(#c)" opacity=".765">
+      <circle cx="40.5" cy="30.5" r="96" fill="#7AD8FB"/>
+    </g>
+    <g filter="url(#d)">
+      <circle cx="345.5" cy="208.5" r="96" fill="#FBB57A"/>
+    </g>
+  </g>
+  <defs>
+    <filter id="c" width="371.407" height="371.407" x="-145.203" y="-155.203" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur result="effect1_foregroundBlur" stdDeviation="44.852"/>
+    </filter>
+    <filter id="d" width="371.407" height="371.407" x="159.797" y="22.797" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur result="effect1_foregroundBlur" stdDeviation="44.852"/>
+    </filter>
+    <radialGradient id="a" cx="0" cy="0" r="1" gradientTransform="rotate(143.008 178.165 47.589) scale(445.53 436.516)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E84D70"/>
+      <stop offset=".531" stop-color="#A337F6"/>
+      <stop offset="1" stop-color="#28A7ED"/>
+    </radialGradient>
+  </defs>
+</svg>
