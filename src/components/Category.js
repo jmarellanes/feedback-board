@@ -1,15 +1,21 @@
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useParams } from 'react-router';
 
-function Category({ children }) {
-  const [isActive, setIsActive] = useState(false);
+function Category({ category, children }) {
+  const params = useParams();
+  const categorySlug = !params.categorySlug ? 'All' : params.categorySlug;
 
   return (
-    <button
-      className={`category ${isActive ? 'category--active' : ''}`}
-      onClick={() => setIsActive(!isActive)}
-    >
-      <span className='category__name'>{children}</span>
-    </button>
+    <li className='nav-main__item'>
+      <Link
+        to={category === 'All' ? '/' : category}
+        className={`nav-main__link ${
+          categorySlug === category ? 'nav-main__link--active' : ''
+        }`}
+      >
+        {children}
+      </Link>
+    </li>
   );
 }
 

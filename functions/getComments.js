@@ -18,12 +18,8 @@ exports.handler = async (event) => {
         fields: comment.fields,
       }))
       .filter(function (comment) {
-        if (!comment.fields.ParentId) {
-          comments.push(comment);
-          return true;
-        }
-        replies.push(comment);
-        return false;
+        if (!comment.fields.ParentId) return comments.push(comment);
+        return replies.push(comment);
       });
 
     return {

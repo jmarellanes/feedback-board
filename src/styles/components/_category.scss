@@ -1,29 +1,43 @@
-.category {
-  background-color: var(--color__secondary--light-03);
-  color: var(--color__tertiary);
-  border: none;
-  border-radius: 0.75rem;
-  cursor: pointer;
+.nav-main {
+  &__element {
+    display: flex;
+    flex-wrap: wrap;
 
-  &:hover {
-    background-color: var(--color__secondary--light-02);
-    color: var(--color__secondary);
+    border-radius: var(--rounded-corners);
+
+    list-style: none;
+    background-color: var(--color__light);
+    padding: 1.5rem 0 0.5rem 1.5rem;
   }
 
-  &:active,
-  &--active {
-    background-color: var(--color__secondary);
-    color: var(--color__light);
+  &__item {
+    margin-right: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  &__link {
+    display: inline-block;
+
+    background-color: var(--color__secondary--light-03);
+    border-radius: var(--rounded-corners);
+    color: var(--color__secondary);
+    padding: var(--spacer__8) var(--spacer__16);
+    text-decoration: none;
 
     &:hover {
-      background-color: var(--color__secondary--light-01);
-      color: var(--color__light);
+      background-color: var(--color__secondary--light-02);
+      color: var(--color__secondary);
     }
-  }
 
-  &__name {
-    display: inline-block;
-    text-transform: uppercase;
-    padding: var(--spacer__8) var(--spacer__16);
+    &:active,
+    &--active {
+      background-color: var(--color__secondary);
+      color: var(--color__light);
+
+      &:hover {
+        background-color: var(--color__secondary--light-01);
+        color: var(--color__light);
+      }
+    }
   }
 }

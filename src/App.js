@@ -11,6 +11,9 @@ function App() {
         <Route path='/feedback/:id'>
           <FeedbackDetails />
         </Route>
+        <Route exact path='/:categorySlug'>
+          <Home />
+        </Route>
         <Route exact path='/'>
           <Home />
         </Route>
