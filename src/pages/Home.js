@@ -4,11 +4,12 @@ import FeedbackList from '../components/FeedbackList';
 import Header from '../components/Header';
 import HeaderBrandmark from '../components/HeaderBrandmark';
 import NavMain from '../components/NavMain';
-import HeaderRoadmapCard from '../components/HeaderRoadmapCard';
+import RoadmapCard from '../components/RoadmapCard';
 
 function Home() {
   const [feedback, setFeedback] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [status, setStatus] = useState([]);
   const { categorySlug } = useParams();
 
   useEffect(() => {
@@ -17,9 +18,10 @@ function Home() {
         const res = await fetch(
           `/api/getFeedbackList/?categorySlug=${categorySlug}`
         );
-        const feedbackList = await res.json();
-        setFeedback(feedbackList.formattedFeedbackList);
-        setCategories(feedbackList.categoriesList);
+        const feedbackRes = await res.json();
+        setFeedback(feedbackRes.feedbackList);
+        setCategories(feedbackRes.categoriesList);
+        setStatus(feedbackRes.statusList);
       } catch (error) {
         console.log(error);
       }
@@ -33,7 +35,7 @@ function Home() {
       <Header>
         <HeaderBrandmark title='FeedbackTo' />
         <NavMain categories={categories} />
-        <HeaderRoadmapCard />
+        <RoadmapCard statusList={status} />
       </Header>
       <main className='main'>
         <FeedbackList feedbackList={feedback} />

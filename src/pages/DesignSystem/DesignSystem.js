@@ -1,3 +1,4 @@
+import Anchor from '../../components/Anchor';
 import Button from '../../components/Button';
 import Category from '../../components/Category';
 import SortBy from '../../components/SortBy';
@@ -98,8 +99,13 @@ export default function DesignSystem() {
           </dd>
           <dd className='ds-buttons__element'>
             <Button buttonStyle='button--back-light' svgIcon={true}>
-              Go Back
+              Button Go Back
             </Button>
+          </dd>
+          <dd className='ds-buttons__element'>
+            <Anchor path='#0' anchorStyle='anchor--back-light' svgIcon={true}>
+              Anchor Go Back
+            </Anchor>
           </dd>
           <dd className='ds-buttons__element'>
             <Button buttonStyle='button--back-dark' svgIcon={true}>

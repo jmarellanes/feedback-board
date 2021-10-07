@@ -2,6 +2,12 @@
   width: 16rem;
   margin-right: 2rem;
 
+  &__container {
+    > *:not(:last-child) {
+      margin-bottom: 1.5rem;
+    }
+  }
+
   &__brandmark {
     border-radius: var(--rounded-corners);
     background-image: url(../../assets/images/bg-radial.svg);

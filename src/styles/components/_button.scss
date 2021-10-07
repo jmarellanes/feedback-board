@@ -1,10 +1,13 @@
+/* =====================================================================
+  -> BUTTON
+===================================================================== */
 .button {
   display: flex;
   align-items: center;
 
   color: var(--color__light);
   border: none;
-  border-radius: 0.75rem;
+  border-radius: var(--rounded-corners);
   padding: var(--spacer__12) var(--spacer__24);
   cursor: pointer;
 
@@ -58,6 +61,65 @@
 
       .icon--chevron-left {
         stroke: var(--color__tertiary--light-01);
+      }
+    }
+  }
+
+  &--back-dark {
+    color: var(--color__light);
+    background-color: transparent;
+
+    .icon--chevron-left {
+      margin-right: var(--spacer__16);
+      stroke: var(--color__light);
+    }
+
+    &:hover {
+      color: var(--color__secondary--light-02);
+
+      h4 {
+        text-decoration: underline;
+      }
+
+      .icon--chevron-left {
+        stroke: var(--color__secondary--light-02);
+      }
+    }
+  }
+}
+
+/* =====================================================================
+  -> ANCHOR
+===================================================================== */
+.anchor {
+  display: flex;
+  align-items: center;
+
+  color: var(--color__light);
+  border: none;
+  border-radius: var(--rounded-corners);
+  padding: var(--spacer__8) var(--spacer__8);
+  cursor: pointer;
+  text-decoration: none;
+
+  &--back-light {
+    color: var(--color__secondary);
+    background-color: transparent;
+
+    .icon--chevron-left {
+      margin-right: var(--spacer__16);
+      stroke: var(--color__tertiary);
+    }
+
+    &:hover {
+      color: var(--color__secondary--light-01);
+
+      h4 {
+        text-decoration: underline;
+      }
+
+      .icon--chevron-left {
+        stroke: var(--color__secondary--light-01);
       }
     }
   }

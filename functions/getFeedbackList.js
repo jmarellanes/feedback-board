@@ -10,7 +10,7 @@ exports.handler = async (event) => {
   };
 
   try {
-    const feedbackList = await feedbackTable
+    const feedbackRecords = await feedbackTable
       .select({
         filterByFormula: filterSlug(),
         sort: [{ field: 'Upvotes', direction: 'desc' }],
@@ -25,26 +25,49 @@ exports.handler = async (event) => {
         ],
       })
       .all();
-    const categories = await feedbackTable
+    const categoriesRecords = await feedbackTable
       .select({
-        filterByFormula: `{Status} = 'Suggestion'`,
-        fields: ['Category'],
+        sort: [{ field: 'Status' }],
+        fields: ['Category', 'Status'],
       })
       .all();
 
-    const formattedFeedbackList = feedbackList.map((feedback) => ({
+    // Formatting Data
+    const feedbackList = feedbackRecords.map((feedback) => ({
       fields: feedback.fields,
     }));
-    const formattedCategoryList = categories
+
+    const formattedCategoryList = categoriesRecords
       .map((category) => category.fields.Category)
       .filter((category, index, array) => array.indexOf(category) === index);
     const categoriesList = ['All'].concat(formattedCategoryList);
 
+    const statusList = categoriesRecords
+      .map((status) => status.fields.Status)
+      .filter((status) => status !== 'Suggestion')
+      .reduce(
+        (acc, value) => {
+          const { data, map } = acc;
+          const index = map.get(value);
+          if (map.has(value)) {
+            data[index][1]++;
+          } else {
+            map.set(value, data.push([value, 1]) - 1);
+          }
+          return { data, map };
+        },
+        {
+          data: [],
+          map: new Map(),
+        }
+      ).data;
+
     return {
       statusCode: 200,
       body: JSON.stringify({
-        formattedFeedbackList,
+        feedbackList,
         categoriesList,
+        statusList,
       }),
     };
   } catch (err) {

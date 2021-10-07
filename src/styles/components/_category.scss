@@ -1,13 +1,13 @@
 .nav-main {
+  padding: 1.5rem 0 0.5rem 1.5rem;
+  background-color: var(--color__light);
+  border-radius: var(--rounded-corners);
+
   &__element {
     display: flex;
     flex-wrap: wrap;
 
-    border-radius: var(--rounded-corners);
-
     list-style: none;
-    background-color: var(--color__light);
-    padding: 1.5rem 0 0.5rem 1.5rem;
   }
 
   &__item {
