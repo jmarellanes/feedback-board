@@ -1,5 +1,5 @@
 .nav-main {
-  padding: 1.5rem 0 0.5rem 1.5rem;
+  padding: var(--spacer__24) 0 var(--spacer__8) var(--spacer__24);
   background-color: var(--color__light);
   border-radius: var(--rounded-corners);
 
@@ -11,8 +11,8 @@
   }
 
   &__item {
-    margin-right: 0.5rem;
-    margin-bottom: 1rem;
+    margin-right: var(--spacer__8);
+    margin-bottom: var(--spacer__16);
   }
 
   &__link {

@@ -23,7 +23,7 @@
     background-color: var(--color__secondary--light-03);
     border: none;
     border-radius: 0.25rem;
-    padding-left: 1.5rem;
+    padding-left: var(--spacer__24);
 
     font-family: inherit;
 
@@ -45,7 +45,7 @@
       appearance: none;
       background-color: transparent;
       border: none;
-      padding: 0 1.5rem 0 0;
+      padding: 0 var(--spacer__24) 0 0;
       margin: 0;
       width: 100%;
       font-family: inherit;
@@ -65,7 +65,7 @@
 .form {
   &__group {
     & + .form__group {
-      margin-top: 1.5rem;
+      margin-top: var(--spacer__24);
     }
   }
 

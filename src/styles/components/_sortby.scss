@@ -7,7 +7,7 @@
   font-size: fn_calculate-rem(14);
   background-color: var(--color__tertiary);
   border-radius: 0.75rem;
-  padding: 1rem 1rem;
+  padding: var(--spacer__16) var(--spacer__16);
   cursor: pointer;
 
   &__label {
@@ -48,14 +48,14 @@
 
       width: 16rem;
       left: -4rem;
-      margin-top: 2rem;
+      margin-top: var(--spacer__32);
       border-radius: 0.75rem;
       box-shadow: 0px 10px 40px -7px rgba(55, 63, 104, 0.4);
     }
 
     .sortby__option {
       border-bottom: 1px solid rgba(233, 31, 50, 0.15);
-      padding: 0.8rem 1.5rem;
+      padding: var(--spacer__12) var(--spacer__24);
       cursor: inherit;
 
       &:last-child {
