@@ -9,3 +9,12 @@
 .main {
   flex-grow: 1;
 }
+
+.header {
+  &-main {
+    &__user {
+      display: flex;
+      align-items: center;
+    }
+  }
+}

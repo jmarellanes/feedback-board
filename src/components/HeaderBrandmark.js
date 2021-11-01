@@ -6,12 +6,12 @@ export default function HeaderBrandmark({ title }) {
   const isUser = () => {
     return (
       <>
-        <div className='header-main__name'>{user.name}</div>
         <img
           className='header-main__image'
           src={user.image}
           alt={`${user.name} profile`}
         />
+        <div className='header-main__name'>{user.name}</div>
       </>
     );
   };
