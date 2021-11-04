@@ -12,6 +12,12 @@
   line-height: fn_calculate-lh(17, 13);
 }
 
+@mixin fb_paragraph-bold {
+  font-family: var(--font__headings);
+  font-size: fn_calculate-rem(16);
+  line-height: fn_calculate-lh(23, 16);
+}
+
 /* =====================================================================
   -> FUNCTIONS
 ===================================================================== */

@@ -11,8 +11,14 @@
   }
 
   &__item {
-    margin-right: var(--spacer__8);
-    margin-bottom: var(--spacer__16);
+    &:first-child {
+      margin-right: var(--spacer__8);
+    }
+
+    & + .nav-main__item {
+      margin-right: var(--spacer__8);
+      margin-bottom: var(--spacer__16);
+    }
   }
 
   &__link {

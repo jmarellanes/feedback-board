@@ -1,0 +1,51 @@
+.feedback {
+  &__container {
+    > *:not(:last-child) {
+      margin-bottom: var(--spacer__24);
+    }
+  }
+
+  &__item {
+    display: flex;
+
+    padding: var(--spacer__32);
+    background-color: var(--color__light);
+    border-radius: var(--rounded-corners);
+
+    & > .upvotes {
+      order: 1;
+      height: fit-content;
+
+      margin-right: var(--spacer__40);
+    }
+  }
+
+  &__description {
+    order: 2;
+    flex-grow: 1;
+  }
+
+  &__comments {
+    order: 3;
+
+    display: flex;
+    align-items: center;
+
+    & .icon--comments {
+      margin-right: var(--spacer__12);
+    }
+  }
+
+  &__link {
+    margin-bottom: var(--spacer__16);
+
+    h2 {
+      margin-bottom: var(--spacer__4);
+    }
+
+    p {
+      color: var(--color__tertiary--light-02);
+      margin-right: var(--spacer__40);
+    }
+  }
+}

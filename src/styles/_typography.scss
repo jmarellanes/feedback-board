@@ -79,3 +79,8 @@ h4 {
 .paragraph--semibold {
   @include fb_paragraph-semibold;
 }
+
+.feedback__quantity,
+.paragraph--bold {
+  @include fb_paragraph-bold;
+}

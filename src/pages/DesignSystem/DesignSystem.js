@@ -63,7 +63,22 @@ export default function DesignSystem() {
           </dd>
           <dd className='ds-typography__element'>
             <p className='ds-typography__details'>
-              Body 2 - Jost Semibold | 13px; 19px Line
+              Body 2 - Jost Regular | 16px; 23px Line
+            </p>
+            <p className='paragraph--bold'>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
+              facere sed eius, deserunt, nesciunt unde harum distinctio illum
+              consequuntur id maiores accusamus nam magnam tempora numquam
+              voluptas soluta mollitia praesentium! Nesciunt, enim repudiandae
+              modi placeat iste ab, odit cupiditate voluptate officiis laborum
+              architecto voluptatem quasi cum assumenda error expedita. Eveniet
+              doloribus numquam necessitatibus exercitationem maxime culpa
+              architecto repellendus amet aspernatur.
+            </p>
+          </dd>
+          <dd className='ds-typography__element'>
+            <p className='ds-typography__details'>
+              Body 3 - Jost Semibold | 13px; 19px Line
             </p>
             <p className='paragraph--semibold'>
               Facere sed eius, deserunt, nesciunt unde harum distinctio illum
