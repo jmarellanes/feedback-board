@@ -10,11 +10,13 @@ function Home() {
   const [feedback, setFeedback] = useState([]);
   const [categories, setCategories] = useState([]);
   const [status, setStatus] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { categorySlug } = useParams();
 
   useEffect(() => {
     const loadFeedback = async () => {
       try {
+        setLoading(true);
         const res = await fetch(
           `/api/getFeedbackList/?categorySlug=${categorySlug}`
         );
@@ -25,6 +27,8 @@ function Home() {
       } catch (error) {
         console.log(error);
       }
+
+      setLoading(false);
     };
 
     loadFeedback();
@@ -38,7 +42,7 @@ function Home() {
         <RoadmapCard statusList={status} />
       </Header>
       <main className='main'>
-        <FeedbackList feedbackList={feedback} />
+        <FeedbackList feedbackList={feedback} loading={loading} />
       </main>
     </>
   );

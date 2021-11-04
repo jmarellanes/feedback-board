@@ -1,6 +1,7 @@
 import FeedbackItem from './FeedbackItem';
+import Loader from './Loader';
 
-function FeedbackList({ feedbackList }) {
+function FeedbackList({ feedbackList, loading }) {
   const noFeedback = () => (
     <>
       <h2>There is not Feedback</h2>
@@ -22,6 +23,8 @@ function FeedbackList({ feedbackList }) {
         key={feedback.fields.FeedbackId}
       />
     ));
+
+  if (loading) return <Loader />;
 
   return (
     <section className='feedback' aria-labelledby='section-feedback'>
