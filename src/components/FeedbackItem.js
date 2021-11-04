@@ -11,7 +11,7 @@ function FeedbackItem({ title, description, upvotes, category, comments }) {
           <p>{description}</p>
         </div>
         <ul className='nav-main__element feedback__category'>
-          <Category>{category}</Category>
+          <Category category={category}>{category}</Category>
         </ul>
       </div>
 
