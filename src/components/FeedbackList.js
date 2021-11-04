@@ -19,6 +19,7 @@ function FeedbackList({ feedbackList }) {
         comments={
           feedback.fields.Comments ? feedback.fields.Comments.length : 0
         }
+        key={feedback.fields.FeedbackId}
       />
     ));
 
