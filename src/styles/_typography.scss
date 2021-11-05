@@ -40,32 +40,40 @@ body {
 -> HEADINGS
 ===================================================================== */
 h1,
+.h1,
 h2,
+.h2,
 h3,
-h4 {
+.h3,
+h4,
+.h4 {
   font-family: var(--font__headings);
   @include fb_text-properties;
 }
 
-h1 {
+h1,
+.h1 {
   font-size: fn_calculate-rem(24);
   line-height: fn_calculate-lh(35, 24);
   letter-spacing: -0.3px;
 }
 
-h2 {
+h2,
+.h2 {
   font-size: fn_calculate-rem(20);
   line-height: fn_calculate-lh(29, 20);
   letter-spacing: -0.25px;
 }
 
-h3 {
+h3,
+.h3 {
   font-size: fn_calculate-rem(18);
   line-height: fn_calculate-lh(26, 18);
   letter-spacing: -0.25px;
 }
 
-h4 {
+h4,
+.h4 {
   font-size: fn_calculate-rem(14);
   line-height: fn_calculate-lh(20, 14);
   letter-spacing: -0.2px;

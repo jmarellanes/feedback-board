@@ -42,7 +42,13 @@ function FeedbackDetails() {
       ) : (
         <>
           <main className='main'>
-            <section>
+            <section
+              className='feedback-details'
+              aria-labelledby='section-feedback-details'
+            >
+              <h2 id='section-feedback-details' hidden>
+                Feedback Details
+              </h2>
               <FeedbackItem
                 title={feedback[0].fields.Title}
                 description={feedback[0].fields.Description}
@@ -56,29 +62,33 @@ function FeedbackDetails() {
                 link={false}
               />
             </section>
-            <section>
-              <div className='comments__container'>
-                <h3>
-                  {feedback[0].fields.Comments
-                    ? `${feedback[0].fields.Comments.length} Comments`
-                    : `0 Comments`}
-                </h3>
-                {comments.map((comment) => (
-                  <FeedbackComments
-                    quantity={feedback[0].fields.Comments}
-                    key={comment.fields.CommentId}
-                    image={comment.fields.Image}
-                    name={comment.fields.Name}
-                    username={comment.fields.Username}
-                    comment={comment.fields.Comment}
-                    commentId={comment.fields.CommentId}
-                    parentId={
-                      comment.fields.ParentId ? comment.fields.ParentId : null
-                    }
-                    replies={replies}
-                  />
-                ))}
-              </div>
+            <section
+              className='feedback-comments'
+              aria-labelledby='section-feedback-comments'
+            >
+              <h2 id='section-feedback-comments' hidden>
+                Feedback Comments
+              </h2>
+              <p className='h3'>
+                {feedback[0].fields.Comments
+                  ? `${feedback[0].fields.Comments.length} Comments`
+                  : `0 Comments`}
+              </p>
+              {comments.map((comment) => (
+                <FeedbackComments
+                  quantity={feedback[0].fields.Comments}
+                  key={comment.fields.CommentId}
+                  image={comment.fields.Image}
+                  name={comment.fields.Name}
+                  username={comment.fields.Username}
+                  comment={comment.fields.Comment}
+                  commentId={comment.fields.CommentId}
+                  parentId={
+                    comment.fields.ParentId ? comment.fields.ParentId : null
+                  }
+                  replies={replies}
+                />
+              ))}
             </section>
           </main>
         </>
