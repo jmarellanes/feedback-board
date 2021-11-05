@@ -39,7 +39,21 @@
   }
 
   &__link {
+    display: block;
     margin-bottom: var(--spacer__16);
+
+    &--anchor {
+      text-decoration: none;
+
+      &:link,
+      &:visited {
+        color: var(--color__tertiary);
+      }
+
+      &:hover {
+        color: var(--color__secondary);
+      }
+    }
 
     h2 {
       margin-bottom: var(--spacer__4);

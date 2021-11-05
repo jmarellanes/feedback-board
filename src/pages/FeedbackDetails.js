@@ -52,6 +52,7 @@ function FeedbackDetails() {
                   ? feedback[0].fields.Comments.length
                   : 0
               }
+              link={false}
             />
           </section>
           <section>

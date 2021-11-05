@@ -1,10 +1,10 @@
-import { useEffect, useRef } from 'react';
+// import { useRef } from 'react';
 // import { gsap } from 'gsap';
 import FeedbackItem from './FeedbackItem';
 import Loader from './Loader';
 
 function FeedbackList({ feedbackList, loading }) {
-  const feedbackRef = useRef();
+  // const feedbackRef = useRef();
   const noFeedback = () => (
     <>
       <h2>There is not Feedback</h2>
@@ -24,6 +24,8 @@ function FeedbackList({ feedbackList, loading }) {
           feedback.fields.Comments ? feedback.fields.Comments.length : 0
         }
         key={feedback.fields.FeedbackId}
+        id={feedback.fields.FeedbackId}
+        link={true}
       />
     ));
 
@@ -37,7 +39,7 @@ function FeedbackList({ feedbackList, loading }) {
     <section
       className='feedback'
       aria-labelledby='section-feedback'
-      ref={feedbackRef}
+      // ref={feedbackRef}
     >
       <h2 id='section-feedback' hidden>
         Feedback List
