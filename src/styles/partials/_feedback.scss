@@ -1,4 +1,13 @@
 .feedback {
+  &-page__container {
+    max-width: 46rem;
+    margin: 0 auto;
+
+    & section:not(:last-child) {
+      margin-bottom: var(--spacer__24);
+    }
+  }
+
   &-list {
     &__container {
       > *:not(:last-child) {

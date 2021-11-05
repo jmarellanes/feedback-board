@@ -42,7 +42,9 @@ function Home() {
         <RoadmapCard statusList={status} />
       </Header>
       <main className='main'>
-        <FeedbackList feedbackList={feedback} loading={loading} />
+        <div className='home-page__container'>
+          <FeedbackList feedbackList={feedback} loading={loading} />
+        </div>
       </main>
     </>
   );
