@@ -57,25 +57,28 @@ function FeedbackDetails() {
               />
             </section>
             <section>
-              <h3>
-                {feedback[0].fields.Comments
-                  ? `${feedback[0].fields.Comments.length} Comments`
-                  : `0 Comments`}
-              </h3>
-              {comments.map((comment) => (
-                <FeedbackComments
-                  key={comment.fields.CommentId}
-                  image={comment.fields.Image}
-                  name={comment.fields.Name}
-                  username={comment.fields.Username}
-                  comment={comment.fields.Comment}
-                  commentId={comment.fields.CommentId}
-                  parentId={
-                    comment.fields.ParentId ? comment.fields.ParentId : null
-                  }
-                  replies={replies}
-                />
-              ))}
+              <div className='comments__container'>
+                <h3>
+                  {feedback[0].fields.Comments
+                    ? `${feedback[0].fields.Comments.length} Comments`
+                    : `0 Comments`}
+                </h3>
+                {comments.map((comment) => (
+                  <FeedbackComments
+                    quantity={feedback[0].fields.Comments}
+                    key={comment.fields.CommentId}
+                    image={comment.fields.Image}
+                    name={comment.fields.Name}
+                    username={comment.fields.Username}
+                    comment={comment.fields.Comment}
+                    commentId={comment.fields.CommentId}
+                    parentId={
+                      comment.fields.ParentId ? comment.fields.ParentId : null
+                    }
+                    replies={replies}
+                  />
+                ))}
+              </div>
             </section>
           </main>
         </>

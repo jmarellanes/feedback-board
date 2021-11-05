@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ReactComponent as ChevronUp } from '../assets/images/chevron-up.svg';
 
-export default function Upvote() {
+export default function Upvote({ feedbackItemClass }) {
   const [upvotes, setUpvotes] = useState(14);
   const [isUpvoted, setIsUpvoted] = useState(false);
 
@@ -17,7 +17,7 @@ export default function Upvote() {
 
   return (
     <button
-      className={`upvotes feedback__upvotes ${
+      className={`upvotes ${feedbackItemClass} ${
         isUpvoted ? 'upvotes--active' : ''
       }`}
       onClick={addUpvote}

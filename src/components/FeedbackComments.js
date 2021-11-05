@@ -15,7 +15,7 @@ function FeedbackComments({
   //   })
   // }
   return (
-    <article>
+    <article className='comment__item'>
       <header className='comment__info'>
         <h4>{name}</h4>
         <p>{username}</p>

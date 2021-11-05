@@ -37,14 +37,14 @@ function FeedbackList({ feedbackList, loading }) {
 
   return (
     <section
-      className='feedback'
-      aria-labelledby='section-feedback'
+      className='feedback-list'
+      aria-labelledby='section-feedback-list'
       // ref={feedbackRef}
     >
-      <h2 id='section-feedback' hidden>
+      <h2 id='section-feedback-list' hidden>
         Feedback List
       </h2>
-      <div className='feedback__container'>
+      <div className='feedback-list__container'>
         {!feedbackList.length ? noFeedback() : isFeedback()}
       </div>
     </section>

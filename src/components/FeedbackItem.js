@@ -16,31 +16,31 @@ function FeedbackItem({
     return link ? (
       <Link
         to={`/feedback/${id}`}
-        className='feedback__link feedback__link--anchor'
+        className='feedback-item__link feedback-item__link--anchor'
         aria-label={`Read all details for: ${title} feedback`}
       >
         {children}
       </Link>
     ) : (
-      <div className='feedback__link'>{children}</div>
+      <div className='feedback-item__link'>{children}</div>
     );
   };
 
   return (
-    <article className='feedback__item'>
-      <div className='feedback__description'>
+    <article className='feedback-item'>
+      <div className='feedback-item__description'>
         <Tag>
           <h2>{title}</h2>
           <p>{description}</p>
         </Tag>
-        <ul className='nav-main__element feedback__category'>
+        <ul className='nav-main__element feedback-item__category'>
           <Category category={category}>{category}</Category>
         </ul>
       </div>
 
-      <Upvotes />
+      <Upvotes feedbackItemClass='feedback-item__upvotes' />
 
-      <div className='feedback__quantity'>
+      <div className='feedback-item__quantity'>
         <CommentsIcon />
         <span>{comments}</span>
       </div>
