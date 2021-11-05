@@ -17,7 +17,9 @@ export default function Upvote() {
 
   return (
     <button
-      className={`upvotes ${isUpvoted ? 'upvotes--active' : ''}`}
+      className={`upvotes feedback__upvotes ${
+        isUpvoted ? 'upvotes--active' : ''
+      }`}
       onClick={addUpvote}
     >
       <ChevronUp />

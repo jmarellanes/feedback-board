@@ -40,9 +40,9 @@ function FeedbackItem({
 
       <Upvotes />
 
-      <div className='feedback__comments'>
+      <div className='feedback__quantity'>
         <CommentsIcon />
-        <span className='feedback__quantity'>{comments}</span>
+        <span>{comments}</span>
       </div>
     </article>
   );

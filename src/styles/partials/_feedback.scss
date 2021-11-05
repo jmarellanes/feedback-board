@@ -13,13 +13,6 @@
     padding: var(--spacer__32);
     background-color: var(--color__light);
     border-radius: var(--rounded-corners);
-
-    & > .upvotes {
-      order: 1;
-      height: fit-content;
-
-      margin-right: var(--spacer__40);
-    }
   }
 
   &__description {
@@ -27,7 +20,14 @@
     flex-grow: 1;
   }
 
-  &__comments {
+  &__upvotes {
+    order: 1;
+    height: fit-content;
+
+    margin-right: var(--spacer__40);
+  }
+
+  &__quantity {
     order: 3;
 
     display: flex;
