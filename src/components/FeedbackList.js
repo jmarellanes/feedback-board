@@ -1,7 +1,10 @@
+import { useEffect, useRef } from 'react';
+// import { gsap } from 'gsap';
 import FeedbackItem from './FeedbackItem';
 import Loader from './Loader';
 
 function FeedbackList({ feedbackList, loading }) {
+  const feedbackRef = useRef();
   const noFeedback = () => (
     <>
       <h2>There is not Feedback</h2>
@@ -24,10 +27,18 @@ function FeedbackList({ feedbackList, loading }) {
       />
     ));
 
+  // useEffect(() => {
+  //   gsap.to(feedbackRef.current, { opacity: 1 });
+  // });
+
   if (loading) return <Loader />;
 
   return (
-    <section className='feedback' aria-labelledby='section-feedback'>
+    <section
+      className='feedback'
+      aria-labelledby='section-feedback'
+      ref={feedbackRef}
+    >
       <h2 id='section-feedback' hidden>
         Feedback List
       </h2>

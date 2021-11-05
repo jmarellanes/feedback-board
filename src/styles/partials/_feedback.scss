@@ -1,4 +1,6 @@
 .feedback {
+  // opacity: 0;
+
   &__container {
     > *:not(:last-child) {
       margin-bottom: var(--spacer__24);
