@@ -2,8 +2,7 @@ const { commentsTable } = require('./utils/airtable');
 
 exports.handler = async (event) => {
   const feedback_id = event.queryStringParameters.id;
-  let comments = [];
-  let replies = [];
+  let topLevelComments = [];
 
   try {
     const commentsList = await commentsTable
@@ -13,18 +12,22 @@ exports.handler = async (event) => {
       })
       .all();
 
-    commentsList
+    const allComments = commentsList.map((comment) => ({
+      fields: comment.fields,
+    }));
+
+    topLevelComments = commentsList
       .map((comment) => ({
         fields: comment.fields,
       }))
       .filter(function (comment) {
-        if (!comment.fields.ParentId) return comments.push(comment);
-        return replies.push(comment);
+        if (!comment.fields.ParentId) return topLevelComments.push(comment);
+        return null;
       });
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ comments, replies }),
+      body: JSON.stringify({ allComments, topLevelComments }),
     };
   } catch (error) {
     return {

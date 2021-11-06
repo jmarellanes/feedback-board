@@ -85,5 +85,8 @@
   }
 
   &-comment {
+    &--reply {
+      margin-left: var(--spacer__24);
+    }
   }
 }
