@@ -6,10 +6,15 @@
   font-style: normal;
 }
 
+@mixin fb_paragraph-small {
+  font-size: fn_calculate-rem(14);
+  line-height: fn_calculate-lh(19, 14);
+}
+
 @mixin fb_paragraph-semibold {
   font-family: var(--font__primary--semibold);
-  font-size: fn_calculate-rem(13);
-  line-height: fn_calculate-lh(17, 13);
+  font-size: fn_calculate-rem(14);
+  line-height: fn_calculate-lh(19, 14);
 }
 
 @mixin fb_paragraph-bold {

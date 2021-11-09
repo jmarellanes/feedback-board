@@ -72,12 +72,11 @@ function FeedbackDetails() {
               <p className='h3'>
                 {feedback[0].fields.Comments
                   ? `${feedback[0].fields.Comments.length} Comments`
-                  : `0 Comments`}
+                  : `No Comments`}
               </p>
               {topLevelComments.map((comment) => (
                 <FeedbackComments
                   allComments={allComments}
-                  quantity={feedback[0].fields.Comments}
                   key={comment.fields.CommentId}
                   name={comment.fields.Name}
                   username={comment.fields.Username}
@@ -86,6 +85,9 @@ function FeedbackDetails() {
                   commentId={comment.fields.CommentId}
                   parentId={
                     comment.fields.ParentId ? comment.fields.ParentId : null
+                  }
+                  parentUsername={
+                    comment.fields.ParentId ? comment.fields.Username : null
                   }
                 />
               ))}
