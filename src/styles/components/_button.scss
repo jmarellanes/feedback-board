@@ -11,6 +11,10 @@
   padding: var(--spacer__12) var(--spacer__24);
   cursor: pointer;
 
+  .h4 {
+    color: var(--color__light);
+  }
+
   &--primary {
     background-color: var(--color__primary);
 

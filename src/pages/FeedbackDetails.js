@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import FeedbackItem from '../components/FeedbackItem';
 import FeedbackComments from '../components/FeedbackComments';
+import CreateComment from '../components/CreateComment';
 
 function FeedbackDetails() {
   const [feedback, setFeedback] = useState([]);
@@ -91,6 +92,15 @@ function FeedbackDetails() {
                   }
                 />
               ))}
+            </section>
+            <section
+              className='add-comment'
+              aria-labelledby='section-add-comment'
+            >
+              <h2 id='section-add-comment' hidden>
+                Add Comment
+              </h2>
+              <CreateComment />
             </section>
           </div>
         </main>
