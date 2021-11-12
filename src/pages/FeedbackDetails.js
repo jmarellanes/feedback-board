@@ -63,41 +63,44 @@ function FeedbackDetails() {
                 link={false}
               />
             </section>
+
             <section
               className='feedback-comments'
               aria-labelledby='section-feedback-comments'
             >
-              <h2 id='section-feedback-comments' hidden>
-                Feedback Comments
-              </h2>
-              <p className='h3'>
-                {feedback[0].fields.Comments
-                  ? `${feedback[0].fields.Comments.length} Comments`
-                  : `No Comments`}
-              </p>
-              {topLevelComments.map((comment) => (
-                <FeedbackComments
-                  allComments={allComments}
-                  key={comment.fields.CommentId}
-                  name={comment.fields.Name}
-                  username={comment.fields.Username}
-                  image={comment.fields.Image}
-                  comment={comment.fields.Comment}
-                  commentId={comment.fields.CommentId}
-                  parentId={
-                    comment.fields.ParentId ? comment.fields.ParentId : null
-                  }
-                  parentUsername={
-                    comment.fields.ParentId ? comment.fields.Username : null
-                  }
-                />
-              ))}
+              <div className='feedback-comments__container'>
+                <h2 id='section-feedback-comments' hidden>
+                  Feedback Comments
+                </h2>
+                <p className='h3'>
+                  {feedback[0].fields.Comments
+                    ? `${feedback[0].fields.Comments.length} Comments`
+                    : `No Comments`}
+                </p>
+                {topLevelComments.map((comment) => (
+                  <FeedbackComments
+                    allComments={allComments}
+                    key={comment.fields.CommentId}
+                    name={comment.fields.Name}
+                    username={comment.fields.Username}
+                    image={comment.fields.Image}
+                    comment={comment.fields.Comment}
+                    commentId={comment.fields.CommentId}
+                    parentId={
+                      comment.fields.ParentId ? comment.fields.ParentId : null
+                    }
+                    parentUsername={
+                      comment.fields.ParentId ? comment.fields.Username : null
+                    }
+                  />
+                ))}
+              </div>
             </section>
             <section
-              className='add-comment'
-              aria-labelledby='section-add-comment'
+              className='create-comment'
+              aria-labelledby='section-create-comment'
             >
-              <h2 id='section-add-comment' hidden>
+              <h2 id='section-create-comment' hidden>
                 Add Comment
               </h2>
               <CreateComment />

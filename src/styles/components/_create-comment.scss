@@ -1,0 +1,5 @@
+.create-comment {
+  &__container {
+    @include fb_container;
+  }
+}

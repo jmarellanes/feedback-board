@@ -18,46 +18,48 @@ function CreateComment() {
     console.log(data);
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)} id='myForm'>
-      <div className='form__group form__group--textarea'>
-        <label htmlFor='create-comment' className='h2'>
-          Add Comment
-        </label>
-        <span className='form__container-field'>
-          <textarea
-            className='form__field'
-            id='create-comment'
-            name='create-comment'
-            aria-invalid={errors['create-comment'] ? 'true' : 'false'}
-            placeholder='Type your comment here'
-            maxLength={MAX_CHARS}
-            {...register('create-comment', {
-              required: true,
-              maxLength: MAX_CHARS,
-              onChange: (e) => {
-                let commentLength = e.target.value.length;
-                setCharactersLeft(MAX_CHARS - commentLength);
-              },
-            })}
-          ></textarea>
-          {errors['create-comment'] &&
-            errors['create-comment']?.type === 'required' && (
-              <span role='alert'>Comment is required</span>
-            )}
-          {errors['create-comment'] &&
-            errors['create-comment'].type === 'maxLength' && (
-              <span role='alert'>Max length exceeded</span>
-            )}
-        </span>
-      </div>
+    <div className='create-comment__container'>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className='form__group form__group--textarea'>
+          <label htmlFor='create-comment' className='h2'>
+            Add Comment
+          </label>
+          <span className='form__container-field'>
+            <textarea
+              className='form__field'
+              id='create-comment'
+              name='create-comment'
+              aria-invalid={errors['create-comment'] ? 'true' : 'false'}
+              placeholder='Type your comment here'
+              maxLength={MAX_CHARS}
+              {...register('create-comment', {
+                required: true,
+                maxLength: MAX_CHARS,
+                onChange: (e) => {
+                  let commentLength = e.target.value.length;
+                  setCharactersLeft(MAX_CHARS - commentLength);
+                },
+              })}
+            ></textarea>
+            {errors['create-comment'] &&
+              errors['create-comment']?.type === 'required' && (
+                <span role='alert'>Comment is required</span>
+              )}
+            {errors['create-comment'] &&
+              errors['create-comment'].type === 'maxLength' && (
+                <span role='alert'>Max length exceeded</span>
+              )}
+          </span>
+        </div>
 
-      <div className='form__group'>
-        <Button typeAttribute='submit' buttonStyle='button--primary'>
-          Post Comment
-        </Button>
-      </div>
-      <p>{characters} characters left</p>
-    </form>
+        <div className='form__group'>
+          <Button typeAttribute='submit' buttonStyle='button--primary'>
+            Post Comment
+          </Button>
+        </div>
+        <p>{characters} characters left</p>
+      </form>
+    </div>
   );
 }
 

@@ -23,6 +23,12 @@
   line-height: fn_calculate-lh(23, 16);
 }
 
+@mixin fb_container {
+  background-color: var(--color__light);
+  border-radius: var(--rounded-corners);
+  padding: var(--spacer__32);
+}
+
 /* =====================================================================
   -> FUNCTIONS
 ===================================================================== */

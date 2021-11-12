@@ -75,12 +75,12 @@
   }
 
   &-comments {
-    padding: var(--spacer__32);
-    background-color: var(--color__light);
-    border-radius: var(--rounded-corners);
+    @include fb_container;
 
-    > *:not(:last-child) {
-      margin-bottom: var(--spacer__24);
+    &__container {
+      > *:not(:last-child) {
+        margin-bottom: var(--spacer__24);
+      }
     }
   }
 
