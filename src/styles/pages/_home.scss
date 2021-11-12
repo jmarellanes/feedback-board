@@ -1,0 +1,7 @@
+.home-page {
+  & .feedback-list__container {
+    & > article:not(:last-child) {
+      margin-bottom: var(--spacer__24);
+    }
+  }
+}

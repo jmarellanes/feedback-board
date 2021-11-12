@@ -1,0 +1,11 @@
+.feedback-page {
+  margin: 0 auto;
+
+  &__container {
+    max-width: 46rem;
+
+    & section:not(:last-child) {
+      margin-bottom: var(--spacer__24);
+    }
+  }
+}

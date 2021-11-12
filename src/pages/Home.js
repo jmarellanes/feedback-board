@@ -41,7 +41,7 @@ function Home() {
         <NavMain categories={categories} />
         <RoadmapCard statusList={status} />
       </Header>
-      <main className='main'>
+      <main className='main home-page'>
         <div className='home-page__container'>
           <FeedbackList feedbackList={feedback} loading={loading} />
         </div>

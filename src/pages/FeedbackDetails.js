@@ -41,7 +41,7 @@ function FeedbackDetails() {
       {!feedback.length ? (
         'Loading'
       ) : (
-        <main className='main'>
+        <main className='main feedback-page'>
           <div className='feedback-page__container'>
             <section
               className='feedback-detail'

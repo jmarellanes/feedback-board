@@ -8,10 +8,6 @@
   padding: var(--spacer__80) 0 var(--spacer__128);
 }
 
-.main {
-  flex-grow: 1;
-}
-
 .header {
   &-main {
     &__user {
@@ -19,4 +15,8 @@
       align-items: center;
     }
   }
+}
+
+.home-page {
+  flex-grow: 1;
 }
