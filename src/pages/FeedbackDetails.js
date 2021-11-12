@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router-dom';
 import FeedbackItem from '../components/FeedbackItem';
 import FeedbackComments from '../components/FeedbackComments';
 import CreateComment from '../components/CreateComment';
+import Button from '../components/Button';
 
 function FeedbackDetails() {
   const [feedback, setFeedback] = useState([]);
   const [allComments, setComments] = useState([]);
   const [topLevelComments, setTopLevel] = useState([]);
   const { id } = useParams();
+  const history = useHistory();
 
   const loadFeedbackDetails = async () => {
     try {
@@ -43,6 +45,20 @@ function FeedbackDetails() {
       ) : (
         <main className='main feedback-page'>
           <div className='feedback-page__container'>
+            <section>
+              <header>
+                <div className='header__container'>
+                  <Button
+                    typeAttribute='button'
+                    buttonStyle='button--back-light'
+                    svgIcon={true}
+                    onClick={() => history.goBack()}
+                  >
+                    Go Back
+                  </Button>
+                </div>
+              </header>
+            </section>
             <section
               className='feedback-detail'
               aria-labelledby='section-feedback-detail'

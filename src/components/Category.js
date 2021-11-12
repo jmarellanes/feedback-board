@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 
 function Category({ category, children }) {
   const params = useParams();

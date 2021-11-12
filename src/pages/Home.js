@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 import FeedbackList from '../components/FeedbackList';
 import Header from '../components/Header';
 import HeaderBrandmark from '../components/HeaderBrandmark';

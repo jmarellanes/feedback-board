@@ -48,7 +48,6 @@
   }
 
   &--back-light {
-    color: var(--color__tertiary);
     background-color: transparent;
 
     .icon--chevron-left {
@@ -56,10 +55,13 @@
       stroke: var(--color__tertiary);
     }
 
-    &:hover {
-      color: var(--color__tertiary--light-01);
+    .h4 {
+      color: var(--color__tertiary);
+    }
 
-      h4 {
+    &:hover {
+      .h4 {
+        color: var(--color__tertiary--light-01);
         text-decoration: underline;
       }
 
