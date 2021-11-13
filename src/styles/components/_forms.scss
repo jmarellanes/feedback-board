@@ -1,31 +1,35 @@
 @mixin field-focus {
-  border-color: red;
-  outline: 2px solid transparent;
+  border-color: var(--color__secondary);
+  outline: 1px solid var(--color__secondary);
 }
 
 @mixin field-disabled {
-  // border-color: gray;
-  // background-color: gray;
-  // cursor: not-allowed;
+  border-color: #ebebe4;
+  background-color: #ebebe4;
+  cursor: not-allowed;
 
-  // &,
-  // option {
-  //   color: rgba(black, 0.45);
-  // }
+  &,
+  option {
+    color: rgba(black, 0.45);
+  }
+}
+
+@mixin field-error {
+  outline: 1px solid var(--color__danger);
 }
 
 // FORM RESET
 .form {
   &__field {
     --form-field-width: 46ch;
-    display: flex;
 
     background-color: var(--color__secondary--light-03);
     border: none;
     border-radius: 0.25rem;
-    padding-left: var(--spacer__24);
+    padding: 0;
 
     font-family: inherit;
+    color: inherit;
 
     // fallback
     font-size: 16px;
@@ -40,8 +44,7 @@
       height: 3rem;
     }
 
-    & select,
-    input {
+    & select {
       appearance: none;
       background-color: transparent;
       border: none;
@@ -61,21 +64,52 @@
   }
 }
 
-// GENERAL
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+legend {
+  padding: 0;
+}
+// END FORM RESET
+
+// STYLES FOR FEEDBACKTO
 .form {
   &__group {
+    position: relative;
+
     & + .form__group {
       margin-top: var(--spacer__24);
+    }
+
+    textarea {
+      resize: vertical;
+      padding: var(--spacer__16) var(--spacer__24);
+    }
+
+    &--error {
+      color: var(--color__danger);
+      position: absolute;
+      bottom: -1.75rem;
     }
   }
 
   &__field {
-    &:focus {
+    width: 100%;
+
+    &:focus,
+    &:active {
       @include field-focus;
     }
 
     &:disabled {
       @include field-disabled;
+    }
+
+    &[aria-invalid='true'] {
+      @include field-error;
     }
   }
 }

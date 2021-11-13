@@ -1,15 +1,22 @@
 /* =====================================================================
   -> BUTTON
 ===================================================================== */
+// BUTTON RESET
+button {
+  border: none;
+  background-color: transparent;
+  font-family: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
 .button {
   display: flex;
   align-items: center;
 
   color: var(--color__light);
-  border: none;
   border-radius: var(--rounded-corners);
   padding: var(--spacer__12) var(--spacer__24);
-  cursor: pointer;
 
   .h4 {
     color: var(--color__light);

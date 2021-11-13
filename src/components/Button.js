@@ -4,7 +4,7 @@ function Button({ children, buttonStyle, svgIcon, typeAttribute, onClick }) {
   return (
     <button
       type={typeAttribute}
-      className={`button ${buttonStyle || ''} form__button button__form`}
+      className={`button ${buttonStyle || ''}`}
       onClick={onClick}
     >
       {svgIcon ? <ChevronLeft /> : null}

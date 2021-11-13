@@ -119,7 +119,7 @@ function FeedbackDetails() {
               className='create-comment'
               aria-labelledby='section-create-comment'
             >
-              <h2 id='section-create-comment' hidden>
+              <h2 id='section-create-comment' className='create-comment__title'>
                 Add Comment
               </h2>
               <CreateComment />

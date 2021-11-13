@@ -1,5 +1,16 @@
 .create-comment {
-  &__container {
-    @include fb_container;
+  @include fb_container;
+
+  &__title {
+    margin-bottom: var(--spacer__24);
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+  }
+
+  .button {
+    margin-left: auto;
   }
 }
