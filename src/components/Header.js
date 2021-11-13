@@ -2,7 +2,7 @@ import React from 'react';
 
 function Header({ children }) {
   return (
-    <header className='header-main header'>
+    <header className='header-main'>
       <div className='header-main__container'>{children}</div>
     </header>
   );

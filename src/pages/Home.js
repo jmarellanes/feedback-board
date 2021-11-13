@@ -35,18 +35,16 @@ function Home() {
   }, [categorySlug]);
 
   return (
-    <>
+    <div id='home-page__wrapper'>
       <Header>
         <HeaderBrandmark title='FeedbackTo' />
         <NavMain categories={categories} />
         <RoadmapCard statusList={status} />
       </Header>
-      <main className='main home-page'>
-        <div className='home-page__container'>
-          <FeedbackList feedbackList={feedback} loading={loading} />
-        </div>
+      <main className='home-page__feedback'>
+        <FeedbackList feedbackList={feedback} loading={loading} />
       </main>
-    </>
+    </div>
   );
 }
 

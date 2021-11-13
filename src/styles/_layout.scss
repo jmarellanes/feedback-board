@@ -1,11 +1,18 @@
 // Rules for general app layout
-
-.wrapper {
-  display: flex;
-
+#root {
   max-width: 69rem;
   margin: 0 auto;
   padding: var(--spacer__80) 0 var(--spacer__128);
+}
+
+#home-page__wrapper {
+  display: flex;
+}
+
+.home-page {
+  &__feedback {
+    flex-grow: 1;
+  }
 }
 
 .header {
@@ -15,8 +22,11 @@
       align-items: center;
     }
   }
-}
 
-.home-page {
-  flex-grow: 1;
+  &-third {
+    &__container {
+      display: flex;
+      align-items: center;
+    }
+  }
 }

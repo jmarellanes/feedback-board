@@ -39,26 +39,28 @@ function FeedbackDetails() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <>
+    <div id='feedback-page__wrapper'>
       {!feedback.length ? (
         'Loading'
       ) : (
-        <main className='main feedback-page'>
-          <div className='feedback-page__container'>
-            <section>
-              <header>
-                <div className='header__container'>
-                  <Button
-                    typeAttribute='button'
-                    buttonStyle='button--back-light'
-                    svgIcon={true}
-                    onClick={() => history.goBack()}
-                  >
-                    Go Back
-                  </Button>
-                </div>
-              </header>
-            </section>
+        <>
+          <header className='header-third'>
+            <div className='header-third__container'>
+              <Button
+                typeAttribute='button'
+                buttonStyle='button--back-light'
+                svgIcon={true}
+                onClick={() => history.goBack()}
+              >
+                Go Back
+              </Button>
+              <Button typeAttribute='button' buttonStyle='button--secondary'>
+                Edit Feedback
+              </Button>
+            </div>
+          </header>
+
+          <main className='feedback-page__content'>
             <section
               className='feedback-detail'
               aria-labelledby='section-feedback-detail'
@@ -112,6 +114,7 @@ function FeedbackDetails() {
                 ))}
               </div>
             </section>
+
             <section
               className='create-comment'
               aria-labelledby='section-create-comment'
@@ -121,10 +124,10 @@ function FeedbackDetails() {
               </h2>
               <CreateComment />
             </section>
-          </div>
-        </main>
+          </main>
+        </>
       )}
-    </>
+    </div>
   );
 }
 

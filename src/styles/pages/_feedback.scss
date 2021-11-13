@@ -1,10 +1,15 @@
-.feedback-page {
+#feedback-page__wrapper {
+  max-width: 46rem;
   margin: 0 auto;
 
-  &__container {
-    max-width: 46rem;
+  > header {
+    margin-bottom: var(--spacer__24);
+  }
+}
 
-    & section:not(:last-child) {
+.feedback-page {
+  &__content {
+    & > section:not(:last-child) {
       margin-bottom: var(--spacer__24);
     }
   }
