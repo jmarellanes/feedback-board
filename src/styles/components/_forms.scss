@@ -90,14 +90,22 @@ legend {
     }
 
     &--error {
-      color: var(--color__danger);
       position: absolute;
-      bottom: -1.75rem;
+      bottom: -1.5rem;
+
+      color: var(--color__danger);
+      font-size: 90%;
     }
   }
 
   &__field {
     width: 100%;
+    color: var(--color__tertiary);
+
+    &::placeholder {
+      color: #8c92b3;
+      opacity: 1;
+    }
 
     &:focus,
     &:active {
@@ -110,6 +118,10 @@ legend {
 
     &[aria-invalid='true'] {
       @include field-error;
+
+      &::placeholder {
+        color: var(--color__danger);
+      }
     }
   }
 }
