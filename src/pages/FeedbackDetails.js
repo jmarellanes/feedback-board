@@ -122,7 +122,7 @@ function FeedbackDetails() {
               <h2 id='section-create-comment' className='create-comment__title'>
                 Add Comment
               </h2>
-              <CreateComment />
+              <CreateComment>Post Comment</CreateComment>
             </section>
           </main>
         </>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Button from './Button';
 
-function CreateComment() {
+function CreateComment({ children, isReply }) {
   const MAX_CHARS = 250;
   const [characters, setCharactersLeft] = useState(MAX_CHARS);
   const {
@@ -18,7 +18,11 @@ function CreateComment() {
     console.log(data);
   };
   return (
-    <div className='create-comment__container'>
+    <div
+      className={`create-comment__container ${
+        isReply ? 'feedback-comment__reply' : ''
+      }`}
+    >
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className='form__group'>
           <label
@@ -49,19 +53,19 @@ function CreateComment() {
           <div className='form__group--error'>
             {errors['create-comment'] &&
               errors['create-comment']?.type === 'required' && (
-                <span role='alert'>Can't be empty. Comment is required</span>
+                <span role='alert'>Can't be empty.</span>
               )}
             {errors['create-comment'] &&
               errors['create-comment'].type === 'maxLength' && (
-                <span role='alert'>Max length exceeded</span>
+                <span role='alert'>Max length exceeded.</span>
               )}
           </div>
         </div>
 
         <div className='form__group create-comment__footer'>
-          <p>{characters} characters left</p>
+          <p className='left-ch'>{characters} characters left</p>
           <Button typeAttribute='submit' buttonStyle='button--primary'>
-            Post Comment
+            {children}
           </Button>
         </div>
       </form>

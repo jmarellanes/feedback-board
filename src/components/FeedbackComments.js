@@ -1,3 +1,7 @@
+import { useState } from 'react';
+import Button from './Button';
+import CreateComment from './CreateComment';
+
 function FeedbackComments({
   allComments,
   name,
@@ -10,6 +14,8 @@ function FeedbackComments({
 }) {
   let replyCommentsList = () =>
     allComments.filter((c) => c.fields.ParentId === commentId);
+
+  const [showMe, setShowMe] = useState(false);
 
   return (
     <>
@@ -36,7 +42,16 @@ function FeedbackComments({
               {comment}
             </p>
           </div>
-          <footer className='feedback-comment__reply-button'>Reply</footer>
+          <footer className='feedback-comment__reply-button'>
+            <Button
+              typeAttribute='button'
+              buttonStyle='button--back-light'
+              onClick={() => setShowMe(!showMe)}
+            >
+              Reply
+            </Button>
+          </footer>
+          {showMe && <CreateComment isReply={true}>Post Reply</CreateComment>}
         </div>
         {replyCommentsList().map((reply) => (
           <FeedbackComments

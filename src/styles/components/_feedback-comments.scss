@@ -35,9 +35,9 @@
     &__container {
       display: grid;
       grid-template-columns: min-content repeat(2, 1fr);
-      row-gap: 0.5rem;
+      row-gap: 1rem;
 
-      padding-bottom: var(--spacer__24);
+      padding-bottom: var(--spacer__32);
     }
 
     &__author-image {
@@ -67,6 +67,37 @@
     &__reply-button {
       justify-self: right;
       align-self: center;
+    }
+
+    &__reply {
+      grid-row: 3 / 4;
+      grid-column: 2 / -1;
+
+      & > form {
+        display: flex;
+      }
+
+      & .form__group {
+        &:first-child {
+          flex-grow: 1;
+        }
+
+        &:last-child {
+          align-items: flex-end;
+          flex-direction: column;
+          margin-left: 1rem;
+          margin-top: 0;
+        }
+
+        & .button {
+          order: 1;
+        }
+
+        & .left-ch {
+          display: none;
+          visibility: hidden;
+        }
+      }
     }
   }
 }
