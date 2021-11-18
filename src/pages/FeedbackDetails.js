@@ -4,6 +4,7 @@ import FeedbackItem from '../components/FeedbackItem';
 import FeedbackComments from '../components/FeedbackComments';
 import CreateComment from '../components/CreateComment';
 import Button from '../components/Button';
+import Loader from '../components/Loader';
 
 function FeedbackDetails() {
   const [feedback, setFeedback] = useState([]);
@@ -41,7 +42,7 @@ function FeedbackDetails() {
   return (
     <div id='feedback-page__wrapper'>
       {!feedback.length ? (
-        'Loading'
+        <Loader />
       ) : (
         <>
           <header className='header-third'>

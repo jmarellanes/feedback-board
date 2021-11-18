@@ -33,11 +33,23 @@
     }
 
     &__container {
+      --closeCommentHeight: ;
+      --openCommentHeight: ;
+
       display: grid;
       grid-template-columns: min-content repeat(2, 1fr);
       row-gap: 1rem;
 
+      // Animation
+      height: calc(var(--closeCommentHeight) * 1px);
+      transition: height var(--duration--250) var(--easing--s);
+      overflow-y: hidden;
+
       padding-bottom: var(--spacer__32);
+
+      &.isOpen {
+        height: calc(var(--openCommentHeight) * 1px);
+      }
     }
 
     &__author-image {
@@ -97,6 +109,21 @@
           display: none;
           visibility: hidden;
         }
+      }
+
+      &-enter {
+        opacity: 0;
+      }
+      &-enter-active {
+        opacity: 1;
+        transition: opacity var(--duration--250) var(--easing--s);
+      }
+      &-exit {
+        opacity: 1;
+      }
+      &-exit-active {
+        opacity: 0;
+        transition: opacity var(--duration--250) var(--easing--s);
       }
     }
   }

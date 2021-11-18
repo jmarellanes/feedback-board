@@ -55,3 +55,13 @@ body {
   white-space: nowrap;
   width: 1px;
 } // -> .visually-hidden
+
+// Hide content but keep it rendered on the DOM to get dimensions with Javascript
+.get-size-hidden {
+  display: inline-block;
+  position: absolute !important;
+  visibility: hidden;
+  z-index: -1;
+  opacity: 0;
+  overflow: hidden;
+} // -> .get-size-hidden

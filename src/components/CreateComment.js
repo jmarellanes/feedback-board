@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, forwardRef } from 'react';
 import { useForm } from 'react-hook-form';
 import Button from './Button';
 
-function CreateComment({ children, isReply }) {
+function CreateComment({ children, isReply, isHidden }, replyRef) {
   const MAX_CHARS = 250;
   const [characters, setCharactersLeft] = useState(MAX_CHARS);
   const {
@@ -21,7 +21,8 @@ function CreateComment({ children, isReply }) {
     <div
       className={`create-comment__container ${
         isReply ? 'feedback-comment__reply' : ''
-      }`}
+      } ${isHidden ? 'get-size-hidden' : ''}`}
+      ref={replyRef}
     >
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className='form__group'>
@@ -73,4 +74,4 @@ function CreateComment({ children, isReply }) {
   );
 }
 
-export default CreateComment;
+export default forwardRef(CreateComment);
