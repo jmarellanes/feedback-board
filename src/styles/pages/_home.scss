@@ -1,4 +1,10 @@
 .home-page {
+  &__feedback {
+    & > :not(:last-child) {
+      margin-bottom: var(--spacer__24);
+    }
+  }
+
   &__feedback-list {
     & > article:not(:last-child) {
       margin-bottom: var(--spacer__24);

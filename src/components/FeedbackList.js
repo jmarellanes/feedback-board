@@ -4,7 +4,6 @@ import FeedbackItem from './FeedbackItem';
 import Loader from './Loader';
 
 function FeedbackList({ feedbackList, loading }) {
-  // const feedbackRef = useRef();
   const noFeedback = () => (
     <>
       <h2>There is not Feedback</h2>
@@ -28,10 +27,6 @@ function FeedbackList({ feedbackList, loading }) {
         link={true}
       />
     ));
-
-  // useEffect(() => {
-  //   gsap.to(feedbackRef.current, { opacity: 1 });
-  // });
 
   if (loading) return <Loader />;
 

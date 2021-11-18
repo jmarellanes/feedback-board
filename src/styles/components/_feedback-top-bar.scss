@@ -1,0 +1,24 @@
+.feedback {
+  &-topbar {
+    display: flex;
+    align-items: center;
+
+    background-color: var(--color__tertiary);
+    border-radius: var(--rounded-corners);
+    padding: var(--spacer__12) var(--spacer__24);
+
+    &__title {
+      display: flex;
+      color: var(--color__light);
+      margin-right: var(--spacer__40);
+    }
+
+    & .icon--bulb {
+      margin-right: var(--spacer__16);
+    }
+
+    .button {
+      margin-left: auto;
+    }
+  }
+}
