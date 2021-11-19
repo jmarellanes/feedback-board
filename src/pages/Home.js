@@ -57,8 +57,7 @@ function Home() {
           <Button
             typeAttribute='button'
             buttonStyle='button--primary'
-            svgIcon={true}
-            // svgIconType='ChevronLeft'
+            svgIcon='sign'
           >
             Add Feedback
           </Button>
