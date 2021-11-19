@@ -128,7 +128,7 @@ export default function DesignSystem() {
             <Button buttonStyle='button--danger'>Button Danger</Button>
           </dd>
           <dd className='ds-buttons__element'>
-            <Button buttonStyle='button--back-light' svgIcon={true}>
+            <Button buttonStyle='button--back-light' svgIcon='chevron-left'>
               Button Go Back
             </Button>
           </dd>
@@ -138,7 +138,7 @@ export default function DesignSystem() {
             </Anchor>
           </dd>
           <dd className='ds-buttons__element'>
-            <Button buttonStyle='button--back-dark' svgIcon={true}>
+            <Button buttonStyle='button--back-dark' svgIcon='chevron-left'>
               Go Back
             </Button>
           </dd>

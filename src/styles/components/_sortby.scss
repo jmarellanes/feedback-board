@@ -21,6 +21,7 @@
     flex-grow: 1;
 
     font-family: var(--font__headings);
+    max-width: 8.5rem;
 
     .sortby__control {
       background-color: var(--color__tertiary);
@@ -50,13 +51,13 @@
 
       width: 16rem;
       left: -4rem;
-      margin-top: var(--spacer__32);
+      margin-top: var(--spacer__24);
       border-radius: 0.75rem;
       box-shadow: 0px 10px 40px -7px rgba(55, 63, 104, 0.4);
     }
 
     .sortby__option {
-      border-bottom: 1px solid rgba(233, 31, 50, 0.15);
+      border-bottom: 1px solid rgba(140, 146, 179, 0.25);
       padding: var(--spacer__12) var(--spacer__24);
       cursor: inherit;
 

@@ -15,8 +15,12 @@ function Button({ children, buttonStyle, typeAttribute, onClick, svgIcon }) {
       className={`button ${buttonStyle || ''}`}
       onClick={onClick}
     >
-      {svgIcon ? <SVGIcon /> : null}
-      <p className='h4'>{children}</p>
+      {svgIcon ? (
+        <span className='button__icon'>
+          <SVGIcon />
+        </span>
+      ) : null}
+      <p className='h4 button__title'>{children}</p>
     </button>
   );
 }

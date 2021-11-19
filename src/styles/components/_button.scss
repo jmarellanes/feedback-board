@@ -18,7 +18,13 @@ button {
   border-radius: var(--rounded-corners);
   padding: var(--spacer__12) var(--spacer__24);
 
-  .h4 {
+  &__icon {
+    display: flex;
+
+    margin-right: var(--spacer__4);
+  }
+
+  &__title {
     color: var(--color__light);
   }
 
@@ -59,7 +65,7 @@ button {
     padding-left: 0;
 
     .icon--chevron-left {
-      margin-right: var(--spacer__16);
+      margin-right: var(--spacer__12);
       stroke: var(--color__tertiary);
     }
 

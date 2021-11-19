@@ -50,7 +50,7 @@ function FeedbackDetails() {
               <Button
                 typeAttribute='button'
                 buttonStyle='button--back-light'
-                svgIcon={true}
+                svgIcon='chevron-left'
                 onClick={() => history.goBack()}
               >
                 Go Back
