@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import Select from 'react-select';
+import Select, { components } from 'react-select';
+import { ReactComponent as Arrow } from '../assets/images/arrow-up.svg';
 
 const options = [
   {
@@ -19,6 +20,14 @@ const options = [
     value: 'Least Comments',
   },
 ];
+
+const DropdownIndicator = (props) => {
+  return (
+    <components.DropdownIndicator {...props}>
+      <Arrow label='Arrow' />
+    </components.DropdownIndicator>
+  );
+};
 
 function SortBy() {
   const [sortedBy, isSortedBy] = useState('Most Upvotes');
@@ -41,6 +50,7 @@ function SortBy() {
         name='sortby'
         inputId='sortby'
         openMenuOnFocus
+        components={{ DropdownIndicator }}
       />
     </div>
   );

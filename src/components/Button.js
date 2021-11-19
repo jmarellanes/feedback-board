@@ -1,6 +1,9 @@
 import { ReactComponent as ChevronLeft } from '../assets/images/chevron-left.svg';
 import { ReactComponent as Sign } from '../assets/images/plus-sign.svg';
 
+// Render a different component based on a prop.
+// https://reactjs.org/docs/jsx-in-depth.html#choosing-the-type-at-runtime
+
 const components = {
   'chevron-left': ChevronLeft,
   sign: Sign,
