@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import Select, { components } from 'react-select';
 import { ReactComponent as Arrow } from '../assets/images/arrow-up.svg';
 
@@ -29,8 +28,10 @@ const DropdownIndicator = (props) => {
   );
 };
 
-function SortBy() {
-  const [sortedBy, isSortedBy] = useState('Most Upvotes');
+function SortBy({ value, onChange }) {
+  const handleChange = (value) => {
+    onChange(value.label);
+  };
 
   return (
     <div className='sortby'>
@@ -39,12 +40,12 @@ function SortBy() {
       </label>
       <Select
         defaultValue={{
-          label: 'Most Upvotes',
-          value: 'Most Upvotes',
+          label: value,
+          value: value,
         }}
-        placeholder={sortedBy}
+        placeholder={value}
         options={options}
-        onChange={(value) => isSortedBy(value.label)}
+        onChange={handleChange}
         classNamePrefix='sortby'
         className='sortby__container'
         name='sortby'

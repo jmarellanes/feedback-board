@@ -15,7 +15,34 @@ function Home() {
   const [categories, setCategories] = useState([]);
   const [status, setStatus] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [sortValue, setSortValue] = useState('Most Upvotes');
   const { categorySlug } = useParams();
+
+  const handleChange = (newOrder) => {
+    setSortValue(newOrder);
+    sortFeedback(newOrder, feedback);
+  };
+
+  const sortFeedback = (type, data) => {
+    const sorted = [...data].sort((a, b) => {
+      switch (type) {
+        case 'Least Upvotes':
+          if (type === sortValue) return null;
+          return a.fields.Upvotes - b.fields.Upvotes;
+        case 'Most Comments':
+          if (type === sortValue) return null;
+          return b.fields.Comments.length - a.fields.Comments.length;
+        case 'Least Comments':
+          if (type === sortValue) return null;
+          return a.fields.Comments.length - b.fields.Comments.length;
+        default:
+          if (type === sortValue) return null;
+          return b.fields.Upvotes - a.fields.Upvotes;
+      }
+    });
+
+    setFeedback(sorted);
+  };
 
   useEffect(() => {
     const loadFeedback = async () => {
@@ -53,7 +80,7 @@ function Home() {
               feedback.length > 1 ? 'Suggestions' : 'Suggestion'
             }`}
           </div>
-          <SortBy />
+          <SortBy value={sortValue} onChange={handleChange} />
           <Button
             typeAttribute='button'
             buttonStyle='button--primary'

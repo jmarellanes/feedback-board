@@ -1,5 +1,3 @@
-// import { useRef } from 'react';
-// import { gsap } from 'gsap';
 import FeedbackItem from './FeedbackItem';
 import Loader from './Loader';
 
@@ -34,7 +32,6 @@ function FeedbackList({ feedbackList, loading }) {
     <section
       className='home-page__feedback-list'
       aria-labelledby='section-feedback-list'
-      // ref={feedbackRef}
     >
       <h2 id='section-feedback-list' hidden>
         Feedback List
