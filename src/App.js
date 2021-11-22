@@ -16,7 +16,7 @@ function App() {
         <Route exact path='/'>
           <Redirect to='/all' />
         </Route>
-        <Route exact path={['/all', '/:categorySlug']}>
+        <Route exact path={['/all', '/:categoryParam']}>
           <Home />
         </Route>
         <Route exact path='/feedback/:id'>

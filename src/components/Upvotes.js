@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ReactComponent as ChevronUp } from '../assets/images/chevron-up.svg';
 
-export default function Upvote({ feedbackItemClass }) {
+export default function Upvote({ feedbackItemClass, children }) {
   const [upvotes, setUpvotes] = useState(14);
   const [isUpvoted, setIsUpvoted] = useState(false);
 
@@ -23,7 +23,7 @@ export default function Upvote({ feedbackItemClass }) {
       onClick={addUpvote}
     >
       <ChevronUp />
-      <span className='upvotes__quantity'>{upvotes}</span>
+      <span className='upvotes__quantity'>{children}</span>
     </button>
   );
 }

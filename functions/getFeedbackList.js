@@ -1,19 +1,34 @@
 const { feedbackTable } = require('./utils/airtable');
 
 exports.handler = async (event) => {
-  const categorySlug = event.queryStringParameters.categorySlug;
+  const categoryParam = event.queryStringParameters.categoryParam;
+  const sortByParam = event.queryStringParameters.sortBy;
+  console.log({ categoryParam, sortByParam });
 
-  const filterSlug = () => {
-    return categorySlug === 'undefined'
+  const filterCategoryParam = () => {
+    return categoryParam === 'undefined'
       ? `AND({Status} = 'Suggestion', NOT({Category} = ''))`
-      : `AND({Status} = 'Suggestion', {Category} = '${categorySlug}')`;
+      : `AND({Status} = 'Suggestion', {Category} = '${categoryParam}')`;
+  };
+
+  const filterSortByParam = () => {
+    switch (sortByParam) {
+      case 'least-upvotes':
+        return [{ field: 'Upvotes' }];
+      case 'most-comments':
+        return [{ field: 'Total Comments', direction: 'desc' }];
+      case 'least-comments':
+        return [{ field: 'Total Comments' }];
+      default:
+        return [{ field: 'Upvotes', direction: 'desc' }];
+    }
   };
 
   try {
     const feedbackRecords = await feedbackTable
       .select({
-        filterByFormula: filterSlug(),
-        sort: [{ field: 'Upvotes', direction: 'desc' }],
+        filterByFormula: filterCategoryParam(),
+        sort: filterSortByParam(),
         fields: [
           'Title',
           'FeedbackId',

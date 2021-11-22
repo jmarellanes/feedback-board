@@ -38,7 +38,7 @@ function FeedbackItem({
         </ul>
       </div>
 
-      <Upvotes feedbackItemClass='feedback-item__upvotes' />
+      <Upvotes feedbackItemClass='feedback-item__upvotes'>{upvotes}</Upvotes>
 
       <div className='feedback-item__quantity'>
         <CommentsIcon />

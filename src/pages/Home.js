@@ -19,17 +19,17 @@ function Home(props) {
   const [loading, setLoading] = useState(false);
   const [sortValue, setSortValue] = useState('Most Upvotes');
 
-  const { categorySlug } = useParams();
+  const { categoryParam } = useParams();
   // First letter to uppercase to match categories on database.
-  const categoryParam =
-    categorySlug === undefined
-      ? categorySlug
-      : categorySlug.charAt(0).toUpperCase() + categorySlug.slice(1);
+  const categoryParamFormatted =
+    categoryParam === undefined
+      ? categoryParam
+      : categoryParam.charAt(0).toUpperCase() + categoryParam.slice(1);
   const history = useHistory();
 
   const { search } = useLocation();
   const values = queryString.parse(search);
-  console.log(values.sortby, categorySlug, sortValue);
+  console.log(values.sortby, categoryParam, sortValue);
 
   const handleChange = (newSortOrder) => {
     setSortValue(newSortOrder);
@@ -64,7 +64,7 @@ function Home(props) {
       try {
         setLoading(true);
         const res = await fetch(
-          `/api/getFeedbackList/?categorySlug=${categoryParam}`
+          `/api/getFeedbackList/?categoryParam=${categoryParamFormatted}&sortBy=${values.sortby}`
         );
         const feedbackRes = await res.json();
         setFeedback(feedbackRes.feedbackList);
@@ -78,7 +78,7 @@ function Home(props) {
     };
 
     loadFeedback();
-  }, [categoryParam]);
+  }, [categoryParamFormatted]);
 
   return (
     <div id='home-page__wrapper'>
