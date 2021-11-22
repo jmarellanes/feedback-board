@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory, useLocation } from 'react-router-dom';
 import Button from '../components/Button';
 import FeedbackList from '../components/FeedbackList';
 import Header from '../components/Header';
@@ -9,34 +9,43 @@ import RoadmapCard from '../components/RoadmapCard';
 import SortBy from '../components/SortBy';
 import FeedbackTopBar from '../components/FeedbackTopBar';
 import { ReactComponent as Bulb } from '../assets/images/bulb.svg';
+import queryString from 'query-string';
 
-function Home() {
+function Home(props) {
   const [feedback, setFeedback] = useState([]);
   const [categories, setCategories] = useState([]);
   const [status, setStatus] = useState([]);
+
   const [loading, setLoading] = useState(false);
   const [sortValue, setSortValue] = useState('Most Upvotes');
   const { categorySlug } = useParams();
+  const history = useHistory();
 
-  const handleChange = (newOrder) => {
-    setSortValue(newOrder);
-    sortFeedback(newOrder, feedback);
+  const { search } = useLocation();
+  const values = queryString.parse(search);
+  console.log(values.sortby);
+
+  const handleChange = (newSortOrder) => {
+    setSortValue(newSortOrder);
+    sortFeedback(newSortOrder, feedback);
+    updateQueryString(newSortOrder);
+  };
+
+  const updateQueryString = (queryString) => {
+    history.push(`?sortby=${queryString.replace(/\s+/g, '-').toLowerCase()}`);
   };
 
   const sortFeedback = (type, data) => {
     const sorted = [...data].sort((a, b) => {
+      if (type === sortValue) return null;
       switch (type) {
         case 'Least Upvotes':
-          if (type === sortValue) return null;
           return a.fields.Upvotes - b.fields.Upvotes;
         case 'Most Comments':
-          if (type === sortValue) return null;
           return b.fields.Comments.length - a.fields.Comments.length;
         case 'Least Comments':
-          if (type === sortValue) return null;
           return a.fields.Comments.length - b.fields.Comments.length;
         default:
-          if (type === sortValue) return null;
           return b.fields.Upvotes - a.fields.Upvotes;
       }
     });

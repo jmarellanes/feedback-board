@@ -8,17 +8,14 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path='/design-system'>
+        <Route exact path='/design-system'>
           <DesignSystem />
         </Route>
-        <Route path='/feedback/:id'>
+        <Route exact path={['/', '/:categorySlug']}>
+          <Home />
+        </Route>
+        <Route exact path='/feedback/:id'>
           <FeedbackDetails />
-        </Route>
-        <Route path='/:categorySlug'>
-          <Home />
-        </Route>
-        <Route exact path='/'>
-          <Home />
         </Route>
       </Switch>
     </Router>
