@@ -8,7 +8,7 @@ function Category({ category, children }) {
   return (
     <li className='nav-main__item'>
       <Link
-        to={category === 'All' ? '/' : category}
+        to={category === 'All' ? '/' : category.toLowerCase()}
         className={`nav-main__link ${
           categorySlug === category ? 'nav-main__link--active' : ''
         }`}
