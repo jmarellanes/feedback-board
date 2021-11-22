@@ -18,16 +18,18 @@ function Home(props) {
 
   const [loading, setLoading] = useState(false);
   const [sortValue, setSortValue] = useState('Most Upvotes');
+
   const { categorySlug } = useParams();
+  // First letter to uppercase to match categories on database.
   const categoryParam =
     categorySlug === undefined
       ? categorySlug
       : categorySlug.charAt(0).toUpperCase() + categorySlug.slice(1);
   const history = useHistory();
 
-  // const { search } = useLocation();
-  // const values = queryString.parse(search);
-  // console.log(values.sortby);
+  const { search } = useLocation();
+  const values = queryString.parse(search);
+  console.log(values.sortby, categorySlug, sortValue);
 
   const handleChange = (newSortOrder) => {
     setSortValue(newSortOrder);

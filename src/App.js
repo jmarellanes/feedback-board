@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from 'react-router-dom';
 import Home from './pages/Home';
 import FeedbackDetails from './pages/FeedbackDetails';
 import DesignSystem from './pages/DesignSystem/DesignSystem';
@@ -8,14 +13,17 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path='/design-system'>
-          <DesignSystem />
+        <Route exact path='/'>
+          <Redirect to='/all' />
         </Route>
-        <Route exact path={['/', '/:categorySlug']}>
+        <Route exact path={['/all', '/:categorySlug']}>
           <Home />
         </Route>
         <Route exact path='/feedback/:id'>
           <FeedbackDetails />
+        </Route>
+        <Route exact path='/design-system'>
+          <DesignSystem />
         </Route>
       </Switch>
     </Router>
