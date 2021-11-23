@@ -8,7 +8,7 @@ function Category({ category, children }) {
   return (
     <li className='nav-main__item'>
       <Link
-        to={category.toLowerCase()}
+        to={category}
         className={`nav-main__link ${
           categoryParam === category.toLowerCase()
             ? 'nav-main__link--active'

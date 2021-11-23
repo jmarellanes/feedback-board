@@ -29,6 +29,7 @@
     color: var(--color__secondary);
     padding: var(--spacer__8) var(--spacer__16);
     text-decoration: none;
+    text-transform: capitalize;
 
     &:hover {
       background-color: var(--color__secondary--light-02);

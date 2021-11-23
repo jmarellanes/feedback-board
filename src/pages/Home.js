@@ -9,7 +9,7 @@ import RoadmapCard from '../components/RoadmapCard';
 import SortBy from '../components/SortBy';
 import FeedbackTopBar from '../components/FeedbackTopBar';
 import { ReactComponent as Bulb } from '../assets/images/bulb.svg';
-import queryString from 'query-string';
+import queryComponent from 'query-string';
 
 function Home(props) {
   const [feedback, setFeedback] = useState([]);
@@ -20,29 +20,37 @@ function Home(props) {
   const [sortValue, setSortValue] = useState('Most Upvotes');
 
   const { categoryParam } = useParams();
-  // First letter to uppercase to match categories on database.
-  const categoryParamFormatted =
-    categoryParam === undefined
-      ? categoryParam
-      : categoryParam.charAt(0).toUpperCase() + categoryParam.slice(1);
   const history = useHistory();
 
   const { search } = useLocation();
-  const values = queryString.parse(search);
-  console.log(values.sortby, categoryParam, sortValue);
+  const queryString =
+    queryComponent.parse(search).sortby === undefined
+      ? 'most-upvotes'
+      : queryComponent.parse(search).sortby;
+
+  const updateSortLabelOnLoad = () => {
+    const sortLabel = {
+      'Most Upvotes': 'most-upvotes',
+      'Least Upvotes': 'least-upvotes',
+      'Most Comments': 'most-comments',
+      'Least Comments': 'least-comments',
+    };
+
+    const updateLabel = Object.keys(sortLabel).find(
+      (key) => sortLabel[key] === queryString
+    );
+
+    setSortValue(updateLabel);
+  };
 
   const handleChange = (newSortOrder) => {
     setSortValue(newSortOrder);
-    sortFeedback(newSortOrder, feedback);
+    sortFeedbackWithDropdown(newSortOrder, feedback);
     updateQueryString(newSortOrder);
   };
 
-  const updateQueryString = (queryString) => {
-    history.push(`?sortby=${queryString.replace(/\s+/g, '-').toLowerCase()}`);
-  };
-
-  const sortFeedback = (type, data) => {
-    const sorted = [...data].sort((a, b) => {
+  const sortFeedbackWithDropdown = (type, data) => {
+    const sortedFeedback = [...data].sort((a, b) => {
       if (type === sortValue) return null;
       switch (type) {
         case 'Least Upvotes':
@@ -56,7 +64,11 @@ function Home(props) {
       }
     });
 
-    setFeedback(sorted);
+    setFeedback(sortedFeedback);
+  };
+
+  const updateQueryString = (query) => {
+    history.push(`?sortby=${query.replace(/\s+/g, '-').toLowerCase()}`);
   };
 
   useEffect(() => {
@@ -64,7 +76,7 @@ function Home(props) {
       try {
         setLoading(true);
         const res = await fetch(
-          `/api/getFeedbackList/?categoryParam=${categoryParamFormatted}&sortBy=${values.sortby}`
+          `/api/getFeedbackList/?categoryParam=${categoryParam}&sortBy=${queryString}`
         );
         const feedbackRes = await res.json();
         setFeedback(feedbackRes.feedbackList);
@@ -77,8 +89,10 @@ function Home(props) {
       setLoading(false);
     };
 
+    queryString && updateSortLabelOnLoad();
     loadFeedback();
-  }, [categoryParamFormatted]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categoryParam]);
 
   return (
     <div id='home-page__wrapper'>

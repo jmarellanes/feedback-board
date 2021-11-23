@@ -2,15 +2,19 @@ const { feedbackTable } = require('./utils/airtable');
 
 exports.handler = async (event) => {
   const categoryParam = event.queryStringParameters.categoryParam;
-  const sortByParam = event.queryStringParameters.sortBy;
-  console.log({ categoryParam, sortByParam });
+  // First letter to uppercase to match categories on database.
+  const categoryParamFormatted =
+    categoryParam === 'undefined'
+      ? categoryParam
+      : categoryParam.charAt(0).toUpperCase() + categoryParam.slice(1);
 
   const filterCategoryParam = () => {
-    return categoryParam === 'undefined'
+    return categoryParamFormatted === 'undefined'
       ? `AND({Status} = 'Suggestion', NOT({Category} = ''))`
-      : `AND({Status} = 'Suggestion', {Category} = '${categoryParam}')`;
+      : `AND({Status} = 'Suggestion', {Category} = '${categoryParamFormatted}')`;
   };
 
+  const sortByParam = event.queryStringParameters.sortBy;
   const filterSortByParam = () => {
     switch (sortByParam) {
       case 'least-upvotes':
@@ -40,6 +44,7 @@ exports.handler = async (event) => {
         ],
       })
       .all();
+
     const categoriesRecords = await feedbackTable
       .select({
         sort: [{ field: 'Status' }],
@@ -52,10 +57,11 @@ exports.handler = async (event) => {
       fields: feedback.fields,
     }));
 
+    // console.log(categoriesRecords);
     const formattedCategoryList = categoriesRecords
-      .map((category) => category.fields.Category)
+      .map((category) => category.fields.Category.toLocaleLowerCase())
       .filter((category, index, array) => array.indexOf(category) === index);
-    const categoriesList = ['All'].concat(formattedCategoryList);
+    const categoriesList = ['all'].concat(formattedCategoryList);
 
     const statusList = categoriesRecords
       .map((status) => status.fields.Status)

@@ -39,7 +39,7 @@ function SortBy({ value, onChange }) {
         Sort By:
       </label>
       <Select
-        defaultValue={{
+        value={{
           label: value,
           value: value,
         }}
