@@ -56,9 +56,9 @@ function Home(props) {
         case 'Least Upvotes':
           return a.fields.Upvotes - b.fields.Upvotes;
         case 'Most Comments':
-          return b.fields.Comments.length - a.fields.Comments.length;
+          return b.fields.TotalComments - a.fields.TotalComments;
         case 'Least Comments':
-          return a.fields.Comments.length - b.fields.Comments.length;
+          return a.fields.TotalComments - b.fields.TotalComments;
         default:
           return b.fields.Upvotes - a.fields.Upvotes;
       }

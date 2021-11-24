@@ -20,9 +20,9 @@ exports.handler = async (event) => {
       case 'least-upvotes':
         return [{ field: 'Upvotes' }];
       case 'most-comments':
-        return [{ field: 'Total Comments', direction: 'desc' }];
+        return [{ field: 'TotalComments', direction: 'desc' }];
       case 'least-comments':
-        return [{ field: 'Total Comments' }];
+        return [{ field: 'TotalComments' }];
       default:
         return [{ field: 'Upvotes', direction: 'desc' }];
     }
@@ -40,6 +40,7 @@ exports.handler = async (event) => {
           'Upvotes',
           'Category',
           'Comments',
+          'TotalComments',
           'Status',
         ],
       })

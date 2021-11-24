@@ -17,9 +17,7 @@ function FeedbackList({ feedbackList, loading }) {
         description={feedback.fields.Description}
         upvotes={feedback.fields.Upvotes}
         category={feedback.fields.Category}
-        comments={
-          feedback.fields.Comments ? feedback.fields.Comments.length : 0
-        }
+        comments={feedback.fields.TotalComments}
         key={feedback.fields.FeedbackId}
         id={feedback.fields.FeedbackId}
         link={true}
