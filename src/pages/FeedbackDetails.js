@@ -39,6 +39,16 @@ function FeedbackDetails() {
     loadComments();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const commentsTotal = () => {
+    if (feedback[0].fields.TotalComments === 0) {
+      return 'No Comments';
+    } else if (feedback[0].fields.TotalComments === 1) {
+      return '1 Comment';
+    } else {
+      return feedback[0].fields.TotalComments + ' Comments';
+    }
+  };
+
   return (
     <div id='feedback-page__wrapper'>
       {!feedback.length ? (
@@ -74,11 +84,7 @@ function FeedbackDetails() {
                 description={feedback[0].fields.Description}
                 upvotes={feedback[0].fields.Upvotes}
                 category={feedback[0].fields.Category}
-                comments={
-                  feedback[0].fields.Comments
-                    ? feedback[0].fields.Comments.length
-                    : 0
-                }
+                comments={feedback[0].fields.TotalComments}
                 link={false}
               />
             </section>
@@ -91,11 +97,7 @@ function FeedbackDetails() {
                 <h2 id='section-feedback-comments' hidden>
                   Feedback Comments
                 </h2>
-                <p className='h3'>
-                  {feedback[0].fields.Comments
-                    ? `${feedback[0].fields.Comments.length} Comments`
-                    : `No Comments`}
-                </p>
+                <p className='h3'>{commentsTotal()}</p>
                 {topLevelComments.map((comment) => (
                   <FeedbackComments
                     allComments={allComments}
