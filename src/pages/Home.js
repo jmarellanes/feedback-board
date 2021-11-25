@@ -11,6 +11,9 @@ import FeedbackTopBar from '../components/FeedbackTopBar';
 import { ReactComponent as Bulb } from '../assets/images/bulb.svg';
 import queryComponent from 'query-string';
 
+import Modal from '../components/Modal';
+import CreateFeedback from '../components/CreateFeedback';
+
 function Home(props) {
   const [feedback, setFeedback] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -18,6 +21,7 @@ function Home(props) {
 
   const [loading, setLoading] = useState(false);
   const [sortValue, setSortValue] = useState('Most Upvotes');
+  const [showModal, setShowModal] = useState(false);
 
   const { categoryParam } = useParams();
   const history = useHistory();
@@ -94,33 +98,43 @@ function Home(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryParam]);
 
+  const openModal = () => (
+    <Modal>
+      <CreateFeedback onClick={() => setShowModal(!showModal)} />
+    </Modal>
+  );
+
   return (
-    <div id='home-page__wrapper'>
-      <Header>
-        <HeaderBrandmark title='FeedbackTo' />
-        <NavMain categories={categories} />
-        <RoadmapCard statusList={status} />
-      </Header>
-      <main className='home-page__feedback'>
-        <FeedbackTopBar>
-          <div className='h3 feedback-topbar__title'>
-            <Bulb />{' '}
-            {`${feedback.length} ${
-              feedback.length > 1 ? 'Suggestions' : 'Suggestion'
-            }`}
-          </div>
-          <SortBy value={sortValue} onChange={handleChange} />
-          <Button
-            typeAttribute='button'
-            buttonStyle='button--primary'
-            svgIcon='sign'
-          >
-            Add Feedback
-          </Button>
-        </FeedbackTopBar>
-        <FeedbackList feedbackList={feedback} loading={loading} />
-      </main>
-    </div>
+    <>
+      <div id='home-page__wrapper'>
+        <Header>
+          <HeaderBrandmark title='FeedbackTo' />
+          <NavMain categories={categories} />
+          <RoadmapCard statusList={status} />
+        </Header>
+        <main className='home-page__feedback'>
+          <FeedbackTopBar>
+            <div className='h3 feedback-topbar__title'>
+              <Bulb />{' '}
+              {`${feedback.length} ${
+                feedback.length > 1 ? 'Suggestions' : 'Suggestion'
+              }`}
+            </div>
+            <SortBy value={sortValue} onChange={handleChange} />
+            <Button
+              typeAttribute='button'
+              buttonStyle='button--primary'
+              svgIcon='sign'
+              onClick={() => setShowModal(!showModal)}
+            >
+              Add Feedback
+            </Button>
+          </FeedbackTopBar>
+          <FeedbackList feedbackList={feedback} loading={loading} />
+        </main>
+      </div>
+      {showModal && openModal()}
+    </>
   );
 }
 

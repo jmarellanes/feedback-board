@@ -1,0 +1,25 @@
+#modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 10;
+
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+#modal:empty {
+  display: none;
+}
+
+#modal > div {
+  @include fb_container;
+
+  width: 34rem;
+  text-align: center;
+}
