@@ -10,16 +10,16 @@
   top: 0;
   z-index: 10;
 
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 #modal:empty {
   display: none;
 }
 
-#modal > div {
+.modal__wrapper {
   @include fb_container;
+  padding: var(--spacer__40);
 
   width: 34rem;
-  text-align: center;
 }

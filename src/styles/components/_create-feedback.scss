@@ -1,0 +1,24 @@
+.create {
+  &-feedback {
+    &__title {
+      margin-bottom: var(--spacer__40);
+    }
+
+    &__footer {
+      display: flex;
+      justify-content: right;
+
+      margin-top: var(--spacer__48);
+
+      & .button:not(:last-child) {
+        margin-right: 1rem;
+      }
+    }
+
+    &__chars-left {
+      position: absolute;
+      bottom: -2rem;
+      right: 0;
+    }
+  }
+}

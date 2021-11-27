@@ -3,6 +3,11 @@
   outline: 1px solid var(--color__secondary);
 }
 
+@mixin field-focus-react-select {
+  border-color: var(--color__secondary);
+  outline: 1px solid var(--color__secondary) !important;
+}
+
 @mixin field-disabled {
   border-color: #ebebe4;
   background-color: #ebebe4;
@@ -81,17 +86,121 @@ legend {
     position: relative;
 
     & + .form__group {
-      margin-top: var(--spacer__24);
+      margin-top: var(--spacer__32);
+
+      &.create-comment__footer {
+        margin-top: var(--spacer__20);
+      }
+
+      &.create-feedback__footer {
+        margin-top: var(--spacer__48);
+      }
+    }
+
+    input,
+    textarea {
+      padding: var(--spacer__16) var(--spacer__24);
     }
 
     textarea {
       resize: vertical;
-      padding: var(--spacer__16) var(--spacer__24);
+    }
+
+    .select {
+      &__control {
+        min-height: 3rem;
+        font-size: fn_calculate-rem(14);
+        background-color: var(--color__secondary--light-03);
+        border: none;
+        box-shadow: none;
+        cursor: pointer;
+        padding: var(--spacer__8) var(--spacer__24);
+
+        outline: 1px solid var(--color__secondary--light-03) !important;
+        transition: outline var(--duration--250) var(--easing--s);
+
+        svg {
+          rotate: (180deg);
+          transition: rotate var(--duration--250) var(--easing--s);
+
+          path {
+            fill: var(--color__secondary);
+          }
+        }
+
+        &--menu-is-open {
+          svg {
+            rotate: (0deg);
+          }
+        }
+
+        &--is-focused,
+        &:hover {
+          @include field-focus-react-select;
+        }
+      }
+
+      &__value-container {
+        padding: 0;
+      }
+
+      &__indicator-separator {
+        display: none;
+      }
+
+      &__menu {
+        font-family: var(--font__primary);
+        font-size: fn_calculate-rem(16);
+
+        margin-top: var(--spacer__16);
+        border-radius: 0.75rem;
+        box-shadow: 0px 10px 40px -7px rgba(55, 63, 104, 0.4);
+      }
+
+      &__option {
+        border-bottom: 1px solid rgba(140, 146, 179, 0.25);
+        padding: var(--spacer__12) var(--spacer__24);
+        cursor: inherit;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        &--is-selected {
+          background-color: transparent;
+          color: var(--color__tertiary);
+          position: relative;
+
+          &::after {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.5rem;
+            content: '';
+            background-image: url('../../../src/assets/images/check-select.svg');
+            background-size: 13px 10px;
+            height: 10px;
+            width: 13px;
+          }
+        }
+
+        &--is-focused {
+          background-color: transparent;
+          color: var(--color__primary);
+        }
+      }
+    }
+
+    &-title {
+      margin-bottom: var(--spacer__32);
+    }
+
+    &-subtitle {
+      margin-bottom: var(--spacer__16);
     }
 
     &--error {
       position: absolute;
-      bottom: -1.5rem;
+      top: 104%;
 
       color: var(--color__danger);
       font-size: 90%;
@@ -102,13 +211,17 @@ legend {
     width: 100%;
     color: var(--color__tertiary);
 
+    outline: 1px solid var(--color__secondary--light-03);
+    transition: outline var(--duration--250) var(--easing--s);
+
     &::placeholder {
       color: #8c92b3;
       opacity: 1;
     }
 
     &:focus,
-    &:active {
+    &:active,
+    &:hover {
       @include field-focus;
     }
 
@@ -118,6 +231,12 @@ legend {
 
     &[aria-invalid='true'] {
       @include field-error;
+
+      &:focus,
+      &:active,
+      &:hover {
+        @include field-error;
+      }
 
       &::placeholder {
         color: var(--color__danger);

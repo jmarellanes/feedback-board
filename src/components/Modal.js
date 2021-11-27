@@ -9,6 +9,7 @@ const Modal = ({ children }) => {
   if (!elRef.current) elRef.current = document.createElement('div');
 
   useEffect(() => {
+    elRef.current.className = 'modal__wrapper';
     modalRoot.appendChild(elRef.current);
     return () => modalRoot.removeChild(elRef.current);
   }, []);

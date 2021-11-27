@@ -155,7 +155,7 @@ export default function DesignSystem() {
             <Upvotes />
           </dd>
           <dd className='ds-interactive__element'>
-            <Category>Ux</Category>
+            {/* <Category>Ux</Category> */}
           </dd>
           <dd className='ds-interactive__element'>
             <SortBy />

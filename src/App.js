@@ -13,6 +13,9 @@ function App() {
   return (
     <Router>
       <Switch>
+        <Route exact path='/design-system'>
+          <DesignSystem />
+        </Route>
         <Route exact path='/'>
           <Redirect to='/all' />
         </Route>
@@ -21,9 +24,6 @@ function App() {
         </Route>
         <Route exact path='/feedback/:id'>
           <FeedbackDetails />
-        </Route>
-        <Route exact path='/design-system'>
-          <DesignSystem />
         </Route>
       </Switch>
     </Router>
