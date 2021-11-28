@@ -3,9 +3,12 @@ import { useForm, Controller } from 'react-hook-form';
 import ReactSelect, { components } from 'react-select';
 import { ReactComponent as Arrow } from '../assets/images/arrow-up.svg';
 import Button from './Button';
-import Category from './Category';
+
+import { useUser } from '../context/UserContext';
 
 function CreateFeedback({ onClick }) {
+  const [user] = useUser();
+
   const MAX_CHARS = 250;
   const [characters, setCharactersLeft] = useState(MAX_CHARS);
   const {
@@ -39,14 +42,12 @@ function CreateFeedback({ onClick }) {
   ];
 
   const onSubmit = async (data) => {
-    console.log(data);
     const {
       'create-feedback-title': Title,
       'create-feedback-detail': Description,
       'create-feedback-category': { value: Category },
     } = data;
-
-    console.log(Category);
+    const { id: Author } = user;
 
     try {
       await fetch('/api/createFeedback/', {
@@ -55,14 +56,13 @@ function CreateFeedback({ onClick }) {
           Title,
           Description,
           Category,
+          Author: [Author],
         }),
       });
     } catch (error) {
       console.log(error);
     }
   };
-
-  // console.log('Errors:', errors);
 
   return (
     <>
