@@ -3,6 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import ReactSelect, { components } from 'react-select';
 import { ReactComponent as Arrow } from '../assets/images/arrow-up.svg';
 import Button from './Button';
+import Category from './Category';
 
 function CreateFeedback({ onClick }) {
   const MAX_CHARS = 250;
@@ -37,9 +38,28 @@ function CreateFeedback({ onClick }) {
     },
   ];
 
-  const onSubmit = (data) => {
-    // Call to API
+  const onSubmit = async (data) => {
     console.log(data);
+    const {
+      'create-feedback-title': Title,
+      'create-feedback-detail': Description,
+      'create-feedback-category': { value: Category },
+    } = data;
+
+    console.log(Category);
+
+    try {
+      await fetch('/api/createFeedback/', {
+        method: 'POST',
+        body: JSON.stringify({
+          Title,
+          Description,
+          Category,
+        }),
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // console.log('Errors:', errors);
@@ -163,7 +183,7 @@ function CreateFeedback({ onClick }) {
 
             <div className='form__group create-feedback__footer'>
               <Button
-                typeAttribute='submit'
+                typeAttribute='button'
                 buttonStyle='button--tertiary'
                 onClick={onClick}
               >
