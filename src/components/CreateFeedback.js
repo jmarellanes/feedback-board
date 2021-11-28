@@ -6,7 +6,7 @@ import Button from './Button';
 
 import { useUser } from '../context/UserContext';
 
-function CreateFeedback({ onClick }) {
+function CreateFeedback({ onClick, feedbackAdded }) {
   const [user] = useUser();
 
   const MAX_CHARS = 250;
@@ -16,6 +16,7 @@ function CreateFeedback({ onClick }) {
     handleSubmit,
     formState: { errors },
     control,
+    reset,
   } = useForm();
 
   const DropdownIndicator = (props) => {
@@ -59,6 +60,8 @@ function CreateFeedback({ onClick }) {
           Author: [Author],
         }),
       });
+
+      feedbackAdded();
     } catch (error) {
       console.log(error);
     }

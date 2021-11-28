@@ -75,24 +75,25 @@ function Home(props) {
     history.push(`?sortby=${query.replace(/\s+/g, '-').toLowerCase()}`);
   };
 
+  const loadFeedback = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch(
+        `/api/getFeedbackList/?categoryParam=${categoryParam}&sortBy=${queryString}`
+      );
+      const feedbackRes = await res.json();
+      setFeedback(feedbackRes.feedbackList);
+      setCategories(feedbackRes.categoriesList);
+      setStatus(feedbackRes.statusList);
+    } catch (error) {
+      console.log(error);
+    }
+
+    if (showModal) setShowModal(false);
+    setLoading(false);
+  };
+
   useEffect(() => {
-    const loadFeedback = async () => {
-      try {
-        setLoading(true);
-        const res = await fetch(
-          `/api/getFeedbackList/?categoryParam=${categoryParam}&sortBy=${queryString}`
-        );
-        const feedbackRes = await res.json();
-        setFeedback(feedbackRes.feedbackList);
-        setCategories(feedbackRes.categoriesList);
-        setStatus(feedbackRes.statusList);
-      } catch (error) {
-        console.log(error);
-      }
-
-      setLoading(false);
-    };
-
     queryString && updateSortLabelOnLoad();
     loadFeedback();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -100,7 +101,10 @@ function Home(props) {
 
   const openModal = () => (
     <Modal>
-      <CreateFeedback onClick={() => setShowModal(!showModal)} />
+      <CreateFeedback
+        feedbackAdded={loadFeedback}
+        onClick={() => setShowModal(!showModal)}
+      />
     </Modal>
   );
 
