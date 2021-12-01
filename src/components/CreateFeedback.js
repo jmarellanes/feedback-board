@@ -16,7 +16,6 @@ function CreateFeedback({ onClick, feedbackAdded }) {
     handleSubmit,
     formState: { errors },
     control,
-    reset,
   } = useForm();
 
   const DropdownIndicator = (props) => {
@@ -70,7 +69,16 @@ function CreateFeedback({ onClick, feedbackAdded }) {
   return (
     <>
       <section className='create-feedback'>
-        <h2 className='create-feedback__title h1'>Create New Feedback</h2>
+        <h2 className='create-feedback__title h1' id='dialog-title'>
+          Create New Feedback
+        </h2>
+        <p id='dialog-description' className='visually-hidden'>
+          This is a dialog window which overlays the main content of the page.
+          The modal begins with a heading 2 called &quot;Create New
+          Feedback&quot;. Pressing the Cancel button at the bottom of the modal
+          or pressing Escape will close the modal and bring you back to where
+          you were on the page.
+        </p>
 
         <div className='create-feedback__container'>
           <form onSubmit={handleSubmit(onSubmit)}>

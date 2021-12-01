@@ -32,6 +32,10 @@ body {
   background-color: var(--color__secondary--light-03);
 } // -> body
 
+#root[aria-hidden='true'] {
+  pointer-events: none;
+}
+
 /* =====================================================================
   -> HIDE CONTENT
 ===================================================================== */

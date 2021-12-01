@@ -76,6 +76,8 @@ function Home(props) {
   };
 
   const loadFeedback = async () => {
+    updateSortLabelOnLoad();
+
     try {
       setLoading(true);
       const res = await fetch(
@@ -94,16 +96,19 @@ function Home(props) {
   };
 
   useEffect(() => {
-    queryString && updateSortLabelOnLoad();
     loadFeedback();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryParam]);
 
+  const closeModal = () => {
+    setShowModal(!showModal);
+  };
+
   const openModal = () => (
-    <Modal>
+    <Modal onClose={() => closeModal()}>
       <CreateFeedback
         feedbackAdded={loadFeedback}
-        onClick={() => setShowModal(!showModal)}
+        onClick={() => closeModal()}
       />
     </Modal>
   );
