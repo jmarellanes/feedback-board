@@ -1,60 +1,62 @@
 import React, { createRef } from 'react';
 import { createPortal } from 'react-dom';
 
-const modalElement = document.getElementById('modal');
-const rootElement = modalElement.nextElementSibling;
-let firstFocusableElement, lastFocusableElement, focusedElBeforeOpen;
-
 class Modal extends React.Component {
   constructor(props) {
     super(props);
     this.modalRef = createRef(null);
 
-    this.initVariables = this.initVariables.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.whenModalOpen = this.whenModalOpen.bind(this);
-    this.whenModalClose = this.whenModalClose.bind(this);
+    this.modalElement = document.getElementById('modal');
+    this.rootElement = this.modalElement.nextElementSibling;
+    this.firstFocusableElement = '';
+    this.lastFocusableElement = '';
+    this.focusedElBeforeOpen = '';
   }
 
-  initVariables() {
-    focusedElBeforeOpen = document.activeElement;
+  initVariables = () => {
+    this.focusedElBeforeOpen = document.activeElement;
 
-    const focusableElements =
+    this.focusableElements =
       'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
-    const focusableContent = modalElement.querySelectorAll(focusableElements);
+    this.focusableContent = this.modalElement.querySelectorAll(
+      this.focusableElements
+    );
 
-    firstFocusableElement = modalElement.querySelectorAll(focusableElements)[0];
-    lastFocusableElement = focusableContent[focusableContent.length - 1];
-  }
+    this.firstFocusableElement = this.modalElement.querySelectorAll(
+      this.focusableElements
+    )[0];
+    this.lastFocusableElement =
+      this.focusableContent[this.focusableContent.length - 1];
+  };
 
-  whenModalOpen() {
-    rootElement.setAttribute('aria-hidden', true);
-    rootElement.setAttribute('tabindex', '-1');
-    firstFocusableElement.focus();
-  }
+  whenModalOpen = () => {
+    this.rootElement.setAttribute('aria-hidden', true);
+    this.rootElement.setAttribute('tabindex', '-1');
+    this.firstFocusableElement.focus();
+  };
 
-  whenModalClose(element) {
-    rootElement.removeAttribute('aria-hidden');
-    rootElement.removeAttribute('tabindex');
+  whenModalClose = (element) => {
+    this.rootElement.removeAttribute('aria-hidden');
+    this.rootElement.removeAttribute('tabindex');
 
-    modalElement.removeChild(element);
-    focusedElBeforeOpen.focus();
-  }
+    this.modalElement.removeChild(element);
+    this.focusedElBeforeOpen.focus();
+  };
 
-  handleKeyDown(e) {
+  handleKeyDown = (e) => {
     let KEY_TAB = 'Tab';
     let KEY_ESC = 'Escape';
 
     switch (e.key) {
       case KEY_TAB:
         if (e.shiftKey) {
-          if (document.activeElement === firstFocusableElement) {
-            lastFocusableElement.focus();
+          if (document.activeElement === this.firstFocusableElement) {
+            this.lastFocusableElement.focus();
             e.preventDefault();
           }
         } else {
-          if (document.activeElement === lastFocusableElement) {
-            firstFocusableElement.focus();
+          if (document.activeElement === this.lastFocusableElement) {
+            this.firstFocusableElement.focus();
             e.preventDefault();
           }
         }
@@ -65,7 +67,7 @@ class Modal extends React.Component {
       default:
         break;
     }
-  }
+  };
 
   componentDidMount() {
     this.initVariables();
@@ -87,7 +89,7 @@ class Modal extends React.Component {
       this.modalRef.current = document.createElement('div');
 
     this.modalRef.current.className = 'modal__wrapper';
-    modalElement.appendChild(this.modalRef.current);
+    this.modalElement.appendChild(this.modalRef.current);
 
     return createPortal(<>{children}</>, this.modalRef.current);
   }
