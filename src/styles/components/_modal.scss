@@ -1,4 +1,4 @@
-#modal {
+.modal {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,15 +11,55 @@
   z-index: 10;
 
   background-color: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  transition: opacity 350ms var(--easing--s);
+
+  &:empty {
+    display: none;
+    opacity: 0;
+  }
+
+  &__is-open {
+    opacity: 1;
+  }
+
+  &__wrapper {
+    @include fb_container;
+
+    width: 34rem;
+    padding: var(--spacer__40);
+  }
+
+  // Animation
+  &-transition {
+    &-enter {
+      transform: translateY(-15%);
+      opacity: 0;
+    }
+
+    &-enter-active {
+      transform: translateY(0);
+      opacity: 1;
+
+      transition: all 350ms var(--easing--s);
+      transition-property: opacity, transform;
+    }
+
+    &-exit {
+      transform: translateY(0);
+    }
+
+    &-exit-active {
+      transform: translateY(-15%);
+      opacity: 0;
+
+      transition: all 350ms var(--easing--s);
+      transition-property: opacity, transform;
+    }
+  }
 }
 
-#modal:empty {
-  display: none;
-}
-
-.modal__wrapper {
-  @include fb_container;
-  padding: var(--spacer__40);
-
-  width: 34rem;
+#root {
+  filter: blur(0);
+  transition: filter 250ms var(--easing--s);
 }

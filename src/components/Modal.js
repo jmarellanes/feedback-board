@@ -30,16 +30,22 @@ class Modal extends React.Component {
   };
 
   whenModalOpen = () => {
+    this.modalElement.className = `${this.modalElement.className} ${this.props.isOpen}`;
+
+    this.rootElement.style.filter = 'blur(8px)';
     this.rootElement.setAttribute('aria-hidden', true);
     this.rootElement.setAttribute('tabindex', '-1');
+
     this.firstFocusableElement.focus();
   };
 
-  whenModalClose = (element) => {
+  whenModalClose = () => {
+    this.modalElement.classList.remove('modal__is-open');
+
+    this.rootElement.style.filter = null;
     this.rootElement.removeAttribute('aria-hidden');
     this.rootElement.removeAttribute('tabindex');
 
-    this.modalElement.removeChild(element);
     this.focusedElBeforeOpen.focus();
   };
 
@@ -77,21 +83,19 @@ class Modal extends React.Component {
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleKeyDown);
+    this.whenModalClose();
 
-    this.whenModalClose(this.modalRef.current);
+    document.removeEventListener('keydown', this.handleKeyDown);
   }
 
   render() {
     const { children } = this.props;
+    this.modalRef.current = this.modalElement;
 
-    if (!this.modalRef.current)
-      this.modalRef.current = document.createElement('div');
-
-    this.modalRef.current.className = 'modal__wrapper';
-    this.modalElement.appendChild(this.modalRef.current);
-
-    return createPortal(<>{children}</>, this.modalRef.current);
+    return createPortal(
+      <div className='modal__wrapper'>{children}</div>,
+      this.modalRef.current
+    );
   }
 }
 

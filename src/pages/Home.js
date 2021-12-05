@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
+import queryComponent from 'query-string';
+
 import Button from '../components/Button';
 import FeedbackList from '../components/FeedbackList';
 import Header from '../components/Header';
@@ -9,8 +12,6 @@ import RoadmapCard from '../components/RoadmapCard';
 import SortBy from '../components/SortBy';
 import FeedbackTopBar from '../components/FeedbackTopBar';
 import { ReactComponent as Bulb } from '../assets/images/bulb.svg';
-import queryComponent from 'query-string';
-
 import Modal from '../components/Modal';
 import CreateFeedback from '../components/CreateFeedback';
 
@@ -105,10 +106,11 @@ function Home(props) {
   };
 
   const openModal = () => (
-    <Modal onClose={() => closeModal()}>
+    <Modal onClose={() => closeModal()} isOpen='modal__is-open'>
       <CreateFeedback
         feedbackAdded={loadFeedback}
         onClick={() => closeModal()}
+        show={showModal}
       />
     </Modal>
   );
@@ -142,7 +144,16 @@ function Home(props) {
           <FeedbackList feedbackList={feedback} loading={loading} />
         </main>
       </div>
-      {showModal && openModal()}
+
+      {/* Add Feedback Modal*/}
+      <CSSTransition
+        in={showModal}
+        classNames='modal-transition'
+        unmountOnExit
+        timeout={250}
+      >
+        {openModal()}
+      </CSSTransition>
     </>
   );
 }

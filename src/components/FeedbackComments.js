@@ -28,7 +28,7 @@ function FeedbackComments({
     comment.style.setProperty('--closeCommentHeight', collapsedCommentHeight);
 
     const replyFormHeight = reply.scrollHeight;
-    // 16 = 1rem
+    // 16 = 1rem from Grid Gap
     let totalHeight = collapsedCommentHeight + replyFormHeight + 16;
     comment.style.setProperty('--openCommentHeight', totalHeight);
 
