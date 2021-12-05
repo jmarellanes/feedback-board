@@ -1,10 +1,5 @@
 @mixin field-focus {
   border-color: var(--color__secondary);
-  outline: 1px solid var(--color__secondary);
-}
-
-@mixin field-focus-react-select {
-  border-color: var(--color__secondary);
   outline: 1px solid var(--color__secondary) !important;
 }
 
@@ -20,7 +15,7 @@
 }
 
 @mixin field-error {
-  outline: 1px solid var(--color__danger);
+  outline: 1px solid var(--color__danger) !important;
 }
 
 // FORM RESET
@@ -106,6 +101,30 @@ legend {
       resize: vertical;
     }
 
+    &-title {
+      margin-bottom: var(--spacer__32);
+    }
+
+    &-subtitle {
+      margin-bottom: var(--spacer__16);
+    }
+
+    &--error {
+      position: absolute;
+      top: 104%;
+
+      color: var(--color__danger);
+      font-size: 90%;
+    }
+  }
+
+  &__field {
+    width: 100%;
+    color: var(--color__tertiary);
+
+    outline: 1px solid var(--color__secondary--light-03);
+    transition: outline var(--duration--250) var(--easing--s);
+
     .select {
       &__control {
         min-height: 3rem;
@@ -136,8 +155,13 @@ legend {
 
         &--is-focused,
         &:hover {
-          @include field-focus-react-select;
+          @include field-focus;
         }
+      }
+
+      &__single-value {
+        // Fix to avoid cutting text
+        overflow: unset;
       }
 
       &__value-container {
@@ -190,29 +214,23 @@ legend {
       }
     }
 
-    &-title {
-      margin-bottom: var(--spacer__32);
+    &.aria-invalid-true {
+      .select {
+        &__control {
+          @include field-error;
+
+          &:focus,
+          &:active,
+          &:hover {
+            @include field-error;
+          }
+
+          path {
+            fill: var(--color__danger);
+          }
+        }
+      }
     }
-
-    &-subtitle {
-      margin-bottom: var(--spacer__16);
-    }
-
-    &--error {
-      position: absolute;
-      top: 104%;
-
-      color: var(--color__danger);
-      font-size: 90%;
-    }
-  }
-
-  &__field {
-    width: 100%;
-    color: var(--color__tertiary);
-
-    outline: 1px solid var(--color__secondary--light-03);
-    transition: outline var(--duration--250) var(--easing--s);
 
     &::placeholder {
       color: #8c92b3;

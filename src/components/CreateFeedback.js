@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import ReactSelect, { components } from 'react-select';
+import Select, { components } from 'react-select';
 import { ReactComponent as Arrow } from '../assets/images/arrow-up.svg';
 import { ReactComponent as CreateFeedbackIcon } from '../assets/images/create-feedback.svg';
 import Button from './Button';
@@ -10,12 +10,14 @@ import { useUser } from '../context/UserContext';
 function CreateFeedback({ onClick, feedbackAdded, show }) {
   const [user] = useUser();
 
+  // const [ariaInvalid, setAriaInvalid]
+
   const MAX_CHARS = 250;
   const [characters, setCharactersLeft] = useState(MAX_CHARS);
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     control,
   } = useForm();
 
@@ -121,9 +123,10 @@ function CreateFeedback({ onClick, feedbackAdded, show }) {
             <Controller
               name='create-feedback-category'
               control={control}
+              aria-invalid='true'
               rules={{ required: true }}
               render={({ field }) => (
-                <ReactSelect
+                <Select
                   default-value={{
                     label: 'Feature',
                     value: 'Feature',
@@ -137,7 +140,11 @@ function CreateFeedback({ onClick, feedbackAdded, show }) {
                   name='create-feedback-category'
                   inputId='create-feedback-category'
                   classNamePrefix='select'
-                  className='select__container'
+                  className={`form__field ${
+                    errors['create-feedback-category']
+                      ? 'aria-invalid-true'
+                      : ''
+                  }`}
                   openMenuOnFocus
                   components={{ DropdownIndicator }}
                 />
