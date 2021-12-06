@@ -15,7 +15,7 @@ import { ReactComponent as Bulb } from '../assets/images/bulb.svg';
 import Modal from '../components/Modal';
 import CreateFeedback from '../components/CreateFeedback';
 
-function Home(props) {
+function Home() {
   const [feedback, setFeedback] = useState([]);
   const [categories, setCategories] = useState([]);
   const [status, setStatus] = useState([]);
@@ -110,7 +110,6 @@ function Home(props) {
       <CreateFeedback
         feedbackAdded={loadFeedback}
         onClick={() => closeModal()}
-        show={showModal}
       />
     </Modal>
   );

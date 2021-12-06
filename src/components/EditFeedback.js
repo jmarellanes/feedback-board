@@ -6,11 +6,7 @@ import Button from './Button';
 import { ReactComponent as Arrow } from '../assets/images/arrow-up.svg';
 import { ReactComponent as CreateFeedbackIcon } from '../assets/images/create-feedback.svg';
 
-import { useUser } from '../context/UserContext';
-
-function CreateFeedback({ onClick, feedbackAdded }) {
-  const [user] = useUser();
-
+function EditFeedback({ onClick }) {
   const MAX_CHARS = 250;
   const [characters, setCharactersLeft] = useState(MAX_CHARS);
   const {
@@ -44,28 +40,7 @@ function CreateFeedback({ onClick, feedbackAdded }) {
   ];
 
   const onSubmit = async (data) => {
-    const {
-      'create-feedback-title': Title,
-      'create-feedback-detail': Description,
-      'create-feedback-category': { value: Category },
-    } = data;
-    const { id: Author } = user;
-
-    try {
-      await fetch('/api/createFeedback/', {
-        method: 'POST',
-        body: JSON.stringify({
-          Title,
-          Description,
-          Category,
-          Author: [Author],
-        }),
-      });
-
-      feedbackAdded();
-    } catch (error) {
-      console.log(error);
-    }
+    // API Call
   };
 
   const modalInterior = (
@@ -74,7 +49,7 @@ function CreateFeedback({ onClick, feedbackAdded }) {
         <CreateFeedbackIcon />
       </span>
       <h2 className='create-feedback__title h1' id='dialog-title'>
-        Create New Feedback
+        Editing Add Task Name
       </h2>
       <p id='dialog-description' className='visually-hidden'>
         This is a dialog window which overlays the main content of the page. The
@@ -216,4 +191,4 @@ function CreateFeedback({ onClick, feedbackAdded }) {
   return <>{modalInterior}</>;
 }
 
-export default CreateFeedback;
+export default EditFeedback;
