@@ -16,8 +16,6 @@ function FeedbackDetails() {
   const [topLevelComments, setTopLevel] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
-  const [fild] = useState([]);
-
   const { id } = useParams();
   const history = useHistory();
 
@@ -25,14 +23,18 @@ function FeedbackDetails() {
     try {
       const res = await fetch(`/api/getFeedbackDetails?id=${id}`);
       const feedbackList = await res.json();
-      setFeedback(feedbackList);
-      const [fild] = feedbackList;
-      const newFilds = fild.fields;
-      console.log(newFilds);
+      const [rawData] = feedbackList;
+      const formattedFeedback = rawData.fields;
+
+      setFeedback(formattedFeedback);
     } catch (error) {
       console.log(error);
     }
   };
+
+  // const {
+  //   fields: { Title: title, Status: status },
+  // } = feedback[0];
 
   const loadComments = async () => {
     try {
@@ -51,12 +53,12 @@ function FeedbackDetails() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const commentsTotal = () => {
-    if (feedback[0].fields.TotalComments === 0) {
+    if (feedback.TotalComments === 0) {
       return 'No Comments';
-    } else if (feedback[0].fields.TotalComments === 1) {
+    } else if (feedback.TotalComments === 1) {
       return '1 Comment';
     } else {
-      return feedback[0].fields.TotalComments + ' Comments';
+      return feedback.TotalComments + ' Comments';
     }
   };
 
@@ -73,7 +75,7 @@ function FeedbackDetails() {
   return (
     <>
       <div id='feedback-page__wrapper'>
-        {!feedback.length ? (
+        {!Object.keys(feedback).length ? (
           <Loader />
         ) : (
           <>
@@ -106,11 +108,11 @@ function FeedbackDetails() {
                   Feedback Detail
                 </h2>
                 <FeedbackItem
-                  title={feedback[0].fields.Title}
-                  description={feedback[0].fields.Description}
-                  upvotes={feedback[0].fields.Upvotes}
-                  category={feedback[0].fields.Category}
-                  comments={feedback[0].fields.TotalComments}
+                  title={feedback.Title}
+                  description={feedback.Description}
+                  upvotes={feedback.Upvotes}
+                  category={feedback.Category}
+                  comments={feedback.TotalComments}
                   link={false}
                 />
               </section>
@@ -124,23 +126,31 @@ function FeedbackDetails() {
                     Feedback Comments
                   </h2>
                   <p className='h3'>{commentsTotal()}</p>
-                  {topLevelComments.map((comment) => (
-                    <FeedbackComments
-                      allComments={allComments}
-                      key={comment.fields.CommentId}
-                      name={comment.fields.Name}
-                      username={comment.fields.Username}
-                      image={comment.fields.Image}
-                      comment={comment.fields.Comment}
-                      commentId={comment.fields.CommentId}
-                      parentId={
-                        comment.fields.ParentId ? comment.fields.ParentId : null
-                      }
-                      parentUsername={
-                        comment.fields.ParentId ? comment.fields.Username : null
-                      }
-                    />
-                  ))}
+                  {topLevelComments.map((comment) => {
+                    const commentFormatted = comment.fields;
+
+                    return (
+                      <FeedbackComments
+                        allComments={allComments}
+                        key={commentFormatted.CommentId}
+                        name={commentFormatted.Name}
+                        username={commentFormatted.Username}
+                        image={commentFormatted.Image}
+                        comment={commentFormatted.Comment}
+                        commentId={commentFormatted.CommentId}
+                        parentId={
+                          commentFormatted.ParentId
+                            ? commentFormatted.ParentId
+                            : null
+                        }
+                        parentUsername={
+                          commentFormatted.ParentId
+                            ? commentFormatted.Username
+                            : null
+                        }
+                      />
+                    );
+                  })}
                 </div>
               </section>
 

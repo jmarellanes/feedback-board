@@ -44,6 +44,7 @@ function CreateFeedback({ onClick, feedbackAdded }) {
   ];
 
   const onSubmit = async (data) => {
+    console.log(data);
     const {
       'create-feedback-title': Title,
       'create-feedback-detail': Description,
