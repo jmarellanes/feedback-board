@@ -100,6 +100,7 @@ h4,
 
 .feedback-comment__username,
 .form__group-subtitle,
-.paragraph--small {
+.paragraph--small,
+.create-feedback__chars-left {
   @include fb_paragraph-small;
 }

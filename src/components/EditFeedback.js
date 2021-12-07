@@ -6,15 +6,24 @@ import Button from './Button';
 import { ReactComponent as Arrow } from '../assets/images/arrow-up.svg';
 import { ReactComponent as CreateFeedbackIcon } from '../assets/images/create-feedback.svg';
 
-function EditFeedback({ onClick }) {
+function EditFeedback({ onClick, title, category, status, comment }) {
   const MAX_CHARS = 250;
-  const [characters, setCharactersLeft] = useState(MAX_CHARS);
+  const charsLeft = MAX_CHARS - comment.length;
+  const [characters, setCharactersLeft] = useState(charsLeft);
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm();
+    setValue,
+  } = useForm({
+    defaultValues: {
+      'create-feedback-title': title,
+      'create-feedback-detail': comment,
+      'create-feedback-category': { label: category, value: category },
+      'create-feedback-status': { label: status, value: status },
+    },
+  });
 
   const DropdownIndicator = (props) => {
     return (
@@ -24,7 +33,7 @@ function EditFeedback({ onClick }) {
     );
   };
 
-  const options = [
+  const categoryOptions = [
     {
       label: 'Feature',
       value: 'Feature',
@@ -39,8 +48,27 @@ function EditFeedback({ onClick }) {
     },
   ];
 
+  const statusOptions = [
+    {
+      label: 'Suggestion',
+      value: 'Suggestion',
+    },
+    {
+      label: 'Planned',
+      value: 'Planned',
+    },
+    {
+      label: 'In-Progress',
+      value: 'In-Progress',
+    },
+    {
+      label: 'Live',
+      value: 'Live',
+    },
+  ];
+
   const onSubmit = async (data) => {
-    // API Call
+    console.log(data);
   };
 
   const modalInterior = (
@@ -49,7 +77,7 @@ function EditFeedback({ onClick }) {
         <CreateFeedbackIcon />
       </span>
       <h2 className='create-feedback__title h1' id='dialog-title'>
-        Editing Add Task Name
+        Editing '{title}'
       </h2>
       <p id='dialog-description' className='visually-hidden'>
         This is a dialog window which overlays the main content of the page. The
@@ -76,6 +104,9 @@ function EditFeedback({ onClick }) {
               aria-invalid={errors['create-feedback-title'] ? 'true' : 'false'}
               {...register('create-feedback-title', {
                 required: true,
+                onChange: (e) => {
+                  setValue(e.target.value);
+                },
               })}
             />
             <div className='form__group--error'>
@@ -97,17 +128,11 @@ function EditFeedback({ onClick }) {
             <Controller
               name='create-feedback-category'
               control={control}
-              aria-invalid='true'
               rules={{ required: true }}
               render={({ field }) => (
                 <Select
-                  default-value={{
-                    label: 'Feature',
-                    value: 'Feature',
-                  }}
                   {...field}
-                  placeholder='Feature'
-                  options={options}
+                  options={categoryOptions}
                   aria-invalid={
                     errors['create-feedback-category'] ? 'true' : 'false'
                   }
@@ -127,6 +152,42 @@ function EditFeedback({ onClick }) {
             <div className='form__group--error'>
               {errors['create-feedback-category'] &&
                 errors['create-feedback-category']?.type === 'required' && (
+                  <span role='alert'>Can't be empty.</span>
+                )}
+            </div>
+          </div>
+
+          <div className='form__group'>
+            <label htmlFor='create-feedback-status' className='h4'>
+              Update Status
+            </label>
+            <p className='form__group-subtitle'>Change feedback state</p>
+
+            <Controller
+              name='create-feedback-status'
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  options={statusOptions}
+                  aria-invalid={
+                    errors['create-feedback-status'] ? 'true' : 'false'
+                  }
+                  name='create-feedback-status'
+                  inputId='create-feedback-status'
+                  classNamePrefix='select'
+                  className={`form__field ${
+                    errors['create-feedback-status'] ? 'aria-invalid-true' : ''
+                  }`}
+                  openMenuOnFocus
+                  components={{ DropdownIndicator }}
+                />
+              )}
+            />
+            <div className='form__group--error'>
+              {errors['create-feedback-status'] &&
+                errors['create-feedback-status']?.type === 'required' && (
                   <span role='alert'>Can't be empty.</span>
                 )}
             </div>
@@ -153,6 +214,7 @@ function EditFeedback({ onClick }) {
                 onChange: (e) => {
                   let commentLength = e.target.value.length;
                   setCharactersLeft(MAX_CHARS - commentLength);
+                  setValue(e.target.value);
                 },
               })}
             ></textarea>
@@ -180,7 +242,7 @@ function EditFeedback({ onClick }) {
               Cancel
             </Button>
             <Button typeAttribute='submit' buttonStyle='button--primary'>
-              Add Feedback
+              Update Feedback
             </Button>
           </div>
         </form>

@@ -11,7 +11,7 @@ import Modal from '../components/Modal';
 import EditFeedback from '../components/EditFeedback';
 
 function FeedbackDetails() {
-  const [feedback, setFeedback] = useState([]);
+  const [feedback, setFeedback] = useState({});
   const [allComments, setComments] = useState([]);
   const [topLevelComments, setTopLevel] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -68,7 +68,13 @@ function FeedbackDetails() {
 
   const openModal = () => (
     <Modal onClose={() => closeModal()} isOpen='modal__is-open'>
-      <EditFeedback onClick={() => closeModal()} feedback={feedback} />
+      <EditFeedback
+        onClick={() => closeModal()}
+        title={feedback.Title}
+        comment={feedback.Description}
+        category={feedback.Category}
+        status={feedback.Status}
+      />
     </Modal>
   );
 
@@ -126,27 +132,21 @@ function FeedbackDetails() {
                     Feedback Comments
                   </h2>
                   <p className='h3'>{commentsTotal()}</p>
-                  {topLevelComments.map((comment) => {
-                    const commentFormatted = comment.fields;
+                  {topLevelComments.map((rawComment) => {
+                    const comment = rawComment.fields;
 
                     return (
                       <FeedbackComments
                         allComments={allComments}
-                        key={commentFormatted.CommentId}
-                        name={commentFormatted.Name}
-                        username={commentFormatted.Username}
-                        image={commentFormatted.Image}
-                        comment={commentFormatted.Comment}
-                        commentId={commentFormatted.CommentId}
-                        parentId={
-                          commentFormatted.ParentId
-                            ? commentFormatted.ParentId
-                            : null
-                        }
+                        key={comment.CommentId}
+                        name={comment.Name}
+                        username={comment.Username}
+                        image={comment.Image}
+                        comment={comment.Comment}
+                        commentId={comment.CommentId}
+                        parentId={comment.ParentId ? comment.ParentId : null}
                         parentUsername={
-                          commentFormatted.ParentId
-                            ? commentFormatted.Username
-                            : null
+                          comment.ParentId ? comment.Username : null
                         }
                       />
                     );
