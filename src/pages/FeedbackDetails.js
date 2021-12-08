@@ -70,10 +70,12 @@ function FeedbackDetails() {
     <Modal onClose={() => closeModal()} isOpen='modal__is-open'>
       <EditFeedback
         onClick={() => closeModal()}
+        feedbackUpdated={loadFeedbackDetails}
         title={feedback.Title}
         comment={feedback.Description}
         category={feedback.Category}
         status={feedback.Status}
+        id={feedback.FeedbackId}
       />
     </Modal>
   );

@@ -6,7 +6,15 @@ import Button from './Button';
 import { ReactComponent as Arrow } from '../assets/images/arrow-up.svg';
 import { ReactComponent as EditFeedbackIcon } from '../assets/images/edit-feedback.svg';
 
-function EditFeedback({ onClick, title, category, status, comment }) {
+function EditFeedback({
+  onClick: closeModal,
+  title,
+  category,
+  status,
+  comment,
+  id,
+  feedbackUpdated,
+}) {
   const MAX_CHARS = 250;
   const charsLeft = MAX_CHARS - comment.length;
   const [characters, setCharactersLeft] = useState(charsLeft);
@@ -68,7 +76,32 @@ function EditFeedback({ onClick, title, category, status, comment }) {
   ];
 
   const onSubmit = async (data) => {
-    console.log(data);
+    const {
+      'edit-feedback-title': Title,
+      'edit-feedback-detail': Description,
+      'edit-feedback-category': { value: Category },
+      'edit-feedback-status': { value: Status },
+    } = data;
+
+    try {
+      const res = await fetch('/api/updateFeedback', {
+        method: 'PUT',
+        body: JSON.stringify({
+          id,
+          Title,
+          Description,
+          Category,
+          Status,
+        }),
+      });
+
+      if (res.status === 200) {
+        feedbackUpdated();
+        closeModal();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const modalInterior = (
@@ -243,7 +276,7 @@ function EditFeedback({ onClick, title, category, status, comment }) {
         <Button
           typeAttribute='button'
           buttonStyle='button--tertiary'
-          onClick={onClick}
+          onClick={closeModal}
         >
           Cancel
         </Button>
