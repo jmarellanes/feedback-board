@@ -9,7 +9,14 @@ const components = {
   sign: Sign,
 };
 
-function Button({ children, buttonStyle, typeAttribute, onClick, svgIcon }) {
+function Button({
+  children,
+  buttonStyle,
+  typeAttribute,
+  onClick,
+  svgIcon,
+  form,
+}) {
   const SVGIcon = components[svgIcon];
 
   return (
@@ -17,6 +24,7 @@ function Button({ children, buttonStyle, typeAttribute, onClick, svgIcon }) {
       type={typeAttribute}
       className={`button ${buttonStyle || ''}`}
       onClick={onClick}
+      form={form}
     >
       {svgIcon ? (
         <span className='button__icon'>

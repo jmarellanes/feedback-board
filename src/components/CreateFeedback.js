@@ -44,7 +44,6 @@ function CreateFeedback({ onClick, feedbackAdded }) {
   ];
 
   const onSubmit = async (data) => {
-    console.log(data);
     const {
       'create-feedback-title': Title,
       'create-feedback-detail': Description,
@@ -70,22 +69,25 @@ function CreateFeedback({ onClick, feedbackAdded }) {
   };
 
   const modalInterior = (
-    <section className='create-feedback'>
-      <span className='create-feedback__icon'>
-        <CreateFeedbackIcon />
-      </span>
-      <h2 className='create-feedback__title h1' id='dialog-title'>
-        Create New Feedback
-      </h2>
-      <p id='dialog-description' className='visually-hidden'>
-        This is a dialog window which overlays the main content of the page. The
-        modal begins with a heading 2 called &quot;Create New Feedback&quot;.
-        Pressing the Cancel button at the bottom of the modal or pressing Escape
-        will close the modal and bring you back to where you were on the page.
-      </p>
+    <section className='feedback-modal'>
+      <header className='feedback-modal__header'>
+        <span className='feedback-modal__icon'>
+          <CreateFeedbackIcon />
+        </span>
+        <h2 className='feedback-modal__title h1' id='dialog-title'>
+          Create New Feedback
+        </h2>
+        <p id='dialog-description' className='visually-hidden'>
+          This is a dialog window which overlays the main content of the page.
+          The modal begins with a heading 2 called &quot;Create New
+          Feedback&quot;. Pressing the Cancel button at the bottom of the modal
+          or pressing Escape will close the modal and bring you back to where
+          you were on the page.
+        </p>
+      </header>
 
-      <div className='create-feedback__container'>
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <div className='feedback-modal__container'>
+        <form onSubmit={handleSubmit(onSubmit)} id='create-feedback'>
           <div className='form__group'>
             <label htmlFor='create-feedback-title' className='h4'>
               Feedback Title
@@ -192,25 +194,29 @@ function CreateFeedback({ onClick, feedbackAdded }) {
                   <span role='alert'>Max length exceeded.</span>
                 )}
             </div>
-            <p className='create-feedback__chars-left left-ch'>
+            <p className='feedback-modal__chars-left chars-left'>
               {characters} characters left
             </p>
           </div>
-
-          <div className='form__group create-feedback__footer'>
-            <Button
-              typeAttribute='button'
-              buttonStyle='button--tertiary'
-              onClick={onClick}
-            >
-              Cancel
-            </Button>
-            <Button typeAttribute='submit' buttonStyle='button--primary'>
-              Add Feedback
-            </Button>
-          </div>
         </form>
       </div>
+
+      <footer className='feedback-modal__footer'>
+        <Button
+          typeAttribute='button'
+          buttonStyle='button--tertiary'
+          onClick={onClick}
+        >
+          Cancel
+        </Button>
+        <Button
+          typeAttribute='submit'
+          buttonStyle='button--primary'
+          form='create-feedback'
+        >
+          Add Feedback
+        </Button>
+      </footer>
     </section>
   );
 

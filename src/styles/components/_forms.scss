@@ -81,14 +81,10 @@ legend {
     position: relative;
 
     & + .form__group {
-      margin-top: var(--spacer__32);
+      margin-top: var(--spacer__24);
 
       &.create-comment__footer {
         margin-top: var(--spacer__20);
-      }
-
-      &.create-feedback__footer {
-        margin-top: var(--spacer__48);
       }
     }
 

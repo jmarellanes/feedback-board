@@ -18,10 +18,10 @@ function EditFeedback({ onClick, title, category, status, comment }) {
     setValue,
   } = useForm({
     defaultValues: {
-      'create-feedback-title': title,
-      'create-feedback-detail': comment,
-      'create-feedback-category': { label: category, value: category },
-      'create-feedback-status': { label: status, value: status },
+      'edit-feedback-title': title,
+      'edit-feedback-detail': comment,
+      'edit-feedback-category': { label: category, value: category },
+      'edit-feedback-status': { label: status, value: status },
     },
   });
 
@@ -72,24 +72,27 @@ function EditFeedback({ onClick, title, category, status, comment }) {
   };
 
   const modalInterior = (
-    <section className='create-feedback'>
-      <span className='create-feedback__icon'>
-        <CreateFeedbackIcon />
-      </span>
-      <h2 className='create-feedback__title h1' id='dialog-title'>
-        Editing '{title}'
-      </h2>
-      <p id='dialog-description' className='visually-hidden'>
-        This is a dialog window which overlays the main content of the page. The
-        modal begins with a heading 2 called &quot;Create New Feedback&quot;.
-        Pressing the Cancel button at the bottom of the modal or pressing Escape
-        will close the modal and bring you back to where you were on the page.
-      </p>
+    <section className='feedback-modal'>
+      <header className='feedback-modal__header'>
+        <span className='feedback-modal__icon'>
+          <CreateFeedbackIcon />
+        </span>
+        <h2 className='feedback-modal__title h1' id='dialog-title'>
+          Editing '{title}'
+        </h2>
+        <p id='dialog-description' className='visually-hidden'>
+          This is a dialog window which overlays the main content of the page.
+          The modal begins with a heading 2 called &quot;Editing{title}&quot;.
+          Pressing the Cancel button at the bottom of the modal or pressing
+          Escape will close the modal and bring you back to where you were on
+          the page.
+        </p>
+      </header>
 
-      <div className='create-feedback__container'>
-        <form onSubmit={handleSubmit(onSubmit)}>
+      <div className='feedback-modal__container'>
+        <form onSubmit={handleSubmit(onSubmit)} id='edit-feedback'>
           <div className='form__group'>
-            <label htmlFor='create-feedback-title' className='h4'>
+            <label htmlFor='edit-feedback-title' className='h4'>
               Feedback Title
             </label>
             <p className='form__group-subtitle'>
@@ -99,10 +102,10 @@ function EditFeedback({ onClick, title, category, status, comment }) {
             <input
               type='text'
               className='form__field'
-              id='create-feedback-title'
-              name='create-feedback-title'
-              aria-invalid={errors['create-feedback-title'] ? 'true' : 'false'}
-              {...register('create-feedback-title', {
+              id='edit-feedback-title'
+              name='edit-feedback-title'
+              aria-invalid={errors['edit-feedback-title'] ? 'true' : 'false'}
+              {...register('edit-feedback-title', {
                 required: true,
                 onChange: (e) => {
                   setValue(e.target.value);
@@ -110,15 +113,15 @@ function EditFeedback({ onClick, title, category, status, comment }) {
               })}
             />
             <div className='form__group--error'>
-              {errors['create-feedback-title'] &&
-                errors['create-feedback-title']?.type === 'required' && (
+              {errors['edit-feedback-title'] &&
+                errors['edit-feedback-title']?.type === 'required' && (
                   <span role='alert'>Can't be empty.</span>
                 )}
             </div>
           </div>
 
           <div className='form__group'>
-            <label htmlFor='create-feedback-category' className='h4'>
+            <label htmlFor='edit-feedback-category' className='h4'>
               Category
             </label>
             <p className='form__group-subtitle'>
@@ -126,7 +129,7 @@ function EditFeedback({ onClick, title, category, status, comment }) {
             </p>
 
             <Controller
-              name='create-feedback-category'
+              name='edit-feedback-category'
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
@@ -134,15 +137,13 @@ function EditFeedback({ onClick, title, category, status, comment }) {
                   {...field}
                   options={categoryOptions}
                   aria-invalid={
-                    errors['create-feedback-category'] ? 'true' : 'false'
+                    errors['edit-feedback-category'] ? 'true' : 'false'
                   }
-                  name='create-feedback-category'
-                  inputId='create-feedback-category'
+                  name='edit-feedback-category'
+                  inputId='edit-feedback-category'
                   classNamePrefix='select'
                   className={`form__field ${
-                    errors['create-feedback-category']
-                      ? 'aria-invalid-true'
-                      : ''
+                    errors['edit-feedback-category'] ? 'aria-invalid-true' : ''
                   }`}
                   openMenuOnFocus
                   components={{ DropdownIndicator }}
@@ -150,21 +151,21 @@ function EditFeedback({ onClick, title, category, status, comment }) {
               )}
             />
             <div className='form__group--error'>
-              {errors['create-feedback-category'] &&
-                errors['create-feedback-category']?.type === 'required' && (
+              {errors['edit-feedback-category'] &&
+                errors['edit-feedback-category']?.type === 'required' && (
                   <span role='alert'>Can't be empty.</span>
                 )}
             </div>
           </div>
 
           <div className='form__group'>
-            <label htmlFor='create-feedback-status' className='h4'>
+            <label htmlFor='edit-feedback-status' className='h4'>
               Update Status
             </label>
             <p className='form__group-subtitle'>Change feedback state</p>
 
             <Controller
-              name='create-feedback-status'
+              name='edit-feedback-status'
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
@@ -172,13 +173,13 @@ function EditFeedback({ onClick, title, category, status, comment }) {
                   {...field}
                   options={statusOptions}
                   aria-invalid={
-                    errors['create-feedback-status'] ? 'true' : 'false'
+                    errors['edit-feedback-status'] ? 'true' : 'false'
                   }
-                  name='create-feedback-status'
-                  inputId='create-feedback-status'
+                  name='edit-feedback-status'
+                  inputId='edit-feedback-status'
                   classNamePrefix='select'
                   className={`form__field ${
-                    errors['create-feedback-status'] ? 'aria-invalid-true' : ''
+                    errors['edit-feedback-status'] ? 'aria-invalid-true' : ''
                   }`}
                   openMenuOnFocus
                   components={{ DropdownIndicator }}
@@ -186,15 +187,15 @@ function EditFeedback({ onClick, title, category, status, comment }) {
               )}
             />
             <div className='form__group--error'>
-              {errors['create-feedback-status'] &&
-                errors['create-feedback-status']?.type === 'required' && (
+              {errors['edit-feedback-status'] &&
+                errors['edit-feedback-status']?.type === 'required' && (
                   <span role='alert'>Can't be empty.</span>
                 )}
             </div>
           </div>
 
           <div className='form__group'>
-            <label htmlFor='create-feedback-detail' className='h4 '>
+            <label htmlFor='edit-feedback-detail' className='h4 '>
               Feedback Detail
             </label>
             <p className='form__group-subtitle'>
@@ -204,11 +205,11 @@ function EditFeedback({ onClick, title, category, status, comment }) {
 
             <textarea
               className='form__field'
-              id='create-feedback-detail'
-              name='create-feedback-detail'
-              aria-invalid={errors['create-feedback-detail'] ? 'true' : 'false'}
+              id='edit-feedback-detail'
+              name='edit-feedback-detail'
+              aria-invalid={errors['edit-feedback-detail'] ? 'true' : 'false'}
               maxLength={MAX_CHARS}
-              {...register('create-feedback-detail', {
+              {...register('edit-feedback-detail', {
                 required: true,
                 maxLength: MAX_CHARS,
                 onChange: (e) => {
@@ -219,34 +220,38 @@ function EditFeedback({ onClick, title, category, status, comment }) {
               })}
             ></textarea>
             <div className='form__group--error'>
-              {errors['create-feedback-detail'] &&
-                errors['create-feedback-detail']?.type === 'required' && (
+              {errors['edit-feedback-detail'] &&
+                errors['edit-feedback-detail']?.type === 'required' && (
                   <span role='alert'>Can't be empty.</span>
                 )}
-              {errors['create-feedback-detail'] &&
-                errors['create-feedback-detail'].type === 'maxLength' && (
+              {errors['edit-feedback-detail'] &&
+                errors['edit-feedback-detail'].type === 'maxLength' && (
                   <span role='alert'>Max length exceeded.</span>
                 )}
             </div>
-            <p className='create-feedback__chars-left left-ch'>
+            <p className='feedback-modal__chars-left chars-left'>
               {characters} characters left
             </p>
           </div>
-
-          <div className='form__group create-feedback__footer'>
-            <Button
-              typeAttribute='button'
-              buttonStyle='button--tertiary'
-              onClick={onClick}
-            >
-              Cancel
-            </Button>
-            <Button typeAttribute='submit' buttonStyle='button--primary'>
-              Update Feedback
-            </Button>
-          </div>
         </form>
       </div>
+
+      <footer className='feedback-modal__footer'>
+        <Button
+          typeAttribute='button'
+          buttonStyle='button--tertiary'
+          onClick={onClick}
+        >
+          Cancel
+        </Button>
+        <Button
+          typeAttribute='submit'
+          buttonStyle='button--primary'
+          form='edit-feedback'
+        >
+          Update Feedback
+        </Button>
+      </footer>
     </section>
   );
 

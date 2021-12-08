@@ -64,7 +64,7 @@ function CreateComment({ children, isReply, isHidden }, replyRef) {
         </div>
 
         <div className='form__group create-comment__footer'>
-          <p className='left-ch'>{characters} characters left</p>
+          <p className='chars-left'>{characters} characters left</p>
           <Button typeAttribute='submit' buttonStyle='button--primary'>
             {children}
           </Button>

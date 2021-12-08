@@ -1,10 +1,10 @@
-.create {
-  &-feedback {
+.feedback {
+  &-modal {
     position: relative;
 
     &__icon {
       position: absolute;
-      top: -2.5rem;
+      top: -4.8rem;
       left: 0;
     }
 
@@ -16,7 +16,7 @@
       display: flex;
       justify-content: right;
 
-      margin-top: var(--spacer__48);
+      margin-top: var(--spacer__56);
 
       & .button:not(:last-child) {
         margin-right: 1rem;
