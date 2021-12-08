@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import { useForm, Controller } from 'react-hook-form';
 import Select, { components } from 'react-select';
 import Button from './Button';
@@ -15,6 +17,7 @@ function EditFeedback({
   id,
   feedbackUpdated,
 }) {
+  const history = useHistory();
   const MAX_CHARS = 250;
   const charsLeft = MAX_CHARS - comment.length;
   const [characters, setCharactersLeft] = useState(charsLeft);
@@ -75,7 +78,7 @@ function EditFeedback({
     },
   ];
 
-  const onSubmit = async (data) => {
+  const updateCourse = async (data) => {
     const {
       'edit-feedback-title': Title,
       'edit-feedback-detail': Description,
@@ -104,6 +107,25 @@ function EditFeedback({
     }
   };
 
+  const deleteFeedback = async () => {
+    try {
+      const res = await fetch('/api/deleteFeedback', {
+        method: 'DELETE',
+        body: JSON.stringify({
+          id,
+        }),
+      });
+
+      if (res.status === 200) {
+        console.log('Deleted');
+        closeModal();
+        history.push('/');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const modalInterior = (
     <section className='feedback-modal'>
       <header className='feedback-modal__header'>
@@ -123,7 +145,7 @@ function EditFeedback({
       </header>
 
       <div className='feedback-modal__container'>
-        <form onSubmit={handleSubmit(onSubmit)} id='edit-feedback'>
+        <form onSubmit={handleSubmit(updateCourse)} id='edit-feedback'>
           <div className='form__group'>
             <label htmlFor='edit-feedback-title' className='h4'>
               Feedback Title
@@ -270,7 +292,11 @@ function EditFeedback({
       </div>
 
       <footer className='feedback-modal__footer'>
-        <Button typeAttribute='button' buttonStyle='button--danger'>
+        <Button
+          typeAttribute='button'
+          buttonStyle='button--danger'
+          onClick={deleteFeedback}
+        >
           Delete
         </Button>
         <Button
