@@ -18,8 +18,14 @@
 
       margin-top: var(--spacer__56);
 
-      & .button:not(:last-child) {
-        margin-right: 1rem;
+      & .button {
+        &--danger {
+          margin-right: auto;
+        }
+
+        &:last-child {
+          margin-left: 1rem;
+        }
       }
     }
 

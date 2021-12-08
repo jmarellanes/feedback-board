@@ -4,7 +4,7 @@ import Select, { components } from 'react-select';
 import Button from './Button';
 
 import { ReactComponent as Arrow } from '../assets/images/arrow-up.svg';
-import { ReactComponent as CreateFeedbackIcon } from '../assets/images/create-feedback.svg';
+import { ReactComponent as EditFeedbackIcon } from '../assets/images/edit-feedback.svg';
 
 function EditFeedback({ onClick, title, category, status, comment }) {
   const MAX_CHARS = 250;
@@ -75,7 +75,7 @@ function EditFeedback({ onClick, title, category, status, comment }) {
     <section className='feedback-modal'>
       <header className='feedback-modal__header'>
         <span className='feedback-modal__icon'>
-          <CreateFeedbackIcon />
+          <EditFeedbackIcon />
         </span>
         <h2 className='feedback-modal__title h1' id='dialog-title'>
           Editing '{title}'
@@ -237,6 +237,9 @@ function EditFeedback({ onClick, title, category, status, comment }) {
       </div>
 
       <footer className='feedback-modal__footer'>
+        <Button typeAttribute='button' buttonStyle='button--danger'>
+          Delete
+        </Button>
         <Button
           typeAttribute='button'
           buttonStyle='button--tertiary'

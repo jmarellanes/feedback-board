@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="none" aria-hidden="true" focusable="false" >
+  <circle cx="28" cy="28" r="28" fill="url(#a)"/>
+  <path fill="#fff" fill-rule="evenodd" d="m29.082 19.48 3.75-3.48 6.513 6.272-3.548 3.68-6.714-6.471ZM16 39.596c.92-3.942 3.487-14.02 3.487-14.02l8.203-4.822 6.83 6.397-5.218 7.82L16.313 40l6.157-5.79c1.043.39 2.516.038 3.312-.836a2.818 2.818 0 0 0-.177-3.983c-1.149-1.05-3.02-1.05-4.071.098-.783.855-1.053 2.365-.605 3.36L16 39.596Z" clip-rule="evenodd"/>
+  <defs>
+    <radialGradient id="a" cx="0" cy="0" r="1" gradientTransform="rotate(129.411 30.466 10.84) scale(93.4169)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E84D70"/>
+      <stop offset=".531" stop-color="#A337F6"/>
+      <stop offset="1" stop-color="#28A7ED"/>
+    </radialGradient>
+  </defs>
+</svg>
