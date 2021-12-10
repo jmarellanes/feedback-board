@@ -166,7 +166,12 @@ function FeedbackDetails() {
                 >
                   Add Comment
                 </h2>
-                <CreateComment>Post Comment</CreateComment>
+                <CreateComment
+                  id={feedback.FeedbackId}
+                  commentAdded={loadComments}
+                >
+                  Post Comment
+                </CreateComment>
               </section>
             </main>
           </>

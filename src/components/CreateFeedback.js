@@ -52,7 +52,7 @@ function CreateFeedback({ onClick, feedbackAdded }) {
     const { id: Author } = user;
 
     try {
-      await fetch('/api/createFeedback/', {
+      const res = await fetch('/api/createFeedback/', {
         method: 'POST',
         body: JSON.stringify({
           Title,
@@ -62,7 +62,13 @@ function CreateFeedback({ onClick, feedbackAdded }) {
         }),
       });
 
-      feedbackAdded();
+      if (res.status === 200) {
+        feedbackAdded();
+      } else {
+        alert(
+          "We're having trouble trying to add your new feedback, please try again!'"
+        );
+      }
     } catch (error) {
       console.log(error);
     }

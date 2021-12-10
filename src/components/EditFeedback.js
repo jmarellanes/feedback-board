@@ -101,6 +101,8 @@ function EditFeedback({
       if (res.status === 200) {
         feedbackUpdated();
         closeModal();
+      } else {
+        alert("We're having problems, please try again!'");
       }
     } catch (error) {
       console.log(error);
@@ -117,9 +119,10 @@ function EditFeedback({
       });
 
       if (res.status === 200) {
-        console.log('Deleted');
         closeModal();
         history.push('/');
+      } else {
+        alert("We're having problems, please try again!'");
       }
     } catch (error) {
       console.log(error);

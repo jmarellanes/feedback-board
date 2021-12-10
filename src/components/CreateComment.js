@@ -2,7 +2,14 @@ import { useState, forwardRef } from 'react';
 import { useForm } from 'react-hook-form';
 import Button from './Button';
 
-function CreateComment({ children, isReply, isHidden }, replyRef) {
+import { useUser } from '../context/UserContext';
+
+function CreateComment(
+  { children, isReply, isHidden, id, commentAdded },
+  replyRef
+) {
+  const [user] = useUser();
+
   const MAX_CHARS = 250;
   const [characters, setCharactersLeft] = useState(MAX_CHARS);
   const {
@@ -10,12 +17,35 @@ function CreateComment({ children, isReply, isHidden }, replyRef) {
     handleSubmit,
     formState: { errors },
     watch,
+    reset,
   } = useForm();
   watch('create-comment');
 
-  const onSubmit = (data) => {
-    // Call to API
-    console.log(data);
+  const onSubmit = async (data) => {
+    const { 'create-comment': Comment } = data;
+    const { id: Author } = user;
+
+    try {
+      const res = await fetch('/api/createComment/', {
+        method: 'POST',
+        body: JSON.stringify({
+          Comment,
+          Feedback: [id],
+          Author: [Author],
+        }),
+      });
+
+      if (res.status === 200) {
+        commentAdded();
+        reset({ 'create-comment': '' });
+      } else {
+        alert(
+          "We're having trouble trying to add your new comment, please try again!'"
+        );
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div
