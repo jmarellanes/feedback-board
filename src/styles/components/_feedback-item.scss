@@ -30,6 +30,7 @@
     &__link {
       display: block;
       margin-bottom: var(--spacer__16);
+      margin-right: 1rem;
 
       &--anchor {
         text-decoration: none;
@@ -40,8 +41,31 @@
         }
 
         &:hover {
-          color: var(--color__secondary);
+          p,
+          h2 {
+            color: var(--color__secondary);
+          }
         }
+
+        &:active,
+        &:focus {
+          outline: 3px dotted currentColor;
+          outline-offset: 2px;
+        }
+
+        // HACK for use @supports selector() with SASS
+        @supports #{'\selector(*:focus-visible)'} {
+          &:active,
+          &:focus-visible {
+            outline: 3px dotted currentColor;
+            outline-offset: 2px;
+          }
+        }
+      }
+
+      h2,
+      p {
+        transition: all var(--duration--250) var(--easing--s);
       }
 
       h2 {
