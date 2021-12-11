@@ -10,7 +10,7 @@ function NavMain({ categories }) {
       <ul className='nav-main__element'>
         {categories.map((category) => {
           return (
-            <Category category={category} key={category}>
+            <Category category={category} key={category} isActive>
               {category}
             </Category>
           );
