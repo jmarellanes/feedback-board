@@ -1,0 +1,11 @@
+.nav-main {
+  @include fb_header-container;
+
+  &__element {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    list-style: none;
+  }
+}

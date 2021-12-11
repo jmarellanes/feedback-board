@@ -3,7 +3,7 @@ import Anchor from './Anchor';
 
 function RoadmapCard({ statusList }) {
   return (
-    <div className='roadmap-card'>
+    <aside className='roadmap-card'>
       <div className='roadmap-card__title'>
         <h3>Roadmap</h3>
         <Anchor path='#0' anchorStyle='anchor--back-light' svgIcon={false}>
@@ -35,7 +35,7 @@ function RoadmapCard({ statusList }) {
           ))}
         </tbody>
       </table>
-    </div>
+    </aside>
   );
 }
 

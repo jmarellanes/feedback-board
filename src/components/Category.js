@@ -6,12 +6,12 @@ function Category({ category, children, isActive }) {
   const categoryParam = !params.categoryParam ? 'all' : params.categoryParam;
 
   return (
-    <li className='nav-main__item'>
+    <li className='category__item'>
       <Link
         to={category}
-        className={`nav-main__link ${
+        className={`category__link ${
           categoryParam === category.toLowerCase()
-            ? 'nav-main__link--active'
+            ? 'category__link--active'
             : ''
         } ${!isActive ? 'isInactive' : ''}`}
       >

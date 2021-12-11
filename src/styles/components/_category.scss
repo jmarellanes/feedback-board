@@ -1,24 +1,6 @@
-.nav-main {
-  padding: var(--spacer__24) 0 var(--spacer__8) var(--spacer__24);
-  background-color: var(--color__light);
-  border-radius: var(--rounded-corners);
-
-  &__element {
-    display: flex;
-    flex-wrap: wrap;
-
-    list-style: none;
-  }
-
+.category {
   &__item {
-    &:first-child {
-      margin-right: var(--spacer__8);
-    }
-
-    & + .nav-main__item {
-      margin-right: var(--spacer__8);
-      margin-bottom: var(--spacer__16);
-    }
+    width: fit-content;
   }
 
   &__link {

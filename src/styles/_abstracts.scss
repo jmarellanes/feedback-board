@@ -29,6 +29,12 @@
   padding: var(--spacer__32);
 }
 
+@mixin fb_header-container {
+  background-color: var(--color__light);
+  border-radius: var(--rounded-corners);
+  padding: var(--spacer__24);
+}
+
 /* =====================================================================
   -> FUNCTIONS
 ===================================================================== */

@@ -1,8 +1,5 @@
 .roadmap-card {
-  border-radius: var(--rounded-corners);
-  background-color: var(--color__light);
-  padding: var(--spacer__24);
-  padding-top: var(--spacer__16);
+  @include fb_header-container;
 
   &__title {
     display: flex;

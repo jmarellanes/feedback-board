@@ -1,6 +1,6 @@
 .header {
   &-main {
-    max-width: 16rem;
+    min-width: 16rem;
     margin-right: var(--spacer__32);
 
     &__container {
@@ -10,24 +10,20 @@
     }
 
     &__brandmark {
-      border-radius: var(--rounded-corners);
+      @include fb_header-container;
+      padding-top: var(--spacer__64);
+
       background-image: url(../../assets/images/bg-radial.svg);
       background-position: center bottom;
     }
 
     &__title,
     &__user {
-      padding-left: var(--spacer__24);
       color: var(--color__light);
     }
 
     &__title {
-      padding-top: var(--spacer__64);
       margin-bottom: var(--spacer__4);
-    }
-
-    &__user {
-      padding-bottom: var(--spacer__24);
     }
 
     &__image {
