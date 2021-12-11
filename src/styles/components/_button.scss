@@ -31,6 +31,7 @@ button {
   }
 
   &--primary {
+    color: var(--color__primary);
     background-color: var(--color__primary);
 
     &:hover {
@@ -39,6 +40,7 @@ button {
   }
 
   &--secondary {
+    color: var(--color__secondary);
     background-color: var(--color__secondary);
 
     &:hover {
@@ -47,6 +49,7 @@ button {
   }
 
   &--tertiary {
+    color: var(--color__tertiary);
     background-color: var(--color__tertiary);
 
     &:hover {
@@ -55,6 +58,7 @@ button {
   }
 
   &--danger {
+    color: var(--color__danger);
     background-color: var(--color__danger);
 
     &:hover {
@@ -63,6 +67,7 @@ button {
   }
 
   &--back-light {
+    color: var(--color__tertiary);
     background-color: transparent;
     padding-left: 0;
 
@@ -105,6 +110,28 @@ button {
 
       .icon--chevron-left {
         stroke: var(--color__secondary--light-02);
+      }
+    }
+  }
+
+  &--primary,
+  &--secondary,
+  &--tertiary,
+  &--danger,
+  &--back-light,
+  &--back-dark {
+    &:active,
+    &:focus {
+      outline: 3px dotted currentColor;
+      outline-offset: 2px;
+    }
+
+    // HACK for use @supports selector() with SASS
+    @supports #{'\selector(*:focus-visible)'} {
+      &:active,
+      &:focus-visible {
+        outline: 3px dotted currentColor;
+        outline-offset: 2px;
       }
     }
   }
