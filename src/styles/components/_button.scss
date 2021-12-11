@@ -18,6 +18,8 @@ button {
   border-radius: var(--rounded-corners);
   padding: var(--spacer__12) var(--spacer__24);
 
+  transition: background-color var(--duration--250) var(--easing--s);
+
   &__icon {
     display: flex;
 
