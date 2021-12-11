@@ -11,6 +11,7 @@ function FeedbackItem({
   comments,
   id,
   link,
+  categoryActive,
 }) {
   const Tag = ({ children }) => {
     return link ? (
@@ -34,7 +35,9 @@ function FeedbackItem({
           <p>{description}</p>
         </Tag>
         <ul className='nav-main__element feedback-item__category'>
-          <Category category={category}>{category}</Category>
+          <Category category={category} isActive={categoryActive}>
+            {category}
+          </Category>
         </ul>
       </div>
 

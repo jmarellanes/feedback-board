@@ -122,6 +122,7 @@ function FeedbackDetails() {
                   category={feedback.Category}
                   comments={feedback.TotalComments}
                   link={false}
+                  categoryActive={false}
                 />
               </section>
 

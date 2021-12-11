@@ -20,7 +20,8 @@ function FeedbackList({ feedbackList, loading }) {
         comments={feedback.fields.TotalComments}
         key={feedback.fields.FeedbackId}
         id={feedback.fields.FeedbackId}
-        link={true}
+        link
+        categoryActive
       />
     ));
 
