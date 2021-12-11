@@ -1,14 +1,3 @@
-@keyframes openComment {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    height: calc(var(--closeCommentHeight) * 1px);
-    opacity: 1;
-  }
-}
-
 .feedback {
   &-comments {
     @include fb_container;
@@ -22,9 +11,7 @@
 
   &-comment {
     position: relative;
-
-    max-height: 50rem;
-    transition: max-height 1s ease-out;
+    // margin-bottom: -1.5rem !important;
 
     &:not([class*='feedback-comment--reply']):not(:last-child) {
       border-bottom: 1px solid rgba(140, 146, 179, 0.25);
@@ -60,7 +47,7 @@
       // Animation
       transition: height var(--duration--250) var(--easing--s);
       overflow-y: hidden;
-      animation: openComment 350ms linear;
+      animation: openComment 250ms linear;
       // animation-play-state: paused;
 
       padding-bottom: var(--spacer__32);
@@ -68,6 +55,17 @@
       &.isOpen {
         height: calc(var(--openCommentHeight) * 1px);
         opacity: 1;
+      }
+
+      @keyframes openComment {
+        0% {
+          height: 0;
+          opacity: 0;
+        }
+        100% {
+          height: calc(var(--closeCommentHeight) * 1px);
+          opacity: 1;
+        }
       }
     }
 
