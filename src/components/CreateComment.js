@@ -47,6 +47,7 @@ function CreateComment(
       console.log(error);
     }
   };
+
   return (
     <div
       className={`create-comment__container ${

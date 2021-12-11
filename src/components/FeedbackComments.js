@@ -28,8 +28,7 @@ function FeedbackComments({
     comment.style.setProperty('--closeCommentHeight', collapsedCommentHeight);
 
     const replyFormHeight = reply.scrollHeight;
-    // 16 = 1rem from Grid Gap
-    let totalHeight = collapsedCommentHeight + replyFormHeight + 16;
+    let totalHeight = collapsedCommentHeight + replyFormHeight + 16; // 16 = 1rem from Grid Gap
     comment.style.setProperty('--openCommentHeight', totalHeight);
 
     setTriggerAnimation(!triggerAnimation);
@@ -38,11 +37,9 @@ function FeedbackComments({
   useEffect(() => {
     getHeight(commentRef.current, replyRef.current);
     const timer = setTimeout(() => setIsHidden(!isHidden), 600);
-
     return () => {
       clearTimeout(timer);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const prevOpenRef = useRef(true);
