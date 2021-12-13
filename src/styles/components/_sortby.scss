@@ -31,7 +31,7 @@
 
       svg {
         rotate: (180deg);
-        transition: rotate var(--duration--250) var(--easing--s);
+        transition: rotate var(--duration--250) var(--easing__s);
       }
 
       &--menu-is-open {

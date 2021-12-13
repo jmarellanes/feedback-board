@@ -3,11 +3,40 @@
 
   &__title {
     display: flex;
-    align-items: center;
   }
 
   &__element {
     width: 100%;
+  }
+
+  &__name {
+    position: relative;
+    padding-left: 1.5rem;
+
+    &--Planned {
+      --bullet-color: var(--color__complementary--01);
+    }
+
+    &--In-Progress {
+      --bullet-color: var(--color__primary);
+    }
+
+    &--Live {
+      --bullet-color: var(--color__complementary--02);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+
+      background-color: var(--bullet-color);
+      height: 8px;
+      width: 8px;
+      transform: translateY(-50%);
+      border-radius: 50%;
+    }
   }
 
   &__quantity {
@@ -16,6 +45,6 @@
 
   .anchor {
     margin-left: auto;
-    padding-right: 0;
+    transform: translate(4px, -4px);
   }
 }

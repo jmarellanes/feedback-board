@@ -45,7 +45,7 @@
       height: calc(var(--closeCommentHeight) * 1px);
 
       // Animation
-      transition: height var(--duration--250) var(--easing--s);
+      transition: height var(--duration--250) var(--easing__s);
       overflow-y: hidden;
       animation: openComment 250ms linear;
       // animation-play-state: paused;
@@ -133,14 +133,14 @@
       }
       &-enter-active {
         opacity: 1;
-        transition: opacity var(--duration--250) var(--easing--s);
+        transition: opacity var(--duration--250) var(--easing__s);
       }
       &-exit {
         opacity: 1;
       }
       &-exit-active {
         opacity: 0;
-        transition: opacity var(--duration--250) var(--easing--s);
+        transition: opacity var(--duration--250) var(--easing__s);
       }
     }
   }

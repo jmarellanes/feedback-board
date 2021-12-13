@@ -13,104 +13,84 @@ button {
 .button {
   display: flex;
   align-items: center;
+  position: relative;
 
-  color: var(--color__light);
+  color: var(--accent__color);
+  background-color: var(--accent__color);
   border-radius: var(--rounded-corners);
   padding: var(--spacer__12) var(--spacer__24);
 
-  transition: background-color var(--duration--250) var(--easing--s);
+  transition: all 250ms var(--easing__s);
+  transition-property: color, background-color;
 
   &__icon {
     display: flex;
-
     margin-right: var(--spacer__4);
   }
 
   &__title {
     color: var(--color__light);
+    transition: color var(--duration--250) var(--easing__s);
   }
 
   &--primary {
-    color: var(--color__primary);
-    background-color: var(--color__primary);
+    --accent__color: var(--color__primary);
 
     &:hover {
-      background-color: var(--color__primary--light);
+      --accent__color: var(--color__primary--light);
     }
   }
 
   &--secondary {
-    color: var(--color__secondary);
-    background-color: var(--color__secondary);
+    --accent__color: var(--color__secondary);
 
     &:hover {
-      background-color: var(--color__secondary--light-01);
+      --accent__color: var(--color__secondary--light-01);
     }
   }
 
   &--tertiary {
-    color: var(--color__tertiary);
-    background-color: var(--color__tertiary);
+    --accent__color: var(--color__tertiary);
 
     &:hover {
-      background-color: var(--color__tertiary--light-01);
+      --accent__color: var(--color__tertiary--light-01);
     }
   }
 
   &--danger {
-    color: var(--color__danger);
-    background-color: var(--color__danger);
+    --accent__color: var(--color__danger);
 
     &:hover {
-      background-color: var(--color__danger--light);
+      --accent__color: var(--color__danger--light);
     }
   }
 
+  .icon--chevron-left {
+    margin-right: var(--spacer__12);
+
+    stroke: var(--accent__color);
+    transition: stroke var(--duration--250) var(--easing__s);
+  }
+
   &--back-light {
-    color: var(--color__tertiary);
+    --accent__color: var(--color__tertiary);
     background-color: transparent;
-    padding-left: 0;
 
-    .icon--chevron-left {
-      margin-right: var(--spacer__12);
-      stroke: var(--color__tertiary);
-    }
-
-    .h4 {
-      color: var(--color__tertiary);
+    & .button__title {
+      color: var(--accent__color);
     }
 
     &:hover {
-      .h4 {
-        color: var(--color__tertiary--light-01);
-        text-decoration: underline;
-      }
-
-      .icon--chevron-left {
-        stroke: var(--color__tertiary--light-01);
-      }
+      --accent__color: var(--color__tertiary--light-02);
     }
   }
 
   &--back-dark {
-    color: var(--color__light);
+    --accent__color: var(--color__light);
     background-color: transparent;
 
-    .icon--chevron-left {
-      margin-right: var(--spacer__16);
-      stroke: var(--color__light);
-    }
-
     &:hover {
-      color: var(--color__secondary--light-02);
-
-      h4 {
-        text-decoration: underline;
-      }
-
-      .icon--chevron-left {
-        stroke: var(--color__secondary--light-02);
-      }
+      --accent__color: var(--color__secondary--light-02);
     }
   }
 
@@ -120,18 +100,50 @@ button {
   &--danger,
   &--back-light,
   &--back-dark {
+    // Fallback for Safari
     &:active,
     &:focus {
-      outline: 3px dotted currentColor;
+      outline: 3px dotted var(--accent__color);
       outline-offset: 2px;
     }
 
     // HACK for use @supports selector() with SASS
     @supports #{'\selector(*:focus-visible)'} {
+      &:focus {
+        outline: none;
+      }
+
       &:active,
       &:focus-visible {
-        outline: 3px dotted currentColor;
+        outline: 3px dotted var(--accent__color);
         outline-offset: 2px;
+      }
+    }
+  }
+
+  // Animated Underline
+  &--back-dark,
+  &--back-light {
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      bottom: 0.35rem;
+      left: 1.5rem;
+
+      height: 2px;
+      width: calc(100% - 3rem);
+      background-color: currentColor;
+      transform: scale3d(0, 1, 1);
+      transform-origin: 0 100%;
+      transition: all var(--duration--250) var(--easing__s);
+      transition-property: transform, color;
+    }
+
+    &:hover {
+      &::after {
+        transform: scale3d(1, 1, 1);
+        transform-origin: 100% 0;
       }
     }
   }
@@ -144,54 +156,80 @@ button {
   display: flex;
   align-items: center;
 
-  color: var(--color__light);
+  color: var(--accent__color);
   border: none;
   border-radius: var(--rounded-corners);
   padding: var(--spacer__8) var(--spacer__8);
   cursor: pointer;
   text-decoration: none;
 
-  &--back-light {
-    color: var(--color__secondary);
-    background-color: transparent;
+  &__title {
+    color: var(--accent__color);
+    transition: color var(--duration--250) var(--easing__s);
+  }
 
-    .icon--chevron-left {
-      margin-right: var(--spacer__16);
-      stroke: var(--color__tertiary);
-    }
+  .icon--chevron-left {
+    margin-right: var(--spacer__16);
+
+    stroke: var(--accent__color);
+    transition: stroke var(--duration--250) var(--easing__s);
+  }
+
+  &--back-light {
+    --accent__color: var(--color__tertiary);
 
     &:hover {
-      color: var(--color__secondary--light-01);
-
-      h4 {
-        text-decoration: underline;
-      }
-
-      .icon--chevron-left {
-        stroke: var(--color__secondary--light-01);
-      }
+      --accent__color: var(--color__secondary--light-01);
     }
   }
 
   &--back-dark {
-    color: var(--color__light);
-    background-color: transparent;
-
-    .icon--chevron-left {
-      margin-right: var(--spacer__16);
-      stroke: var(--color__light);
-    }
+    --accent__color: firebrick;
 
     &:hover {
-      color: var(--color__secondary--light-02);
+      --accent__color: var(--color__secondary--light-02);
+    }
+  }
 
-      h4 {
-        text-decoration: underline;
-      }
+  // Fallback for Safari
+  &:active,
+  &:focus {
+    outline: 3px dotted var(--accent__color);
+  }
 
-      .icon--chevron-left {
-        stroke: var(--color__secondary--light-02);
-      }
+  // HACK for use @supports selector() with SASS
+  @supports #{'\selector(*:focus-visible)'} {
+    &:focus {
+      outline: none;
+    }
+
+    &:active,
+    &:focus-visible {
+      outline: 3px dotted var(--accent__color);
+    }
+  }
+
+  // Animated Underline
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    bottom: 0.35rem;
+    left: 0.5rem;
+
+    height: 2px;
+    width: calc(100% - 1rem);
+    background-color: currentColor;
+    transform: scale3d(0, 1, 1);
+    transform-origin: 0 100%;
+    transition: all var(--duration--250) var(--easing__s);
+    transition-property: transform, color;
+  }
+
+  &:hover {
+    &::after {
+      transform: scale3d(1, 1, 1);
+      transform-origin: 100% 0;
     }
   }
 }

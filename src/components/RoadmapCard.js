@@ -29,7 +29,11 @@ function RoadmapCard({ statusList }) {
         <tbody>
           {statusList.map((status) => (
             <tr className='roadmap-card__item' key={status[0]}>
-              <td className='roadmap-card__name'>{status[0]}</td>
+              <td
+                className={`roadmap-card__name roadmap-card__name--${status[0]}`}
+              >
+                {status[0]}
+              </td>
               <td className='roadmap-card__quantity'>{status[1]}</td>
             </tr>
           ))}
