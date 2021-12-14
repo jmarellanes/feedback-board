@@ -165,6 +165,9 @@ function EditFeedback({
               aria-invalid={errors['edit-feedback-title'] ? 'true' : 'false'}
               {...register('edit-feedback-title', {
                 required: true,
+                pattern: {
+                  value: /^(\s+\S+\s*)*(?!\s).*$/,
+                },
                 onChange: (e) => {
                   setValue(e.target.value);
                 },
@@ -174,6 +177,12 @@ function EditFeedback({
               {errors['edit-feedback-title'] &&
                 errors['edit-feedback-title']?.type === 'required' && (
                   <span role='alert'>Can't be empty.</span>
+                )}
+              {errors['edit-feedback-title'] &&
+                errors['edit-feedback-title']?.type === 'pattern' && (
+                  <span role='alert'>
+                    Entered value can't start or contain only white spacing.
+                  </span>
                 )}
             </div>
           </div>
@@ -269,6 +278,9 @@ function EditFeedback({
               maxLength={MAX_CHARS}
               {...register('edit-feedback-detail', {
                 required: true,
+                pattern: {
+                  value: /^(\s+\S+\s*)*(?!\s).*$/,
+                },
                 maxLength: MAX_CHARS,
                 onChange: (e) => {
                   let commentLength = e.target.value.length;
@@ -285,6 +297,12 @@ function EditFeedback({
               {errors['edit-feedback-detail'] &&
                 errors['edit-feedback-detail'].type === 'maxLength' && (
                   <span role='alert'>Max length exceeded.</span>
+                )}
+              {errors['edit-feedback-detail'] &&
+                errors['edit-feedback-detail']?.type === 'pattern' && (
+                  <span role='alert'>
+                    Entered value can't start or contain only white spacing.
+                  </span>
                 )}
             </div>
             <p className='feedback-modal__chars-left chars-left'>
