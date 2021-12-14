@@ -3,11 +3,16 @@
     & > :not(:last-child) {
       margin-bottom: var(--spacer__24);
     }
-  }
 
-  &__feedback-list {
-    & > article:not(:last-child) {
-      margin-bottom: var(--spacer__24);
+    &-topbar {
+      position: sticky;
+      top: 0.5rem;
+    }
+
+    &-list {
+      & > article:not(:last-child) {
+        margin-bottom: var(--spacer__24);
+      }
     }
   }
 }

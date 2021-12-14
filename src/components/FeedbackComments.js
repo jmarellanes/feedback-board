@@ -37,6 +37,7 @@ function FeedbackComments({
   useEffect(() => {
     getHeight(commentRef.current, replyRef.current);
     const timer = setTimeout(() => setIsHidden(!isHidden), 600);
+
     return () => {
       clearTimeout(timer);
     };
