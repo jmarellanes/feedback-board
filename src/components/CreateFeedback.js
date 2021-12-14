@@ -110,12 +110,21 @@ function CreateFeedback({ onClick, feedbackAdded }) {
               aria-invalid={errors['create-feedback-title'] ? 'true' : 'false'}
               {...register('create-feedback-title', {
                 required: true,
+                pattern: {
+                  value: /^(\s+\S+\s*)*(?!\s).*$/,
+                },
               })}
             />
             <div className='form__group--error'>
               {errors['create-feedback-title'] &&
                 errors['create-feedback-title']?.type === 'required' && (
                   <span role='alert'>Can't be empty.</span>
+                )}
+              {errors['create-feedback-title'] &&
+                errors['create-feedback-title']?.type === 'pattern' && (
+                  <span role='alert'>
+                    Entered value can't start or contain only white spacing.
+                  </span>
                 )}
             </div>
           </div>
@@ -183,6 +192,9 @@ function CreateFeedback({ onClick, feedbackAdded }) {
               maxLength={MAX_CHARS}
               {...register('create-feedback-detail', {
                 required: true,
+                pattern: {
+                  value: /^(\s+\S+\s*)*(?!\s).*$/,
+                },
                 maxLength: MAX_CHARS,
                 onChange: (e) => {
                   let commentLength = e.target.value.length;
@@ -198,6 +210,12 @@ function CreateFeedback({ onClick, feedbackAdded }) {
               {errors['create-feedback-detail'] &&
                 errors['create-feedback-detail'].type === 'maxLength' && (
                   <span role='alert'>Max length exceeded.</span>
+                )}
+              {errors['create-feedback-detail'] &&
+                errors['create-feedback-detail']?.type === 'pattern' && (
+                  <span role='alert'>
+                    Entered value can't start or contain only white spacing.
+                  </span>
                 )}
             </div>
             <p className='feedback-modal__chars-left chars-left'>
