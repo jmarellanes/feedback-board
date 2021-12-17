@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import Select, { components } from 'react-select';
 import Button from './Button';
@@ -9,9 +9,8 @@ import { ReactComponent as CreateFeedbackIcon } from '../assets/images/create-fe
 import { useUser } from '../context/UserContext';
 
 function CreateFeedback({ onClick, feedbackAdded }) {
-  const [user] = useUser();
-
   const MAX_CHARS = 250;
+  const [user] = useUser();
   const [characters, setCharactersLeft] = useState(MAX_CHARS);
   const {
     register,
@@ -19,6 +18,8 @@ function CreateFeedback({ onClick, feedbackAdded }) {
     formState: { errors },
     control,
   } = useForm();
+  const buttonSubmitRef = useRef();
+  const load = useRef(false);
 
   const DropdownIndicator = (props) => {
     return (
@@ -43,6 +44,9 @@ function CreateFeedback({ onClick, feedbackAdded }) {
     },
   ];
 
+  // const changeButtonText = () =>
+  //   !buttonText ? 'Add Feedback' : 'Adding Feedback';
+
   const onSubmit = async (data) => {
     const {
       'create-feedback-title': Title,
@@ -50,6 +54,16 @@ function CreateFeedback({ onClick, feedbackAdded }) {
       'create-feedback-category': { value: Category },
     } = data;
     const { id: Author } = user;
+
+    if (load.current) return;
+
+    load.current = true;
+    buttonSubmitRef.current.setAttribute('data-loading', 'true');
+    // Explicit set the button loading action for screen readers
+    const loadingStatus = buttonSubmitRef.current.querySelector(
+      '.js__loadingMessage'
+    );
+    loadingStatus.innerText = loadingStatus.getAttribute('data-loading-msg');
 
     try {
       const res = await fetch('/api/createFeedback/', {
@@ -63,6 +77,12 @@ function CreateFeedback({ onClick, feedbackAdded }) {
       });
 
       if (res.status === 200) {
+        buttonSubmitRef.current.setAttribute('data-added', 'true');
+        buttonSubmitRef.current.removeAttribute('data-loading');
+        loadingStatus.innerText = loadingStatus.getAttribute(
+          'data-added-feedback'
+        );
+
         feedbackAdded();
       } else {
         alert(
@@ -237,6 +257,9 @@ function CreateFeedback({ onClick, feedbackAdded }) {
           typeAttribute='submit'
           buttonStyle='button--primary'
           form='create-feedback'
+          ref={buttonSubmitRef}
+          dataLoadingMessage='Adding new feedback, please wait...'
+          dataAddedFeedback='New feedback added succesfully'
         >
           Add Feedback
         </Button>
