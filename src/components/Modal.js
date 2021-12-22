@@ -8,12 +8,16 @@ class Modal extends React.Component {
 
     this.modalElement = document.getElementById('modal');
     this.rootElement = this.modalElement.nextElementSibling;
+    this.modalFooter = '';
     this.firstFocusableElement = '';
     this.lastFocusableElement = '';
     this.focusedElBeforeOpen = '';
   }
 
   initVariables = () => {
+    this.modalFooter = this.modalElement.querySelector(
+      '.feedback-modal__footer'
+    );
     this.focusedElBeforeOpen = document.activeElement;
 
     this.focusableElements =
@@ -68,7 +72,8 @@ class Modal extends React.Component {
         }
         break;
       case KEY_ESC:
-        this.props.onClose();
+        if (this.modalFooter.hasAttribute('data-loader')) return;
+        this.props.onClose(e);
         break;
       default:
         break;

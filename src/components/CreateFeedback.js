@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import Select, { components } from 'react-select';
 import Button from './Button';
@@ -19,7 +19,8 @@ function CreateFeedback({ onClick, feedbackAdded }) {
     control,
   } = useForm();
   const buttonSubmitRef = useRef();
-  const load = useRef(false);
+  const buttonCancelRef = useRef();
+  const isCreatingFeedback = useRef(false);
 
   const DropdownIndicator = (props) => {
     return (
@@ -44,9 +45,6 @@ function CreateFeedback({ onClick, feedbackAdded }) {
     },
   ];
 
-  // const changeButtonText = () =>
-  //   !buttonText ? 'Add Feedback' : 'Adding Feedback';
-
   const onSubmit = async (data) => {
     const {
       'create-feedback-title': Title,
@@ -55,15 +53,19 @@ function CreateFeedback({ onClick, feedbackAdded }) {
     } = data;
     const { id: Author } = user;
 
-    if (load.current) return;
+    if (isCreatingFeedback.current) return;
 
-    load.current = true;
-    buttonSubmitRef.current.setAttribute('data-loading', 'true');
-    // Explicit set the button loading action for screen readers
-    const loadingStatus = buttonSubmitRef.current.querySelector(
-      '.js__loadingMessage'
+    isCreatingFeedback.current = true;
+    buttonSubmitRef.current.parentNode.setAttribute('data-loader', 'true');
+
+    buttonSubmitRef.current.setAttribute('data-loader', 'true');
+    // Explicit set the action for screen readers
+    const operationStatus = buttonSubmitRef.current.querySelector(
+      '.operation__status-message'
     );
-    loadingStatus.innerText = loadingStatus.getAttribute('data-loading-msg');
+    operationStatus.innerText = operationStatus.getAttribute(
+      'data-operation-start-msg'
+    );
 
     try {
       const res = await fetch('/api/createFeedback/', {
@@ -77,10 +79,10 @@ function CreateFeedback({ onClick, feedbackAdded }) {
       });
 
       if (res.status === 200) {
-        buttonSubmitRef.current.setAttribute('data-added', 'true');
-        buttonSubmitRef.current.removeAttribute('data-loading');
-        loadingStatus.innerText = loadingStatus.getAttribute(
-          'data-added-feedback'
+        buttonSubmitRef.current.setAttribute('data-operation-complete', 'true');
+        buttonSubmitRef.current.removeAttribute('data-loader');
+        operationStatus.innerText = operationStatus.getAttribute(
+          'data-operation-finish-msg'
         );
 
         feedbackAdded();
@@ -250,6 +252,7 @@ function CreateFeedback({ onClick, feedbackAdded }) {
           typeAttribute='button'
           buttonStyle='button--tertiary'
           onClick={onClick}
+          ref={buttonCancelRef}
         >
           Cancel
         </Button>
@@ -258,8 +261,9 @@ function CreateFeedback({ onClick, feedbackAdded }) {
           buttonStyle='button--primary'
           form='create-feedback'
           ref={buttonSubmitRef}
-          dataLoadingMessage='Adding new feedback, please wait...'
-          dataAddedFeedback='New feedback added succesfully'
+          operationButton
+          operationStartMessage='Adding new feedback, please wait...'
+          operationCompleteMessage='New feedback added succesfully'
         >
           Add Feedback
         </Button>

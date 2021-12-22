@@ -27,6 +27,11 @@
           margin-left: 1rem;
         }
       }
+
+      &[data-loader='true'] {
+        color: transparent;
+        pointer-events: none;
+      }
     }
 
     &__chars-left {

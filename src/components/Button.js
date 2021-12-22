@@ -19,12 +19,23 @@ function Button(
     onClick,
     svgIcon,
     form,
-    dataLoadingMessage,
-    dataAddedFeedback,
+    operationButton,
+    operationStartMessage,
+    operationCompleteMessage,
   },
-  buttonSubmitRef
+  ref
 ) {
   const SVGIcon = components[svgIcon];
+
+  const buttonLoader = <span className='button__loader'>&nbsp;</span>;
+  const operationStatus = (
+    <span
+      className='visually-hidden operation__status-message'
+      aria-live='assertive'
+      data-operation-start-msg={operationStartMessage}
+      data-operation-finish-msg={operationCompleteMessage}
+    ></span>
+  );
 
   return (
     <button
@@ -32,23 +43,18 @@ function Button(
       className={`button ${buttonStyle || ''}`}
       onClick={onClick}
       form={form}
-      ref={buttonSubmitRef}
+      ref={ref}
     >
       {svgIcon ? (
         <span className='button__icon'>
           <SVGIcon />
         </span>
       ) : null}
-      <p className='h4 button__title' data-added='Done'>
+      <p className='h4 button__title' data-operation-complete='Done'>
         <span>{children}</span>
       </p>
-      <span className='button__loader'>&nbsp;</span>
-      <span
-        className='visually-hidden js__loadingMessage'
-        aria-live='assertive'
-        data-loading-msg={dataLoadingMessage}
-        data-added-feedback={dataAddedFeedback}
-      ></span>
+      {operationButton ? buttonLoader : ''}
+      {operationButton ? operationStatus : ''}
     </button>
   );
 }

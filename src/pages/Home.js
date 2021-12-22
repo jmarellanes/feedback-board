@@ -101,15 +101,17 @@ function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryParam]);
 
-  const closeModal = () => {
+  const closeModal = (e) => {
+    if (e.target.parentNode.hasAttribute('data-loader')) return;
+
     setShowModal(!showModal);
   };
 
   const openModal = () => (
-    <Modal onClose={() => closeModal()} isOpen='modal__is-open'>
+    <Modal onClose={(e) => closeModal(e)} isOpen='modal__is-open'>
       <CreateFeedback
         feedbackAdded={loadFeedback}
-        onClick={() => closeModal()}
+        onClick={(e) => closeModal(e)}
       />
     </Modal>
   );

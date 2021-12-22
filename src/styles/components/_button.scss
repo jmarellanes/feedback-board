@@ -194,7 +194,7 @@ button {
     }
   }
 
-  &[data-loading='true'] {
+  &[data-loader='true'] {
     color: transparent;
     pointer-events: none;
 
@@ -220,7 +220,7 @@ button {
   // Rollover text
   &__title {
     &:before {
-      content: attr(data-added);
+      content: attr(data-operation-complete);
       position: absolute;
       left: 0;
 
@@ -233,7 +233,7 @@ button {
     }
   }
 
-  &[data-added='true'] {
+  &[data-operation-complete='true'] {
     pointer-events: none;
 
     & .button__title {
