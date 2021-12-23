@@ -87,6 +87,14 @@ function CreateFeedback({ onClick, feedbackAdded }) {
 
         feedbackAdded();
       } else {
+        isCreatingFeedback.current = false;
+
+        buttonSubmitRef.current.removeAttribute('data-loader');
+        buttonSubmitRef.current.parentNode.removeAttribute('data-loader');
+        operationStatus.innerText = operationStatus.getAttribute(
+          'data-operation-error'
+        );
+
         alert(
           "We're having trouble trying to add your new feedback, please try again!'"
         );
@@ -264,6 +272,7 @@ function CreateFeedback({ onClick, feedbackAdded }) {
           operationButton
           operationStartMessage='Adding new feedback, please wait...'
           operationCompleteMessage='New feedback added succesfully'
+          operationError='We are having trouble trying to add your new feedback, please try again!'
         >
           Add Feedback
         </Button>

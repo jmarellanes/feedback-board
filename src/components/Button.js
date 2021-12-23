@@ -22,6 +22,7 @@ function Button(
     operationButton,
     operationStartMessage,
     operationCompleteMessage,
+    operationError,
   },
   ref
 ) {
@@ -34,6 +35,7 @@ function Button(
       aria-live='assertive'
       data-operation-start-msg={operationStartMessage}
       data-operation-finish-msg={operationCompleteMessage}
+      data-operation-error={operationError}
     ></span>
   );
 
