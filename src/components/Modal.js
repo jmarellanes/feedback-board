@@ -72,7 +72,7 @@ class Modal extends React.Component {
         }
         break;
       case KEY_ESC:
-        if (this.modalFooter.hasAttribute('data-loader')) return;
+        if (this.modalFooter.hasAttribute('data-operation-running')) return;
         this.props.onClose(e);
         break;
       default:

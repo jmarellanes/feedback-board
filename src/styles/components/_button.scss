@@ -200,7 +200,7 @@ button {
     }
   }
 
-  &[data-loader='true'] {
+  &[data-operation-running='true'] {
     color: transparent;
     pointer-events: none;
 

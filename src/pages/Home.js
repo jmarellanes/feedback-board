@@ -102,7 +102,7 @@ function Home() {
   }, [categoryParam]);
 
   const closeModal = (e) => {
-    if (e.target.parentNode.hasAttribute('data-loader')) return;
+    if (e.target.parentNode.hasAttribute('data-operation-running')) return;
 
     setShowModal(!showModal);
   };

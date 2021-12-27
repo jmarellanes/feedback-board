@@ -7,17 +7,21 @@ import { ReactComponent as Arrow } from '../assets/images/arrow-up.svg';
 import { ReactComponent as CreateFeedbackIcon } from '../assets/images/create-feedback.svg';
 
 import { useUser } from '../context/UserContext';
-import { categoryOptions } from '../utils/data';
-import { operationStatus } from '../utils/data';
+import {
+  categoryOptions,
+  operationStatus,
+  validationMessages,
+} from '../utils/data';
+import { errorMessage } from '../utils/utils';
 
 function CreateFeedback({ onClick, feedbackAdded }) {
   const MAX_CHARS = 250;
-  const [user] = useUser();
 
   const buttonSubmitRef = useRef();
   const buttonCancelRef = useRef();
   const isCreatingFeedback = useRef(false);
 
+  const [user] = useUser();
   const [characters, setCharactersLeft] = useState(MAX_CHARS);
   const [statusMessage, setStatusMessage] = useState('');
 
@@ -27,6 +31,16 @@ function CreateFeedback({ onClick, feedbackAdded }) {
     formState: { errors },
     control,
   } = useForm();
+  const {
+    create: { running, complete, failure },
+  } = operationStatus;
+  const { type, error } = validationMessages;
+
+  const fieldName = {
+    title: 'create-feedback-title',
+    category: 'create-feedback-category',
+    detail: 'create-feedback-detail',
+  };
 
   const DropdownIndicator = (props) => {
     return (
@@ -45,12 +59,15 @@ function CreateFeedback({ onClick, feedbackAdded }) {
     const { id: Author } = user;
 
     if (isCreatingFeedback.current) return;
-
     isCreatingFeedback.current = true;
-    buttonSubmitRef.current.parentNode.setAttribute('data-loader', 'true');
-    buttonSubmitRef.current.setAttribute('data-loader', 'true');
 
-    setStatusMessage(operationStatus.running);
+    buttonSubmitRef.current.parentNode.setAttribute(
+      'data-operation-running',
+      'true'
+    );
+    buttonSubmitRef.current.setAttribute('data-operation-running', 'true');
+
+    setStatusMessage(running);
 
     try {
       const res = await fetch('/api/createFeedback/', {
@@ -65,16 +82,18 @@ function CreateFeedback({ onClick, feedbackAdded }) {
 
       if (res.status === 200) {
         buttonSubmitRef.current.setAttribute('data-operation-complete', 'true');
-        buttonSubmitRef.current.removeAttribute('data-loader');
-        setStatusMessage(operationStatus.complete);
+        buttonSubmitRef.current.removeAttribute('data-operation-running');
+        setStatusMessage(complete);
 
         feedbackAdded();
       } else {
         isCreatingFeedback.current = false;
 
-        buttonSubmitRef.current.removeAttribute('data-loader');
-        buttonSubmitRef.current.parentNode.removeAttribute('data-loader');
-        setStatusMessage(operationStatus.error);
+        buttonSubmitRef.current.removeAttribute('data-operation-running');
+        buttonSubmitRef.current.parentNode.removeAttribute(
+          'data-operation-running'
+        );
+        setStatusMessage(failure);
 
         alert(
           "We're having trouble trying to add your new feedback, please try again!'"
@@ -106,7 +125,7 @@ function CreateFeedback({ onClick, feedbackAdded }) {
       <div className='feedback-modal__container'>
         <form onSubmit={handleSubmit(onSubmit)} id='create-feedback'>
           <div className='form__group'>
-            <label htmlFor='create-feedback-title' className='h4'>
+            <label htmlFor={fieldName.title} className='h4'>
               Feedback Title
             </label>
             <p className='form__group-subtitle'>
@@ -116,10 +135,10 @@ function CreateFeedback({ onClick, feedbackAdded }) {
             <input
               type='text'
               className='form__field'
-              id='create-feedback-title'
-              name='create-feedback-title'
-              aria-invalid={errors['create-feedback-title'] ? 'true' : 'false'}
-              {...register('create-feedback-title', {
+              id={fieldName.title}
+              name={fieldName.title}
+              aria-invalid={errors[fieldName.title] ? 'true' : 'false'}
+              {...register(fieldName.title, {
                 required: true,
                 pattern: {
                   value: /^(\s+\S+\s*)*(?!\s).*$/,
@@ -127,21 +146,19 @@ function CreateFeedback({ onClick, feedbackAdded }) {
               })}
             />
             <div className='form__group--error'>
-              {errors['create-feedback-title'] &&
-                errors['create-feedback-title']?.type === 'required' && (
-                  <span role='alert'>Can't be empty.</span>
-                )}
-              {errors['create-feedback-title'] &&
-                errors['create-feedback-title']?.type === 'pattern' && (
-                  <span role='alert'>
-                    Entered value can't start or contain only white spacing.
-                  </span>
-                )}
+              {
+                // prettier-ignore
+                errorMessage( errors, fieldName.title, type.required, error.empty)
+              }
+              {
+                // prettier-ignore
+                errorMessage( errors, fieldName.title, type.pattern, error.space)
+              }
             </div>
           </div>
 
           <div className='form__group'>
-            <label htmlFor='create-feedback-category' className='h4'>
+            <label htmlFor={fieldName.category} className='h4'>
               Category
             </label>
             <p className='form__group-subtitle'>
@@ -149,7 +166,7 @@ function CreateFeedback({ onClick, feedbackAdded }) {
             </p>
 
             <Controller
-              name='create-feedback-category'
+              name={fieldName.category}
               control={control}
               aria-invalid='true'
               rules={{ required: true }}
@@ -162,16 +179,12 @@ function CreateFeedback({ onClick, feedbackAdded }) {
                   {...field}
                   placeholder='Feature'
                   options={categoryOptions}
-                  aria-invalid={
-                    errors['create-feedback-category'] ? 'true' : 'false'
-                  }
-                  name='create-feedback-category'
-                  inputId='create-feedback-category'
+                  aria-invalid={errors[fieldName.category] ? 'true' : 'false'}
+                  name={fieldName.category}
+                  inputId={fieldName.category}
                   classNamePrefix='select'
                   className={`form__field ${
-                    errors['create-feedback-category']
-                      ? 'aria-invalid-true'
-                      : ''
+                    errors[fieldName.category] ? 'aria-invalid-true' : ''
                   }`}
                   openMenuOnFocus
                   components={{ DropdownIndicator }}
@@ -179,15 +192,15 @@ function CreateFeedback({ onClick, feedbackAdded }) {
               )}
             />
             <div className='form__group--error'>
-              {errors['create-feedback-category'] &&
-                errors['create-feedback-category']?.type === 'required' && (
-                  <span role='alert'>Can't be empty.</span>
-                )}
+              {
+                // prettier-ignore
+                errorMessage( errors, fieldName.category, type.required, error.empty)
+              }
             </div>
           </div>
 
           <div className='form__group'>
-            <label htmlFor='create-feedback-detail' className='h4 '>
+            <label htmlFor={fieldName.detail} className='h4 '>
               Feedback Detail
             </label>
             <p className='form__group-subtitle'>
@@ -197,11 +210,11 @@ function CreateFeedback({ onClick, feedbackAdded }) {
 
             <textarea
               className='form__field'
-              id='create-feedback-detail'
-              name='create-feedback-detail'
-              aria-invalid={errors['create-feedback-detail'] ? 'true' : 'false'}
+              id={fieldName.detail}
+              name={fieldName.detail}
+              aria-invalid={errors[fieldName.detail] ? 'true' : 'false'}
               maxLength={MAX_CHARS}
-              {...register('create-feedback-detail', {
+              {...register(fieldName.detail, {
                 required: true,
                 pattern: {
                   value: /^(\s+\S+\s*)*(?!\s).*$/,
@@ -214,20 +227,18 @@ function CreateFeedback({ onClick, feedbackAdded }) {
               })}
             ></textarea>
             <div className='form__group--error'>
-              {errors['create-feedback-detail'] &&
-                errors['create-feedback-detail']?.type === 'required' && (
-                  <span role='alert'>Can't be empty.</span>
-                )}
-              {errors['create-feedback-detail'] &&
-                errors['create-feedback-detail'].type === 'maxLength' && (
-                  <span role='alert'>Max length exceeded.</span>
-                )}
-              {errors['create-feedback-detail'] &&
-                errors['create-feedback-detail']?.type === 'pattern' && (
-                  <span role='alert'>
-                    Entered value can't start or contain only white spacing.
-                  </span>
-                )}
+              {
+                // prettier-ignore
+                errorMessage( errors, fieldName.detail, type.required, error.empty)
+              }
+              {
+                // prettier-ignore
+                errorMessage( errors, fieldName.detail, type.length, error.length)
+              }
+              {
+                // prettier-ignore
+                errorMessage( errors, fieldName.detail, type.pattern, error.space)
+              }
             </div>
             <p className='feedback-modal__chars-left chars-left'>
               {characters} characters left
