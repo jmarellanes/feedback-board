@@ -107,12 +107,9 @@ function Home() {
     setShowModal(!showModal);
   };
 
-  const openModal = () => (
-    <Modal onClose={(e) => closeModal(e)} isOpen='modal__is-open'>
-      <CreateFeedback
-        feedbackAdded={loadFeedback}
-        onClick={(e) => closeModal(e)}
-      />
+  const openModal = (
+    <Modal onClose={closeModal} isOpen='modal__is-open'>
+      <CreateFeedback feedbackAdded={loadFeedback} onClick={closeModal} />
     </Modal>
   );
 
@@ -153,7 +150,7 @@ function Home() {
         unmountOnExit
         timeout={250}
       >
-        {openModal()}
+        {openModal}
       </CSSTransition>
     </>
   );
