@@ -7,20 +7,26 @@ import { ReactComponent as Arrow } from '../assets/images/arrow-up.svg';
 import { ReactComponent as CreateFeedbackIcon } from '../assets/images/create-feedback.svg';
 
 import { useUser } from '../context/UserContext';
+import { categoryOptions } from '../utils/data';
+import { operationStatus } from '../utils/data';
 
 function CreateFeedback({ onClick, feedbackAdded }) {
   const MAX_CHARS = 250;
   const [user] = useUser();
+
+  const buttonSubmitRef = useRef();
+  const buttonCancelRef = useRef();
+  const isCreatingFeedback = useRef(false);
+
   const [characters, setCharactersLeft] = useState(MAX_CHARS);
+  const [statusMessage, setStatusMessage] = useState('');
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
   } = useForm();
-  const buttonSubmitRef = useRef();
-  const buttonCancelRef = useRef();
-  const isCreatingFeedback = useRef(false);
 
   const DropdownIndicator = (props) => {
     return (
@@ -29,21 +35,6 @@ function CreateFeedback({ onClick, feedbackAdded }) {
       </components.DropdownIndicator>
     );
   };
-
-  const options = [
-    {
-      label: 'Feature',
-      value: 'Feature',
-    },
-    {
-      label: 'Enhancement',
-      value: 'Enhancement',
-    },
-    {
-      label: 'Bug',
-      value: 'Bug',
-    },
-  ];
 
   const onSubmit = async (data) => {
     const {
@@ -57,15 +48,9 @@ function CreateFeedback({ onClick, feedbackAdded }) {
 
     isCreatingFeedback.current = true;
     buttonSubmitRef.current.parentNode.setAttribute('data-loader', 'true');
-
     buttonSubmitRef.current.setAttribute('data-loader', 'true');
-    // Explicit set the action for screen readers
-    const operationStatus = buttonSubmitRef.current.querySelector(
-      '.operation__status-message'
-    );
-    operationStatus.innerText = operationStatus.getAttribute(
-      'data-operation-start-msg'
-    );
+
+    setStatusMessage(operationStatus.running);
 
     try {
       const res = await fetch('/api/createFeedback/', {
@@ -81,9 +66,7 @@ function CreateFeedback({ onClick, feedbackAdded }) {
       if (res.status === 200) {
         buttonSubmitRef.current.setAttribute('data-operation-complete', 'true');
         buttonSubmitRef.current.removeAttribute('data-loader');
-        operationStatus.innerText = operationStatus.getAttribute(
-          'data-operation-finish-msg'
-        );
+        setStatusMessage(operationStatus.complete);
 
         feedbackAdded();
       } else {
@@ -91,9 +74,7 @@ function CreateFeedback({ onClick, feedbackAdded }) {
 
         buttonSubmitRef.current.removeAttribute('data-loader');
         buttonSubmitRef.current.parentNode.removeAttribute('data-loader');
-        operationStatus.innerText = operationStatus.getAttribute(
-          'data-operation-error'
-        );
+        setStatusMessage(operationStatus.error);
 
         alert(
           "We're having trouble trying to add your new feedback, please try again!'"
@@ -104,7 +85,7 @@ function CreateFeedback({ onClick, feedbackAdded }) {
     }
   };
 
-  const modalInterior = (
+  const modalContent = (
     <section className='feedback-modal'>
       <header className='feedback-modal__header'>
         <span className='feedback-modal__icon'>
@@ -180,7 +161,7 @@ function CreateFeedback({ onClick, feedbackAdded }) {
                   }}
                   {...field}
                   placeholder='Feature'
-                  options={options}
+                  options={categoryOptions}
                   aria-invalid={
                     errors['create-feedback-category'] ? 'true' : 'false'
                   }
@@ -270,9 +251,7 @@ function CreateFeedback({ onClick, feedbackAdded }) {
           form='create-feedback'
           ref={buttonSubmitRef}
           operationButton
-          operationStartMessage='Adding new feedback, please wait...'
-          operationCompleteMessage='New feedback added succesfully'
-          operationError='We are having trouble trying to add your new feedback, please try again!'
+          statusMessage={statusMessage}
         >
           Add Feedback
         </Button>
@@ -280,7 +259,7 @@ function CreateFeedback({ onClick, feedbackAdded }) {
     </section>
   );
 
-  return <>{modalInterior}</>;
+  return <>{modalContent}</>;
 }
 
 export default CreateFeedback;

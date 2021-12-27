@@ -20,23 +20,20 @@ function Button(
     svgIcon,
     form,
     operationButton,
-    operationStartMessage,
-    operationCompleteMessage,
-    operationError,
+    statusMessage,
   },
   ref
 ) {
   const SVGIcon = components[svgIcon];
 
-  const buttonLoader = <span className='button__loader'>&nbsp;</span>;
+  const buttonLoader = <span className='button__loader'></span>;
   const operationStatus = (
     <span
       className='visually-hidden operation__status-message'
       aria-live='assertive'
-      data-operation-start-msg={operationStartMessage}
-      data-operation-finish-msg={operationCompleteMessage}
-      data-operation-error={operationError}
-    ></span>
+    >
+      {statusMessage}
+    </span>
   );
 
   return (

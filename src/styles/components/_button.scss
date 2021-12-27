@@ -37,6 +37,12 @@ button {
     transition-property: color, opacity;
   }
 
+  // Prevent Click event on button childs
+  & span,
+  & p {
+    pointer-events: none;
+  }
+
   // Hove, Active, Focus, etc, states
   &--primary {
     --accent__color: var(--color__primary);
