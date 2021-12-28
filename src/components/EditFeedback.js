@@ -29,6 +29,13 @@ function EditFeedback({
   const history = useHistory();
   const [characters, setCharactersLeft] = useState(charsLeft);
 
+  const fieldName = {
+    title: 'edit-feedback-title',
+    category: 'edit-feedback-category',
+    status: 'edit-feedback-status',
+    detail: 'edit-feedback-detail',
+  };
+
   const {
     register,
     handleSubmit,
@@ -37,19 +44,12 @@ function EditFeedback({
     setValue,
   } = useForm({
     defaultValues: {
-      'edit-feedback-title': title,
-      'edit-feedback-detail': comment,
-      'edit-feedback-category': { label: category, value: category },
-      'edit-feedback-status': { label: status, value: status },
+      [fieldName.title]: title,
+      [fieldName.detail]: comment,
+      [fieldName.category]: { label: category, value: category },
+      [fieldName.status]: { label: status, value: status },
     },
   });
-
-  const fieldName = {
-    title: 'edit-feedback-title',
-    category: 'edit-feedback-category',
-    status: 'edit-feedback-status',
-    detail: 'edit-feedback-detail',
-  };
 
   const DropdownIndicator = (props) => {
     return (
