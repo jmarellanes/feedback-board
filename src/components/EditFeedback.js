@@ -19,10 +19,16 @@ function EditFeedback({
   id,
   feedbackUpdated,
 }) {
-  const history = useHistory();
   const MAX_CHARS = 250;
   const charsLeft = MAX_CHARS - comment.length;
+
+  const buttonUpdateRef = useRef();
+  const buttonDeleteRef = useRef();
+  const isUpdatingFeedback = useRef(false);
+
+  const history = useHistory();
   const [characters, setCharactersLeft] = useState(charsLeft);
+
   const {
     register,
     handleSubmit,
@@ -37,9 +43,13 @@ function EditFeedback({
       'edit-feedback-status': { label: status, value: status },
     },
   });
-  const buttonUpdateRef = useRef();
-  const buttonDeleteRef = useRef();
-  const isUpdatingFeedback = useRef(false);
+
+  const fieldName = {
+    title: 'edit-feedback-title',
+    category: 'edit-feedback-category',
+    status: 'edit-feedback-status',
+    detail: 'edit-feedback-detail',
+  };
 
   const DropdownIndicator = (props) => {
     return (
@@ -157,7 +167,7 @@ function EditFeedback({
     }
   };
 
-  const modalInterior = (
+  const modalContent = (
     <section className='feedback-modal'>
       <header className='feedback-modal__header'>
         <span className='feedback-modal__icon'>
@@ -178,7 +188,7 @@ function EditFeedback({
       <div className='feedback-modal__container'>
         <form onSubmit={handleSubmit(updateFeedback)} id='edit-feedback'>
           <div className='form__group'>
-            <label htmlFor='edit-feedback-title' className='h4'>
+            <label htmlFor={fieldName.title} className='h4'>
               Feedback Title
             </label>
             <p className='form__group-subtitle'>
@@ -188,10 +198,10 @@ function EditFeedback({
             <input
               type='text'
               className='form__field'
-              id='edit-feedback-title'
-              name='edit-feedback-title'
-              aria-invalid={errors['edit-feedback-title'] ? 'true' : 'false'}
-              {...register('edit-feedback-title', {
+              id={fieldName.title}
+              name={fieldName.title}
+              aria-invalid={errors[fieldName.title] ? 'true' : 'false'}
+              {...register(fieldName.title, {
                 required: true,
                 pattern: {
                   value: /^(\s+\S+\s*)*(?!\s).*$/,
@@ -216,7 +226,7 @@ function EditFeedback({
           </div>
 
           <div className='form__group'>
-            <label htmlFor='edit-feedback-category' className='h4'>
+            <label htmlFor={fieldName.category} className='h4'>
               Category
             </label>
             <p className='form__group-subtitle'>
@@ -224,21 +234,19 @@ function EditFeedback({
             </p>
 
             <Controller
-              name='edit-feedback-category'
+              name={fieldName.category}
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
                 <Select
                   {...field}
                   options={categoryOptions}
-                  aria-invalid={
-                    errors['edit-feedback-category'] ? 'true' : 'false'
-                  }
-                  name='edit-feedback-category'
-                  inputId='edit-feedback-category'
+                  aria-invalid={errors[fieldName.category] ? 'true' : 'false'}
+                  name={fieldName.category}
+                  inputId={fieldName.category}
                   classNamePrefix='select'
                   className={`form__field ${
-                    errors['edit-feedback-category'] ? 'aria-invalid-true' : ''
+                    errors[fieldName.category] ? 'aria-invalid-true' : ''
                   }`}
                   openMenuOnFocus
                   components={{ DropdownIndicator }}
@@ -254,27 +262,25 @@ function EditFeedback({
           </div>
 
           <div className='form__group'>
-            <label htmlFor='edit-feedback-status' className='h4'>
+            <label htmlFor={fieldName.status} className='h4'>
               Update Status
             </label>
             <p className='form__group-subtitle'>Change feedback state</p>
 
             <Controller
-              name='edit-feedback-status'
+              name={fieldName.status}
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
                 <Select
                   {...field}
                   options={statusOptions}
-                  aria-invalid={
-                    errors['edit-feedback-status'] ? 'true' : 'false'
-                  }
-                  name='edit-feedback-status'
-                  inputId='edit-feedback-status'
+                  aria-invalid={errors[fieldName.status] ? 'true' : 'false'}
+                  name={fieldName.status}
+                  inputId={fieldName.status}
                   classNamePrefix='select'
                   className={`form__field ${
-                    errors['edit-feedback-status'] ? 'aria-invalid-true' : ''
+                    errors[fieldName.status] ? 'aria-invalid-true' : ''
                   }`}
                   openMenuOnFocus
                   components={{ DropdownIndicator }}
@@ -290,7 +296,7 @@ function EditFeedback({
           </div>
 
           <div className='form__group'>
-            <label htmlFor='edit-feedback-detail' className='h4 '>
+            <label htmlFor={fieldName.detail} className='h4 '>
               Feedback Detail
             </label>
             <p className='form__group-subtitle'>
@@ -300,11 +306,11 @@ function EditFeedback({
 
             <textarea
               className='form__field'
-              id='edit-feedback-detail'
-              name='edit-feedback-detail'
-              aria-invalid={errors['edit-feedback-detail'] ? 'true' : 'false'}
+              id={fieldName.detail}
+              name={fieldName.detail}
+              aria-invalid={errors[fieldName.detail] ? 'true' : 'false'}
               maxLength={MAX_CHARS}
-              {...register('edit-feedback-detail', {
+              {...register(fieldName.detail, {
                 required: true,
                 pattern: {
                   value: /^(\s+\S+\s*)*(?!\s).*$/,
@@ -376,7 +382,7 @@ function EditFeedback({
     </section>
   );
 
-  return <>{modalInterior}</>;
+  return <>{modalContent}</>;
 }
 
 export default EditFeedback;
