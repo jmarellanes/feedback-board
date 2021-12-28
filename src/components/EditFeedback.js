@@ -134,13 +134,7 @@ function EditFeedback({
       'data-operation-running',
       'true'
     );
-    // Explicit set the button loading action for screen readers
-    const operationStatus = buttonDeleteRef.current.querySelector(
-      '.operation__status-message'
-    );
-    operationStatus.innerText = operationStatus.getAttribute(
-      'data-operation-start-msg'
-    );
+    setStatusDeleteMessage(destroy.running);
 
     try {
       const res = await fetch('/api/deleteFeedback', {
@@ -153,9 +147,7 @@ function EditFeedback({
       if (res.status === 200) {
         buttonDeleteRef.current.setAttribute('data-operation-complete', 'true');
         buttonDeleteRef.current.removeAttribute('data-operation-running');
-        operationStatus.innerText = operationStatus.getAttribute(
-          'data-operation-finish-msg'
-        );
+        setStatusDeleteMessage(destroy.complete);
 
         console.log(e);
         closeModal(e);
@@ -169,9 +161,8 @@ function EditFeedback({
         buttonDeleteRef.current.parentNode.removeAttribute(
           'data-operation-running'
         );
-        operationStatus.innerText = operationStatus.getAttribute(
-          'data-operation-error'
-        );
+        setStatusDeleteMessage(destroy.error);
+
         alert("We're having problems, please try again!'");
       }
     } catch (error) {
