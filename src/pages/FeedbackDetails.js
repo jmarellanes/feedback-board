@@ -65,7 +65,6 @@ function FeedbackDetails() {
   };
 
   const closeModal = (e) => {
-    console.log('Feedback Details', e);
     if (e.target.parentNode.hasAttribute('data-operation-running')) return;
 
     setShowModal(!showModal);

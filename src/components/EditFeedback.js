@@ -147,13 +147,15 @@ function EditFeedback({
       if (res.status === 200) {
         buttonDeleteRef.current.setAttribute('data-operation-complete', 'true');
         buttonDeleteRef.current.removeAttribute('data-operation-running');
+        buttonDeleteRef.current.parentNode.removeAttribute(
+          'data-operation-running'
+        );
         setStatusDeleteMessage(destroy.complete);
 
-        console.log(e);
         closeModal(e);
         setTimeout(() => {
           history.push('/');
-        }, 5000);
+        }, 350);
       } else {
         isUpdatingFeedback.current = false;
 
