@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { useForm, Controller } from 'react-hook-form';
@@ -7,6 +7,8 @@ import Button from './Button';
 
 import { ReactComponent as Arrow } from '../assets/images/arrow-up.svg';
 import { ReactComponent as EditFeedbackIcon } from '../assets/images/edit-feedback.svg';
+
+import { categoryOptions, statusOptions } from '../utils/data';
 
 function EditFeedback({
   onClick: closeModal,
@@ -35,6 +37,9 @@ function EditFeedback({
       'edit-feedback-status': { label: status, value: status },
     },
   });
+  const buttonUpdateRef = useRef();
+  const buttonDeleteRef = useRef();
+  const isUpdatingFeedback = useRef(false);
 
   const DropdownIndicator = (props) => {
     return (
@@ -44,47 +49,26 @@ function EditFeedback({
     );
   };
 
-  const categoryOptions = [
-    {
-      label: 'Feature',
-      value: 'Feature',
-    },
-    {
-      label: 'Enhancement',
-      value: 'Enhancement',
-    },
-    {
-      label: 'Bug',
-      value: 'Bug',
-    },
-  ];
-
-  const statusOptions = [
-    {
-      label: 'Suggestion',
-      value: 'Suggestion',
-    },
-    {
-      label: 'Planned',
-      value: 'Planned',
-    },
-    {
-      label: 'In-Progress',
-      value: 'In-Progress',
-    },
-    {
-      label: 'Live',
-      value: 'Live',
-    },
-  ];
-
-  const updateCourse = async (data) => {
+  const updateFeedback = async (data) => {
     const {
       'edit-feedback-title': Title,
       'edit-feedback-detail': Description,
       'edit-feedback-category': { value: Category },
       'edit-feedback-status': { value: Status },
     } = data;
+
+    if (isUpdatingFeedback.current) return;
+    isUpdatingFeedback.current = true;
+
+    buttonUpdateRef.current.setAttribute('data-loader', 'true');
+    buttonUpdateRef.current.parentNode.setAttribute('data-loader', 'true');
+    // Explicit set the button loading action for screen readers
+    const operationStatus = buttonUpdateRef.current.querySelector(
+      '.operation__status-message'
+    );
+    operationStatus.innerText = operationStatus.getAttribute(
+      'data-operation-start-msg'
+    );
 
     try {
       const res = await fetch('/api/updateFeedback', {
@@ -99,9 +83,24 @@ function EditFeedback({
       });
 
       if (res.status === 200) {
-        feedbackUpdated();
-        closeModal();
+        buttonUpdateRef.current.setAttribute('data-operation-complete', 'true');
+        buttonUpdateRef.current.removeAttribute('data-loader');
+        operationStatus.innerText = operationStatus.getAttribute(
+          'data-operation-finish-msg'
+        );
+
+        setTimeout(() => {
+          feedbackUpdated();
+        }, 700);
       } else {
+        isUpdatingFeedback.current = false;
+
+        buttonUpdateRef.current.removeAttribute('data-loader');
+        buttonUpdateRef.current.parentNode.removeAttribute('data-loader');
+        operationStatus.innerText = operationStatus.getAttribute(
+          'data-operation-error'
+        );
+
         alert("We're having problems, please try again!'");
       }
     } catch (error) {
@@ -109,7 +108,20 @@ function EditFeedback({
     }
   };
 
-  const deleteFeedback = async () => {
+  const deleteFeedback = async (e) => {
+    if (isUpdatingFeedback.current) return;
+    isUpdatingFeedback.current = true;
+
+    buttonDeleteRef.current.setAttribute('data-loader', 'true');
+    buttonDeleteRef.current.parentNode.setAttribute('data-loader', 'true');
+    // Explicit set the button loading action for screen readers
+    const operationStatus = buttonDeleteRef.current.querySelector(
+      '.operation__status-message'
+    );
+    operationStatus.innerText = operationStatus.getAttribute(
+      'data-operation-start-msg'
+    );
+
     try {
       const res = await fetch('/api/deleteFeedback', {
         method: 'DELETE',
@@ -119,9 +131,25 @@ function EditFeedback({
       });
 
       if (res.status === 200) {
-        closeModal();
-        history.push('/');
+        buttonDeleteRef.current.setAttribute('data-operation-complete', 'true');
+        buttonDeleteRef.current.removeAttribute('data-loader');
+        operationStatus.innerText = operationStatus.getAttribute(
+          'data-operation-finish-msg'
+        );
+
+        console.log(e);
+        closeModal(e);
+        setTimeout(() => {
+          history.push('/');
+        }, 5000);
       } else {
+        isUpdatingFeedback.current = false;
+
+        buttonDeleteRef.current.removeAttribute('data-loader');
+        buttonDeleteRef.current.parentNode.removeAttribute('data-loader');
+        operationStatus.innerText = operationStatus.getAttribute(
+          'data-operation-error'
+        );
         alert("We're having problems, please try again!'");
       }
     } catch (error) {
@@ -148,7 +176,7 @@ function EditFeedback({
       </header>
 
       <div className='feedback-modal__container'>
-        <form onSubmit={handleSubmit(updateCourse)} id='edit-feedback'>
+        <form onSubmit={handleSubmit(updateFeedback)} id='edit-feedback'>
           <div className='form__group'>
             <label htmlFor='edit-feedback-title' className='h4'>
               Feedback Title
@@ -316,7 +344,12 @@ function EditFeedback({
         <Button
           typeAttribute='button'
           buttonStyle='button--danger'
-          onClick={deleteFeedback}
+          onClick={(e) => deleteFeedback(e)}
+          ref={buttonDeleteRef}
+          operationButton
+          operationStartMessage='Deleting feedback, please wait...'
+          operationCompleteMessage='Feedback delete successful'
+          operationError='We are having trouble deleting your feedback, please try again!'
         >
           Delete
         </Button>
@@ -331,6 +364,11 @@ function EditFeedback({
           typeAttribute='submit'
           buttonStyle='button--primary'
           form='edit-feedback'
+          ref={buttonUpdateRef}
+          operationButton
+          operationStartMessage='Updating feedback, please wait...'
+          operationCompleteMessage='Feedback update successful'
+          operationError='We are having trouble updating your feedback, please try again!'
         >
           Update Feedback
         </Button>

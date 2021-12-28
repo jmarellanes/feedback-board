@@ -14,6 +14,25 @@ export const categoryOptions = [
   },
 ];
 
+export const statusOptions = [
+  {
+    label: 'Suggestion',
+    value: 'Suggestion',
+  },
+  {
+    label: 'Planned',
+    value: 'Planned',
+  },
+  {
+    label: 'In-Progress',
+    value: 'In-Progress',
+  },
+  {
+    label: 'Live',
+    value: 'Live',
+  },
+];
+
 // Validation messages
 export const validationMessages = {
   type: {

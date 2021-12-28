@@ -30,6 +30,8 @@ function FeedbackDetails() {
     } catch (error) {
       console.log(error);
     }
+
+    if (showModal) setShowModal(false);
   };
 
   // const {
@@ -62,15 +64,18 @@ function FeedbackDetails() {
     }
   };
 
-  const closeModal = () => {
+  const closeModal = (e) => {
+    console.log('Feedback Details', e);
+    if (e.target.parentNode.hasAttribute('data-loader')) return;
+
     setShowModal(!showModal);
   };
 
-  const openModal = () => (
-    <Modal onClose={() => closeModal()} isOpen='modal__is-open'>
+  const openModal = (
+    <Modal onClose={closeModal} isOpen='modal__is-open'>
       <EditFeedback
-        onClick={() => closeModal()}
         feedbackUpdated={loadFeedbackDetails}
+        onClick={closeModal}
         title={feedback.Title}
         comment={feedback.Description}
         category={feedback.Category}
@@ -186,7 +191,7 @@ function FeedbackDetails() {
         unmountOnExit
         timeout={250}
       >
-        {openModal()}
+        {openModal}
       </CSSTransition>
     </>
   );
