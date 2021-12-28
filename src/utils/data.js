@@ -55,4 +55,14 @@ export const operationStatus = {
     failure:
       'We are having trouble trying to add your new feedback, please try again!',
   },
+  edit: {
+    running: 'Updating feedback, please wait...',
+    complete: 'Feedback update successful',
+    failure: ' er are having trouble updating your feedback, please try again!',
+  },
+  destroy: {
+    running: 'Deleting feedback, please wait...',
+    complete: 'Feedback delete successful',
+    failure: ' are having trouble deleting your feedback, please try again!',
+  },
 };

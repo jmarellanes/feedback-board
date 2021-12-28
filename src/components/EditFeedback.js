@@ -8,7 +8,13 @@ import Button from './Button';
 import { ReactComponent as Arrow } from '../assets/images/arrow-up.svg';
 import { ReactComponent as EditFeedbackIcon } from '../assets/images/edit-feedback.svg';
 
-import { categoryOptions, statusOptions } from '../utils/data';
+import {
+  categoryOptions,
+  statusOptions,
+  operationStatus,
+  validationMessages,
+} from '../utils/data';
+import { errorMessage } from '../utils/utils';
 
 function EditFeedback({
   onClick: closeModal,
@@ -28,6 +34,8 @@ function EditFeedback({
 
   const history = useHistory();
   const [characters, setCharactersLeft] = useState(charsLeft);
+  const [statusEditMessage, setStatusEditMessage] = useState('');
+  const [statusDeleteMessage, setStatusDeleteMessage] = useState('');
 
   const fieldName = {
     title: 'edit-feedback-title',
@@ -51,6 +59,9 @@ function EditFeedback({
     },
   });
 
+  const { edit, destroy } = operationStatus;
+  const { type, error } = validationMessages;
+
   const DropdownIndicator = (props) => {
     return (
       <components.DropdownIndicator {...props}>
@@ -70,15 +81,13 @@ function EditFeedback({
     if (isUpdatingFeedback.current) return;
     isUpdatingFeedback.current = true;
 
-    buttonUpdateRef.current.setAttribute('data-loader', 'true');
-    buttonUpdateRef.current.parentNode.setAttribute('data-loader', 'true');
-    // Explicit set the button loading action for screen readers
-    const operationStatus = buttonUpdateRef.current.querySelector(
-      '.operation__status-message'
+    buttonUpdateRef.current.setAttribute('data-operation-running', 'true');
+    buttonUpdateRef.current.parentNode.setAttribute(
+      'data-operation-running',
+      'true'
     );
-    operationStatus.innerText = operationStatus.getAttribute(
-      'data-operation-start-msg'
-    );
+
+    setStatusEditMessage(edit.running);
 
     try {
       const res = await fetch('/api/updateFeedback', {
@@ -94,10 +103,8 @@ function EditFeedback({
 
       if (res.status === 200) {
         buttonUpdateRef.current.setAttribute('data-operation-complete', 'true');
-        buttonUpdateRef.current.removeAttribute('data-loader');
-        operationStatus.innerText = operationStatus.getAttribute(
-          'data-operation-finish-msg'
-        );
+        buttonUpdateRef.current.removeAttribute('data-operation-running');
+        setStatusEditMessage(edit.complete);
 
         setTimeout(() => {
           feedbackUpdated();
@@ -105,11 +112,11 @@ function EditFeedback({
       } else {
         isUpdatingFeedback.current = false;
 
-        buttonUpdateRef.current.removeAttribute('data-loader');
-        buttonUpdateRef.current.parentNode.removeAttribute('data-loader');
-        operationStatus.innerText = operationStatus.getAttribute(
-          'data-operation-error'
+        buttonUpdateRef.current.removeAttribute('data-operation-running');
+        buttonUpdateRef.current.parentNode.removeAttribute(
+          'data-operation-running'
         );
+        setStatusEditMessage(edit.error);
 
         alert("We're having problems, please try again!'");
       }
@@ -122,8 +129,11 @@ function EditFeedback({
     if (isUpdatingFeedback.current) return;
     isUpdatingFeedback.current = true;
 
-    buttonDeleteRef.current.setAttribute('data-loader', 'true');
-    buttonDeleteRef.current.parentNode.setAttribute('data-loader', 'true');
+    buttonDeleteRef.current.setAttribute('data-operation-running', 'true');
+    buttonDeleteRef.current.parentNode.setAttribute(
+      'data-operation-running',
+      'true'
+    );
     // Explicit set the button loading action for screen readers
     const operationStatus = buttonDeleteRef.current.querySelector(
       '.operation__status-message'
@@ -142,7 +152,7 @@ function EditFeedback({
 
       if (res.status === 200) {
         buttonDeleteRef.current.setAttribute('data-operation-complete', 'true');
-        buttonDeleteRef.current.removeAttribute('data-loader');
+        buttonDeleteRef.current.removeAttribute('data-operation-running');
         operationStatus.innerText = operationStatus.getAttribute(
           'data-operation-finish-msg'
         );
@@ -155,8 +165,10 @@ function EditFeedback({
       } else {
         isUpdatingFeedback.current = false;
 
-        buttonDeleteRef.current.removeAttribute('data-loader');
-        buttonDeleteRef.current.parentNode.removeAttribute('data-loader');
+        buttonDeleteRef.current.removeAttribute('data-operation-running');
+        buttonDeleteRef.current.parentNode.removeAttribute(
+          'data-operation-running'
+        );
         operationStatus.innerText = operationStatus.getAttribute(
           'data-operation-error'
         );
@@ -353,9 +365,7 @@ function EditFeedback({
           onClick={(e) => deleteFeedback(e)}
           ref={buttonDeleteRef}
           operationButton
-          operationStartMessage='Deleting feedback, please wait...'
-          operationCompleteMessage='Feedback delete successful'
-          operationError='We are having trouble deleting your feedback, please try again!'
+          statusMessage={statusDeleteMessage}
         >
           Delete
         </Button>
@@ -372,9 +382,7 @@ function EditFeedback({
           form='edit-feedback'
           ref={buttonUpdateRef}
           operationButton
-          operationStartMessage='Updating feedback, please wait...'
-          operationCompleteMessage='Feedback update successful'
-          operationError='We are having trouble updating your feedback, please try again!'
+          statusMessage={statusEditMessage}
         >
           Update Feedback
         </Button>
