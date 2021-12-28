@@ -72,10 +72,10 @@ function EditFeedback({
 
   const updateFeedback = async (data) => {
     const {
-      'edit-feedback-title': Title,
-      'edit-feedback-detail': Description,
-      'edit-feedback-category': { value: Category },
-      'edit-feedback-status': { value: Status },
+      [fieldName.title]: Title,
+      [fieldName.detail]: Description,
+      [fieldName.category]: { value: Category },
+      [fieldName.status]: { value: Status },
     } = data;
 
     if (isUpdatingFeedback.current) return;
@@ -215,16 +215,14 @@ function EditFeedback({
               })}
             />
             <div className='form__group--error'>
-              {errors['edit-feedback-title'] &&
-                errors['edit-feedback-title']?.type === 'required' && (
-                  <span role='alert'>Can't be empty.</span>
-                )}
-              {errors['edit-feedback-title'] &&
-                errors['edit-feedback-title']?.type === 'pattern' && (
-                  <span role='alert'>
-                    Entered value can't start or contain only white spacing.
-                  </span>
-                )}
+              {
+                // prettier-ignore
+                errorMessage( errors, fieldName.title, type.required, error.empty)
+              }
+              {
+                // prettier-ignore
+                errorMessage( errors, fieldName.title, type.pattern, error.space)
+              }
             </div>
           </div>
 
@@ -257,10 +255,10 @@ function EditFeedback({
               )}
             />
             <div className='form__group--error'>
-              {errors['edit-feedback-category'] &&
-                errors['edit-feedback-category']?.type === 'required' && (
-                  <span role='alert'>Can't be empty.</span>
-                )}
+              {
+                // prettier-ignore
+                errorMessage( errors, fieldName.category, type.required, error.empty)
+              }
             </div>
           </div>
 
@@ -291,10 +289,10 @@ function EditFeedback({
               )}
             />
             <div className='form__group--error'>
-              {errors['edit-feedback-status'] &&
-                errors['edit-feedback-status']?.type === 'required' && (
-                  <span role='alert'>Can't be empty.</span>
-                )}
+              {
+                // prettier-ignore
+                errorMessage( errors, fieldName.status, type.required, error.empty)
+              }
             </div>
           </div>
 
@@ -327,20 +325,18 @@ function EditFeedback({
               })}
             ></textarea>
             <div className='form__group--error'>
-              {errors['edit-feedback-detail'] &&
-                errors['edit-feedback-detail']?.type === 'required' && (
-                  <span role='alert'>Can't be empty.</span>
-                )}
-              {errors['edit-feedback-detail'] &&
-                errors['edit-feedback-detail'].type === 'maxLength' && (
-                  <span role='alert'>Max length exceeded.</span>
-                )}
-              {errors['edit-feedback-detail'] &&
-                errors['edit-feedback-detail']?.type === 'pattern' && (
-                  <span role='alert'>
-                    Entered value can't start or contain only white spacing.
-                  </span>
-                )}
+              {
+                // prettier-ignore
+                errorMessage( errors, fieldName.detail, type.required, error.empty)
+              }
+              {
+                // prettier-ignore
+                errorMessage( errors, fieldName.detail, type.length, error.length)
+              }
+              {
+                // prettier-ignore
+                errorMessage( errors, fieldName.detail, type.pattern, error.space)
+              }
             </div>
             <p className='feedback-modal__chars-left chars-left'>
               {characters} characters left
