@@ -36,11 +36,12 @@ function FeedbackComments({
 
   useEffect(() => {
     getHeight(commentRef.current, replyRef.current);
-    const timer = setTimeout(() => setIsHidden(!isHidden), 600);
+    const timer = setTimeout(() => setIsHidden((isHidden) => !isHidden), 600);
 
     return () => {
       clearTimeout(timer);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const prevOpenRef = useRef(true);
