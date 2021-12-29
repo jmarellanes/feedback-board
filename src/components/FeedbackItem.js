@@ -29,23 +29,30 @@ function FeedbackItem({
 
   return (
     <article className='feedback-item'>
-      <div className='feedback-item__description'>
-        <Tag>
-          <h2>{title}</h2>
-          <p>{description}</p>
-        </Tag>
-        <ul className='nav-main__element feedback-item__category'>
-          <Category category={category} isActive={categoryActive}>
-            {category}
-          </Category>
-        </ul>
-      </div>
+      <div className='feedback-item__container'>
+        <header className='feedback-item__title'>
+          <Tag>
+            <h2>{title}</h2>
+            <p>{description}</p>
+          </Tag>
+        </header>
 
-      <Upvotes feedbackItemClass='feedback-item__upvotes'>{upvotes}</Upvotes>
+        <div className='feedback-item__upvotes'>
+          <Upvotes>{upvotes}</Upvotes>
+        </div>
 
-      <div className='feedback-item__quantity'>
-        <CommentsIcon />
-        <span>{comments}</span>
+        <div className='feedback-item__comments'>
+          <CommentsIcon />
+          <span>{comments}</span>
+        </div>
+
+        <footer className='feedback-item__category'>
+          <ul className='nav-main__element'>
+            <Category category={category} isActive={categoryActive}>
+              {category}
+            </Category>
+          </ul>
+        </footer>
       </div>
     </article>
   );
