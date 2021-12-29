@@ -2,7 +2,7 @@ import FeedbackItem from './FeedbackItem';
 import Loader from './Loader';
 
 function FeedbackList({ feedbackList, loading }) {
-  const noFeedback = () => (
+  const noFeedback = (
     <>
       <h2>There is not Feedback</h2>
       <p>Got a suggestion? Found a bug that needs to be squashed?</p>
@@ -10,20 +10,19 @@ function FeedbackList({ feedbackList, loading }) {
     </>
   );
 
-  const isFeedback = () =>
-    feedbackList.map((feedback) => (
-      <FeedbackItem
-        title={feedback.fields.Title}
-        description={feedback.fields.Description}
-        upvotes={feedback.fields.Upvotes}
-        category={feedback.fields.Category}
-        comments={feedback.fields.TotalComments}
-        key={feedback.fields.FeedbackId}
-        id={feedback.fields.FeedbackId}
-        link
-        categoryActive
-      />
-    ));
+  const isFeedback = feedbackList.map((feedback) => (
+    <FeedbackItem
+      title={feedback.fields.Title}
+      description={feedback.fields.Description}
+      upvotes={feedback.fields.Upvotes}
+      category={feedback.fields.Category}
+      comments={feedback.fields.TotalComments}
+      key={feedback.fields.FeedbackId}
+      id={feedback.fields.FeedbackId}
+      link
+      categoryActive
+    />
+  ));
 
   if (loading) return <Loader />;
 
@@ -35,7 +34,7 @@ function FeedbackList({ feedbackList, loading }) {
       <h2 id='section-feedback-list' hidden>
         Feedback List
       </h2>
-      {!feedbackList.length ? noFeedback() : isFeedback()}
+      {!feedbackList.length ? noFeedback : isFeedback}
     </section>
   );
 }
