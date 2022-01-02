@@ -1,6 +1,6 @@
 import Anchor from '../../components/Anchor';
 import Button from '../../components/Button';
-import Category from '../../components/Category';
+// import Category from '../../components/Category';
 import SortBy from '../../components/SortBy';
 import Upvotes from '../../components/Upvotes';
 import './design-system.scss';
