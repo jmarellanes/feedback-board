@@ -56,7 +56,7 @@ function CreateFeedback({ onClick, feedbackAdded }) {
       'create-feedback-detail': Description,
       'create-feedback-category': { value: Category },
     } = data;
-    const { id: Author } = user;
+    const { userID: Author } = user;
 
     if (isCreatingFeedback.current) return;
     isCreatingFeedback.current = true;

@@ -18,13 +18,13 @@ exports.handler = async (event) => {
   const filterSortByParam = () => {
     switch (sortByParam) {
       case 'least-upvotes':
-        return [{ field: 'Upvotes' }];
+        return [{ field: 'TotalUpvotes' }];
       case 'most-comments':
         return [{ field: 'TotalComments', direction: 'desc' }];
       case 'least-comments':
         return [{ field: 'TotalComments' }];
       default:
-        return [{ field: 'Upvotes', direction: 'desc' }];
+        return [{ field: 'TotalUpvotes', direction: 'desc' }];
     }
   };
 
@@ -37,7 +37,8 @@ exports.handler = async (event) => {
           'Title',
           'FeedbackId',
           'Description',
-          'Upvotes',
+          'UpvotedBy',
+          'TotalUpvotes',
           'Category',
           'Comments',
           'TotalComments',

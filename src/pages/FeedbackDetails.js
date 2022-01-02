@@ -122,7 +122,8 @@ function FeedbackDetails() {
                 <FeedbackItem
                   title={feedback.Title}
                   description={feedback.Description}
-                  upvotes={feedback.Upvotes}
+                  upvotedBy={feedback.UpvotedBy ? feedback.UpvotedBy : []}
+                  totalUpvotes={feedback.TotalUpvotes}
                   category={feedback.Category}
                   comments={feedback.TotalComments}
                   link={false}

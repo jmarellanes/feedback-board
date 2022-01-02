@@ -1,29 +1,66 @@
 import { useState } from 'react';
+import { useUser } from '../context/UserContext';
+
 import { ReactComponent as ChevronUp } from '../assets/images/chevron-up.svg';
 
-export default function Upvote({ feedbackItemClass, children }) {
-  const [upvotes, setUpvotes] = useState(14);
-  const [isUpvoted, setIsUpvoted] = useState(false);
+/*
+ TODO:
+  * > Button animation
+  * > Get update data from database before add or remove upvotes to avoid rewrites. 
+  * > Refactor with Context?? 
+*/
 
-  function addUpvote() {
+function Upvote({ children, upvotedBy, id, updateUpvotesState }) {
+  const [user] = useUser();
+  const upvoted = upvotedBy ? upvotedBy.includes(user.userID) : false;
+
+  const [isUpvoted, setIsUpvoted] = useState(upvoted);
+  const [totalUpvotes, setTotalUpvotes] = useState(children);
+
+  const updateUpvote = async (arr) => {
+    try {
+      await fetch('/api/updateUpvotes', {
+        method: 'PUT',
+        body: JSON.stringify({
+          id,
+          UpvotedBy: arr,
+        }),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  function handleClick() {
+    const addUpvote = upvotedBy ? [user.userID, ...upvotedBy] : [user.userID];
+    const filteredUpvotes = upvotedBy.filter(
+      (upvotes) => upvotes !== user.userID
+    );
+
     if (isUpvoted) {
-      setUpvotes((prevUpvotes) => prevUpvotes - 1);
+      setTotalUpvotes((prevUpvotes) => prevUpvotes - 1);
+      updateUpvote(filteredUpvotes);
+      updateUpvotesState(filteredUpvotes, id);
+
       return setIsUpvoted(!isUpvoted);
     }
 
-    setUpvotes((prevUpvotes) => prevUpvotes + 1);
-    setIsUpvoted(!isUpvoted);
+    setTotalUpvotes((prevUpvotes) => prevUpvotes + 1);
+    updateUpvote(addUpvote);
+    updateUpvotesState(addUpvote, id);
+
+    return setIsUpvoted(!isUpvoted);
   }
 
   return (
     <button
-      className={`upvotes ${feedbackItemClass} ${
-        isUpvoted ? 'upvotes--active' : ''
-      }`}
-      onClick={addUpvote}
+      className={`upvotes ${isUpvoted ? 'upvotes--active' : ''}`}
+      onClick={handleClick}
     >
       <ChevronUp />
-      <span className='upvotes__quantity'>{children}</span>
+      <span className='upvotes__quantity'>{totalUpvotes}</span>
     </button>
   );
 }
+
+export default Upvote;

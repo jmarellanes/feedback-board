@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
+
 import { CSSTransition } from 'react-transition-group';
 import queryComponent from 'query-string';
 
@@ -14,6 +15,8 @@ import FeedbackTopBar from '../components/FeedbackTopBar';
 import { ReactComponent as Bulb } from '../assets/images/bulb.svg';
 import Modal from '../components/Modal';
 import CreateFeedback from '../components/CreateFeedback';
+import FeedbackItem from '../components/FeedbackItem';
+import Upvotes from '../components/Upvotes';
 
 function Home() {
   const [feedback, setFeedback] = useState([]);
@@ -23,6 +26,19 @@ function Home() {
   const [loading, setLoading] = useState(false);
   const [sortValue, setSortValue] = useState('Most Upvotes');
   const [showModal, setShowModal] = useState(false);
+
+  const updateUpvotesState = (arr, id) => {
+    let updateState = feedback.map((item) => {
+      if (item.fields.FeedbackId === id) {
+        return {
+          fields: { ...item.fields, UpvotedBy: arr, TotalUpvotes: arr.length },
+        };
+      }
+      return item;
+    });
+
+    setFeedback(updateState);
+  };
 
   const { categoryParam } = useParams();
   const history = useHistory();
@@ -59,13 +75,13 @@ function Home() {
       if (type === sortValue) return null;
       switch (type) {
         case 'Least Upvotes':
-          return a.fields.Upvotes - b.fields.Upvotes;
+          return a.fields.TotalUpvotes - b.fields.TotalUpvotes;
         case 'Most Comments':
           return b.fields.TotalComments - a.fields.TotalComments;
         case 'Least Comments':
           return a.fields.TotalComments - b.fields.TotalComments;
         default:
-          return b.fields.Upvotes - a.fields.Upvotes;
+          return b.fields.TotalUpvotes - a.fields.TotalUpvotes;
       }
     });
 
@@ -139,7 +155,31 @@ function Home() {
               Add Feedback
             </Button>
           </FeedbackTopBar>
-          <FeedbackList feedbackList={feedback} loading={loading} />
+          <FeedbackList loading={loading}>
+            {feedback.map((feedback, i) => (
+              <FeedbackItem
+                title={feedback.fields.Title}
+                description={feedback.fields.Description}
+                category={feedback.fields.Category}
+                comments={feedback.fields.TotalComments}
+                key={feedback.fields.FeedbackId}
+                id={feedback.fields.FeedbackId}
+                // index={i}
+                link
+                categoryActive
+              >
+                <Upvotes
+                  upvotedBy={
+                    feedback.fields.UpvotedBy ? feedback.fields.UpvotedBy : []
+                  }
+                  id={feedback.fields.FeedbackId}
+                  updateUpvotesState={updateUpvotesState}
+                >
+                  {feedback.fields.TotalUpvotes}
+                </Upvotes>
+              </FeedbackItem>
+            ))}
+          </FeedbackList>
         </main>
       </div>
 
