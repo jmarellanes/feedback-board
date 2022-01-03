@@ -49,9 +49,9 @@ function Button(
           <SVGIcon />
         </span>
       ) : null}
-      <p className='h4 button__title' data-operation-complete='Done'>
-        <span>{children}</span>
-      </p>
+      <span className='h4 button__title' data-operation-complete='Done'>
+        <span className='button__subtitle'>{children}</span>
+      </span>
       {operationButton ? buttonLoader : ''}
       {operationButton ? operationStatus : ''}
     </button>
