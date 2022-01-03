@@ -1,9 +1,13 @@
 const { feedbackTable } = require('./utils/airtable');
 
-exports.handler = async () => {
+exports.handler = async (event) => {
+  const feedback_id = event.queryStringParameters.id;
+  console.log(feedback_id);
+
   try {
     const upvotesRecords = await feedbackTable
       .select({
+        filterByFormula: `RECORD_ID() = '${feedback_id}'`,
         fields: ['UpvotedBy'],
       })
       .all();
@@ -14,7 +18,7 @@ exports.handler = async () => {
 
     return {
       statusCode: 200,
-      body: JSON.stringify(upvotesList),
+      body: JSON.stringify({ upvotesList }),
     };
   } catch (err) {
     return {

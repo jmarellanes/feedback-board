@@ -64,3 +64,15 @@ function Upvote({ children, upvotedBy, id, updateUpvotesState }) {
 }
 
 export default Upvote;
+
+//  const getUpvotes = async () => {
+//    try {
+//      const res = await fetch(`/api/getUpvotes/?id=${id}`);
+//      const upvotesRes = await res.json();
+
+//      setUserList(upvotesRes.upvotesList);
+//      setTotalUpvotes(upvotesRes.upvotesList.length);
+//    } catch (error) {
+//      console.log(error);
+//    }
+//  };
