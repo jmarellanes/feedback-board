@@ -156,7 +156,7 @@ function Home() {
             </Button>
           </FeedbackTopBar>
           <FeedbackList loading={loading}>
-            {feedback.map((feedback, i) => (
+            {feedback.map((feedback) => (
               <FeedbackItem
                 title={feedback.fields.Title}
                 description={feedback.fields.Description}
@@ -164,7 +164,6 @@ function Home() {
                 comments={feedback.fields.TotalComments}
                 key={feedback.fields.FeedbackId}
                 id={feedback.fields.FeedbackId}
-                // index={i}
                 link
                 categoryActive
               >
