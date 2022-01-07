@@ -27,7 +27,7 @@ function Home() {
   const [sortValue, setSortValue] = useState('Most Upvotes');
   const [showModal, setShowModal] = useState(false);
 
-  const updateUpvotesState = (arr, id) => {
+  const updateUpvotesParentState = (arr, id) => {
     let updateState = feedback.map((item) => {
       if (item.fields.FeedbackId === id) {
         return {
@@ -172,7 +172,7 @@ function Home() {
                     feedback.fields.UpvotedBy ? feedback.fields.UpvotedBy : []
                   }
                   id={feedback.fields.FeedbackId}
-                  updateUpvotesState={updateUpvotesState}
+                  updateUpvotesParentState={updateUpvotesParentState}
                 >
                   {feedback.fields.TotalUpvotes}
                 </Upvotes>

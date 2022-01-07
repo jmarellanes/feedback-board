@@ -12,13 +12,13 @@ exports.handler = async (event) => {
       })
       .all();
 
-    const upvotesList = upvotesRecords.map((upvote) => ({
-      fields: upvote.fields,
-    }));
+    const upvotesList = upvotesRecords.map((upvote) => {
+      return upvote.fields.UpvotedBy;
+    });
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ upvotesList }),
+      body: JSON.stringify(upvotesList),
     };
   } catch (err) {
     return {
