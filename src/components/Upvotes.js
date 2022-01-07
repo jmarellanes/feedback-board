@@ -1,14 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { useUser } from '../context/UserContext';
+import { usePrevious } from '../hooks/usePrevious';
 
 import { ReactComponent as ChevronUp } from '../assets/images/chevron-up.svg';
-
-/*
- TODO:
-  * > Button animation
-  * > Get update data from database before add or remove upvotes to avoid rewrites. 
-  * > Refactor with Context?? 
-*/
 
 function Upvote({ children, upvotedBy, id, updateUpvotesParentState }) {
   const [user] = useUser();
@@ -19,20 +13,11 @@ function Upvote({ children, upvotedBy, id, updateUpvotesParentState }) {
 
   const [userUpvotesList, setUserUpvotesList] = useState([]);
   const [isUpvoted, setIsUpvoted] = useState(upvoted);
-
-  const getUpvotes = async () => {
-    try {
-      const res = await fetch(`/api/getUpvotes/?id=${id}`);
-      const upvotesList = await res.json();
-      const formattedUpvotes = upvotesList[0];
-
-      setUserUpvotesList(formattedUpvotes);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const prevUpvotedBy = usePrevious(upvotedBy);
 
   const updateUpvotesDB = async (arr) => {
+    updateUpvotesParentState(arr, id);
+
     try {
       const res = await fetch('/api/updateUpvotes', {
         method: 'PUT',
@@ -42,15 +27,12 @@ function Upvote({ children, upvotedBy, id, updateUpvotesParentState }) {
         }),
       });
 
-      if (res.status === 200) {
-        console.log('orking');
+      upvoteButtonRef.current.removeAttribute('data-operation-running');
+      isUpvotingRef.current = false;
 
-        upvoteButtonRef.current.removeAttribute('data-operation-running');
-        return (isUpvotingRef.current = false);
-      } else {
-        console.log('Not Working');
-        upvoteButtonRef.current.removeAttribute('data-operation-running');
-        isUpvotingRef.current = false;
+      if (res.status !== 200) {
+        alert("We're having problems, please try again!'");
+        updateUpvotesParentState(prevUpvotedBy, id);
         return setIsUpvoted(!isUpvoted);
       }
     } catch (error) {
@@ -58,26 +40,22 @@ function Upvote({ children, upvotedBy, id, updateUpvotesParentState }) {
     }
   };
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (isUpvotingRef.current) return;
     isUpvotingRef.current = true;
 
     setIsUpvoted(!isUpvoted);
-
     upvoteButtonRef.current.setAttribute('data-operation-running', 'true');
-    getUpvotes();
-  };
 
-  const toggleUpvote = (add, remove) => {
-    if (!isUpvoted) {
-      updateUpvotesDB(remove);
-      updateUpvotesParentState(remove, id);
-      return;
+    try {
+      const res = await fetch(`/api/getUpvotes/?id=${id}`);
+      const upvotesList = await res.json();
+      const formattedUpvotes = upvotesList[0];
+
+      setUserUpvotesList(formattedUpvotes || []);
+    } catch (error) {
+      console.log(error);
     }
-
-    updateUpvotesDB(add);
-    updateUpvotesParentState(add, id);
-    return;
   };
 
   const prevOpenRef = useRef(true);
@@ -88,11 +66,14 @@ function Upvote({ children, upvotedBy, id, updateUpvotesParentState }) {
     const addUpvote = userUpvotesList
       ? [user.userID, ...userUpvotesList]
       : [user.userID];
-    const filteredUpvotes = upvotedBy.filter(
+    const filteredUpvotes = userUpvotesList.filter(
       (upvotes) => upvotes !== user.userID
     );
 
-    toggleUpvote(addUpvote, filteredUpvotes);
+    if (isUpvoted) {
+      return updateUpvotesDB(addUpvote);
+    }
+    return updateUpvotesDB(filteredUpvotes);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userUpvotesList]);
 
