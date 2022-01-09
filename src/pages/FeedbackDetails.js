@@ -152,10 +152,8 @@ function FeedbackDetails() {
                         image={comment.Image}
                         comment={comment.Comment}
                         commentId={comment.CommentId}
-                        parentId={comment.ParentId ? comment.ParentId : null}
-                        parentUsername={
-                          comment.ParentId ? comment.Username : null
-                        }
+                        feedbackId={feedback.FeedbackId}
+                        commentAdded={loadComments}
                       />
                     );
                   })}
@@ -173,7 +171,7 @@ function FeedbackDetails() {
                   Add Comment
                 </h2>
                 <CreateComment
-                  id={feedback.FeedbackId}
+                  feedbackId={feedback.FeedbackId}
                   commentAdded={loadComments}
                 >
                   Post Comment

@@ -5,7 +5,7 @@ import Button from './Button';
 import { useUser } from '../context/UserContext';
 
 function CreateComment(
-  { children, isReply, isHidden, id, commentAdded },
+  { children, isReply, isHidden, feedbackId, commentAdded, replyToComment },
   replyRef
 ) {
   const [user] = useUser();
@@ -23,15 +23,17 @@ function CreateComment(
 
   const onSubmit = async (data) => {
     const { 'create-comment': Comment } = data;
-    const { id: Author } = user;
+    const { userID: Author } = user;
+    const parentComment = replyToComment ? replyToComment : '';
 
     try {
       const res = await fetch('/api/createComment/', {
         method: 'POST',
         body: JSON.stringify({
           Comment,
-          Feedback: [id],
+          Feedback: [feedbackId],
           Author: [Author],
+          ParentId: parentComment,
         }),
       });
 

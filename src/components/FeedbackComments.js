@@ -5,6 +5,7 @@ import CreateComment from './CreateComment';
 
 function FeedbackComments({
   allComments,
+  feedbackId,
   name,
   username,
   image,
@@ -12,6 +13,7 @@ function FeedbackComments({
   commentId,
   parentUsername,
   replyComment,
+  commentAdded,
 }) {
   let replyCommentsList = () =>
     allComments.filter((c) => c.fields.ParentId === commentId);
@@ -94,7 +96,14 @@ function FeedbackComments({
           timeout={250}
           classNames='feedback-comment__reply'
         >
-          <CreateComment isReply={true} ref={replyRef} isHidden={isHidden}>
+          <CreateComment
+            isReply={true}
+            ref={replyRef}
+            isHidden={isHidden}
+            feedbackId={feedbackId}
+            replyToComment={commentId}
+            commentAdded={commentAdded}
+          >
             Post Reply
           </CreateComment>
         </CSSTransition>
@@ -108,9 +117,10 @@ function FeedbackComments({
           username={reply.fields.Username}
           image={reply.fields.Image}
           comment={reply.fields.Comment}
-          parentId={reply.fields.ParentId}
-          parentUsername={reply.fields.ParentId === commentId ? username : null}
+          parentUsername={username}
           replyComment={true}
+          feedbackId={feedbackId}
+          commentAdded={commentAdded}
         />
       ))}
     </article>
