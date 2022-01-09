@@ -11,10 +11,9 @@ exports.handler = async (event) => {
       body: JSON.stringify(updateUpvotes),
     };
   } catch (err) {
-    // return {
-    //   statusCode: 500,
-    //   body: JSON.stringify('Failed to query records on Database'),
-    // };
-    console.log(err);
+    return {
+      statusCode: 500,
+      body: JSON.stringify('Failed to query records on Database'),
+    };
   }
 };
