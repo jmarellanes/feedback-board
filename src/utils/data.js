@@ -50,19 +50,29 @@ export const validationMessages = {
 // Status messages for Live Regions to allow assistive technologies to listen for changes and announce the updated messages when they happen.
 export const operationStatus = {
   create: {
-    running: 'Adding new feedback, please wait...',
+    running: 'Adding new feedback',
     complete: 'New feedback added succesfully',
     failure:
       'We are having trouble trying to add your new feedback, please try again!',
   },
   edit: {
-    running: 'Updating feedback, please wait...',
-    complete: 'Feedback update successful',
-    failure: ' er are having trouble updating your feedback, please try again!',
+    running: 'Updating feedback',
+    complete: 'Feedback updated successfully',
+    failure: 'We are having trouble updating your feedback, please try again!',
   },
   destroy: {
-    running: 'Deleting feedback, please wait...',
-    complete: 'Feedback delete successful',
-    failure: ' are having trouble deleting your feedback, please try again!',
+    running: 'Deleting feedback',
+    complete: 'Feedback deleted successfully',
+    failure: 'We are having trouble deleting your feedback, please try again!',
+  },
+  upvoteAdd: {
+    running: 'Adding upvote',
+    complete: 'Upvote added successfully',
+    failure: 'We are having trouble adding your upvote, please try again!',
+  },
+  upvoteRemove: {
+    running: 'Removing upvote',
+    complete: 'Upvote removed successfully',
+    failure: 'We are having trouble removing your upvote, please try again!',
   },
 };

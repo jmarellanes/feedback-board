@@ -3,6 +3,7 @@ import { useUser } from '../context/UserContext';
 import { usePrevious } from '../hooks/usePrevious';
 
 import { ReactComponent as ChevronUp } from '../assets/images/chevron-up.svg';
+import { operationStatus } from '../utils/data';
 
 function Upvote({ children, upvotedBy, id, updateUpvotesParentState }) {
   const [user] = useUser();
@@ -13,7 +14,10 @@ function Upvote({ children, upvotedBy, id, updateUpvotesParentState }) {
 
   const [userUpvotesList, setUserUpvotesList] = useState([]);
   const [isUpvoted, setIsUpvoted] = useState(upvoted);
+  const [statusMessage, setStatusMessage] = useState('');
   const prevUpvotedBy = usePrevious(upvotedBy);
+
+  const { upvoteAdd, upvoteRemove } = operationStatus;
 
   const updateUpvotesDB = async (arr) => {
     updateUpvotesParentState(arr, id);
@@ -31,9 +35,14 @@ function Upvote({ children, upvotedBy, id, updateUpvotesParentState }) {
       isUpvotingRef.current = false;
 
       if (res.status !== 200) {
+        setStatusMessage(isUpvoted ? upvoteAdd.failure : upvoteRemove.failure);
         alert("We're having problems, please try again!'");
         updateUpvotesParentState(prevUpvotedBy, id);
         return setIsUpvoted(!isUpvoted);
+      } else {
+        setStatusMessage(
+          isUpvoted ? upvoteAdd.complete : upvoteRemove.complete
+        );
       }
     } catch (error) {
       console.log(error);
@@ -46,6 +55,8 @@ function Upvote({ children, upvotedBy, id, updateUpvotesParentState }) {
 
     setIsUpvoted(!isUpvoted);
     upvoteButtonRef.current.setAttribute('data-operation-running', 'true');
+
+    setStatusMessage(isUpvoted ? upvoteRemove.running : upvoteAdd.running);
 
     try {
       const res = await fetch(`/api/getUpvotes/?id=${id}`);
@@ -82,12 +93,22 @@ function Upvote({ children, upvotedBy, id, updateUpvotesParentState }) {
       className={`upvotes ${isUpvoted ? 'upvotes--isUpvoted' : ''}`}
       ref={upvoteButtonRef}
       onClick={handleClick}
+      onBlur={() => setStatusMessage('')}
     >
       <ChevronUp />
       <span className='upvotes__title'>
-        <span className='upvotes__quantity'>{children}</span>
+        <span className='upvotes__quantity'>
+          {`${children}`}
+          <span className='visually-hidden'>Upvotes</span>
+        </span>
       </span>
       <span className='upvotes__loader'></span>
+      <span
+        className='visually-hidden operation__status-message'
+        aria-live='assertive'
+      >
+        {statusMessage}
+      </span>
     </button>
   );
 }
