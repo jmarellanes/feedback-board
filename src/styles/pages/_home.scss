@@ -7,6 +7,7 @@
     &-topbar {
       position: sticky;
       top: 0.5rem;
+      z-index: 10;
     }
 
     &-list {
