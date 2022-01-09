@@ -2,7 +2,6 @@ const { feedbackTable } = require('./utils/airtable');
 
 exports.handler = async (event) => {
   const feedback_id = event.queryStringParameters.id;
-  console.log(feedback_id);
 
   try {
     const upvotesRecords = await feedbackTable
