@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import Button from './Button';
 
 import { useUser } from '../context/UserContext';
+import { validationMessages } from '../utils/data';
+import { errorMessage } from '../utils/utils';
 
 function CreateComment(
   { children, isReply, isHidden, feedbackId, commentAdded, replyToComment },
@@ -24,6 +26,9 @@ function CreateComment(
     reset,
   } = useForm();
   watch('create-comment');
+  const { type, error } = validationMessages;
+
+  const fieldName = { comment: 'create-comment' };
 
   const onSubmit = async (data) => {
     const { 'create-comment': Comment } = data;
@@ -79,7 +84,7 @@ function CreateComment(
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className='form__group'>
           <label
-            htmlFor='create-comment'
+            htmlFor={fieldName.comment}
             aria-labelledby='create-comment-label'
           >
             <span id='create-comment-label' hidden>
@@ -89,13 +94,16 @@ function CreateComment(
 
           <textarea
             className='form__field'
-            id='create-comment'
-            name='create-comment'
-            aria-invalid={errors['create-comment'] ? 'true' : 'false'}
+            id={fieldName.comment}
+            name={fieldName.comment}
+            aria-invalid={errors[fieldName.comment] ? 'true' : 'false'}
             placeholder='Type your comment here'
             maxLength={MAX_CHARS}
-            {...register('create-comment', {
+            {...register(fieldName.comment, {
               required: true,
+              pattern: {
+                value: /^(\s+\S+\s*)*(?!\s).*$/,
+              },
               maxLength: MAX_CHARS,
               onChange: (e) => {
                 let commentLength = e.target.value.length;
@@ -104,14 +112,18 @@ function CreateComment(
             })}
           ></textarea>
           <div className='form__group--error'>
-            {errors['create-comment'] &&
-              errors['create-comment']?.type === 'required' && (
-                <span role='alert'>Can't be empty.</span>
-              )}
-            {errors['create-comment'] &&
-              errors['create-comment'].type === 'maxLength' && (
-                <span role='alert'>Max length exceeded.</span>
-              )}
+            {
+              // prettier-ignore
+              errorMessage( errors, fieldName.comment, type.required, error.empty)
+            }
+            {
+              // prettier-ignore
+              errorMessage( errors, fieldName.comment, type.length, error.length)
+            }
+            {
+              // prettier-ignore
+              errorMessage( errors, fieldName.comment, type.pattern, error.space)
+            }
           </div>
         </div>
 
