@@ -75,4 +75,9 @@ export const operationStatus = {
     complete: 'Upvote removed successfully',
     failure: 'We are having trouble removing your upvote, please try again!',
   },
+  createComment: {
+    running: 'Adding your comment',
+    complete: 'Comment added successfully',
+    failure: 'We are having trouble adding your upvote, please try again!',
+  },
 };

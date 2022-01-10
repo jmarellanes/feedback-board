@@ -1,4 +1,4 @@
-import { useState, forwardRef } from 'react';
+import { useState, forwardRef, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import Button from './Button';
 
@@ -8,9 +8,13 @@ function CreateComment(
   { children, isReply, isHidden, feedbackId, commentAdded, replyToComment },
   replyRef
 ) {
+  const MAX_CHARS = 250;
+
+  const buttonCreateRef = useRef();
+  const isCreatingComment = useRef(false);
+
   const [user] = useUser();
 
-  const MAX_CHARS = 250;
   const [characters, setCharactersLeft] = useState(MAX_CHARS);
   const {
     register,
@@ -26,6 +30,11 @@ function CreateComment(
     const { userID: Author } = user;
     const parentComment = replyToComment ? replyToComment : '';
 
+    if (isCreatingComment.current) return;
+    isCreatingComment.current = true;
+
+    buttonCreateRef.current.setAttribute('data-operation-running', 'true');
+
     try {
       const res = await fetch('/api/createComment/', {
         method: 'POST',
@@ -38,13 +47,23 @@ function CreateComment(
       });
 
       if (res.status === 200) {
+        buttonCreateRef.current.setAttribute('data-operation-complete', 'true');
+        buttonCreateRef.current.removeAttribute('data-operation-running');
+
         commentAdded();
         reset({ 'create-comment': '' });
       } else {
+        buttonCreateRef.current.removeAttribute('data-operation-running');
+
         alert(
           "We're having trouble trying to add your new comment, please try again!'"
         );
       }
+
+      isCreatingComment.current = false;
+      setTimeout(() => {
+        buttonCreateRef.current.removeAttribute('data-operation-complete');
+      }, 1000);
     } catch (error) {
       console.log(error);
     }
@@ -98,7 +117,12 @@ function CreateComment(
 
         <div className='form__group create-comment__footer'>
           <p className='chars-left'>{characters} characters left</p>
-          <Button typeAttribute='submit' buttonStyle='button--primary'>
+          <Button
+            typeAttribute='submit'
+            buttonStyle='button--primary'
+            ref={buttonCreateRef}
+            operationButton
+          >
             {children}
           </Button>
         </div>

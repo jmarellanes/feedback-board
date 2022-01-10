@@ -219,6 +219,10 @@ button {
       &__title {
         opacity: 0;
       }
+
+      &__subtitle {
+        opacity: 0;
+      }
     }
   }
   // End of loader
@@ -239,6 +243,12 @@ button {
     }
   }
 
+  &__subtitle {
+    opacity: 1;
+    transition: opacity 250ms linear;
+    transition-delay: 250ms;
+  }
+
   &[data-operation-complete='true'] {
     pointer-events: none;
 
@@ -253,7 +263,6 @@ button {
 
       &__subtitle {
         opacity: 0;
-        transform: scale(0.3);
       }
     }
   }
