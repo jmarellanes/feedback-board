@@ -103,6 +103,7 @@ function FeedbackComments({
             feedbackId={feedbackId}
             replyToComment={commentId}
             commentAdded={commentAdded}
+            closeReply={() => setIsOpen(!isOpen)}
           >
             Post Reply
           </CreateComment>

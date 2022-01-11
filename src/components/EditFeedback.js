@@ -151,11 +151,13 @@ function EditFeedback({
           'data-operation-running'
         );
         setStatusDeleteMessage(destroy.complete);
+        setTimeout(() => {
+          closeModal(e);
+        }, 1000);
 
-        closeModal(e);
         setTimeout(() => {
           history.push('/');
-        }, 350);
+        }, 1500);
       } else {
         isUpdatingFeedback.current = false;
 

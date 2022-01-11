@@ -3,11 +3,19 @@ import { useForm } from 'react-hook-form';
 import Button from './Button';
 
 import { useUser } from '../context/UserContext';
-import { validationMessages } from '../utils/data';
+import { operationStatus, validationMessages } from '../utils/data';
 import { errorMessage } from '../utils/utils';
 
 function CreateComment(
-  { children, isReply, isHidden, feedbackId, commentAdded, replyToComment },
+  {
+    children,
+    isReply,
+    isHidden,
+    feedbackId,
+    commentAdded,
+    replyToComment,
+    closeReply,
+  },
   replyRef
 ) {
   const MAX_CHARS = 250;
@@ -16,8 +24,9 @@ function CreateComment(
   const isCreatingComment = useRef(false);
 
   const [user] = useUser();
-
   const [characters, setCharactersLeft] = useState(MAX_CHARS);
+  const [statusMessage, setStatusMessage] = useState('');
+
   const {
     register,
     handleSubmit,
@@ -26,6 +35,9 @@ function CreateComment(
     reset,
   } = useForm();
   watch('create-comment');
+  const {
+    createComment: { running, complete, failure },
+  } = operationStatus;
   const { type, error } = validationMessages;
 
   const fieldName = { comment: 'create-comment' };
@@ -39,6 +51,7 @@ function CreateComment(
     isCreatingComment.current = true;
 
     buttonCreateRef.current.setAttribute('data-operation-running', 'true');
+    setStatusMessage(running);
 
     try {
       const res = await fetch('/api/createComment/', {
@@ -55,10 +68,15 @@ function CreateComment(
         buttonCreateRef.current.setAttribute('data-operation-complete', 'true');
         buttonCreateRef.current.removeAttribute('data-operation-running');
 
-        commentAdded();
+        setStatusMessage(complete);
         reset({ 'create-comment': '' });
+        setTimeout(() => {
+          if (isReply) closeReply();
+          commentAdded();
+        }, 1000);
       } else {
         buttonCreateRef.current.removeAttribute('data-operation-running');
+        setStatusMessage(failure);
 
         alert(
           "We're having trouble trying to add your new comment, please try again!'"
@@ -66,9 +84,11 @@ function CreateComment(
       }
 
       isCreatingComment.current = false;
-      setTimeout(() => {
-        buttonCreateRef.current.removeAttribute('data-operation-complete');
-      }, 1000);
+      if (!isReply) {
+        setTimeout(() => {
+          buttonCreateRef.current.removeAttribute('data-operation-complete');
+        }, 1000);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -134,6 +154,8 @@ function CreateComment(
             buttonStyle='button--primary'
             ref={buttonCreateRef}
             operationButton
+            statusMessage={statusMessage}
+            onBlur={() => setStatusMessage('')}
           >
             {children}
           </Button>

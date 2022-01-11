@@ -17,6 +17,7 @@ function Button(
     buttonStyle,
     typeAttribute,
     onClick,
+    onBlur,
     svgIcon,
     form,
     operationButton,
@@ -43,6 +44,7 @@ function Button(
       onClick={onClick}
       form={form}
       ref={ref}
+      onBlur={onBlur}
     >
       {svgIcon ? (
         <span className='button__icon'>
