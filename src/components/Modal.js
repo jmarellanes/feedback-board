@@ -71,10 +71,14 @@ class Modal extends React.Component {
           }
         }
         break;
+
       case KEY_ESC:
         if (this.modalFooter.hasAttribute('data-operation-running')) return;
+
+        document.removeEventListener('keydown', this.handleKeyDown);
         this.props.onClose(e);
         break;
+
       default:
         break;
     }
