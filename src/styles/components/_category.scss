@@ -13,12 +13,34 @@
     text-decoration: none;
     text-transform: capitalize;
 
+    transition: all var(--duration__250) var(--easing__s);
+    transition-property: color, background-color;
+
     &:hover {
       background-color: var(--color__secondary--light-02);
       color: var(--color__secondary);
     }
 
+    // Fallback for Safari
     &:active,
+    &:focus {
+      outline: 3px dotted var(--color__secondary);
+      outline-offset: 2px;
+    }
+
+    // HACK for use @supports selector() with SASS
+    @supports #{'\selector(*:focus-visible)'} {
+      &:focus {
+        outline: none;
+      }
+
+      &:active,
+      &:focus-visible {
+        outline: 3px dotted var(--color__secondary);
+        outline-offset: 2px;
+      }
+    }
+
     &--active {
       background-color: var(--color__secondary);
       color: var(--color__light);
