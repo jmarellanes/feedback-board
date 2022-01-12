@@ -70,6 +70,8 @@ function CreateComment(
 
         setStatusMessage(complete);
         reset({ 'create-comment': '' });
+        setCharactersLeft(MAX_CHARS);
+
         setTimeout(() => {
           if (isReply) closeReply();
           commentAdded();
