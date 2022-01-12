@@ -164,7 +164,7 @@
     display: inline-block;
 
     transform: translateY(0);
-    transition: transform 250ms linear;
+    transition: transform var(--duration--250) var(--easing__s);
   }
 
   &[data-operation-running='true'] {
