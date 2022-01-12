@@ -131,6 +131,23 @@ button {
       }
     }
   }
+
+  &--back-light,
+  &--back-dark {
+    // Fallback for Safari
+    &:active,
+    &:focus {
+      outline-offset: -3px;
+    }
+
+    // HACK for use @supports selector() with SASS
+    @supports #{'\selector(*:focus-visible)'} {
+      &:active,
+      &:focus-visible {
+        outline-offset: -3px;
+      }
+    }
+  }
   // End of states
 
   // Animated underline
