@@ -66,12 +66,12 @@ function FeedbackDetails() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const commentsTotal = () => {
-    if (feedback.TotalComments === 0) {
+    if (allComments.length === 0) {
       return 'No Comments';
-    } else if (feedback.TotalComments === 1) {
+    } else if (allComments.length === 1) {
       return '1 Comment';
     } else {
-      return feedback.TotalComments + ' Comments';
+      return allComments.length + ' Comments';
     }
   };
 
