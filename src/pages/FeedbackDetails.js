@@ -134,7 +134,7 @@ function FeedbackDetails() {
                   title={feedback.Title}
                   description={feedback.Description}
                   category={feedback.Category}
-                  comments={feedback.TotalComments}
+                  comments={allComments.length}
                   link={false}
                   categoryActive={false}
                 >
