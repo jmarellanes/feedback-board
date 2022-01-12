@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 
@@ -19,6 +19,7 @@ function FeedbackDetails() {
 
   const { id } = useParams();
   const history = useHistory();
+  const isMounted = useRef(true);
 
   const updateUpvotesParentState = (arr, id) => {
     const updateFeedback = {
@@ -27,7 +28,7 @@ function FeedbackDetails() {
       TotalUpvotes: arr.length,
     };
 
-    setFeedback(updateFeedback);
+    if (isMounted.current) setFeedback(updateFeedback);
   };
 
   const loadFeedbackDetails = async () => {
@@ -37,7 +38,7 @@ function FeedbackDetails() {
       const [rawData] = feedbackList;
       const formattedFeedback = rawData.fields;
 
-      setFeedback(formattedFeedback);
+      if (isMounted.current) setFeedback(formattedFeedback);
     } catch (error) {
       console.log(error);
     }
@@ -53,8 +54,8 @@ function FeedbackDetails() {
     try {
       const res = await fetch(`/api/getComments?id=${id}`);
       const commentsList = await res.json();
-      setComments(commentsList.allComments);
-      setTopLevel(commentsList.topLevelComments);
+      if (isMounted.current) setComments(commentsList.allComments);
+      if (isMounted.current) setTopLevel(commentsList.topLevelComments);
     } catch (error) {
       console.log(error);
     }
@@ -63,6 +64,10 @@ function FeedbackDetails() {
   useEffect(() => {
     loadFeedbackDetails();
     loadComments();
+
+    return () => {
+      isMounted.current = false;
+    };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const commentsTotal = () => {
