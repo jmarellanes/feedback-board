@@ -47,7 +47,7 @@
       // Animation
       transition: height var(--duration--250) var(--easing__s);
       overflow-y: hidden;
-      animation: openComment 250ms linear;
+      animation: openComment var(--duration--250) var(--easing__s);
       // animation-play-state: paused;
 
       padding-bottom: var(--spacer__32);
