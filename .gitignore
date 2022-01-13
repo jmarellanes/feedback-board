@@ -22,6 +22,7 @@
 .env.production.local
 notes.txt
 *.swp
+*.bak
 
 npm-debug.log*
 yarn-debug.log*

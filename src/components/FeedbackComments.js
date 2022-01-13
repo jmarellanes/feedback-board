@@ -109,21 +109,25 @@ function FeedbackComments({
           </CreateComment>
         </CSSTransition>
       </div>
-      {replyCommentsList().map((reply) => (
-        <FeedbackComments
-          allComments={allComments}
-          key={reply.fields.CommentId}
-          commentId={reply.fields.CommentId}
-          name={reply.fields.Name}
-          username={reply.fields.Username}
-          image={reply.fields.Image}
-          comment={reply.fields.Comment}
-          parentUsername={username}
-          replyComment={true}
-          feedbackId={feedbackId}
-          commentAdded={commentAdded}
-        />
-      ))}
+      {replyCommentsList().map((data) => {
+        const reply = data.fields;
+
+        return (
+          <FeedbackComments
+            allComments={allComments}
+            key={reply.CommentId}
+            commentId={reply.CommentId}
+            name={reply.Name}
+            username={reply.Username}
+            image={reply.Image}
+            comment={reply.Comment}
+            parentUsername={username}
+            replyComment={true}
+            feedbackId={feedbackId}
+            commentAdded={commentAdded}
+          />
+        );
+      })}
     </article>
   );
 }

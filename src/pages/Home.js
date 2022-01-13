@@ -156,28 +156,30 @@ function Home() {
             </Button>
           </FeedbackTopBar>
           <FeedbackList loading={loading}>
-            {feedback.map((feedback) => (
-              <FeedbackItem
-                title={feedback.fields.Title}
-                description={feedback.fields.Description}
-                category={feedback.fields.Category}
-                comments={feedback.fields.TotalComments}
-                key={feedback.fields.FeedbackId}
-                id={feedback.fields.FeedbackId}
-                link
-                categoryActive
-              >
-                <Upvotes
-                  upvotedBy={
-                    feedback.fields.UpvotedBy ? feedback.fields.UpvotedBy : []
-                  }
-                  id={feedback.fields.FeedbackId}
-                  updateUpvotesParentState={updateUpvotesParentState}
+            {feedback.map((data) => {
+              const fb = data.fields;
+
+              return (
+                <FeedbackItem
+                  title={fb.Title}
+                  description={fb.Description}
+                  category={fb.Category}
+                  comments={fb.TotalComments}
+                  key={fb.FeedbackId}
+                  id={fb.FeedbackId}
+                  link
+                  categoryActive
                 >
-                  {feedback.fields.TotalUpvotes}
-                </Upvotes>
-              </FeedbackItem>
-            ))}
+                  <Upvotes
+                    upvotedBy={fb.UpvotedBy ? fb.UpvotedBy : []}
+                    id={fb.FeedbackId}
+                    updateUpvotesParentState={updateUpvotesParentState}
+                  >
+                    {fb.TotalUpvotes}
+                  </Upvotes>
+                </FeedbackItem>
+              );
+            })}
           </FeedbackList>
         </main>
       </div>

@@ -162,8 +162,8 @@ function FeedbackDetails() {
                     Feedback Comments
                   </h2>
                   <p className='h3'>{commentsTotal()}</p>
-                  {topLevelComments.map((rawComment) => {
-                    const comment = rawComment.fields;
+                  {topLevelComments.map((data) => {
+                    const comment = data.fields;
 
                     return (
                       <FeedbackComments
