@@ -81,7 +81,11 @@ function FeedbackDetails() {
   };
 
   const closeModal = (e) => {
-    if (e.target.parentNode.hasAttribute('data-operation-running')) return;
+    if (
+      e.target?.parentNode.hasAttribute('data-operation-running') ||
+      e.parentNode?.hasAttribute('data-operation-running')
+    )
+      return;
 
     setShowModal(!showModal);
   };

@@ -147,17 +147,8 @@ function EditFeedback({
       if (res.status === 200) {
         buttonDeleteRef.current.setAttribute('data-operation-complete', 'true');
         buttonDeleteRef.current.removeAttribute('data-operation-running');
-        buttonDeleteRef.current.parentNode.removeAttribute(
-          'data-operation-running'
-        );
-        setStatusDeleteMessage(destroy.complete);
-        setTimeout(() => {
-          closeModal(e);
-        }, 1000);
 
-        setTimeout(() => {
-          history.push('/');
-        }, 1500);
+        setStatusDeleteMessage(destroy.complete);
       } else {
         isUpdatingFeedback.current = false;
 
@@ -173,6 +164,22 @@ function EditFeedback({
       console.log(error);
     }
   };
+
+  function handleTransitionEnd(e) {
+    if (
+      e.propertyName === 'transform' &&
+      e.target.className === 'h4 button__title'
+    ) {
+      buttonDeleteRef.current.parentNode.removeAttribute(
+        'data-operation-running'
+      );
+      closeModal(e.target.parentNode);
+
+      setTimeout(() => {
+        history.push('/');
+      }, 300);
+    }
+  }
 
   const modalContent = (
     <section className='feedback-modal'>
@@ -353,10 +360,11 @@ function EditFeedback({
         <Button
           typeAttribute='button'
           buttonStyle='button--danger'
-          onClick={(e) => deleteFeedback(e)}
+          onClick={deleteFeedback}
           ref={buttonDeleteRef}
           operationButton
           statusMessage={statusDeleteMessage}
+          onTransitionEnd={handleTransitionEnd}
         >
           Delete
         </Button>

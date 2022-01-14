@@ -22,6 +22,7 @@ function Button(
     form,
     operationButton,
     statusMessage,
+    onTransitionEnd,
   },
   ref
 ) {
@@ -45,6 +46,7 @@ function Button(
       form={form}
       ref={ref}
       onBlur={onBlur}
+      onTransitionEnd={onTransitionEnd}
     >
       {svgIcon ? (
         <span className='button__icon'>
