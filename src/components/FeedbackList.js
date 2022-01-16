@@ -9,7 +9,7 @@ function FeedbackList({ loading, children }) {
     </>
   );
 
-  if (loading) return <Loader />;
+  if (loading) return <Loader type='feedback-home' />;
 
   return (
     <section

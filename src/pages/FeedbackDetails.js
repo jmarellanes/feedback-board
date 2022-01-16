@@ -108,7 +108,7 @@ function FeedbackDetails() {
     <>
       <div id='feedback-page__wrapper'>
         {!Object.keys(feedback).length ? (
-          <Loader />
+          <Loader type='feedback-details' />
         ) : (
           <>
             <header className='header-third'>

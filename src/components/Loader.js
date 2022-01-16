@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-function Loader() {
+function Loader({ type }) {
   const [content, setContent] = useState(false);
 
-  const noFeedback = (
+  const noFeedbackDetails = (
     <>
-      <h2>We're having a problem. There is no Feedback with this ID</h2>
+      <h2>Hmm... We're having a problem. There is no Feedback with this ID</h2>
       <p>Got a suggestion? Found a bug that needs to be squashed?</p>
       <p>We love hearing about new ideas to improve our app.</p>
 
@@ -21,6 +21,29 @@ function Loader() {
       </div>
     </>
   );
+
+  const noFeedbackHome = (
+    <>
+      <h2>Hmm.. We're having a problem.</h2>
+      <p>Got a suggestion? Found a bug that needs to be squashed?</p>
+      <p>We love hearing about new ideas to improve our app.</p>
+
+      <div className='loader__redirect'>
+        <h3>Please refresh your browser</h3>
+      </div>
+    </>
+  );
+
+  const message = (type) => {
+    switch (type) {
+      case 'feedback-details':
+        return noFeedbackDetails;
+      case 'feedback-home':
+        return noFeedbackHome;
+      default:
+        return null;
+    }
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -41,7 +64,7 @@ function Loader() {
       <div
         className={`loader__content ${content ? 'loader__content--show' : ''}`}
       >
-        {noFeedback}
+        {message(type)}
       </div>
     </div>
   );
