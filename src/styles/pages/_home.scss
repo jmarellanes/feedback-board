@@ -15,5 +15,29 @@
         margin-bottom: var(--spacer__24);
       }
     }
+
+    &-empty {
+      @include fb_container;
+
+      text-align: center;
+
+      svg {
+        margin-top: 3rem;
+      }
+
+      h2 {
+        margin-top: 2rem;
+      }
+
+      p {
+        &:first-of-type {
+          margin-top: 1rem;
+        }
+
+        &:last-of-type {
+          margin-bottom: 4rem;
+        }
+      }
+    }
   }
 }

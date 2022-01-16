@@ -3,6 +3,7 @@ import { useParams, useHistory, useLocation } from 'react-router-dom';
 
 import { CSSTransition } from 'react-transition-group';
 import queryComponent from 'query-string';
+import { ReactComponent as Bulb } from '../assets/images/bulb.svg';
 
 import Button from '../components/Button';
 import FeedbackList from '../components/FeedbackList';
@@ -12,7 +13,6 @@ import NavMain from '../components/NavMain';
 import RoadmapCard from '../components/RoadmapCard';
 import SortBy from '../components/SortBy';
 import FeedbackTopBar from '../components/FeedbackTopBar';
-import { ReactComponent as Bulb } from '../assets/images/bulb.svg';
 import Modal from '../components/Modal';
 import CreateFeedback from '../components/CreateFeedback';
 import FeedbackItem from '../components/FeedbackItem';
