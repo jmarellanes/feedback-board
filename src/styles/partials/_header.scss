@@ -20,7 +20,9 @@
 
     &__title,
     &__user {
-      color: var(--color__light);
+      &--light {
+        color: var(--color__light);
+      }
     }
 
     &__title {
