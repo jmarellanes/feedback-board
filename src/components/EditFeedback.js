@@ -47,7 +47,7 @@ function EditFeedback({
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
     control,
     setValue,
   } = useForm({
@@ -78,7 +78,7 @@ function EditFeedback({
       [fieldName.status]: { value: Status },
     } = data;
 
-    if (isUpdatingFeedback.current) return;
+    if (isUpdatingFeedback.current || !isDirty) return;
     isUpdatingFeedback.current = true;
 
     buttonUpdateRef.current.setAttribute('data-operation-running', 'true');
