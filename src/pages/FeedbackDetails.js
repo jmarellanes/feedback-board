@@ -54,6 +54,7 @@ function FeedbackDetails() {
     try {
       const res = await fetch(`/api/getComments?id=${id}`);
       const commentsList = await res.json();
+
       if (isMounted.current) setComments(commentsList.allComments);
       if (isMounted.current) setTopLevel(commentsList.topLevelComments);
     } catch (error) {
