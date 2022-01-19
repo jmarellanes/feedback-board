@@ -81,3 +81,10 @@ export const operationStatus = {
     failure: 'We are having trouble adding your upvote, please try again!',
   },
 };
+
+/* 
+Categories list
+- Hard coded to avoid 'undefined' using array.find method on existing categories. 
+- A better approach is fetch for categories first (before any other data), save them in a state and use the array.find method on that array but right using a hard coded array now is fine because the user can't add a new category. 
+*/
+export const categoriesData = ['all', 'feature', 'enhancement', 'bug'];

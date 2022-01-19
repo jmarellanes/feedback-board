@@ -18,6 +18,8 @@ import CreateFeedback from '../components/CreateFeedback';
 import FeedbackItem from '../components/FeedbackItem';
 import Upvotes from '../components/Upvotes';
 
+import { categoriesData } from '../utils/data';
+
 function Home() {
   const [feedback, setFeedback] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -26,6 +28,11 @@ function Home() {
   const [loading, setLoading] = useState(false);
   const [sortValue, setSortValue] = useState('Most Upvotes');
   const [showModal, setShowModal] = useState(false);
+  const [createdFeedback, setCreatedFeedback] = useState(false);
+
+  const { categoryParam } = useParams();
+  const { search } = useLocation();
+  const history = useHistory();
 
   const updateUpvotesParentState = (arr, id) => {
     let updateState = feedback.map((item) => {
@@ -40,10 +47,6 @@ function Home() {
     setFeedback(updateState);
   };
 
-  const { categoryParam } = useParams();
-  const history = useHistory();
-
-  const { search } = useLocation();
   const queryString =
     queryComponent.parse(search).sortby === undefined
       ? 'most-upvotes'
@@ -92,15 +95,23 @@ function Home() {
     history.push(`?sortby=${query.replace(/\s+/g, '-').toLowerCase()}`);
   };
 
-  const loadFeedback = async () => {
+  const categoryFormatted = () => {
+    let data = categoriesData.find((category) => category === categoryParam);
+    return !data ? history.push('/') : data;
+  };
+
+  const loadFeedback = async (abortCont) => {
     updateSortLabelOnLoad();
 
     try {
       setLoading(true);
+
       const res = await fetch(
-        `/api/getFeedbackList/?categoryParam=${categoryParam}&sortBy=${queryString}`
+        `/api/getFeedbackList/?categoryParam=${categoryFormatted()}&sortBy=${queryString}`,
+        { signal: abortCont.signal }
       );
       const feedbackRes = await res.json();
+
       setFeedback(feedbackRes.feedbackList);
       setCategories(feedbackRes.categoriesList);
       setStatus(feedbackRes.statusList);
@@ -108,14 +119,22 @@ function Home() {
       console.log(error);
     }
 
+    // Close modal after Create feedback
     if (showModal) setShowModal(false);
-    setLoading(false);
+
+    if (!abortCont.signal.aborted) setLoading(false);
   };
 
   useEffect(() => {
-    loadFeedback();
+    const abortCont = new AbortController();
+
+    loadFeedback(abortCont);
+
+    return () => {
+      abortCont.abort();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categoryParam]);
+  }, [categoryParam, createdFeedback]);
 
   const closeModal = (e) => {
     if (e.target.parentNode.hasAttribute('data-operation-running')) return;
@@ -123,9 +142,13 @@ function Home() {
     setShowModal(!showModal);
   };
 
+  const feedbackAdded = () => {
+    setCreatedFeedback(!createdFeedback);
+  };
+
   const openModal = (
     <Modal onClose={closeModal} isOpen='modal__is-open'>
-      <CreateFeedback feedbackAdded={loadFeedback} onClick={closeModal} />
+      <CreateFeedback feedbackAdded={feedbackAdded} onClick={closeModal} />
     </Modal>
   );
 

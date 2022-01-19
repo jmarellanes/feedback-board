@@ -2,14 +2,15 @@ const { feedbackTable } = require('./utils/airtable');
 
 exports.handler = async (event) => {
   const categoryParam = event.queryStringParameters.categoryParam;
+
   // First letter to uppercase to match categories on database.
   const categoryParamFormatted =
-    categoryParam === 'undefined'
+    categoryParam === 'all'
       ? categoryParam
       : categoryParam.charAt(0).toUpperCase() + categoryParam.slice(1);
 
   const filterCategoryParam = () => {
-    return categoryParamFormatted === 'undefined'
+    return categoryParamFormatted === 'all'
       ? `AND({Status} = 'Suggestion', NOT({Category} = ''))`
       : `AND({Status} = 'Suggestion', {Category} = '${categoryParamFormatted}')`;
   };
@@ -59,7 +60,6 @@ exports.handler = async (event) => {
       fields: feedback.fields,
     }));
 
-    // console.log(categoriesRecords);
     const formattedCategoryList = categoriesRecords
       .map((category) => category.fields.Category.toLocaleLowerCase())
       .filter((category, index, array) => array.indexOf(category) === index);

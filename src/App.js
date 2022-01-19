@@ -13,17 +13,20 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path='/design-system'>
+        <Route path='/design-system'>
           <DesignSystem />
         </Route>
-        <Route exact path='/'>
+        <Route path='/' exact>
           <Redirect to='/all' />
         </Route>
-        <Route exact path={['/all', '/:categoryParam']}>
+        <Route path='/:categoryParam' exact>
           <Home />
         </Route>
-        <Route exact path='/feedback/:id'>
+        <Route path='/feedback/:id'>
           <FeedbackDetails />
+        </Route>
+        <Route path='*'>
+          <Redirect to='/all' />
         </Route>
       </Switch>
     </Router>
