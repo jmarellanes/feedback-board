@@ -5,7 +5,19 @@ exports.handler = async (event) => {
 
   try {
     const feedbackList = await feedbackTable
-      .select({ filterByFormula: `RECORD_ID() = '${feedback_id}'` })
+      .select({
+        filterByFormula: `RECORD_ID() = '${feedback_id}'`,
+        fields: [
+          'Title',
+          'FeedbackId',
+          'Description',
+          'UpvotedBy',
+          'TotalUpvotes',
+          'Category',
+          'Comments',
+          'TotalComments',
+        ],
+      })
       .all();
     const formattedFeedbackList = !feedbackList.length
       ? [{ fields: {} }]
