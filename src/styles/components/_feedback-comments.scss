@@ -45,9 +45,9 @@
       height: calc(var(--closeCommentHeight) * 1px);
 
       // Animation
-      transition: height var(--duration--250) var(--easing__s);
+      transition: height var(--duration__250) var(--easing__s);
       overflow-y: hidden;
-      animation: openComment var(--duration--250) var(--easing__s);
+      animation: openComment var(--duration__250) var(--easing__s);
       // animation-play-state: paused;
 
       padding-bottom: var(--spacer__32);
@@ -133,14 +133,14 @@
       }
       &-enter-active {
         opacity: 1;
-        transition: opacity var(--duration--250) var(--easing__s);
+        transition: opacity var(--duration__250) var(--easing__s);
       }
       &-exit {
         opacity: 1;
       }
       &-exit-active {
         opacity: 0;
-        transition: opacity var(--duration--250) var(--easing__s);
+        transition: opacity var(--duration__250) var(--easing__s);
       }
     }
   }

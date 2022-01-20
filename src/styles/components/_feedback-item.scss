@@ -78,7 +78,7 @@
 
       h2,
       p {
-        transition: all var(--duration--250) var(--easing__s);
+        transition: color var(--duration__250) var(--easing__s);
       }
 
       h2 {

@@ -262,8 +262,8 @@ button {
 
   &__subtitle {
     opacity: 1;
-    transition: opacity var(--duration--250) var(--easing__s);
-    transition-delay: var(--duration--250);
+    transition: opacity var(--duration__250) var(--easing__s);
+    transition-delay: var(--duration__250);
   }
 
   &[data-operation-complete='true'] {
