@@ -155,11 +155,8 @@ function Home() {
   return (
     <>
       <div id='home-page__wrapper'>
-        <Header>
-          <HeaderBrandmark title='FeedbackTo' />
-          <NavMain categories={categories} />
-          <RoadmapCard statusList={status} />
-        </Header>
+        <Header categories={categories} status={status} />
+
         <main className='home-page__feedback'>
           <FeedbackTopBar>
             <div className='h3 feedback-topbar__title'>

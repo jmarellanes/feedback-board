@@ -68,3 +68,26 @@
   $px-size: $rem * $rem-default;
   @return #{$px-size}px;
 }
+
+/* =====================================================================
+  -> MEDIA QUERY MANAGER
+===================================================================== */
+/// @param {String} $breakpoint - Breakpoint name
+/// @require $breakpoints
+
+$text: 'only screen and';
+@mixin respond-to($breakpoint) {
+  // If the key exists in the map
+  @if map-has-key($breakpoints, $breakpoint) {
+    // Prints a media query based on the value
+    @media #{$text inspect(map-get($breakpoints, $breakpoint))} {
+      @content;
+    }
+  }
+
+  // If the key doesn't exist in the map
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Available breakpoints are: #{map-keys($breakpoints)}.";
+  }
+}

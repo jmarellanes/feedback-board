@@ -71,3 +71,14 @@
   --duration__250: 250ms;
   --duration__350: 350ms;
 } // -> :root
+
+/* =====================================================================
+  -> RESPONSIVE BREAKPOINTS
+===================================================================== */
+/* prettier-ignore */
+$breakpoints: (
+  'medium--l': ( max-width:  64em ),    // ------> 1024px
+  'medium--m': ( max-width:  52em ),    // ------> 832px
+  'medium--s': ( max-width:  39em ),    // ------> 624px
+  'small--m': ( max-width:  26em ),    // ------> 416px
+) !default;

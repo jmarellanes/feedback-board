@@ -12,7 +12,11 @@
 
     &__brandmark {
       @include fb_header-container;
-      padding-top: var(--spacer__64);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      min-height: 9rem;
 
       background-image: url(../../assets/images/bg-radial.svg);
       background-position: center bottom;
@@ -25,6 +29,11 @@
       }
     }
 
+    &__user {
+      display: flex;
+      align-items: center;
+    }
+
     &__title {
       margin-bottom: var(--spacer__4);
     }
@@ -35,9 +44,41 @@
       border: 2px solid var(--color__light);
       margin-right: var(--spacer__12);
     }
+
+    &__sliding-background {
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: 9;
+
+      transform-origin: right;
+      transform: scaleX(0);
+      transition: transform 600ms var(--easing__s);
+      transition-delay: 80ms;
+
+      height: 100vh;
+      width: 19rem;
+      background-color: var(--color__secondary--light-03);
+
+      &::after {
+        content: '';
+        background-color: black;
+        opacity: 0.6;
+        position: fixed;
+        height: 100%;
+        width: 100vw;
+        top: 0;
+        left: -100vw;
+      }
+    }
   }
 
   &-third {
+    &__container {
+      display: flex;
+      align-items: center;
+    }
+
     & .button {
       &--back-light {
         transform: translateX(-1.5rem);
@@ -46,5 +87,140 @@
         margin-left: auto;
       }
     }
+  }
+}
+
+/* =====================================================================
+  -> RESPONSIVE
+===================================================================== */
+// Temp
+.header-main__icon--toggle {
+  display: none;
+}
+
+@include respond-to('medium--l') {
+  .header {
+    &-main {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: var(--spacer__32);
+
+      &__container {
+        display: flex;
+
+        > * {
+          flex: 1 1 0;
+
+          &:not(:last-child) {
+            margin-right: var(--spacer__24);
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@include respond-to('medium--m') {
+  .header {
+    &-main {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 6;
+
+      height: 4.5rem;
+      margin-bottom: 0;
+
+      &__container {
+        position: relative;
+        z-index: 10;
+        display: block;
+        height: inherit;
+
+        > *:not(:last-child) {
+          margin-right: 0;
+        }
+      }
+
+      &__brandmark {
+        flex-direction: row;
+        justify-content: flex-start;
+
+        border-radius: 0;
+        background-size: cover;
+        background-position: center;
+        padding: 0;
+        min-height: initial;
+        height: inherit;
+      }
+
+      &__title {
+        align-self: center;
+        margin: 0;
+        margin-left: var(--spacer__24);
+      }
+
+      &__user {
+        margin-left: var(--spacer__24);
+      }
+
+      &__navigation {
+        position: absolute;
+        right: 0;
+
+        overflow: hidden;
+        // background-color: yellowgreen;
+        height: 32rem;
+        width: 19rem;
+      }
+
+      &__nav-main,
+      &__roadmap-card {
+        max-width: 16rem;
+        transform: translateX(19rem);
+
+        transition: transform 600ms var(--easing__s);
+      }
+
+      &__nav-main {
+        margin-top: 6rem;
+      }
+
+      &__roadmap-card {
+        margin-top: 1.5rem;
+      }
+
+      &__icon--toggle {
+        position: fixed;
+        top: 1.75rem;
+        right: 1.5rem;
+
+        display: block;
+      }
+    }
+  }
+}
+
+@include respond-to('small--m') {
+  .header {
+    &-main {
+      &__user {
+        margin-left: var(--spacer__24);
+      }
+    }
+  }
+}
+
+.header-main__isOpen {
+  .header-main__sliding-background {
+    transform: scaleX(1);
+    transition-delay: 0s;
+  }
+
+  .header-main__nav-main,
+  .header-main__roadmap-card {
+    transform: translateX(1.5rem);
+    transition-delay: 80ms;
   }
 }

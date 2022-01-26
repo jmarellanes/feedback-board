@@ -22,6 +22,14 @@ html {
   font-size: 100%; // 1rem = 16px
   font-weight: normal;
   font-style: normal;
+
+  @include respond-to('medium--m') {
+    font-size: 90%;
+  }
+
+  @include respond-to('small--m') {
+    font-size: 86%;
+  }
 } //--> html
 
 /* =====================================================================
@@ -32,8 +40,21 @@ body {
   background-color: var(--color__secondary--light-03);
 } // -> body
 
-#root[aria-hidden='true'] {
-  pointer-events: none;
+#root {
+  padding: 0 var(--spacer__32) var(--spacer__80);
+
+  &[aria-hidden='true'] {
+    pointer-events: none;
+  }
+
+  @include respond-to('medium--l') {
+    padding-bottom: var(--spacer__48);
+  }
+
+  @include respond-to('medium--m') {
+    padding: 0;
+    padding-bottom: var(--spacer__40);
+  }
 }
 
 /* =====================================================================

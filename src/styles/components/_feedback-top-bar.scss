@@ -7,10 +7,24 @@
     border-radius: var(--rounded-corners);
     padding: var(--spacer__12) var(--spacer__24);
 
+    @include respond-to('medium--m') {
+      border-radius: 0;
+    }
+
+    @include respond-to('small--m') {
+      padding-left: var(--spacer__20);
+      padding-right: var(--spacer__20);
+    }
+
     &__title {
       display: flex;
       color: var(--color__light);
       margin-right: var(--spacer__40);
+
+      @include respond-to('medium--s') {
+        display: none;
+        visibility: hidden;
+      }
     }
 
     & .icon--bulb {

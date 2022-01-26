@@ -24,6 +24,11 @@ button {
   transition: all var(--duration__250) var(--easing__s);
   transition-property: color, background-color;
 
+  @include respond-to('small--m') {
+    padding-left: var(--spacer__20);
+    padding-right: var(--spacer__20);
+  }
+
   &__icon {
     display: flex;
     margin-right: var(--spacer__8);
