@@ -76,6 +76,14 @@ function Header({ categories, status }) {
     document.removeEventListener('keydown', handleKeyDown);
   };
 
+  const handleHiddenMainNav = (e) => {
+    if (e.matches) {
+      headerMainNavRef.current.setAttribute('hidden', '');
+    } else {
+      headerMainNavRef.current.removeAttribute('hidden', '');
+    }
+  };
+
   const focusedElBeforeOpen = document.activeElement;
   const prevOpenRef = useRef(true);
   useEffect(() => {
@@ -91,11 +99,24 @@ function Header({ categories, status }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openMenu]);
 
+  useEffect(() => {
+    let root = document.documentElement;
+    const breakpoint = getComputedStyle(root).getPropertyValue(
+      '--breakpoint__medium--m'
+    );
+    const hiddenHeaderMainNav = window.matchMedia(breakpoint);
+
+    hiddenHeaderMainNav.addEventListener('change', handleHiddenMainNav);
+
+    if (hiddenHeaderMainNav.matches)
+      headerMainNavRef.current.setAttribute('hidden', '');
+  }, []);
+
   const hamburguerButton = (
     <button
       className='header-main__icon--toggle'
       aria-labelledby='menu-label'
-      aria-expanded='false'
+      aria-expanded={isOpen}
       onClick={() => setOpenMenu(!openMenu)}
     >
       <span id='menu-label' hidden>
@@ -116,9 +137,8 @@ function Header({ categories, status }) {
         <HeaderBrandmark title='FeedbackTo' />
         {hamburguerButton}
         <div
-          className={`header-main__navigation`}
+          className={`header-main__navigation-container`}
           ref={headerMainNavRef}
-          hidden
         >
           <NavMain categories={categories} />
           <RoadmapCard statusList={status} />

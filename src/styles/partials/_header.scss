@@ -45,6 +45,12 @@
       margin-right: var(--spacer__12);
     }
 
+    &__navigation-container {
+      > *:not(:last-child) {
+        margin-bottom: var(--spacer__24);
+      }
+    }
+
     &__sliding-background {
       position: fixed;
       top: 0;
@@ -165,12 +171,11 @@
         margin-left: var(--spacer__24);
       }
 
-      &__navigation {
+      &__navigation-container {
         position: absolute;
         right: 0;
 
         overflow: hidden;
-        // background-color: yellowgreen;
         height: 32rem;
         width: 19rem;
       }
