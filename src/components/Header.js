@@ -114,7 +114,7 @@ function Header({ categories, status }) {
 
   const hamburguerButton = (
     <button
-      className='header-main__icon--toggle'
+      className='header-main__button--toggle button--nav-toggle'
       aria-labelledby='menu-label'
       aria-expanded={isOpen}
       onClick={() => setOpenMenu(!openMenu)}
@@ -122,9 +122,7 @@ function Header({ categories, status }) {
       <span id='menu-label' hidden>
         Main menu
       </span>
-      <span className='toggle__icon'>
-        <Hamburguer />
-      </span>
+      <Hamburguer />
     </button>
   );
 

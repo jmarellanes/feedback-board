@@ -45,6 +45,10 @@
       margin-right: var(--spacer__12);
     }
 
+    &__button--toggle {
+      display: none;
+    }
+
     &__navigation-container {
       > *:not(:last-child) {
         margin-bottom: var(--spacer__24);
@@ -99,10 +103,6 @@
 /* =====================================================================
   -> RESPONSIVE
 ===================================================================== */
-// Temp
-.header-main__icon--toggle {
-  display: none;
-}
 
 @include respond-to('medium--l') {
   .header {
@@ -217,12 +217,13 @@
         margin-top: 1.5rem;
       }
 
-      &__icon--toggle {
+      &__button--toggle {
         position: fixed;
         top: 1.75rem;
         right: 1.5rem;
 
-        display: block;
+        display: flex;
+        padding: 2px;
       }
     }
   }

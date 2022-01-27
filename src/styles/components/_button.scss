@@ -110,12 +110,17 @@ button {
     }
   }
 
+  &--nav-toggle {
+    --accent__color: var(--color__tertiary);
+  }
+
   &--primary,
   &--secondary,
   &--tertiary,
   &--danger,
   &--back-light,
-  &--back-dark {
+  &--back-dark,
+  &--nav-toggle {
     // Fallback for Safari
     &:active,
     &:focus {
