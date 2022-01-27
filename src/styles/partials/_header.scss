@@ -115,7 +115,26 @@
         display: flex;
 
         > * {
-          flex: 1 1 0;
+          &:first-child {
+            flex: 1 1 33%;
+          }
+
+          &:last-child {
+            flex: 1 1 67%;
+          }
+
+          &:not(:last-child) {
+            margin-right: var(--spacer__24);
+            margin-bottom: 0;
+          }
+        }
+      }
+
+      &__navigation-container {
+        display: flex;
+
+        > * {
+          flex: 1 1 0px;
 
           &:not(:last-child) {
             margin-right: var(--spacer__24);
@@ -174,6 +193,8 @@
       &__navigation-container {
         position: absolute;
         right: 0;
+
+        display: block;
 
         overflow: hidden;
         height: 32rem;
