@@ -92,3 +92,52 @@
     }
   }
 }
+
+/* =====================================================================
+  -> RESPONSIVE
+===================================================================== */
+@include respond-to('medium--s') {
+  .feedback {
+    &-item {
+      &__container {
+        grid-template-rows: repeat(3, min-content);
+        grid-template-columns: 1fr 1fr;
+        row-gap: 1rem;
+      }
+
+      &__title {
+        grid-row: 1 / 2;
+        grid-column: 1 / 4;
+      }
+
+      &__upvotes {
+        grid-row: 3 / 4;
+        grid-column: 1 / 2;
+
+        margin-right: 0;
+      }
+
+      &__comments {
+        grid-row: 3 / 4;
+        grid-column: 2 / 3;
+
+        svg {
+          margin-left: auto;
+        }
+      }
+
+      &__category {
+        grid-row: 2 / 3;
+        grid-column: 1 / 2;
+      }
+
+      &__link {
+        margin: 0;
+
+        p {
+          margin: 0;
+        }
+      }
+    }
+  }
+}

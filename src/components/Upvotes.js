@@ -95,7 +95,9 @@ function Upvote({ children, upvotedBy, id, updateUpvotesParentState }) {
       onClick={handleClick}
       onBlur={() => setStatusMessage('')}
     >
-      <ChevronUp />
+      <span className='upvotes__icon'>
+        <ChevronUp />
+      </span>
       <span className='upvotes__title'>
         <span className='upvotes__quantity'>
           {`${children}`}

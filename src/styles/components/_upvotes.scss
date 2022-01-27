@@ -21,7 +21,6 @@
 
   .icon--chevron-up {
     margin-top: 3px;
-    margin-bottom: var(--spacer__4);
     stroke: var(--color__tertiary);
 
     transition: stroke var(--duration__250) var(--easing__s);
@@ -176,4 +175,38 @@
     }
   }
   // End of rollover text
+}
+
+/* =====================================================================
+  -> RESPONSIVE
+===================================================================== */
+@include respond-to('medium--s') {
+  .upvotes {
+    flex-direction: row;
+    padding: var(--spacer__8) var(--spacer__8);
+    overflow: hidden;
+
+    min-width: 64px;
+
+    &__icon {
+      flex: 0 0 36%;
+
+      & .icon--chevron-up {
+        display: block;
+        margin-top: 0;
+        margin-left: auto;
+      }
+    }
+
+    &__title {
+      flex: 0 0 64%;
+    }
+
+    &__loader {
+      &::after {
+        top: calc(50% - 0.5rem);
+        left: calc(54%);
+      }
+    }
+  }
 }
