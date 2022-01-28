@@ -1,5 +1,7 @@
 .header {
   &-main {
+    z-index: 2;
+
     width: 16rem;
     min-width: 16rem;
     margin-right: var(--spacer__32);
@@ -59,7 +61,7 @@
       position: fixed;
       top: 0;
       right: 0;
-      z-index: 9;
+      z-index: 1;
 
       transform-origin: right;
       transform: scaleX(0);
@@ -151,14 +153,13 @@
       position: fixed;
       top: 0;
       left: 0;
-      z-index: 6;
 
       height: 4.5rem;
       margin-bottom: 0;
 
       &__container {
         position: relative;
-        z-index: 10;
+        z-index: 2;
         display: block;
         height: inherit;
 

@@ -17,6 +17,9 @@
 
 .home-page {
   &__feedback {
+    position: relative;
+    z-index: 1;
+
     flex-grow: 1;
 
     & > :not(:last-child) {
@@ -26,6 +29,7 @@
     &-topbar {
       position: sticky;
       top: var(--spacer__8);
+      z-index: 2;
 
       @include respond-to('medium--m') {
         top: 0;
@@ -33,6 +37,9 @@
     }
 
     &-list {
+      position: relative;
+      z-index: 1;
+
       & > article:not(:last-child) {
         margin-bottom: var(--spacer__24);
       }
