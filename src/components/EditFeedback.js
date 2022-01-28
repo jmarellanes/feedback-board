@@ -356,7 +356,24 @@ function EditFeedback({
         </form>
       </div>
 
-      <footer className='feedback-modal__footer'>
+      <footer className='feedback-modal__footer feedback-modal__footer--edit'>
+        <Button
+          typeAttribute='submit'
+          buttonStyle='button--primary'
+          form='edit-feedback'
+          ref={buttonUpdateRef}
+          operationButton
+          statusMessage={statusEditMessage}
+        >
+          Update Feedback
+        </Button>
+        <Button
+          typeAttribute='button'
+          buttonStyle='button--tertiary'
+          onClick={closeModal}
+        >
+          Cancel
+        </Button>
         <Button
           typeAttribute='button'
           buttonStyle='button--danger'
@@ -367,23 +384,6 @@ function EditFeedback({
           onTransitionEnd={handleTransitionEnd}
         >
           Delete
-        </Button>
-        <Button
-          typeAttribute='button'
-          buttonStyle='button--tertiary'
-          onClick={closeModal}
-        >
-          Cancel
-        </Button>
-        <Button
-          typeAttribute='submit'
-          buttonStyle='button--primary'
-          form='edit-feedback'
-          ref={buttonUpdateRef}
-          operationButton
-          statusMessage={statusEditMessage}
-        >
-          Update Feedback
         </Button>
       </footer>
     </section>

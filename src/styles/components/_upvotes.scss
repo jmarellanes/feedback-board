@@ -181,10 +181,13 @@
 @include respond-to('medium--s') {
   .upvotes {
     flex-direction: row;
-    padding: var(--spacer__8) var(--spacer__8);
-    overflow: hidden;
+    display: flex;
+    align-items: center;
 
     min-width: 64px;
+    min-height: 2.5rem;
+    padding: var(--spacer__8) var(--spacer__8);
+    overflow: hidden;
 
     &__icon {
       flex: 0 0 36%;

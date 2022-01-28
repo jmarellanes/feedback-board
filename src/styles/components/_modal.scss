@@ -30,6 +30,11 @@
     width: 34rem;
     padding: var(--spacer__40);
     padding-top: var(--spacer__48);
+
+    @include respond-to('medium--s') {
+      padding: var(--spacer__24);
+      padding-top: var(--spacer__32);
+    }
   }
 
   // Animation

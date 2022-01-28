@@ -83,6 +83,10 @@ legend {
     & + .form__group {
       margin-top: var(--spacer__24);
 
+      @include respond-to('medium--s') {
+        margin-top: var(--spacer__24);
+      }
+
       &.create-comment__footer {
         margin-top: var(--spacer__20);
       }
@@ -103,6 +107,10 @@ legend {
 
     &-subtitle {
       margin-bottom: var(--spacer__16);
+
+      @include respond-to('medium--s') {
+        margin-bottom: var(--spacer__12);
+      }
     }
 
     &--error {

@@ -1,6 +1,14 @@
 #feedback-page__wrapper {
   max-width: 46rem;
   margin: 0 auto;
+  margin-top: var(--spacer__64);
+
+  @include respond-to('medium--m') {
+    margin-top: var(--spacer__32);
+
+    padding-left: var(--spacer__24);
+    padding-right: var(--spacer__24);
+  }
 
   > header {
     margin-bottom: var(--spacer__24);
