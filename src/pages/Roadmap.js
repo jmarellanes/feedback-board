@@ -5,9 +5,9 @@ function Roadmap() {
   const [feedbackInProgress, setFeedbackInProgress] = useState([]);
   const [feedbackLive, setFeedbackLive] = useState([]);
 
-  const loadFeedback = async () => {
+  const loadFeedback = async (abortCont) => {
     try {
-      const res = await fetch(`/api/getStatus`);
+      const res = await fetch(`/api/getStatus`, { signal: abortCont.signal });
       const statusRes = await res.json();
 
       setFeedbackPlanned(statusRes.planned);
@@ -19,10 +19,21 @@ function Roadmap() {
   };
 
   useEffect(() => {
-    loadFeedback();
+    const abortCont = new AbortController();
+
+    loadFeedback(abortCont);
+
+    return () => {
+      abortCont.abort();
+    };
   }, []);
 
-  return <div>Roadmap</div>;
+  return (
+    <div id='roadmap-page__wrapper'>
+      Placeholder for Top Bar
+      <main className='roadmap-page__content'></main>
+    </div>
+  );
 }
 
 export default Roadmap;
