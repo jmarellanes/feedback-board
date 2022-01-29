@@ -7,6 +7,7 @@ import {
 import Home from './pages/Home';
 import FeedbackDetails from './pages/FeedbackDetails';
 import DesignSystem from './pages/DesignSystem/DesignSystem';
+import Roadmap from './pages/Roadmap';
 import './App.scss';
 
 function App() {
@@ -18,6 +19,9 @@ function App() {
         </Route>
         <Route path='/' exact>
           <Redirect to='/all' />
+        </Route>
+        <Route path='/roadmap' exact>
+          <Roadmap />
         </Route>
         <Route path='/:categoryParam' exact>
           <Home />

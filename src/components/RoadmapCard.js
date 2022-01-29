@@ -6,7 +6,7 @@ function RoadmapCard({ statusList }) {
     <aside className='header-main__roadmap-card roadmap-card'>
       <div className='roadmap-card__title'>
         <h3>Roadmap</h3>
-        <Anchor path='#0' anchorStyle='anchor--back-light' svgIcon={false}>
+        <Anchor path='roadmap' anchorStyle='anchor--back-light' svgIcon={false}>
           View
         </Anchor>
       </div>
