@@ -2,7 +2,7 @@ const { feedbackTable } = require('./utils/airtable');
 
 exports.handler = async () => {
   try {
-    const statusRecords = await feedbackTable
+    const feedbackRecords = await feedbackTable
       .select({
         filterByFormula: `NOT({Status} = 'Suggestion')`,
         fields: [
@@ -23,17 +23,17 @@ exports.handler = async () => {
     const inProgress = [];
     const live = [];
 
-    statusRecords
-      .map((status) => ({
-        fields: status.fields,
+    feedbackRecords
+      .map((feedback) => ({
+        fields: feedback.fields,
       }))
-      .filter((status) => {
-        if (status.fields.Status === 'Planned') {
-          return planned.push(status);
-        } else if (status.fields.Status === 'In-Progress') {
-          return inProgress.push(status);
+      .filter((feedback) => {
+        if (feedback.fields.Status === 'Planned') {
+          return planned.push(feedback);
+        } else if (feedback.fields.Status === 'In-Progress') {
+          return inProgress.push(feedback);
         } else {
-          return live.push(status);
+          return live.push(feedback);
         }
       });
 
