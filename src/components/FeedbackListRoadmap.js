@@ -1,10 +1,8 @@
 import NoFeedback from '../components/NoFeedback';
 
 function FeedbackListRoadmap({ children, status, desc, length }) {
-  status = status.toLowerCase();
-
   return (
-    <section className={`roadmap-page__feedback-${status}`}>
+    <section className={`roadmap-page__feedback-${status.toLowerCase()}`}>
       <header className='roadmap-page__feedback-header'>
         <h3>
           {status} ({length})
