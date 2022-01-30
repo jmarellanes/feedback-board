@@ -60,3 +60,18 @@
     }
   }
 }
+
+/* =====================================================================
+  -> ROADMAP > FEEDBACK LIST
+===================================================================== */
+.roadmap-page {
+  .category {
+    &__link {
+      display: flex;
+      align-items: center;
+
+      min-height: 2.5rem;
+      margin-left: 1.5rem;
+    }
+  }
+}

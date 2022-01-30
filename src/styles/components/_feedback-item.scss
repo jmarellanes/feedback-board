@@ -141,3 +141,92 @@
     }
   }
 }
+
+/* =====================================================================
+  -> ROADMAP > FEEDBACK LIST
+===================================================================== */
+.roadmap-page {
+  display: flex;
+
+  > * {
+    flex: 1 1 0px;
+
+    &:not(:last-child) {
+      margin-right: var(--spacer__32);
+    }
+  }
+
+  &__feedback {
+    &-planned {
+      --accent__color: var(--color__complementary--01);
+    }
+    &-progress {
+      --accent__color: var(--color__primary);
+    }
+    &-live {
+      --accent__color: var(--color__complementary--02);
+    }
+  }
+
+  & .feedback {
+    &-item {
+      position: relative;
+
+      &:not(:last-child) {
+        margin-bottom: 1.5rem;
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 6px;
+        background-color: var(--accent__color, var(--color__secondary));
+        border-radius: var(--rounded-corners) var(--rounded-corners) 0 0;
+      }
+
+      &__container {
+        grid-template-rows: repeat(2, min-content);
+        grid-template-columns: min-content repeat(2, 1fr);
+        row-gap: 1rem;
+      }
+
+      &__title {
+        grid-row: 1 / 2;
+        grid-column: 1 / -1;
+      }
+
+      &__upvotes {
+        grid-row: 2 / 3;
+        grid-column: 1 / 2;
+
+        margin-right: 0;
+      }
+
+      &__comments {
+        grid-row: 2 / 3;
+        grid-column: 3 / 4;
+
+        svg {
+          margin-left: auto;
+        }
+      }
+
+      &__category {
+        grid-row: 2 / 3;
+        grid-column: 2 / 3;
+      }
+
+      &__link {
+        margin: 0;
+
+        p {
+          margin: 0;
+        }
+      }
+    }
+  }
+}

@@ -211,3 +211,40 @@
     }
   }
 }
+
+/* =====================================================================
+  -> ROADMAP > FEEDBACK LIST
+===================================================================== */
+.roadmap-page {
+  .upvotes {
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+
+    min-width: 64px;
+    min-height: 2.5rem;
+    padding: var(--spacer__8) var(--spacer__8);
+    overflow: hidden;
+
+    &__icon {
+      flex: 0 0 36%;
+
+      & .icon--chevron-up {
+        display: block;
+        margin-top: 0;
+        margin-left: auto;
+      }
+    }
+
+    &__title {
+      flex: 0 0 64%;
+    }
+
+    &__loader {
+      &::after {
+        top: calc(50% - 0.5rem);
+        left: calc(54%);
+      }
+    }
+  }
+}
