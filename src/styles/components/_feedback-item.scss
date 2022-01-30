@@ -143,31 +143,9 @@
 }
 
 /* =====================================================================
-  -> ROADMAP > FEEDBACK LIST
+  -> ROADMAP PAGE
 ===================================================================== */
 .roadmap-page {
-  display: flex;
-
-  > * {
-    flex: 1 1 0px;
-
-    &:not(:last-child) {
-      margin-right: var(--spacer__32);
-    }
-  }
-
-  &__feedback {
-    &-planned {
-      --accent__color: var(--color__complementary--01);
-    }
-    &-progress {
-      --accent__color: var(--color__primary);
-    }
-    &-live {
-      --accent__color: var(--color__complementary--02);
-    }
-  }
-
   & .feedback {
     &-item {
       position: relative;

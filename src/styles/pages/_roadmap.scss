@@ -1,0 +1,27 @@
+.roadmap-page {
+  display: flex;
+
+  > * {
+    flex: 1 1 0px;
+
+    &:not(:last-child) {
+      margin-right: var(--spacer__32);
+    }
+  }
+
+  &__feedback-header {
+    margin-bottom: 2rem;
+  }
+
+  &__feedback {
+    &-planned {
+      --accent__color: var(--color__complementary--01);
+    }
+    &-in-progress {
+      --accent__color: var(--color__primary);
+    }
+    &-live {
+      --accent__color: var(--color__complementary--02);
+    }
+  }
+}
