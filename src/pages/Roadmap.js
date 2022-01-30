@@ -1,25 +1,29 @@
 import { useState, useEffect } from 'react';
 
-import Loader from '../components/Loader';
 import FeedbackItem from '../components/FeedbackItem';
 import Upvotes from '../components/Upvotes';
+import FeedbackListRoadmap from '../components/FeedbackListRoadmap';
+import Loader from '../components/Loader';
 
 function Roadmap() {
-  const [feedbackPlanned, setFeedbackPlanned] = useState([]);
-  const [feedbackInProgress, setFeedbackInProgress] = useState([]);
-  const [feedbackLive, setFeedbackLive] = useState([]);
+  const [feedback, setFeedback] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const loadFeedback = async (abortCont) => {
     try {
       const res = await fetch(`/api/getStatus`, { signal: abortCont.signal });
       const statusRes = await res.json();
 
-      setFeedbackPlanned(statusRes.planned);
-      setFeedbackInProgress(statusRes.inProgress);
-      setFeedbackLive(statusRes.live);
+      setFeedback(() => [
+        statusRes.planned,
+        statusRes.inProgress,
+        statusRes.live,
+      ]);
     } catch (error) {
       console.log(error);
     }
+
+    if (!abortCont.signal.aborted) setLoading(false);
   };
 
   useEffect(() => {
@@ -32,109 +36,58 @@ function Roadmap() {
     };
   }, []);
 
+  const Feedback = (feedbackData) =>
+    feedbackData.map((data) => {
+      const fb = data.fields;
+
+      return (
+        <FeedbackItem
+          title={fb.Title}
+          description={fb.Description}
+          category={fb.Category}
+          comments={fb.TotalComments}
+          key={fb.FeedbackId}
+          id={fb.FeedbackId}
+          status={fb.Status}
+          link
+          categoryActive
+          roadmapFeedback
+        >
+          <Upvotes
+            upvotedBy={fb.UpvotedBy ? fb.UpvotedBy : []}
+            id={fb.FeedbackId}
+            // updateUpvotesParentState={updateUpvotesParentState}
+          >
+            {fb.TotalUpvotes}
+          </Upvotes>
+        </FeedbackItem>
+      );
+    });
+
+  const feedbackList = feedback.map((data, index) => {
+    const info = [
+      { status: 'Planned', description: 'Ideas prioritized for research' },
+      { status: 'In-Progress', description: 'Currently being developed' },
+      { status: 'Live', description: 'Released features' },
+    ];
+
+    return (
+      <FeedbackListRoadmap
+        status={info[index]['status']}
+        desc={info[index]['description']}
+        length={data.length}
+        key={info[index]['status']}
+      >
+        {Feedback(data)}
+      </FeedbackListRoadmap>
+    );
+  });
+
   return (
     <div id='roadmap-page__wrapper'>
       <span>Placeholder for Top Bar</span>
       <main className='roadmap-page roadmap-page__content'>
-        {!feedbackPlanned.length ? (
-          <Loader type='feedback-roadmap' />
-        ) : (
-          <>
-            <section className='roadmap-page__feedback-planned'>
-              <h3 id='section-feedback-planned'>
-                Planned ({feedbackPlanned.length})
-              </h3>
-              <p>Ideas prioritized for research</p>
-
-              {feedbackPlanned.map((data) => {
-                const fb = data.fields;
-
-                return (
-                  <FeedbackItem
-                    title={fb.Title}
-                    description={fb.Description}
-                    category={fb.Category}
-                    comments={fb.TotalComments}
-                    key={fb.FeedbackId}
-                    id={fb.FeedbackId}
-                    link
-                    categoryActive
-                  >
-                    <Upvotes
-                      upvotedBy={fb.UpvotedBy ? fb.UpvotedBy : []}
-                      id={fb.FeedbackId}
-                      // updateUpvotesParentState={updateUpvotesParentState}
-                    >
-                      {fb.TotalUpvotes}
-                    </Upvotes>
-                  </FeedbackItem>
-                );
-              })}
-            </section>
-            <section className='roadmap-page__feedback-progress'>
-              <h3 id='section-feedback-progress'>
-                In-Progress ({feedbackInProgress.length})
-              </h3>
-              <p>Currently being developed</p>
-
-              {feedbackInProgress.map((data) => {
-                const fb = data.fields;
-
-                return (
-                  <FeedbackItem
-                    title={fb.Title}
-                    description={fb.Description}
-                    category={fb.Category}
-                    comments={fb.TotalComments}
-                    key={fb.FeedbackId}
-                    id={fb.FeedbackId}
-                    link
-                    categoryActive
-                  >
-                    <Upvotes
-                      upvotedBy={fb.UpvotedBy ? fb.UpvotedBy : []}
-                      id={fb.FeedbackId}
-                      // updateUpvotesParentState={updateUpvotesParentState}
-                    >
-                      {fb.TotalUpvotes}
-                    </Upvotes>
-                  </FeedbackItem>
-                );
-              })}
-            </section>
-            <section className='roadmap-page__feedback-live'>
-              <h3 id='section-feedback-live'>
-                Live ({feedbackLive.length || 0})
-              </h3>
-              <p>Released features</p>
-
-              {feedbackLive.map((data) => {
-                const fb = data.fields;
-
-                return (
-                  <FeedbackItem
-                    title={fb.Title}
-                    description={fb.Description}
-                    category={fb.Category}
-                    comments={fb.TotalComments}
-                    key={fb.FeedbackId}
-                    id={fb.FeedbackId}
-                    link
-                    categoryActive
-                  >
-                    <Upvotes
-                      upvotedBy={fb.UpvotedBy ? fb.UpvotedBy : []}
-                      id={fb.FeedbackId}
-                      // updateUpvotesParentState={updateUpvotesParentState}
-                    >
-                      {fb.TotalUpvotes}
-                    </Upvotes>
-                  </FeedbackItem>
-                );
-              })}
-            </section>
-          </>
-        )}
+        {loading ? <Loader type='feedback-roadmap' /> : feedbackList}
       </main>
     </div>
   );

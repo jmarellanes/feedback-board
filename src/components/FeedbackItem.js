@@ -11,6 +11,8 @@ function FeedbackItem({
   link,
   categoryActive,
   children,
+  roadmapFeedback,
+  status,
 }) {
   const Tag = ({ children }) => {
     return link ? (
@@ -26,8 +28,17 @@ function FeedbackItem({
     );
   };
 
+  const feedbackStatus = (
+    <div className='roadmap-card__item'>
+      <span className={`roadmap-card__name roadmap-card__name--${status}`}>
+        {status}
+      </span>
+    </div>
+  );
+
   return (
     <article className='feedback-item'>
+      {roadmapFeedback ? feedbackStatus : null}
       <div className='feedback-item__container'>
         <header className='feedback-item__title'>
           <Tag>
