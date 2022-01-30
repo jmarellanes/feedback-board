@@ -36,8 +36,8 @@ function Roadmap() {
     <div id='roadmap-page__wrapper'>
       <span>Placeholder for Top Bar</span>
       <main className='roadmap-page roadmap-page__content'>
-        {!feedbackPlanned?.length ? (
-          <Loader />
+        {!feedbackPlanned.length ? (
+          <Loader type='feedback-roadmap' />
         ) : (
           <>
             <section className='roadmap-page__feedback-planned'>

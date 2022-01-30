@@ -34,12 +34,26 @@ function Loader({ type }) {
     </>
   );
 
+  const noFeedbackRoadmap = (
+    <>
+      <h2>Hmm.. We're having a problem.</h2>
+      <p>Got a suggestion? Found a bug that needs to be squashed?</p>
+      <p>We love hearing about new ideas to improve our app.</p>
+
+      <div className='loader__redirect'>
+        <h3>Please refresh your browser</h3>
+      </div>
+    </>
+  );
+
   const message = (type) => {
     switch (type) {
       case 'feedback-details':
         return noFeedbackDetails;
       case 'feedback-home':
         return noFeedbackHome;
+      case 'feedback-roadmap':
+        return noFeedbackRoadmap;
       default:
         return null;
     }
