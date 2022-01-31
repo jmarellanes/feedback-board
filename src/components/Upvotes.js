@@ -7,7 +7,7 @@ import { operationStatus } from '../utils/data';
 
 function Upvote({ children, upvotedBy, id, updateUpvotesParentState }) {
   const [user] = useUser();
-  const upvoted = upvotedBy ? upvotedBy.includes(user.userID) : false;
+  const upvoted = upvotedBy.includes(user.userID) || false;
 
   const upvoteButtonRef = useRef();
   const isUpvotingRef = useRef(false);
@@ -38,6 +38,7 @@ function Upvote({ children, upvotedBy, id, updateUpvotesParentState }) {
         setStatusMessage(isUpvoted ? upvoteAdd.failure : upvoteRemove.failure);
         alert("We're having problems, please try again!'");
         updateUpvotesParentState(prevUpvotedBy, id);
+
         return setIsUpvoted(!isUpvoted);
       } else {
         setStatusMessage(
@@ -77,6 +78,7 @@ function Upvote({ children, upvotedBy, id, updateUpvotesParentState }) {
     const addUpvote = userUpvotesList
       ? [user.userID, ...userUpvotesList]
       : [user.userID];
+
     const filteredUpvotes = userUpvotesList.filter(
       (upvotes) => upvotes !== user.userID
     );
