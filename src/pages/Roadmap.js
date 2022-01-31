@@ -9,6 +9,21 @@ function Roadmap() {
   const [feedback, setFeedback] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const updateUpvotesParentState = (arr, id, index) => {
+    let updateState = feedback[index].map((item) => {
+      if (item.fields.FeedbackId === id) {
+        return {
+          fields: { ...item.fields, UpvotedBy: arr, TotalUpvotes: arr.length },
+        };
+      }
+      return item;
+    });
+
+    const updateFeedback = [...feedback];
+    updateFeedback[index] = updateState;
+    setFeedback(updateFeedback);
+  };
+
   const loadFeedback = async (abortCont) => {
     try {
       const res = await fetch(`/api/getStatus`, { signal: abortCont.signal });
@@ -36,7 +51,7 @@ function Roadmap() {
     };
   }, []);
 
-  const Feedback = (feedbackData) =>
+  const feedbackItem = (feedbackData, index) =>
     feedbackData.map((data) => {
       const fb = data.fields;
 
@@ -56,7 +71,8 @@ function Roadmap() {
           <Upvotes
             upvotedBy={fb.UpvotedBy ? fb.UpvotedBy : []}
             id={fb.FeedbackId}
-            // updateUpvotesParentState={updateUpvotesParentState}
+            updateUpvotesParentState={updateUpvotesParentState}
+            feedbackStatusIndex={index}
           >
             {fb.TotalUpvotes}
           </Upvotes>
@@ -78,7 +94,7 @@ function Roadmap() {
         length={data.length}
         key={info[index]['status']}
       >
-        {Feedback(data)}
+        {feedbackItem(data, index)}
       </FeedbackListRoadmap>
     );
   });

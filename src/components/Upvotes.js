@@ -5,7 +5,13 @@ import { usePrevious } from '../hooks/usePrevious';
 import { ReactComponent as ChevronUp } from '../assets/images/chevron-up.svg';
 import { operationStatus } from '../utils/data';
 
-function Upvote({ children, upvotedBy, id, updateUpvotesParentState }) {
+function Upvote({
+  children,
+  upvotedBy,
+  id,
+  updateUpvotesParentState,
+  feedbackStatusIndex,
+}) {
   const [user] = useUser();
   const upvoted = upvotedBy.includes(user.userID) || false;
 
@@ -20,7 +26,7 @@ function Upvote({ children, upvotedBy, id, updateUpvotesParentState }) {
   const { upvoteAdd, upvoteRemove } = operationStatus;
 
   const updateUpvotesDB = async (arr) => {
-    updateUpvotesParentState(arr, id);
+    updateUpvotesParentState(arr, id, feedbackStatusIndex);
 
     try {
       const res = await fetch('/api/updateUpvotes', {
