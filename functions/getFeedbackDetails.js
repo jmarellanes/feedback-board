@@ -16,6 +16,7 @@ exports.handler = async (event) => {
           'Category',
           'Comments',
           'TotalComments',
+          'Status',
         ],
       })
       .all();
