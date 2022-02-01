@@ -112,8 +112,8 @@ function FeedbackDetails() {
           <Loader type='feedback-details' />
         ) : (
           <>
-            <header className='header-third'>
-              <div className='header-third__container'>
+            <header className='header-secondary'>
+              <div className='header-secondary__container'>
                 <Button
                   typeAttribute='button'
                   buttonStyle='button--back-light'
