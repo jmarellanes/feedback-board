@@ -97,7 +97,7 @@ function Roadmap() {
 
   const openModal = (
     <Modal onClose={closeModal} isOpen='modal__is-open'>
-      <CreateFeedback feedbackAdded={feedbackAdded} onClick={closeModal} />
+      <CreateFeedback feedbackAdded={feedbackAdded} closeModal={closeModal} />
     </Modal>
   );
 
