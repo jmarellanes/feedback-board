@@ -85,7 +85,7 @@
     }
   }
 
-  &-third {
+  &-secondary {
     &__container {
       display: flex;
       align-items: center;
@@ -98,6 +98,15 @@
       &--secondary {
         margin-left: auto;
       }
+    }
+  }
+
+  &-tertiary {
+    &__container {
+      background-color: var(--color__tertiary);
+      border-radius: var(--rounded-corners);
+      padding-top: var(--spacer__24);
+      padding-bottom: var(--spacer__24);
     }
   }
 }

@@ -105,6 +105,10 @@ button {
     --accent__color: var(--color__light);
     background-color: transparent;
 
+    & .button__title {
+      color: var(--accent__color);
+    }
+
     &:hover {
       --accent__color: var(--color__secondary--light-02);
     }

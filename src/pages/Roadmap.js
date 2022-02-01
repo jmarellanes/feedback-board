@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import FeedbackItem from '../components/FeedbackItem';
 import Upvotes from '../components/Upvotes';
 import FeedbackListRoadmap from '../components/FeedbackListRoadmap';
 import Loader from '../components/Loader';
+import Button from '../components/Button';
 
 function Roadmap() {
   const [feedback, setFeedback] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const history = useHistory();
 
   const updateUpvotesParentState = (arr, id, index) => {
     let updateState = feedback[index].map((item) => {
@@ -101,7 +105,19 @@ function Roadmap() {
 
   return (
     <div id='roadmap-page__wrapper'>
-      <span>Placeholder for Top Bar</span>
+      <header className='header-tertiary'>
+        <div className='header-tertiary__container'>
+          <Button
+            typeAttribute='button'
+            buttonStyle='button--back-dark'
+            svgIcon='chevron-left'
+            onClick={() => history.goBack()}
+          >
+            Go Back
+          </Button>
+        </div>
+        <span>Placeholder for Top Bar</span>
+      </header>
       <main className='roadmap-page roadmap-page__content'>
         {loading ? <Loader type='feedback-roadmap' /> : feedbackList}
       </main>
