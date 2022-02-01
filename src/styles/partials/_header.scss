@@ -102,11 +102,25 @@
   }
 
   &-tertiary {
+    margin-bottom: var(--spacer__48);
+
     &__container {
+      display: flex;
+
       background-color: var(--color__tertiary);
       border-radius: var(--rounded-corners);
-      padding-top: var(--spacer__24);
-      padding-bottom: var(--spacer__24);
+      padding: var(--spacer__24);
+    }
+
+    &__title {
+      p {
+        color: var(--color__light);
+      }
+    }
+
+    &__create-feedback {
+      align-self: center;
+      margin-left: auto;
     }
   }
 }

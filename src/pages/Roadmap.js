@@ -133,24 +133,28 @@ function Roadmap() {
       <div id='roadmap-page__wrapper'>
         <header className='header-tertiary'>
           <div className='header-tertiary__container'>
-            <Button
-              typeAttribute='button'
-              buttonStyle='button--back-dark'
-              svgIcon='chevron-left'
-              onClick={() => history.goBack()}
-            >
-              Go Back
-            </Button>
-            <Button
-              typeAttribute='button'
-              buttonStyle='button--primary'
-              svgIcon='sign'
-              onClick={() => setShowModal(!showModal)}
-            >
-              Add Feedback
-            </Button>
+            <div className='header-tertiary__title'>
+              <Button
+                typeAttribute='button'
+                buttonStyle='button--back-dark'
+                svgIcon='chevron-left'
+                onClick={() => history.goBack()}
+              >
+                Go Back
+              </Button>
+              <p className='h1'>Roadmap</p>
+            </div>
+            <div className='header-tertiary__create-feedback'>
+              <Button
+                typeAttribute='button'
+                buttonStyle='button--primary'
+                svgIcon='sign'
+                onClick={() => setShowModal(!showModal)}
+              >
+                Add Feedback
+              </Button>
+            </div>
           </div>
-          <span>Placeholder for Top Bar</span>
         </header>
         <main className='roadmap-page roadmap-page__content'>
           {loading ? <Loader type='feedback-roadmap' /> : feedbackList}
