@@ -14,7 +14,7 @@ import {
 } from '../utils/data';
 import { errorMessage } from '../utils/utils';
 
-function CreateFeedback({ onClick, feedbackAdded }) {
+function CreateFeedback({ closeModal, feedbackAdded }) {
   const MAX_CHARS = 250;
 
   const buttonSubmitRef = useRef();
@@ -84,8 +84,6 @@ function CreateFeedback({ onClick, feedbackAdded }) {
         buttonSubmitRef.current.setAttribute('data-operation-complete', 'true');
         buttonSubmitRef.current.removeAttribute('data-operation-running');
         setStatusMessage(complete);
-
-        feedbackAdded();
       } else {
         isCreatingFeedback.current = false;
 
@@ -101,6 +99,17 @@ function CreateFeedback({ onClick, feedbackAdded }) {
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handleTransitionEnd = (e) => {
+    if (
+      e.propertyName === 'transform' &&
+      e.target.className === 'h4 button__title'
+    ) {
+      setTimeout(() => {
+        feedbackAdded();
+      }, 100);
     }
   };
 
@@ -251,7 +260,7 @@ function CreateFeedback({ onClick, feedbackAdded }) {
         <Button
           typeAttribute='button'
           buttonStyle='button--tertiary'
-          onClick={onClick}
+          onClick={closeModal}
           ref={buttonCancelRef}
         >
           Cancel
@@ -263,6 +272,7 @@ function CreateFeedback({ onClick, feedbackAdded }) {
           ref={buttonSubmitRef}
           operationButton
           statusMessage={statusMessage}
+          onTransitionEnd={handleTransitionEnd}
         >
           Add Feedback
         </Button>

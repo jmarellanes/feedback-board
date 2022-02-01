@@ -98,6 +98,9 @@ function Home() {
   };
 
   const loadFeedback = async (abortCont) => {
+    // Close modal after Create feedback
+    if (showModal) setShowModal(false);
+
     updateSortLabelOnLoad();
 
     try {
@@ -115,9 +118,6 @@ function Home() {
     } catch (error) {
       console.log(error);
     }
-
-    // Close modal after Create feedback
-    if (showModal) setShowModal(false);
 
     if (!abortCont.signal.aborted) setLoading(false);
   };
@@ -145,7 +145,7 @@ function Home() {
 
   const openModal = (
     <Modal onClose={closeModal} isOpen='modal__is-open'>
-      <CreateFeedback feedbackAdded={feedbackAdded} onClick={closeModal} />
+      <CreateFeedback feedbackAdded={feedbackAdded} closeModal={closeModal} />
     </Modal>
   );
 
