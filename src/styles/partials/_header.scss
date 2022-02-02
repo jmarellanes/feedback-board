@@ -249,6 +249,14 @@
         padding: 2px;
       }
     }
+
+    &-tertiary {
+      margin-bottom: var(--spacer__24);
+
+      &__container {
+        border-radius: 0px;
+      }
+    }
   }
 }
 
