@@ -19,7 +19,11 @@ exports.handler = async () => {
       })
       .all();
 
-    const statusRecords = await statusTable.select().all();
+    const statusRecords = await statusTable
+      .select({
+        sort: [{ field: 'Order' }],
+      })
+      .all();
 
     const planned = [];
     const inProgress = [];
@@ -41,13 +45,15 @@ exports.handler = async () => {
 
     const statusList = statusRecords.map((status) => status.fields);
 
+    console.log(statusList);
+
     return {
       statusCode: 200,
       body: JSON.stringify({
+        statusList,
         planned,
         inProgress,
         live,
-        statusList,
       }),
     };
   } catch (error) {
