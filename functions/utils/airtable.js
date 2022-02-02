@@ -7,5 +7,6 @@ Airtable.configure({
 const base = require('airtable').base(process.env.AIRTABLE_BASE);
 const feedbackTable = base(process.env.AIRTABLE_TABLE_MAIN);
 const commentsTable = base(process.env.AIRTABLE_TABLE_COMMENTS);
+const statusTable = base(process.env.AIRTABLE_TABLE_STATUS);
 
-module.exports = { feedbackTable, commentsTable };
+module.exports = { feedbackTable, commentsTable, statusTable };

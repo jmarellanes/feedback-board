@@ -1,4 +1,4 @@
-const { feedbackTable } = require('./utils/airtable');
+const { feedbackTable, statusTable } = require('./utils/airtable');
 
 exports.handler = async () => {
   try {
@@ -19,6 +19,8 @@ exports.handler = async () => {
       })
       .all();
 
+    const statusRecords = await statusTable.select().all();
+
     const planned = [];
     const inProgress = [];
     const live = [];
@@ -37,12 +39,15 @@ exports.handler = async () => {
         }
       });
 
+    const statusList = statusRecords.map((status) => status.fields);
+
     return {
       statusCode: 200,
       body: JSON.stringify({
         planned,
         inProgress,
         live,
+        statusList,
       }),
     };
   } catch (error) {
