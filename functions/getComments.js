@@ -19,7 +19,7 @@ exports.handler = async (event) => {
       .map((comment) => ({
         fields: comment.fields,
       }))
-      .filter(function (comment) {
+      .filter((comment) => {
         if (!comment.fields.ParentId) return comment;
         return null;
       });
