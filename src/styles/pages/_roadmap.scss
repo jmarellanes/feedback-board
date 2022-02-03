@@ -2,16 +2,33 @@
   max-width: 69rem;
   margin: 0 auto;
   margin-top: var(--spacer__64);
+
+  @include respond-to('medium--m') {
+    margin-top: 0;
+  }
 }
 
 .roadmap-page {
   display: flex;
+
+  @include respond-to('medium--m') {
+    display: block;
+    padding-left: var(--spacer__24);
+    padding-right: var(--spacer__24);
+  }
 
   > * {
     flex: 1 1 0px;
 
     &:not(:last-child) {
       margin-right: var(--spacer__32);
+    }
+
+    @include respond-to('medium--m') {
+      &:not(:last-child) {
+        margin-bottom: var(--spacer__40);
+        margin-right: 0;
+      }
     }
   }
 
@@ -28,6 +45,25 @@
     }
     &-live {
       --accent__color: var(--color__complementary--02);
+    }
+  }
+}
+
+@include respond-to('medium--s') {
+  .roadmap-page {
+    display: grid;
+
+    &__feedback {
+      &-planned,
+      &-in-progress,
+      &-live {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+      }
+
+      &-header {
+        display: none;
+      }
     }
   }
 }

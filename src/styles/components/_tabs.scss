@@ -1,0 +1,110 @@
+.tabs {
+  @keyframes lineAnimation {
+    0% {
+      transform: scale3d(0, 1, 1);
+    }
+    100% {
+      transform: scale3d(1, 1, 1);
+    }
+  }
+
+  @keyframes opacityAnimation {
+    0% {
+      opacity: 0%;
+    }
+    100% {
+      opacity: 100%;
+    }
+  }
+
+  &__navlist {
+    display: none;
+    border-bottom: 1px solid rebeccapurple;
+
+    > * {
+      flex: 1 1 0px;
+      text-align: center;
+    }
+  }
+
+  &__nav-item {
+    position: relative;
+
+    padding-bottom: var(--spacer__24);
+    list-style-type: none;
+
+    &--planned {
+      --accent__color: var(--color__complementary--01);
+    }
+
+    &--in-progress {
+      --accent__color: var(--color__primary);
+    }
+
+    &--live {
+      --accent__color: var(--color__complementary--02);
+    }
+
+    span {
+      // Detect click event on parent = button element
+      pointer-events: none;
+
+      opacity: 40%;
+      transition: opacity var(--duration__350) var(--easing__s);
+    }
+
+    &:hover {
+      span {
+        opacity: 100%;
+      }
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      bottom: 0;
+      left: 0;
+      height: 5px;
+      width: 100%;
+      background-color: var(--accent__color);
+      transform: scale3d(0, 1, 1);
+    }
+
+    &.prev-active {
+      &::after {
+        animation: lineAnimation var(--duration__350) var(--easing__s);
+        animation-direction: reverse;
+      }
+    }
+
+    &.is-active {
+      span {
+        opacity: 100%;
+      }
+
+      &::after {
+        animation: lineAnimation var(--duration__350) var(--easing__s) forwards;
+      }
+    }
+  }
+}
+
+@include respond-to('medium--s') {
+  .tabs {
+    &__navlist {
+      display: flex;
+    }
+
+    &__panel {
+      display: none;
+      opacity: 0;
+      animation: opacityAnimation 650ms var(--easing__s) forwards;
+
+      &.is-active {
+        display: block;
+        opacity: 1;
+      }
+    }
+  }
+}

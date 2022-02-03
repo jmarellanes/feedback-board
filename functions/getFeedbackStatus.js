@@ -43,9 +43,9 @@ exports.handler = async () => {
         }
       });
 
-    const statusList = statusRecords.map((status) => status.fields);
-
-    console.log(statusList);
+    const statusList = statusRecords
+      .map((status) => status.fields)
+      .filter((status) => status['Status'] !== 'Suggestion');
 
     return {
       statusCode: 200,

@@ -12,9 +12,12 @@ import Button from '../components/Button';
 
 function Roadmap() {
   const [feedback, setFeedback] = useState([]);
+  const [statusList, setStatusList] = useState([]);
 
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState('tab-label-planned');
+  const [prevTab, setPrevTab] = useState('');
 
   const history = useHistory();
 
@@ -62,30 +65,59 @@ function Roadmap() {
       );
     });
 
-  const feedbackList = feedback.map((data, index) => {
-    const info = [
-      { status: 'Planned', description: 'Ideas prioritized for research' },
-      { status: 'In-Progress', description: 'Currently being developed' },
-      { status: 'Live', description: 'Released features' },
-    ];
+  const FeedbackList = () =>
+    feedback.map((data, index) => {
+      return (
+        <FeedbackListRoadmap
+          status={statusList[index]['Status']}
+          desc={statusList[index]['Descrition']}
+          length={data.length}
+          key={statusList[index]['Order']}
+          activeTab={activeTab}
+        >
+          {feedbackItem(data, index)}
+        </FeedbackListRoadmap>
+      );
+    });
 
-    return (
-      <FeedbackListRoadmap
-        status={info[index]['status']}
-        desc={info[index]['description']}
-        length={data.length}
-        key={info[index]['status']}
-      >
-        {feedbackItem(data, index)}
-      </FeedbackListRoadmap>
-    );
-  });
+  const TabMenu = () => (
+    <ul className='tabs__navlist' role='tablist'>
+      {statusList.map((status, index) => {
+        const statusFeedback = status['Status'].toLowerCase();
 
-  const closeModal = (e) => {
-    if (e.target.parentNode.hasAttribute('data-operation-running')) return;
-
-    setShowModal(!showModal);
-  };
+        return (
+          <li
+            className={`tabs__nav-item ${
+              activeTab === `tab-label-${statusFeedback}` ? 'is-active' : ''
+            } tabs__nav-item--${statusFeedback} ${
+              prevTab === `tab-label-${statusFeedback}` ? 'prev-active' : ''
+            }`}
+            role='presentation'
+            key={status['Order']}
+          >
+            <button
+              id={`tab-label-${statusFeedback}`}
+              role='tab'
+              tabIndex={`${
+                activeTab === `tab-label-${statusFeedback}` ? 0 : -1
+              }`}
+              aria-controls={`tab-panel-${statusFeedback}`}
+              // eslint-disable-next-line jsx-a11y/aria-proptypes
+              aria-selected={`${
+                activeTab === `tab-label-${statusFeedback}` ? true : false
+              }`}
+              aria-setsize='3'
+              aria-posinset={index + 1}
+              onClick={handleClick}
+            >
+              <span className='h3'>{status['Status']}</span>
+              {/* ({feedback[index].length}) */}
+            </button>
+          </li>
+        );
+      })}
+    </ul>
+  );
 
   const feedbackAdded = () => {
     setShowModal(!showModal);
@@ -95,17 +127,39 @@ function Roadmap() {
     }, 100);
   };
 
+  const closeModal = (e) => {
+    if (e.target.parentNode.hasAttribute('data-operation-running')) return;
+
+    setShowModal(!showModal);
+  };
+
   const openModal = (
     <Modal onClose={closeModal} isOpen='modal__is-open'>
       <CreateFeedback feedbackAdded={feedbackAdded} closeModal={closeModal} />
     </Modal>
   );
 
+  const handleClick = (e) => {
+    const buttonEl = e.target.parentNode;
+    if (buttonEl.classList.contains('is-active')) return;
+
+    const buttonParent = buttonEl.parentNode;
+    const [isActive] = Array.from(buttonParent.children).filter((element) => {
+      return element.classList.contains('is-active');
+    });
+
+    setPrevTab(isActive.childNodes[0].id);
+    setActiveTab(e.target.id);
+  };
+
   const loadFeedback = async (abortCont) => {
     try {
-      const res = await fetch(`/api/getStatus`, { signal: abortCont.signal });
+      const res = await fetch(`/api/getFeedbackStatus`, {
+        signal: abortCont.signal,
+      });
       const statusRes = await res.json();
 
+      setStatusList(statusRes.statusList);
       setFeedback(() => [
         statusRes.planned,
         statusRes.inProgress,
@@ -157,7 +211,14 @@ function Roadmap() {
           </div>
         </header>
         <main className='roadmap-page roadmap-page__content'>
-          {loading ? <Loader type='feedback-roadmap' /> : feedbackList}
+          {loading ? (
+            <Loader />
+          ) : (
+            <>
+              <TabMenu />
+              <FeedbackList />
+            </>
+          )}
         </main>
       </div>
 
