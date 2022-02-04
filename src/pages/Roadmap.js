@@ -144,14 +144,11 @@ function Roadmap() {
     const buttonEl = e.target.parentNode;
     if (buttonEl.classList.contains('is-active')) return;
 
-    const buttonParent = buttonEl.parentNode;
-    const [isActive] = Array.from(buttonParent.children).filter((element) => {
-      return element.classList.contains('is-active');
-    });
-
-    setPrevTab(isActive.childNodes[0].id);
+    setPrevTab(activeTab);
     setActiveTab(e.target.id);
   };
+
+  const handleKeyDown = (e) => {};
 
   const loadFeedback = async (abortCont) => {
     try {
@@ -176,6 +173,7 @@ function Roadmap() {
   useEffect(() => {
     const abortCont = new AbortController();
 
+    document.addEventListener('keydown', handleKeyDown);
     loadFeedback(abortCont);
 
     return () => {
