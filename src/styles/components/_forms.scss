@@ -237,7 +237,7 @@ legend {
     }
 
     &::placeholder {
-      color: #8c92b3;
+      color: var(--color__complementary--03);
       opacity: 1;
     }
 

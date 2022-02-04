@@ -37,6 +37,8 @@ $breakpoint__medium: map-get($breakpoints, 'medium--m');
   // Complementary
   --color__complementary--01: hsl(14, 83%, 74%);
   --color__complementary--02: hsl(204, 94%, 68%);
+  --color__complementary--03: hsl(231, 20%, 63%);
+  --color__complementary--03--alpha: hsla(231, 20%, 63%, 0.25);
   --color__light: #ffffff;
 
   /* =====================================================================
