@@ -110,8 +110,9 @@ function Roadmap() {
               aria-posinset={index + 1}
               onClick={handleClick}
             >
-              <span className='h3'>{status['Status']}</span>
-              {/* ({feedback[index].length}) */}
+              <span className='h3'>
+                {status['Status']} ({feedback[index].length})
+              </span>
             </button>
           </li>
         );
