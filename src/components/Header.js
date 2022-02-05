@@ -94,6 +94,7 @@ function Header({ categories, status }) {
     handleClick();
 
     return () => {
+      document.removeEventListener('keydown', handleKeyDown);
       focusedElBeforeOpen.focus();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
