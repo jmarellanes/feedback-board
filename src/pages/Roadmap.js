@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 
@@ -19,6 +19,7 @@ function Roadmap() {
   const [activeTab, setActiveTab] = useState('tab-label-planned');
   const [prevTab, setPrevTab] = useState('');
 
+  const tabNavRef = useRef();
   const history = useHistory();
 
   const updateUpvotesParentState = (arr, id, index) => {
@@ -81,7 +82,7 @@ function Roadmap() {
     });
 
   const TabMenu = () => (
-    <ul className='tabs__navlist' role='tablist'>
+    <ul className='tabs__navlist' role='tablist' ref={tabNavRef}>
       {statusList.map((status, index) => {
         const statusFeedback = status['Status'].toLowerCase();
 
@@ -143,12 +144,67 @@ function Roadmap() {
   const handleClick = (e) => {
     const buttonEl = e.target.parentNode;
     if (buttonEl.classList.contains('is-active')) return;
+    // activeElRef.current = e.target;
+    // console.log(activeElRef);
 
+    // Array.from(buttonEl.parentNode.children).indexOf(buttonEl);
+    // console.log(index);
+
+    console.log(statusList);
     setPrevTab(activeTab);
     setActiveTab(e.target.id);
+    // activeElRef.current.focus();
+    // console.log(document.activeElement);
   };
 
-  const handleKeyDown = (e) => {};
+  function handleKeyDown(e) {
+    let UP_ARROW = 'ArrowUp',
+      DOWN_ARROW = 'ArrowDown',
+      LEFT_ARROW = 'ArrowLeft',
+      RIGHT_ARROW = 'ArrowRight';
+
+    const itemEl = document.activeElement.parentNode;
+    if (!itemEl.classList.contains('tabs__nav-item')) return;
+
+    const tabEl = Array.from(itemEl.parentNode.children);
+    const firstTabEl = tabEl[0].firstChild;
+    const lastTabEl = tabEl[tabEl.length - 1].firstChild;
+
+    const indexFocusEl = tabEl.indexOf(itemEl);
+
+    const changeActiveTab = (currentTab, nextTab) => {
+      const currentActiveTab = statusList[currentTab]['Status'].toLowerCase();
+      const nextActiveTab = statusList[nextTab]['Status'].toLowerCase();
+
+      setPrevTab(`tab-label-${currentActiveTab}`);
+      setActiveTab(`tab-label-${nextActiveTab}`);
+      tabNavRef.current.childNodes[nextTab].lastChild.focus();
+      e.preventDefault();
+    };
+
+    switch (e.key) {
+      case RIGHT_ARROW:
+      case DOWN_ARROW:
+        if (document.activeElement === lastTabEl) {
+          changeActiveTab(indexFocusEl, 0);
+        } else {
+          changeActiveTab(indexFocusEl, indexFocusEl + 1);
+        }
+        break;
+
+      case LEFT_ARROW:
+      case UP_ARROW:
+        if (document.activeElement === firstTabEl) {
+          changeActiveTab(indexFocusEl, tabEl.length - 1);
+        } else {
+          changeActiveTab(indexFocusEl, indexFocusEl - 1);
+        }
+        break;
+
+      default:
+        break;
+    }
+  }
 
   const loadFeedback = async (abortCont) => {
     try {
@@ -173,13 +229,21 @@ function Roadmap() {
   useEffect(() => {
     const abortCont = new AbortController();
 
-    document.addEventListener('keydown', handleKeyDown);
     loadFeedback(abortCont);
 
     return () => {
       abortCont.abort();
     };
   }, []);
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [statusList]);
 
   return (
     <>
