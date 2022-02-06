@@ -144,20 +144,19 @@ function Roadmap() {
   const handleClick = (e) => {
     const buttonEl = e.target.parentNode;
     if (buttonEl.classList.contains('is-active')) return;
-    // activeElRef.current = e.target;
-    // console.log(activeElRef);
 
-    // Array.from(buttonEl.parentNode.children).indexOf(buttonEl);
-    // console.log(index);
+    const tabEl = Array.from(tabNavRef.current.childNodes);
+    const indexFocusEl = tabEl.indexOf(buttonEl);
 
-    console.log(statusList);
     setPrevTab(activeTab);
     setActiveTab(e.target.id);
-    // activeElRef.current.focus();
-    // console.log(document.activeElement);
+
+    setTimeout(() => {
+      tabNavRef.current.childNodes[indexFocusEl].firstChild.focus();
+    }, 100);
   };
 
-  function handleKeyDown(e) {
+  const handleKeyDown = (e) => {
     let UP_ARROW = 'ArrowUp',
       DOWN_ARROW = 'ArrowDown',
       LEFT_ARROW = 'ArrowLeft',
@@ -204,7 +203,7 @@ function Roadmap() {
       default:
         break;
     }
-  }
+  };
 
   const loadFeedback = async (abortCont) => {
     try {
