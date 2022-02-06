@@ -112,6 +112,10 @@ function Header({ categories, status }) {
 
     if (hiddenHeaderMainNav.matches)
       headerMainNavRef.current.setAttribute('hidden', '');
+
+    return () => {
+      hiddenHeaderMainNav.removeEventListener('change', handleHiddenMainNav);
+    };
   }, []);
 
   const hamburguerButton = (
