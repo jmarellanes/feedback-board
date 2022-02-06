@@ -87,6 +87,28 @@
         animation: lineAnimation var(--duration__350) var(--easing__s) forwards;
       }
     }
+
+    button {
+      // Fallback for Safari
+      &:active,
+      &:focus {
+        outline: 3px dotted var(--color__tertiary);
+        outline-offset: 2px;
+      }
+
+      // HACK for use @supports selector() with SASS
+      @supports #{'\selector(*:focus-visible)'} {
+        &:focus {
+          outline: none;
+        }
+
+        &:active,
+        &:focus-visible {
+          outline: 3px dotted var(--color__tertiary);
+          outline-offset: 2px;
+        }
+      }
+    }
   }
 }
 
