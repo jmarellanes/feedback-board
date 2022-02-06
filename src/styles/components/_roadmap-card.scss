@@ -11,7 +11,7 @@
 
   &__name {
     position: relative;
-    padding-left: 1.5rem;
+    padding-left: var(--spacer__24);
 
     &--Planned {
       --bullet-color: var(--color__complementary--01);

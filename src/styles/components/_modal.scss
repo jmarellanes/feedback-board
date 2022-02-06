@@ -11,7 +11,7 @@
   z-index: 10;
 
   background-color: rgba(0, 0, 0, 0.8);
-  padding: 1rem 1.5rem;
+  padding: var(--spacer__16) var(--spacer__24);
   opacity: 0;
   transition: opacity 350ms var(--easing__s);
 
