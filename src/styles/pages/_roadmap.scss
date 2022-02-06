@@ -11,12 +11,6 @@
 .roadmap-page {
   display: flex;
 
-  @include respond-to('medium--m') {
-    display: block;
-    padding-left: var(--spacer__24);
-    padding-right: var(--spacer__24);
-  }
-
   > * {
     flex: 1 1 0px;
 
@@ -45,6 +39,38 @@
     }
     &-live {
       --accent__color: var(--color__complementary--02);
+    }
+  }
+}
+
+@include respond-to('large--s') {
+  .roadmap-page {
+    flex-wrap: wrap;
+
+    > * {
+      &:not(:last-child) {
+        margin-right: 0;
+      }
+    }
+
+    & .roadmap-page__feedback-planned {
+      margin-right: var(--spacer__32);
+    }
+
+    &__feedback-live {
+      flex-basis: 100%;
+    }
+  }
+}
+
+@include respond-to('medium--m') {
+  .roadmap-page {
+    display: block;
+    padding-left: var(--spacer__24);
+    padding-right: var(--spacer__24);
+
+    & .roadmap-page__feedback-planned {
+      margin-right: 0;
     }
   }
 }
