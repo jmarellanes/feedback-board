@@ -24,7 +24,7 @@
         }
 
         &:last-child {
-          margin-left: 1rem;
+          margin-left: var(--spacer__16);
         }
       }
 
@@ -86,7 +86,7 @@
           & .button {
             justify-content: center;
             width: 100%;
-            margin-bottom: 1rem;
+            margin-bottom: var(--spacer__16);
 
             &--primary {
               order: 1;
@@ -94,7 +94,7 @@
 
             &--tertiary {
               order: 2;
-              margin-right: 1rem;
+              margin-right: var(--spacer__16);
             }
 
             &--danger {

@@ -37,6 +37,7 @@ function Upvote({
         }),
       });
 
+      // Fix this!
       upvoteButtonRef.current.removeAttribute('data-operation-running');
       isUpvotingRef.current = false;
 

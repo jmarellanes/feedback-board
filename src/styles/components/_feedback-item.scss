@@ -39,7 +39,7 @@
     &__link {
       display: block;
       margin-bottom: var(--spacer__16);
-      margin-right: 1rem;
+      margin-right: var(--spacer__16);
 
       &--anchor {
         text-decoration: none;
@@ -151,7 +151,7 @@
       position: relative;
 
       &:not(:last-child) {
-        margin-bottom: 1.5rem;
+        margin-bottom: var(--spacer__24);
       }
 
       &::before {

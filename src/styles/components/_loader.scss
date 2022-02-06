@@ -50,7 +50,7 @@
   }
 
   &__content {
-    margin-top: 2.5rem;
+    margin-top: var(--spacer__40);
     text-align: center;
 
     visibility: hidden;
@@ -68,7 +68,7 @@
   }
 
   &__redirect {
-    margin-top: 1rem;
+    margin-top: var(--spacer__16);
 
     a {
       transition: color var(--duration__250) var(--easing__s);
