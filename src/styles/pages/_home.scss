@@ -3,15 +3,9 @@
 
   max-width: 69rem;
   margin: 0 auto;
-  margin-top: var(--spacer__40);
 
   @include respond-to('medium--l') {
     display: block;
-    margin-top: var(--spacer__32);
-  }
-
-  @include respond-to('medium--m') {
-    margin-top: 0;
   }
 }
 

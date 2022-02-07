@@ -1,11 +1,6 @@
 #roadmap-page__wrapper {
   max-width: 69rem;
   margin: 0 auto;
-  margin-top: var(--spacer__40);
-
-  @include respond-to('medium--m') {
-    margin-top: 0;
-  }
 }
 
 .roadmap-page {

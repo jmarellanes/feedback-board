@@ -41,13 +41,14 @@ body {
 } // -> body
 
 #root {
-  padding: 0 var(--spacer__32) var(--spacer__80);
+  padding: var(--spacer__40) var(--spacer__32) var(--spacer__80);
 
   &[aria-hidden='true'] {
     pointer-events: none;
   }
 
   @include respond-to('medium--l') {
+    padding-top: var(--spacer__32);
     padding-bottom: var(--spacer__48);
   }
 
