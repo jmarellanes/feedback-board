@@ -176,7 +176,11 @@ function EditFeedback({
       closeModal(e.target.parentNode);
 
       setTimeout(() => {
-        history.push('/');
+        if (status === 'Suggestion') {
+          return history.push('/');
+        } else {
+          return history.push('/roadmap');
+        }
       }, 300);
     }
   }
