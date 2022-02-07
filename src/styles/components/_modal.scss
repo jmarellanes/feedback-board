@@ -1,8 +1,4 @@
 .modal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   position: fixed;
   left: 0;
   right: 0;
@@ -10,8 +6,11 @@
   top: 0;
   z-index: 10;
 
+  overflow-y: scroll;
+  overflow-x: hidden;
+
   background-color: rgba(0, 0, 0, 0.8);
-  padding: var(--spacer__16) var(--spacer__24);
+  padding: var(--spacer__48) var(--spacer__24) var(--spacer__24);
   opacity: 0;
   transition: opacity 350ms var(--easing__s);
 
@@ -27,7 +26,9 @@
   &__wrapper {
     @include fb_container;
 
-    width: 34rem;
+    width: 100%;
+    max-width: 34rem;
+    margin: 0 auto;
     padding: var(--spacer__40);
     padding-top: var(--spacer__48);
 

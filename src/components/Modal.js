@@ -34,6 +34,7 @@ class Modal extends React.Component {
   };
 
   whenModalOpen = () => {
+    document.body.style.overflow = 'hidden';
     this.modalElement.className = `${this.modalElement.className} ${this.props.isOpen}`;
 
     this.rootElement.style.filter = 'blur(8px)';
@@ -44,6 +45,7 @@ class Modal extends React.Component {
   };
 
   whenModalClose = () => {
+    document.body.style.removeProperty('overflow');
     this.modalElement.classList.remove('modal__is-open');
 
     this.rootElement.style.filter = null;
