@@ -10,10 +10,10 @@
 
   @keyframes opacityAnimation {
     0% {
-      opacity: 0%;
+      opacity: 0;
     }
     100% {
-      opacity: 100%;
+      opacity: 1;
     }
   }
 
@@ -49,13 +49,13 @@
       // Detect click event on parent = button element
       pointer-events: none;
 
-      opacity: 40%;
+      opacity: 0.4;
       transition: opacity var(--duration__350) var(--easing__s);
     }
 
     &:hover {
       span {
-        opacity: 100%;
+        opacity: 1;
       }
     }
 
@@ -80,7 +80,7 @@
 
     &.is-active {
       span {
-        opacity: 100%;
+        opacity: 1;
       }
 
       &::after {
