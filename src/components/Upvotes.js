@@ -1,32 +1,25 @@
 import { useState, useRef, useEffect } from 'react';
 import { useUser } from '../context/UserContext';
-import { usePrevious } from '../hooks/usePrevious';
 
 import { ReactComponent as ChevronUp } from '../assets/images/chevron-up.svg';
 import { operationStatus } from '../utils/data';
 
-function Upvote({
-  children,
-  upvotedBy,
-  id,
-  updateUpvotesParentState,
-  feedbackStatusIndex,
-}) {
+function Upvote({ children, upvotedBy, id, feedbackStatusIndex }) {
   const [user] = useUser();
   const upvoted = upvotedBy.includes(user.userID) || false;
 
-  const upvoteButtonRef = useRef();
   const isUpvotingRef = useRef(false);
 
   const [userUpvotesList, setUserUpvotesList] = useState([]);
+  const [totalUpvotes, setTotalUpvotes] = useState(null);
   const [isUpvoted, setIsUpvoted] = useState(upvoted);
   const [statusMessage, setStatusMessage] = useState('');
-  const prevUpvotedBy = usePrevious(upvotedBy);
+  const [operationRunning, setOperationRunning] = useState(false);
 
   const { upvoteAdd, upvoteRemove } = operationStatus;
 
   const updateUpvotesDB = async (arr) => {
-    updateUpvotesParentState(arr, id, feedbackStatusIndex);
+    setTotalUpvotes(arr.length);
 
     try {
       const res = await fetch('/api/updateUpvotes', {
@@ -37,14 +30,13 @@ function Upvote({
         }),
       });
 
-      // Fix this!
-      upvoteButtonRef.current.removeAttribute('data-operation-running');
+      setOperationRunning(!operationRunning);
       isUpvotingRef.current = false;
 
       if (res.status !== 200) {
         setStatusMessage(isUpvoted ? upvoteAdd.failure : upvoteRemove.failure);
         alert("We're having problems, please try again!'");
-        updateUpvotesParentState(prevUpvotedBy, id);
+        setTotalUpvotes(null);
 
         return setIsUpvoted(!isUpvoted);
       } else {
@@ -62,7 +54,7 @@ function Upvote({
     isUpvotingRef.current = true;
 
     setIsUpvoted(!isUpvoted);
-    upvoteButtonRef.current.setAttribute('data-operation-running', 'true');
+    setOperationRunning(!operationRunning);
 
     setStatusMessage(isUpvoted ? upvoteRemove.running : upvoteAdd.running);
 
@@ -100,16 +92,16 @@ function Upvote({
   return (
     <button
       className={`upvotes ${isUpvoted ? 'upvotes--isUpvoted' : ''}`}
-      ref={upvoteButtonRef}
       onClick={handleClick}
       onBlur={() => setStatusMessage('')}
+      data-operation-running={operationRunning}
     >
       <span className='upvotes__icon'>
         <ChevronUp />
       </span>
       <span className='upvotes__title'>
         <span className='upvotes__quantity'>
-          {`${children}`}
+          {totalUpvotes === null ? children : totalUpvotes}
           <span className='visually-hidden'>Upvotes</span>
         </span>
       </span>
