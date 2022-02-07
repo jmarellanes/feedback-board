@@ -13,7 +13,6 @@ import FeedbackTopBar from '../components/FeedbackTopBar';
 import Modal from '../components/Modal';
 import CreateFeedback from '../components/CreateFeedback';
 import FeedbackItem from '../components/FeedbackItem';
-import Upvotes from '../components/Upvotes';
 
 import { categoriesData } from '../utils/data';
 
@@ -30,19 +29,6 @@ function Home() {
   const { categoryParam } = useParams();
   const { search } = useLocation();
   const history = useHistory();
-
-  const updateUpvotesParentState = (arr, id) => {
-    let updateState = feedback.map((item) => {
-      if (item.fields.FeedbackId === id) {
-        return {
-          fields: { ...item.fields, UpvotedBy: arr, TotalUpvotes: arr.length },
-        };
-      }
-      return item;
-    });
-
-    setFeedback(updateState);
-  };
 
   const queryString =
     queryComponent.parse(search).sortby === undefined
@@ -184,17 +170,11 @@ function Home() {
                   comments={fb.TotalComments}
                   key={fb.FeedbackId}
                   id={fb.FeedbackId}
+                  upvotedBy={fb.UpvotedBy ? fb.UpvotedBy : []}
+                  totalUpvotes={fb.TotalUpvotes}
                   link
                   categoryActive
-                >
-                  <Upvotes
-                    upvotedBy={fb.UpvotedBy ? fb.UpvotedBy : []}
-                    id={fb.FeedbackId}
-                    updateUpvotesParentState={updateUpvotesParentState}
-                  >
-                    {fb.TotalUpvotes}
-                  </Upvotes>
-                </FeedbackItem>
+                />
               );
             })}
           </FeedbackList>

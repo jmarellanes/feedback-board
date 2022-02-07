@@ -5,7 +5,6 @@ import { CSSTransition } from 'react-transition-group';
 import FeedbackItem from '../components/FeedbackItem';
 import Modal from '../components/Modal';
 import CreateFeedback from '../components/CreateFeedback';
-import Upvotes from '../components/Upvotes';
 import FeedbackListRoadmap from '../components/FeedbackListRoadmap';
 import Loader from '../components/Loader';
 import Button from '../components/Button';
@@ -44,18 +43,12 @@ function Roadmap() {
                 key={fb.FeedbackId}
                 id={fb.FeedbackId}
                 status={fb.Status}
+                upvotedBy={fb.UpvotedBy ? fb.UpvotedBy : []}
+                totalUpvotes={fb.TotalUpvotes}
                 link
                 categoryActive
                 roadmapFeedback
-              >
-                <Upvotes
-                  upvotedBy={fb.UpvotedBy ? fb.UpvotedBy : []}
-                  id={fb.FeedbackId}
-                  feedbackStatusIndex={index}
-                >
-                  {fb.TotalUpvotes}
-                </Upvotes>
-              </FeedbackItem>
+              />
             );
           })}
         </FeedbackListRoadmap>

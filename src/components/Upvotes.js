@@ -4,7 +4,7 @@ import { useUser } from '../context/UserContext';
 import { ReactComponent as ChevronUp } from '../assets/images/chevron-up.svg';
 import { operationStatus } from '../utils/data';
 
-function Upvote({ children, upvotedBy, id, feedbackStatusIndex }) {
+function Upvotes({ upvotedBy, id, totalUpvotesFromParent }) {
   const [user] = useUser();
   const upvoted = upvotedBy.includes(user.userID) || false;
 
@@ -101,7 +101,7 @@ function Upvote({ children, upvotedBy, id, feedbackStatusIndex }) {
       </span>
       <span className='upvotes__title'>
         <span className='upvotes__quantity'>
-          {totalUpvotes === null ? children : totalUpvotes}
+          {totalUpvotes === null ? totalUpvotesFromParent : totalUpvotes}
           <span className='visually-hidden'>Upvotes</span>
         </span>
       </span>
@@ -116,4 +116,4 @@ function Upvote({ children, upvotedBy, id, feedbackStatusIndex }) {
   );
 }
 
-export default Upvote;
+export default Upvotes;

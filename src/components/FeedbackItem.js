@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import Category from './Category';
 import { ReactComponent as CommentsIcon } from '../assets/images/comments.svg';
+import Upvotes from './Upvotes';
 
 function FeedbackItem({
   title,
@@ -13,6 +14,8 @@ function FeedbackItem({
   children,
   roadmapFeedback,
   status,
+  upvotedBy,
+  totalUpvotes,
 }) {
   const Tag = ({ children }) => {
     return link ? (
@@ -47,7 +50,13 @@ function FeedbackItem({
           </Tag>
         </header>
 
-        <div className='feedback-item__upvotes'>{children}</div>
+        <div className='feedback-item__upvotes'>
+          <Upvotes
+            upvotedBy={upvotedBy}
+            id={id}
+            totalUpvotesFromParent={totalUpvotes}
+          />
+        </div>
 
         <div className='feedback-item__comments'>
           <CommentsIcon />
