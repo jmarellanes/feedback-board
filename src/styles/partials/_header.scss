@@ -260,6 +260,26 @@
   }
 }
 
+@include respond-to('medium--s') {
+  .header {
+    &-main {
+      &__nav-main,
+      &__roadmap-card {
+        max-width: 18rem;
+        transform: translateX(21rem);
+      }
+
+      &__navigation-container {
+        width: 21rem;
+      }
+
+      &__sliding-background {
+        width: 21rem;
+      }
+    }
+  }
+}
+
 @include respond-to('small--m') {
   .header {
     &-main {

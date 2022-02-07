@@ -16,14 +16,6 @@
     transition: all var(--duration__250) var(--easing__s);
     transition-property: color, background-color;
 
-    @include respond-to('medium--s') {
-      display: flex;
-      align-items: center;
-
-      min-height: 2.5rem;
-      margin-left: var(--spacer__24);
-    }
-
     &:hover {
       background-color: var(--color__secondary--light-02);
       color: var(--color__secondary);
@@ -62,10 +54,11 @@
 }
 
 /* =====================================================================
-  -> ROADMAP > FEEDBACK LIST
+  -> ROADMAP - HOME > FEEDBACK LIST
 ===================================================================== */
-.roadmap-page {
-  .category {
+.roadmap-page,
+.home-page__feedback {
+  & .category {
     &__link {
       display: flex;
       align-items: center;
