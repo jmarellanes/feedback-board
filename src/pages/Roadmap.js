@@ -22,50 +22,6 @@ function Roadmap() {
   const tabNavRef = useRef();
   const history = useHistory();
 
-  const updateUpvotesParentState = (arr, id, index) => {
-    let updateState = feedback[index].map((item) => {
-      if (item.fields.FeedbackId === id) {
-        return {
-          fields: { ...item.fields, UpvotedBy: arr, TotalUpvotes: arr.length },
-        };
-      }
-      return item;
-    });
-
-    const updateFeedback = [...feedback];
-    updateFeedback[index] = updateState;
-    setFeedback(updateFeedback);
-  };
-
-  const feedbackItem = (feedbackData, index) =>
-    feedbackData.map((data) => {
-      const fb = data.fields;
-
-      return (
-        <FeedbackItem
-          title={fb.Title}
-          description={fb.Description}
-          category={fb.Category}
-          comments={fb.TotalComments}
-          key={fb.FeedbackId}
-          id={fb.FeedbackId}
-          status={fb.Status}
-          link
-          categoryActive
-          roadmapFeedback
-        >
-          <Upvotes
-            upvotedBy={fb.UpvotedBy ? fb.UpvotedBy : []}
-            id={fb.FeedbackId}
-            updateUpvotesParentState={updateUpvotesParentState}
-            feedbackStatusIndex={index}
-          >
-            {fb.TotalUpvotes}
-          </Upvotes>
-        </FeedbackItem>
-      );
-    });
-
   const FeedbackList = () =>
     feedback.map((data, index) => {
       return (
@@ -76,7 +32,32 @@ function Roadmap() {
           key={statusList[index]['Order']}
           activeTab={activeTab}
         >
-          {feedbackItem(data, index)}
+          {data.map((d) => {
+            const fb = d.fields;
+
+            return (
+              <FeedbackItem
+                title={fb.Title}
+                description={fb.Description}
+                category={fb.Category}
+                comments={fb.TotalComments}
+                key={fb.FeedbackId}
+                id={fb.FeedbackId}
+                status={fb.Status}
+                link
+                categoryActive
+                roadmapFeedback
+              >
+                <Upvotes
+                  upvotedBy={fb.UpvotedBy ? fb.UpvotedBy : []}
+                  id={fb.FeedbackId}
+                  feedbackStatusIndex={index}
+                >
+                  {fb.TotalUpvotes}
+                </Upvotes>
+              </FeedbackItem>
+            );
+          })}
         </FeedbackListRoadmap>
       );
     });
