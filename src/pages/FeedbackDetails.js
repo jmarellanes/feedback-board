@@ -9,7 +9,6 @@ import Button from '../components/Button';
 import Loader from '../components/Loader';
 import Modal from '../components/Modal';
 import EditFeedback from '../components/EditFeedback';
-import Upvotes from '../components/Upvotes';
 
 function FeedbackDetails() {
   const [feedback, setFeedback] = useState({});
@@ -20,16 +19,6 @@ function FeedbackDetails() {
   const { id } = useParams();
   const history = useHistory();
   const isMounted = useRef(true);
-
-  const updateUpvotesParentState = (arr, id) => {
-    const updateFeedback = {
-      ...feedback,
-      UpvotedBy: arr,
-      TotalUpvotes: arr.length,
-    };
-
-    if (isMounted.current) setFeedback(updateFeedback);
-  };
 
   const loadFeedbackDetails = async () => {
     try {
@@ -145,17 +134,12 @@ function FeedbackDetails() {
                   description={feedback.Description}
                   category={feedback.Category}
                   comments={allComments.length}
+                  id={feedback.FeedbackId}
+                  upvotedBy={feedback.UpvotedBy ? feedback.UpvotedBy : []}
+                  totalUpvotes={feedback.TotalUpvotes}
                   link={false}
                   categoryActive={false}
-                >
-                  <Upvotes
-                    upvotedBy={feedback.UpvotedBy ? feedback.UpvotedBy : []}
-                    id={feedback.FeedbackId}
-                    updateUpvotesParentState={updateUpvotesParentState}
-                  >
-                    {feedback.TotalUpvotes}
-                  </Upvotes>
-                </FeedbackItem>
+                />
               </section>
 
               <section
