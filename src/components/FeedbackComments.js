@@ -94,7 +94,7 @@ function FeedbackComments({
           in={triggerAnimation}
           unmountOnExit
           timeout={250}
-          classNames='feedback-comment__reply'
+          classNames='feedback-comment__create-reply'
         >
           <CreateComment
             isReply={true}

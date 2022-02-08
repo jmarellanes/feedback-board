@@ -99,7 +99,7 @@ function CreateComment(
   return (
     <div
       className={`create-comment__container ${
-        isReply ? 'feedback-comment__reply' : ''
+        isReply ? 'feedback-comment__create-reply' : ''
       } ${isHidden ? 'get-size-hidden' : ''}`}
       ref={replyRef}
     >
