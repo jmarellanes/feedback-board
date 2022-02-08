@@ -1,6 +1,5 @@
 #feedback-page__wrapper {
   max-width: 46rem;
-  margin: 0 auto;
 
   @include respond-to('medium--m') {
     padding: var(--spacer__32) var(--spacer__24) 0;

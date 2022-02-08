@@ -2,7 +2,6 @@
   display: flex;
 
   max-width: 69rem;
-  margin: 0 auto;
 
   @include respond-to('medium--l') {
     display: block;

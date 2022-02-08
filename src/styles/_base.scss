@@ -41,20 +41,8 @@ body {
 } // -> body
 
 #root {
-  padding: var(--spacer__40) var(--spacer__32) var(--spacer__80);
-
   &[aria-hidden='true'] {
     pointer-events: none;
-  }
-
-  @include respond-to('medium--l') {
-    padding-top: var(--spacer__32);
-    padding-bottom: var(--spacer__48);
-  }
-
-  @include respond-to('medium--m') {
-    padding: 0;
-    padding-bottom: var(--spacer__40);
   }
 }
 
@@ -98,6 +86,30 @@ body {
 .isInactive {
   pointer-events: none;
   cursor: default;
+}
+
+/* =====================================================================
+  -> PAGES
+===================================================================== */
+#home-page__wrapper,
+#feedback-page__wrapper,
+#roadmap-page__wrapper {
+  margin: 0 auto;
+  padding-top: var(--spacer__40);
+  padding-bottom: var(--spacer__64);
+}
+
+#home-page__wrapper,
+#roadmap-page__wrapper {
+  @include respond-to('large--s') {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+
+  @include respond-to('medium--m') {
+    margin: 0;
+    padding-top: 0;
+  }
 }
 
 /* =====================================================================
