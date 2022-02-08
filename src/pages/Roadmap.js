@@ -220,7 +220,7 @@ function Roadmap() {
 
   return (
     <>
-      <div id='roadmap-page__wrapper'>
+      <div id='roadmap-page__wrapper' className='page-transition'>
         <header className='header-tertiary'>
           <div className='header-tertiary__container'>
             <div className='header-tertiary__title'>

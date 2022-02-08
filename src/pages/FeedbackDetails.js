@@ -96,7 +96,7 @@ function FeedbackDetails() {
 
   return (
     <>
-      <div id='feedback-page__wrapper'>
+      <div id='feedback-page__wrapper' className='page-transition'>
         {!Object.keys(feedback).length ? (
           <Loader type='feedback-details' />
         ) : (

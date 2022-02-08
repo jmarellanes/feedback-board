@@ -137,7 +137,7 @@ function Home() {
 
   return (
     <>
-      <div id='home-page__wrapper'>
+      <div id='home-page__wrapper' className='page-transition'>
         <Header categories={categories} status={status} />
 
         <main className='home-page__feedback'>
