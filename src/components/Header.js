@@ -147,8 +147,8 @@ function Header({ categories, status }) {
         >
           <NavMain categories={categories} />
           <RoadmapCard statusList={status} />
+          <ToggleMode />
         </div>
-        <ToggleMode />
       </div>
       <div
         className='header-main__sliding-background'

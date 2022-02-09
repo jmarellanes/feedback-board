@@ -161,16 +161,32 @@
       }
 
       &__navigation-container {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(2, max-content);
+        grid-template-rows: repeat(2, min-content);
+
+        gap: 1rem;
 
         > * {
-          flex: 1 1 0px;
-
           &:not(:last-child) {
-            margin-right: var(--spacer__24);
             margin-bottom: 0;
           }
         }
+      }
+
+      &__nav-main {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+      }
+
+      &__roadmap-card {
+        grid-column: 2 / 3;
+        grid-row: 1 / 3;
+      }
+
+      &__toggle {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
       }
     }
   }
@@ -231,18 +247,17 @@
       }
 
       &__nav-main,
-      &__roadmap-card {
+      &__roadmap-card,
+      &__toggle {
         max-width: 16rem;
         transform: translateX(19rem);
 
         transition: transform 600ms var(--easing__s);
       }
 
-      &__nav-main {
-        margin-top: var(--spacer__24);
-      }
-
-      &__roadmap-card {
+      &__nav-main,
+      &__roadmap-card,
+      &__toggle {
         margin-top: var(--spacer__24);
       }
 
@@ -270,15 +285,13 @@
   .header {
     &-main {
       &__nav-main,
-      &__roadmap-card {
+      &__roadmap-card,
+      &__toggle {
         max-width: 18rem;
         transform: translateX(21rem);
       }
 
-      &__navigation-container {
-        width: 21rem;
-      }
-
+      &__navigation-container,
       &__sliding-background {
         width: 21rem;
       }
@@ -296,15 +309,21 @@
   }
 }
 
+/* =====================================================================
+    -> SLIDE ANIMATION
+  ===================================================================== */
 .header-main__isOpen {
   .header-main__sliding-background {
     transform: scaleX(1);
     transition-delay: 0s;
   }
 
-  .header-main__nav-main,
-  .header-main__roadmap-card {
-    transform: translateX(1.5rem);
-    transition-delay: 80ms;
+  .header-main {
+    &__nav-main,
+    &__roadmap-card,
+    &__toggle {
+      transform: translateX(1.5rem);
+      transition-delay: 80ms;
+    }
   }
 }
