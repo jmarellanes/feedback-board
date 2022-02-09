@@ -3,6 +3,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import HeaderBrandmark from './HeaderBrandmark';
 import NavMain from './NavMain';
 import RoadmapCard from './RoadmapCard';
+import ToggleMode from './ToggleMode';
 
 import { ReactComponent as Hamburguer } from '../assets/images/hamburguer.svg';
 
@@ -147,6 +148,7 @@ function Header({ categories, status }) {
           <NavMain categories={categories} />
           <RoadmapCard statusList={status} />
         </div>
+        <ToggleMode />
       </div>
       <div
         className='header-main__sliding-background'

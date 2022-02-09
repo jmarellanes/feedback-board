@@ -83,6 +83,12 @@
         left: -100vw;
       }
     }
+
+    &__toggle {
+      @include fb_header-container;
+
+      display: flex;
+    }
   }
 
   &-secondary {

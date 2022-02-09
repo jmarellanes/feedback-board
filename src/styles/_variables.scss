@@ -17,6 +17,9 @@ $breakpoint__medium: map-get($breakpoints, 'medium--m');
   /* =====================================================================
     -> COLOR PALETTE
   ===================================================================== */
+  // Color Mode
+  --color__mode: 'dark';
+
   // Primary
   --color__primary: hsl(282, 83%, 52%);
   --color__primary--light: hsl(282, 83%, 62%);
@@ -91,3 +94,23 @@ $breakpoint__medium: map-get($breakpoints, 'medium--m');
   ===================================================================== */
   --breakpoint__medium--m: #{$breakpoint__medium};
 } // -> :root
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --color__mode: 'dark';
+  }
+
+  :root:not([data-user-color-scheme]) {
+    --color__tertiary: #dfe3fa;
+    --color__secondary--light-03: #141625;
+    --color__light: #1e2139;
+    --color__tertiary--light-02: #ffffff;
+  }
+}
+
+[data-user-color-scheme='light'] {
+  --color__tertiary: #dfe3fa;
+  --color__secondary--light-03: #141625;
+  --color__light: #1e2139;
+  --color__tertiary--light-02: #ffffff;
+}

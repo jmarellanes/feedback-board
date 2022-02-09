@@ -1,0 +1,84 @@
+.toggle-button {
+  --toggle-button__size: 26px;
+
+  &__container {
+    &-icon,
+    &-button {
+      display: flex;
+      align-items: center;
+    }
+
+    &-button {
+      margin-left: auto;
+    }
+  }
+
+  &__title {
+    margin-left: var(--spacer__8);
+  }
+
+  &__button {
+    &[data-action='aria-switch'] {
+      position: relative;
+
+      background: var(--color__secondary--light-02);
+      border-radius: calc(var(--toggle-button__size) + 2px);
+      width: calc(var(--toggle-button__size) * 2);
+      height: calc(var(--toggle-button__size) + 4px);
+      overflow: hidden;
+
+      transition: background var(--duration__350) var(--easing__s);
+
+      & span {
+        position: absolute;
+
+        height: var(--toggle-button__size);
+        width: var(--toggle-button__size);
+        background: var(--color__secondary);
+        border-radius: 50%;
+        pointer-events: none;
+
+        transition: all var(--duration__350) var(--easing__s);
+        transition-property: background, left;
+      }
+
+      &[aria-checked='false'] {
+        & span {
+          top: 2px;
+          left: 2px;
+        }
+      }
+
+      &[aria-checked='true'] {
+        background: var(--color__secondary);
+
+        & span {
+          top: 2px;
+          left: calc(var(--toggle-button__size) - 2px);
+
+          background: var(--color__light);
+        }
+      }
+    }
+
+    // Fallback for Safari
+    &:active,
+    &:focus {
+      outline: 3px dotted var(--color__tertiary);
+      outline-offset: 2px;
+    }
+
+    // HACK for use @supports selector() with SASS
+    @supports #{'\selector(*:focus-visible)'} {
+      &:focus {
+        outline: none;
+      }
+
+      &:active,
+      &:focus-visible {
+        outline: 3px dotted var(--color__tertiary);
+        outline-offset: 2px;
+      }
+    }
+  }
+}
