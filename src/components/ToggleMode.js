@@ -1,13 +1,10 @@
-import { useState } from 'react';
+import { useTheme } from '../context/ThemeContext';
 
 import { ReactComponent as DarkMode } from '../assets/images/dark-mode.svg';
 
 function ToggleMode() {
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleClick = () => {
-    setIsChecked(!isChecked);
-  };
+  const { themeIsDark, changeTheme } = useTheme();
+  const [isDark] = themeIsDark;
 
   return (
     <div className='header-main__toggle toggle-button'>
@@ -20,10 +17,10 @@ function ToggleMode() {
           type='button'
           data-action='aria-switch'
           aria-labelledby='toggle_label'
-          aria-checked={isChecked}
+          aria-checked={isDark}
           role='switch'
           className='toggle-button__button'
-          onClick={handleClick}
+          onClick={changeTheme}
         >
           <span></span>
         </button>
