@@ -14,15 +14,15 @@
     padding-left: var(--spacer__24);
 
     &--Planned {
-      --bullet-color: var(--color__complementary--01);
+      --bullet-color: var(--color__comp--1);
     }
 
     &--In-Progress {
-      --bullet-color: var(--color__primary);
+      --bullet-color: var(--color__secd);
     }
 
     &--Live {
-      --bullet-color: var(--color__complementary--02);
+      --bullet-color: var(--color__comp--2);
     }
 
     &::before {

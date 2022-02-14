@@ -24,7 +24,7 @@
 
     display: block;
 
-    color: var(--color__secondary);
+    color: var(--color__prim);
     font-size: 10px;
     margin: 0 auto;
     text-indent: -9999em;
@@ -75,7 +75,7 @@
       text-decoration: none;
 
       &:hover {
-        color: var(--color__secondary);
+        color: var(--color__prim);
       }
 
       &:active,

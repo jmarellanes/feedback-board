@@ -8,8 +8,8 @@
   padding-top: var(--spacer__16);
   padding-bottom: var(--spacer__16);
 
-  background-color: var(--color__secondary--light-03);
-  color: var(--color__tertiary);
+  background-color: var(--color__prim-tint--3);
+  color: var(--color__prim-shade--1);
   border: none;
   border-radius: 0.75rem;
   cursor: pointer;
@@ -19,7 +19,7 @@
 
   .icon--chevron-up {
     margin-top: 3px;
-    stroke: var(--color__tertiary);
+    stroke: var(--color__prim-shade--1);
 
     transition: stroke var(--duration__250) var(--easing__s);
   }
@@ -32,18 +32,18 @@
   }
 
   &:hover {
-    background-color: var(--color__secondary--light-02);
-    color: var(--color__secondary);
+    background-color: var(--color__prim-tint--2);
+    color: var(--color__prim);
 
     .icon--chevron-up {
-      stroke: var(--color__secondary);
+      stroke: var(--color__prim);
     }
   }
 
   // Fallback for Safari
   &:active,
   &:focus {
-    outline: 3px dotted var(--color__tertiary);
+    outline: 3px dotted var(--color__prim-shade--1);
     outline-offset: 2px;
   }
 
@@ -55,32 +55,32 @@
 
     &:active,
     &:focus-visible {
-      outline: 3px dotted var(--color__tertiary);
+      outline: 3px dotted var(--color__prim-shade--1);
       outline-offset: 2px;
     }
   }
 
   &--isUpvoted {
-    background-color: var(--color__secondary);
-    color: var(--color__light);
+    background-color: var(--color__prim);
+    color: var(--color__text--white);
 
     .icon--chevron-up {
-      stroke: var(--color__light);
+      stroke: var(--color__text--white);
     }
 
     &:hover {
-      background-color: var(--color__secondary--light-01);
-      color: var(--color__light);
+      background-color: var(--color__prim-tint--1);
+      color: var(--color__text--white);
 
       .icon--chevron-up {
-        stroke: var(--color__light);
+        stroke: var(--color__text--white);
       }
     }
 
     &:active,
     &:focus,
     &:focus-visible {
-      outline-color: var(--color__secondary);
+      outline-color: var(--color__prim);
     }
   }
 
@@ -123,9 +123,9 @@
     }
   }
 
-  --accent__color: var(--color__tertiary);
+  --accent__color: var(--color__prim-shade--1);
   &--isUpvoted .upvotes__loader {
-    --accent__color: var(--color__light);
+    --accent__color: var(--color__text--white);
   }
 
   &[data-operation-running='true'] {
@@ -139,7 +139,7 @@
         transition-delay: 200ms;
 
         &::after {
-          color: var(--color__light);
+          color: var(--color__text--white);
           animation: rotate 750ms linear infinite;
         }
       }

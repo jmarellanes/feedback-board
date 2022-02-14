@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
 
-    background-color: var(--color__tertiary);
+    background-color: var(--color__prim-shade--1);
     border-radius: var(--rounded-corners);
     padding: var(--spacer__12) var(--spacer__24);
 
@@ -18,7 +18,7 @@
 
     &__title {
       display: flex;
-      color: var(--color__light);
+      color: var(--color__text--white);
       margin-right: var(--spacer__40);
 
       @include respond-to('medium--s') {

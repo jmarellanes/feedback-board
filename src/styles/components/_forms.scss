@@ -1,6 +1,6 @@
 @mixin field-focus {
-  border-color: var(--color__secondary);
-  outline: 1px solid var(--color__secondary) !important;
+  border-color: var(--color__prim);
+  outline: 1px solid var(--color__prim) !important;
 }
 
 @mixin field-disabled {
@@ -15,7 +15,7 @@
 }
 
 @mixin field-error {
-  outline: 1px solid var(--color__danger) !important;
+  outline: 1px solid var(--color__dng) !important;
 }
 
 // FORM RESET
@@ -23,7 +23,7 @@
   &__field {
     --form-field-width: 46ch;
 
-    background-color: var(--color__secondary--light-03);
+    background-color: var(--color__prim-tint--3);
     border: none;
     border-radius: 0.25rem;
     padding: 0;
@@ -117,29 +117,29 @@ legend {
       position: absolute;
       top: 104%;
 
-      color: var(--color__danger);
+      color: var(--color__dng);
       font-size: 90%;
     }
   }
 
   &__field {
     width: 100%;
-    color: var(--color__tertiary);
+    color: var(--color__prim-shade--1);
 
-    outline: 1px solid var(--color__secondary--light-03);
+    outline: 1px solid var(--color__prim-tint--3);
     transition: outline var(--duration__250) var(--easing__s);
 
     .select {
       &__control {
         min-height: 3rem;
         font-size: fn_calculate-rem(14);
-        background-color: var(--color__secondary--light-03);
+        background-color: var(--color__prim-tint--3);
         border: none;
         box-shadow: none;
         cursor: pointer;
         padding: var(--spacer__8) var(--spacer__24);
 
-        outline: 1px solid var(--color__secondary--light-03) !important;
+        outline: 1px solid var(--color__prim-tint--3) !important;
         transition: outline var(--duration__250) var(--easing__s);
 
         svg {
@@ -147,7 +147,7 @@ legend {
           transition: rotate var(--duration__250) var(--easing__s);
 
           path {
-            fill: var(--color__secondary);
+            fill: var(--color__prim);
           }
         }
 
@@ -182,11 +182,11 @@ legend {
 
         margin-top: var(--spacer__16);
         border-radius: 0.75rem;
-        box-shadow: 0px 10px 40px -7px rgba(55, 63, 104, 0.4);
+        box-shadow: 0px 10px 40px -7px var(--color__prim-shade--5);
       }
 
       &__option {
-        border-bottom: 1px solid rgba(140, 146, 179, 0.25);
+        border-bottom: 1px solid var(--color__prim-shade--4);
         padding: var(--spacer__12) var(--spacer__24);
         cursor: inherit;
 
@@ -196,7 +196,7 @@ legend {
 
         &--is-selected {
           background-color: transparent;
-          color: var(--color__tertiary);
+          color: var(--color__prim-shade--1);
           position: relative;
 
           &::after {
@@ -213,7 +213,7 @@ legend {
 
         &--is-focused {
           background-color: transparent;
-          color: var(--color__primary);
+          color: var(--color__secd);
         }
       }
     }
@@ -230,14 +230,14 @@ legend {
           }
 
           path {
-            fill: var(--color__danger);
+            fill: var(--color__dng);
           }
         }
       }
     }
 
     &::placeholder {
-      color: var(--color__complementary--03);
+      color: var(--color__comp--3);
       opacity: 1;
     }
 
@@ -261,7 +261,7 @@ legend {
       }
 
       &::placeholder {
-        color: var(--color__danger);
+        color: var(--color__dng);
       }
     }
   }

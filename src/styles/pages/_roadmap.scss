@@ -26,13 +26,13 @@
 
   &__feedback {
     &-planned {
-      --accent__color: var(--color__complementary--01);
+      --accent__color: var(--color__comp--1);
     }
     &-in-progress {
-      --accent__color: var(--color__primary);
+      --accent__color: var(--color__secd);
     }
     &-live {
-      --accent__color: var(--color__complementary--02);
+      --accent__color: var(--color__comp--2);
     }
   }
 }

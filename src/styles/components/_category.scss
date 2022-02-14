@@ -4,11 +4,12 @@
   }
 
   &__link {
+    --accent__color: ;
     display: inline-block;
 
-    background-color: var(--color__secondary--light-03);
+    background-color: var(--color__prim-tint--3);
     border-radius: var(--rounded-corners);
-    color: var(--color__secondary);
+    color: var(--color__prim);
     padding: var(--spacer__8) var(--spacer__16);
     text-decoration: none;
     text-transform: capitalize;
@@ -17,14 +18,13 @@
     transition-property: color, background-color;
 
     &:hover {
-      background-color: var(--color__secondary--light-02);
-      color: var(--color__secondary);
+      background-color: var(--color__prim-tint--2);
     }
 
     // Fallback for Safari
     &:active,
     &:focus {
-      outline: 3px dotted var(--color__secondary);
+      outline: 3px dotted var(--color__prim);
       outline-offset: 2px;
     }
 
@@ -36,18 +36,17 @@
 
       &:active,
       &:focus-visible {
-        outline: 3px dotted var(--color__secondary);
+        outline: 3px dotted var(--color__prim);
         outline-offset: 2px;
       }
     }
 
     &--active {
-      background-color: var(--color__secondary);
-      color: var(--color__light);
+      background-color: var(--color__prim);
+      color: var(--color__text--white);
 
       &:hover {
-        background-color: var(--color__secondary--light-01);
-        color: var(--color__light);
+        background-color: var(--color__prim-tint--1);
       }
     }
   }

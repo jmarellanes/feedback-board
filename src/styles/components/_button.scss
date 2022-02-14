@@ -35,7 +35,7 @@ button {
   }
 
   &__title {
-    color: var(--color__light);
+    color: var(--color__text--white);
     opacity: 1;
 
     transition: all var(--duration__250) var(--easing__s);
@@ -50,34 +50,34 @@ button {
 
   // Hove, Active, Focus, etc, states
   &--primary {
-    --accent__color: var(--color__primary);
+    --accent__color: var(--color__secd);
 
     &:hover {
-      --accent__color: var(--color__primary--light);
+      --accent__color: var(--color__secd-tint--1);
     }
   }
 
   &--secondary {
-    --accent__color: var(--color__secondary);
+    --accent__color: var(--color__prim);
 
     &:hover {
-      --accent__color: var(--color__secondary--light-01);
+      --accent__color: var(--color__prim-tint--1);
     }
   }
 
   &--tertiary {
-    --accent__color: var(--color__tertiary);
+    --accent__color: var(--color__prim-shade--1);
 
     &:hover {
-      --accent__color: var(--color__tertiary--light-01);
+      --accent__color: var(--color__prim-shade--2);
     }
   }
 
   &--danger {
-    --accent__color: var(--color__danger);
+    --accent__color: var(--color__dng);
 
     &:hover {
-      --accent__color: var(--color__danger--light);
+      --accent__color: var(--color__dng-tint--1);
     }
   }
 
@@ -89,7 +89,7 @@ button {
   }
 
   &--back-light {
-    --accent__color: var(--color__tertiary);
+    --accent__color: var(--color__prim-shade--1);
     background-color: transparent;
 
     & .button__title {
@@ -97,12 +97,12 @@ button {
     }
 
     &:hover {
-      --accent__color: var(--color__tertiary--light-02);
+      --accent__color: var(--color__prim-shade--3);
     }
   }
 
   &--back-dark {
-    --accent__color: var(--color__light);
+    --accent__color: var(--color__text--white);
     background-color: transparent;
 
     & .button__title {
@@ -110,12 +110,12 @@ button {
     }
 
     &:hover {
-      --accent__color: var(--color__secondary--light-02);
+      --accent__color: var(--color__prim-tint--2);
     }
   }
 
   &--nav-toggle {
-    --accent__color: var(--color__light);
+    --accent__color: var(--color__text--white);
   }
 
   &--primary,
@@ -224,7 +224,7 @@ button {
       display: block;
       width: 1rem;
       height: 1rem;
-      border: 2px solid var(--color__light);
+      border: 2px solid var(--color__text--white);
       border-bottom-color: transparent;
       border-left-color: transparent;
       border-radius: 50%;
@@ -242,7 +242,7 @@ button {
         transition-delay: 200ms;
 
         &::after {
-          color: var(--color__light);
+          color: var(--color__text--white);
           animation: rotate 750ms linear infinite;
         }
       }
@@ -327,18 +327,18 @@ button {
   }
 
   &--back-light {
-    --accent__color: var(--color__tertiary);
+    --accent__color: var(--color__prim-shade--1);
 
     &:hover {
-      --accent__color: var(--color__secondary--light-01);
+      --accent__color: var(--color__prim-tint--1);
     }
   }
 
   &--back-dark {
-    --accent__color: firebrick;
+    --accent__color: var(--color__text--white);
 
     &:hover {
-      --accent__color: var(--color__secondary--light-02);
+      --accent__color: var(--color__prim-tint--2);
     }
   }
 

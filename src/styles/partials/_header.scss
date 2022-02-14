@@ -27,7 +27,7 @@
     &__title,
     &__user {
       &--light {
-        color: var(--color__light);
+        color: var(--color__text--white);
       }
     }
 
@@ -43,7 +43,7 @@
     &__image {
       height: 2rem;
       border-radius: 50%;
-      border: 2px solid var(--color__light);
+      border: 2px solid var(--color__text--white);
       margin-right: var(--spacer__12);
     }
 
@@ -70,7 +70,7 @@
 
       height: 100vh;
       width: 19rem;
-      background-color: var(--color__secondary--light-03);
+      background-color: var(--color__prim-tint--3);
 
       &::after {
         content: '';
@@ -113,14 +113,14 @@
     &__container {
       display: flex;
 
-      background-color: var(--color__tertiary);
+      background-color: var(--color__prim-shade--1);
       border-radius: var(--rounded-corners);
       padding: var(--spacer__24);
     }
 
     &__title {
       p {
-        color: var(--color__light);
+        color: var(--color__text--white);
       }
     }
 

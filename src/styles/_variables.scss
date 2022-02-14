@@ -3,7 +3,7 @@
   ===================================================================== */
 /* prettier-ignore */
 $breakpoints: (
-  'large--s': ( max-width:  69em ),    // ------> 1104px
+  'large--s': ( max-width:  69em ),     // ------> 1104px
   'medium--l': ( max-width:  64em ),    // ------> 1024px
   'medium--m': ( max-width:  52em ),    // ------> 832px
   'medium--s': ( max-width:  39em ),    // ------> 624px
@@ -16,34 +16,31 @@ $breakpoint__medium: map-get($breakpoints, 'medium--m');
   /* =====================================================================
     -> COLOR PALETTE
   ===================================================================== */
-  // Color Mode
-  --color__mode: 'dark';
+  --color__mode: 'light';
 
-  // Primary
-  --color__primary: hsl(282, 83%, 52%);
-  --color__primary--light: hsl(282, 83%, 62%);
+  --color__bg--main: var(--thm-light__primary--tint-3);
+  --color__bg--container: var(--thm__pure-white);
+  --color__text--headings: var(--thm-light__primary--shade-1);
+  --color__text--main: var(--thm-light__primary--shade-3);
+  --color__text--white: var(--thm__pure-white);
 
-  // Secondary
-  --color__secondary: hsl(230, 76%, 59%);
-  --color__secondary--light-01: hsl(230, 76%, 65%);
-  --color__secondary--light-02: hsl(230, 100%, 91%);
-  --color__secondary--light-03: hsl(230, 86%, 97%);
-
-  // Color Tertiary
-  --color__tertiary: hsl(231, 33%, 34%);
-  --color__tertiary--light-01: hsl(231, 33%, 50%);
-  --color__tertiary--light-02: hsl(224, 20%, 49%);
-
-  // Color Danger
-  --color__danger: hsl(0, 67%, 53%);
-  --color__danger--light: hsl(0, 67%, 65%);
-
-  // Complementary
-  --color__complementary--01: hsl(14, 83%, 74%);
-  --color__complementary--02: hsl(204, 94%, 68%);
-  --color__complementary--03: hsl(231, 20%, 63%);
-  --color__complementary--03--alpha: hsla(231, 20%, 63%, 0.25);
-  --color__light: #ffffff;
+  --color__prim: var(--thm-light__primary);
+  --color__prim-tint--1: var(--thm-light__primary--tint-1);
+  --color__prim-tint--2: var(--thm-light__primary--tint-2);
+  --color__prim-tint--3: var(--thm-light__primary--tint-3);
+  --color__prim-shade--1: var(--thm-light__primary--shade-1);
+  --color__prim-shade--2: var(--thm-light__primary--shade-2);
+  --color__prim-shade--3: var(--thm-light__primary--shade-3);
+  --color__prim-shade--4: var(--thm-light__primary--shade-4);
+  --color__prim-shade--5: var(--thm-light__primary--shade-5);
+  --color__prim-shade--6: var(--thm-light__primary--shade-6);
+  --color__secd: var(--thm-light__secondary);
+  --color__secd-tint--1: var(--thm-light__secondary--tint-1);
+  --color__comp--1: var(--thm-light__complementary-1);
+  --color__comp--2: var(--thm-light__complementary-2);
+  --color__comp--3: var(--thm-light__complementary-3);
+  --color__dng: var(--thm-light__danger);
+  --color__dng-tint--1: var(--thm-light__danger--tint-1);
 
   /* =====================================================================
     -> MARGINS AND PADDINGS
@@ -94,22 +91,14 @@ $breakpoint__medium: map-get($breakpoints, 'medium--m');
   --breakpoint__medium--m: #{$breakpoint__medium};
 } // -> :root
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
   :root {
     --color__mode: 'dark';
   }
 
   :root:not([data-user-color-scheme]) {
-    --color__tertiary: #dfe3fa;
-    --color__secondary--light-03: #141625;
-    --color__light: #1e2139;
-    --color__tertiary--light-02: #ffffff;
   }
 }
 
-[data-user-color-scheme='light'] {
-  --color__tertiary: #dfe3fa;
-  --color__secondary--light-03: #141625;
-  --color__light: #1e2139;
-  --color__tertiary--light-02: #ffffff;
+[data-user-color-scheme='dark'] {
 }

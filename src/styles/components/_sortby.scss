@@ -5,14 +5,14 @@
 
   max-width: 14rem;
   font-size: fn_calculate-rem(14);
-  background-color: var(--color__tertiary);
+  background-color: var(--color__prim-shade--1);
   border-radius: 0.75rem;
   padding-top: 0;
   padding-bottom: 0;
   cursor: pointer;
 
   &__label {
-    color: var(--color__light);
+    color: var(--color__text--white);
     cursor: inherit;
   }
 
@@ -23,7 +23,7 @@
     max-width: 8.5rem;
 
     .sortby__control {
-      background-color: var(--color__tertiary);
+      background-color: var(--color__prim-shade--1);
       border: none;
       box-shadow: none;
       cursor: inherit;
@@ -42,11 +42,11 @@
 
     .sortby__placeholder,
     .sortby__single-value {
-      color: var(--color__light);
+      color: var(--color__text--white);
     }
 
     .sortby__indicator {
-      color: var(--color__light);
+      color: var(--color__text--white);
       padding: 0;
       margin-top: 2px;
     }
@@ -64,13 +64,14 @@
       left: -4rem;
       margin-top: var(--spacer__24);
       border-radius: 0.75rem;
-      box-shadow: 0px 10px 40px -7px rgba(55, 63, 104, 0.4);
+      box-shadow: 0px 10px 40px -7px var(--color__prim-shade--5);
     }
 
     .sortby__option {
-      border-bottom: 1px solid rgba(140, 146, 179, 0.25);
+      border-bottom: 1px solid var(--color__prim-shade--4);
       padding: var(--spacer__12) var(--spacer__24);
       cursor: inherit;
+      transition: color var(--duration__350) var(--easing__s);
 
       &:last-child {
         border-bottom: none;
@@ -78,7 +79,7 @@
 
       &--is-selected {
         background-color: transparent;
-        color: var(--color__tertiary);
+        color: var(--color__prim-shade--1);
         position: relative;
 
         &::after {
@@ -95,7 +96,7 @@
 
       &--is-focused {
         background-color: transparent;
-        color: var(--color__primary);
+        color: var(--color__secd);
       }
     }
   }

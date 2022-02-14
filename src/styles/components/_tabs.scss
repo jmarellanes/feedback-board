@@ -19,7 +19,7 @@
 
   &__navlist {
     display: none;
-    border-bottom: 1px solid var(--color__complementary--03--alpha);
+    border-bottom: 1px solid var(--color__prim-shade--4);
 
     > * {
       flex: 1 1 0px;
@@ -34,15 +34,15 @@
     list-style-type: none;
 
     &--planned {
-      --accent__color: var(--color__complementary--01);
+      --accent__color: var(--color__comp--1);
     }
 
     &--in-progress {
-      --accent__color: var(--color__primary);
+      --accent__color: var(--color__secd);
     }
 
     &--live {
-      --accent__color: var(--color__complementary--02);
+      --accent__color: var(--color__comp--2);
     }
 
     span {
@@ -92,7 +92,7 @@
       // Fallback for Safari
       &:active,
       &:focus {
-        outline: 3px dotted var(--color__tertiary);
+        outline: 3px dotted var(--color__prim-shade--1);
         outline-offset: 2px;
       }
 
@@ -104,7 +104,7 @@
 
         &:active,
         &:focus-visible {
-          outline: 3px dotted var(--color__tertiary);
+          outline: 3px dotted var(--color__prim-shade--1);
           outline-offset: 2px;
         }
       }

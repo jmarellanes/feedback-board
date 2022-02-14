@@ -1,0 +1,49 @@
+* {
+  /* ==========================
+    -> BRAND COLORS
+  ========================== */
+  --brand__hue--primary: 230;
+  --brand__hue--secondary: 282;
+  --brand__saturation: 76%;
+  --brand__lightness: 59%;
+
+  --thm__pure-black: #000;
+  --thm__pure-white: #fff;
+  /* ==========================
+	-> LIGHT
+  ========================== */
+  // Primary
+  --thm-light__primary: hsl(230, 76%, 59%);
+  --thm-light__primary--tint-1: hsl(230, 76%, 65%);
+  --thm-light__primary--tint-2: hsl(230, 76%, 91%);
+  --thm-light__primary--tint-3: hsl(230, 76%, 97%);
+  --thm-light__primary--shade-1: hsl(230, 33%, 30%);
+  --thm-light__primary--shade-2: hsl(230, 33%, 50%);
+  --thm-light__primary--shade-3: hsl(230, 20%, 42%);
+  --thm-light__primary--shade-4: hsla(230, 20%, 63%, 0.25);
+  --thm-light__primary--shade-5: hsla(230, 33%, 30%, 0.4);
+  --thm-light__primary--shade-6: hsl(230, 76%, 10%);
+
+  // Secondary
+  --thm-light__secondary: hsl(282, 83%, 52%);
+  --thm-light__secondary--tint-1: hsl(282, 83%, 62%);
+
+  // Complementary
+  --thm-light__complementary-1: hsl(14, 83%, 74%);
+  --thm-light__complementary-2: hsl(204, 94%, 68%);
+  --thm-light__complementary-3: hsl(231, 20%, 63%);
+  --thm-light__danger: hsl(0, 67%, 53%);
+  --thm-light__danger--tint-1: hsl(0, 67%, 65%);
+
+  /* ==========================
+    -> DARK
+  ========================== */
+  // Primary
+  --thm-dark__primary: hsl(230, 38%, 39%);
+  --thm-dark__primary--tint-1: hsl(230, 38%, 65%);
+  --thm-dark__primary--tint-2: hsl(230, 38%, 91%);
+  --thm-dark__primary--tint-3: hsl(230, 38%, 97%);
+  --thm-dark__primary--shade-1: hsl(230, 76%, 34%);
+  --thm-dark__primary--shade-2: hsl(230, 33%, 50%);
+  --thm-dark__primary--shade-3: hsl(230, 20%, 49%);
+}
