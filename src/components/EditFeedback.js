@@ -264,7 +264,6 @@ function EditFeedback({
                   className={`form__field ${
                     errors[fieldName.category] ? 'aria-invalid-true' : ''
                   }`}
-                  openMenuOnFocus
                   components={{ DropdownIndicator }}
                 />
               )}
@@ -298,7 +297,6 @@ function EditFeedback({
                   className={`form__field ${
                     errors[fieldName.status] ? 'aria-invalid-true' : ''
                   }`}
-                  openMenuOnFocus
                   components={{ DropdownIndicator }}
                 />
               )}

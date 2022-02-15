@@ -50,7 +50,6 @@ function SortBy({ value, onChange }) {
         className='sortby__container'
         name='sortby'
         inputId='sortby'
-        openMenuOnFocus
         components={{ DropdownIndicator }}
       />
     </div>

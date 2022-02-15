@@ -195,7 +195,6 @@ function CreateFeedback({ closeModal, feedbackAdded }) {
                   className={`form__field ${
                     errors[fieldName.category] ? 'aria-invalid-true' : ''
                   }`}
-                  openMenuOnFocus
                   components={{ DropdownIndicator }}
                 />
               )}
