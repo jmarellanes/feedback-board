@@ -192,6 +192,7 @@ legend {
         border-bottom: 1px solid var(--color__prim-shade--4);
         padding: var(--spacer__12) var(--spacer__24);
         cursor: inherit;
+        transition: color var(--duration__350) var(--easing__s);
 
         &:last-child {
           border-bottom: none;
@@ -199,7 +200,7 @@ legend {
 
         &--is-selected {
           background-color: transparent;
-          color: var(--color__prim-shade--1);
+          color: var(--color__secd);
           position: relative;
 
           &::after {
@@ -216,7 +217,7 @@ legend {
 
         &--is-focused {
           background-color: transparent;
-          color: var(--color__secd);
+          color: var(--color__secd-tint--1);
         }
       }
     }
