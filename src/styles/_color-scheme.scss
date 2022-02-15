@@ -39,11 +39,14 @@
     -> DARK
   ========================== */
   // Primary
-  --thm-dark__primary: hsl(230, 38%, 39%);
-  --thm-dark__primary--tint-1: hsl(230, 38%, 65%);
+  --thm-dark__primary: hsl(230, 38%, 38%);
+  --thm-dark__primary--tint-1: hsl(230, 38%, 68%);
   --thm-dark__primary--tint-2: hsl(230, 38%, 91%);
   --thm-dark__primary--tint-3: hsl(230, 38%, 97%);
-  --thm-dark__primary--shade-1: hsl(230, 76%, 34%);
-  --thm-dark__primary--shade-2: hsl(230, 33%, 50%);
-  --thm-dark__primary--shade-3: hsl(230, 20%, 49%);
+  --thm-dark__primary--shade-1: hsl(230, 38%, 12%);
+  --thm-dark__primary--shade-2: hsl(230, 38%, 15%);
+  --thm-dark__primary--shade-3: hsl(230, 38%, 22%);
+  --thm-dark__primary--shade-4: hsla(230, 20%, 10%, 0.25);
+  --thm-dark__primary--shade-5: hsla(230, 15%, 10%, 0.85);
+  --thm-dark__primary--shade-6: hsl(230, 33%, 10%);
 }

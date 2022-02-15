@@ -89,7 +89,7 @@ button {
   }
 
   &--back-light {
-    --accent__color: var(--color__prim-shade--1);
+    --accent__color: var(--color__text--headings);
     background-color: transparent;
 
     & .button__title {
@@ -97,7 +97,7 @@ button {
     }
 
     &:hover {
-      --accent__color: var(--color__prim-shade--3);
+      --accent__color: var(--color__prim-tint--1);
     }
   }
 
@@ -327,7 +327,7 @@ button {
   }
 
   &--back-light {
-    --accent__color: var(--color__prim-shade--1);
+    --accent__color: var(--color__text--headings);
 
     &:hover {
       --accent__color: var(--color__prim-tint--1);

@@ -64,7 +64,7 @@
     // Fallback for Safari
     &:active,
     &:focus {
-      outline: 3px dotted var(--color__prim-shade--1);
+      outline: 3px dotted var(--color__button--focus);
       outline-offset: 2px;
     }
 
@@ -76,7 +76,7 @@
 
       &:active,
       &:focus-visible {
-        outline: 3px dotted var(--color__prim-shade--1);
+        outline: 3px dotted var(--color__button--focus);
         outline-offset: 2px;
       }
     }

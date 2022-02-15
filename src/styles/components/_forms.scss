@@ -1,6 +1,7 @@
 @mixin field-focus {
-  border-color: var(--color__prim);
-  outline: 1px solid var(--color__prim) !important;
+  border-color: var(--color__button--focus);
+  outline: 1px solid var(--color__button--focus) !important;
+  outline-offset: 2px;
 }
 
 @mixin field-disabled {
@@ -126,8 +127,9 @@ legend {
     width: 100%;
     color: var(--color__prim-shade--1);
 
-    outline: 1px solid var(--color__prim-tint--3);
+    outline: 1px solid var(--color__bg--container);
     transition: outline var(--duration__250) var(--easing__s);
+    outline-offset: 2px;
 
     .select {
       &__control {
@@ -139,8 +141,9 @@ legend {
         cursor: pointer;
         padding: var(--spacer__8) var(--spacer__24);
 
-        outline: 1px solid var(--color__prim-tint--3) !important;
+        outline: 1px solid var(--color__bg--container) !important;
         transition: outline var(--duration__250) var(--easing__s);
+        outline-offset: 2px;
 
         svg {
           rotate: (180deg);

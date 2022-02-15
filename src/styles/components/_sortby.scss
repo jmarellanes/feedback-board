@@ -64,7 +64,8 @@
       left: -4rem;
       margin-top: var(--spacer__24);
       border-radius: 0.75rem;
-      box-shadow: 0px 10px 40px -7px var(--color__prim-shade--5);
+      box-shadow: 0px 10px 20px -8px var(--color__prim-shade--5);
+      background-color: var(--color__bg--dropdown);
     }
 
     .sortby__option {
@@ -79,7 +80,7 @@
 
       &--is-selected {
         background-color: transparent;
-        color: var(--color__prim-shade--1);
+        color: var(--color__secd);
         position: relative;
 
         &::after {
@@ -96,7 +97,7 @@
 
       &--is-focused {
         background-color: transparent;
-        color: var(--color__secd);
+        color: var(--color__secd-tint--1);
       }
     }
   }
