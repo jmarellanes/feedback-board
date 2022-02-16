@@ -11,26 +11,6 @@
   padding-bottom: 0;
   cursor: pointer;
 
-  // Fallback for Safari
-  &:active,
-  &:focus {
-    outline: 3px dotted red;
-    outline-offset: 2px;
-  }
-
-  // HACK for use @supports selector() with SASS
-  @supports #{'\selector(*:focus-visible)'} {
-    &:focus {
-      outline: none;
-    }
-
-    &:active,
-    &:focus-visible {
-      outline: 3px dotted red;
-      outline-offset: 2px;
-    }
-  }
-
   &__label {
     color: var(--color__text--white);
     cursor: inherit;
