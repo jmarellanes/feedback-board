@@ -10,13 +10,13 @@ function FeedbackComments({
   username,
   image,
   comment,
-  commentId,
+  commentID,
   parentUsername,
   replyComment,
   commentAdded,
 }) {
   let replyCommentsList = () =>
-    allComments.filter((c) => c.fields.ParentId === commentId);
+    allComments.filter((c) => c.fields.ParentId === commentID);
 
   const [isHidden, setIsHidden] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
@@ -101,7 +101,7 @@ function FeedbackComments({
             ref={replyRef}
             isHidden={isHidden}
             feedbackId={feedbackId}
-            replyToComment={commentId}
+            replyToComment={commentID}
             commentAdded={commentAdded}
             closeReply={() => setIsOpen(!isOpen)}
           >
@@ -115,8 +115,8 @@ function FeedbackComments({
         return (
           <FeedbackComments
             allComments={allComments}
-            key={reply.CommentId}
-            commentId={reply.CommentId}
+            key={reply.CommentID}
+            commentID={reply.CommentID}
             name={reply.Name}
             username={reply.Username}
             image={reply.Image}

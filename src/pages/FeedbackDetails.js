@@ -157,12 +157,12 @@ function FeedbackDetails() {
                     return (
                       <FeedbackComments
                         allComments={allComments}
-                        key={comment.CommentId}
+                        key={comment.CommentID}
                         name={comment.Name}
                         username={comment.Username}
                         image={comment.Image}
                         comment={comment.Comment}
-                        commentId={comment.CommentId}
+                        commentID={comment.CommentID}
                         feedbackId={feedback.FeedbackId}
                         commentAdded={loadComments}
                       />
