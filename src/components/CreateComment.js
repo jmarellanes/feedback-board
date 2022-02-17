@@ -60,7 +60,7 @@ function CreateComment(
           Comment,
           Feedback: [feedbackId],
           Author: [Author],
-          ParentId: parentComment,
+          ParentID: parentComment,
         }),
       });
 

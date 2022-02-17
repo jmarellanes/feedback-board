@@ -20,7 +20,7 @@ exports.handler = async (event) => {
         fields: comment.fields,
       }))
       .filter((comment) => {
-        if (!comment.fields.ParentId) return comment;
+        if (!comment.fields.ParentID) return comment;
         return null;
       });
 

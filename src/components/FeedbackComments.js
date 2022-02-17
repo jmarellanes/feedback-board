@@ -16,7 +16,7 @@ function FeedbackComments({
   commentAdded,
 }) {
   let replyCommentsList = () =>
-    allComments.filter((c) => c.fields.ParentId === commentID);
+    allComments.filter((c) => c.fields.ParentID === commentID);
 
   const [isHidden, setIsHidden] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
