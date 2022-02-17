@@ -11,7 +11,6 @@ function FeedbackItem({
   id,
   link,
   categoryActive,
-  children,
   roadmapFeedback,
   status,
   upvotedBy,
