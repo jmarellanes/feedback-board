@@ -60,28 +60,55 @@ exports.handler = async (event) => {
       fields: feedback.fields,
     }));
 
+    /* Remove duplicates with filter and indexOf methods
+    const categories = ['a', 'b', 'a']
+    category    index   indexOf  Condition
+        a        0   ===   0       true
+        b        1   ===   1       true
+        a        2   ===   0       false < removed 
+    */
     const formattedCategoryList = categoriesRecords
       .map((category) => category.fields.Category.toLocaleLowerCase())
       .filter((category, index, array) => array.indexOf(category) === index);
     const categoriesList = ['all'].concat(formattedCategoryList);
 
+    /* Group and count elements with reduce method
+    > Source:
+    const statusList = ['a', 'a', 'b', 'c', 'b', 'b'];
+    > Result:
+    const statusList = [ ["a",2], ["b",3], ["c",1] ] 
+
+    > The reduce method use two accumulators: 
+      array to store the matches ( data: [] ) and map ( controlMap: new Map() ) to compare the data.
+      - 1st reducer execution:
+        - 'a' value, index 0 from statusList:
+          1. index value is 'undefined': map.get('a'),
+          2. if statement executes else block because map has() method returns false, 
+          3. map set() add { a -> 0 } to controlMap (push returns the length of the array and then minus 1) and push ['a', 1] to the data accumulator array.
+          acc = data: [ ['a', 1] ], controlMap: { a -> 0 }
+      - 2nd reducer execution:
+        - 'a' value, index 1 from statusList:
+        1. index value is 0: map.get('a'),
+        2. the condition is true and the if statement add 1 to the existing array. After execution returns: 
+        acc = data: [ ['a', 2] ], controlMap: { a -> 0 }
+    */
     const statusList = categoriesRecords
       .map((status) => status.fields.Status)
       .filter((status) => status !== 'Suggestion')
       .reduce(
         (acc, value) => {
-          const { data, map } = acc;
-          const index = map.get(value);
-          if (map.has(value)) {
+          const { data, controlMap } = acc;
+          const index = controlMap.get(value);
+          if (controlMap.has(value)) {
             data[index][1]++;
           } else {
-            map.set(value, data.push([value, 1]) - 1);
+            controlMap.set(value, data.push([value, 1]) - 1);
           }
-          return { data, map };
+          return { data, controlMap };
         },
         {
           data: [],
-          map: new Map(),
+          controlMap: new Map(),
         }
       ).data;
 
