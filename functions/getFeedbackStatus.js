@@ -25,23 +25,29 @@ exports.handler = async () => {
       })
       .all();
 
-    const planned = [];
-    const inProgress = [];
-    const live = [];
-
-    feedbackRecords
+    const formattedRecords = feedbackRecords
       .map((feedback) => ({
         fields: feedback.fields,
       }))
-      .filter((feedback) => {
-        if (feedback.fields.Status === 'Planned') {
-          return planned.push(feedback);
-        } else if (feedback.fields.Status === 'In-Progress') {
-          return inProgress.push(feedback);
-        } else {
-          return live.push(feedback);
+      .reduce(
+        (acc, value) => {
+          const { live, planned, inProgress } = acc;
+
+          if (value.fields.Status === 'Planned') {
+            planned.push(value);
+          } else if (value.fields.Status === 'In-Progress') {
+            inProgress.push(value);
+          } else {
+            live.push(value);
+          }
+          return { planned, inProgress, live };
+        },
+        {
+          planned: [],
+          inProgress: [],
+          live: [],
         }
-      });
+      );
 
     const statusList = statusRecords
       .map((status) => status.fields)
@@ -51,9 +57,9 @@ exports.handler = async () => {
       statusCode: 200,
       body: JSON.stringify({
         statusList,
-        planned,
-        inProgress,
-        live,
+        planned: formattedRecords.planned,
+        inProgress: formattedRecords.inProgress,
+        live: formattedRecords.live,
       }),
     };
   } catch (error) {
