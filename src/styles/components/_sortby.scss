@@ -27,6 +27,16 @@
       border: none;
       box-shadow: none;
       cursor: inherit;
+      outline: 3px dotted transparent !important;
+      transition: outline var(--duration__250) var(--easing__s);
+
+      &--is-focused {
+        outline: 3px dotted var(--color__text--white) !important;
+
+        &:hover {
+          outline: 3px dotted var(--color__text--white) !important;
+        }
+      }
 
       svg {
         rotate: (180deg);
