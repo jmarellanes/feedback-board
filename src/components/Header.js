@@ -57,7 +57,7 @@ function Header({ categories, status }) {
         break;
 
       case KEY_ESC:
-        setOpenMenu((openMenu) => !openMenu);
+        setOpenMenu((openMenu) => false);
         break;
 
       default:
