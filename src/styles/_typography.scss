@@ -53,8 +53,8 @@ h4,
 
 h1,
 .h1 {
-  font-size: fn_calculate-rem(24);
-  line-height: fn_calculate-lh(35, 24);
+  font-size: fn_calculate-rem(22);
+  line-height: fn_calculate-lh(32, 22);
   letter-spacing: -0.3px;
   color: var(--color__text--headings);
 }
