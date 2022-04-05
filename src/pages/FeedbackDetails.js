@@ -122,11 +122,12 @@ function FeedbackDetails() {
             </header>
 
             <main className='feedback-page__content'>
+              <h1 className='visually-hidden'>Details for {feedback.Title}</h1>
               <section
                 className='feedback-detail'
                 aria-labelledby='section-feedback-detail'
               >
-                <h2 id='section-feedback-detail' hidden>
+                <h2 id='section-feedback-detail' className='visually-hidden'>
                   Feedback Detail
                 </h2>
                 <FeedbackItem
@@ -147,7 +148,10 @@ function FeedbackDetails() {
                 aria-labelledby='section-feedback-comments'
               >
                 <div className='feedback-comments__container'>
-                  <h2 id='section-feedback-comments' hidden>
+                  <h2
+                    id='section-feedback-comments'
+                    className='visually-hidden'
+                  >
                     Feedback Comments
                   </h2>
                   <p className='h3'>{commentsTotal()}</p>
