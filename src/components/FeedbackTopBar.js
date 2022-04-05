@@ -4,7 +4,7 @@ function FeedbackTopBar({ children }) {
       className='home-page__feedback-topbar'
       aria-labelledby='section-feedback-topbar'
     >
-      <h2 id='section-feedback-topbar' hidden>
+      <h2 id='section-feedback-topbar' className='visually-hidden'>
         Feedback Top Bar
       </h2>
       <div className='feedback-topbar'>{children}</div>
