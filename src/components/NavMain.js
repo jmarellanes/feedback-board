@@ -4,7 +4,7 @@ import Category from './Category';
 function NavMain({ categories }) {
   return (
     <nav className='header-main__nav-main nav-main' aria-labelledby='main-menu'>
-      <h2 id='main-menu' hidden>
+      <h2 id='main-menu' className='visually-hidden'>
         Main Menu
       </h2>
       <ul className='nav-main__element'>
