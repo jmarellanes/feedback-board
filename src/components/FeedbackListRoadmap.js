@@ -14,9 +14,9 @@ function FeedbackListRoadmap({ children, status, desc, length, activeTab }) {
       tabIndex='-1'
     >
       <header className='roadmap-page__feedback-header'>
-        <h3>
+        <h2 className='h3'>
           {status} ({length})
-        </h3>
+        </h2>
         <p>{desc}</p>
       </header>
 

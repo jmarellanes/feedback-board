@@ -232,7 +232,7 @@ function Roadmap() {
               >
                 Go Back
               </Button>
-              <p className='h1'>Roadmap</p>
+              <h1 className='h1'>Roadmap</h1>
             </div>
             <div className='header-tertiary__create-feedback'>
               <Button
