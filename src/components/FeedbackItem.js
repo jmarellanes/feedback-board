@@ -44,8 +44,8 @@ function FeedbackItem({
       <div className='feedback-item__container'>
         <header className='feedback-item__title'>
           <Tag>
-            <h2>{title}</h2>
-            <p>{description}</p>
+            <h3 className='feedback-item__heading h2'>{title}</h3>
+            <p className='feedback-item__paragraph'>{description}</p>
           </Tag>
         </header>
 

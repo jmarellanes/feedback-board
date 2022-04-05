@@ -50,8 +50,8 @@
         }
 
         &:hover {
-          p,
-          h2 {
+          & .feedback-item__heading,
+          & .feedback-item__paragraph {
             color: var(--color__text--highligth);
           }
         }
@@ -76,16 +76,16 @@
         }
       }
 
-      h2,
-      p {
+      & .feedback-item__heading,
+      & .feedback-item__paragraph {
         transition: color var(--duration__250) var(--easing__s);
       }
 
-      h2 {
+      & .feedback-item__heading {
         margin-bottom: var(--spacer__4);
       }
 
-      p {
+      & .feedback-item__paragraph {
         margin-right: var(--spacer__40);
       }
     }
