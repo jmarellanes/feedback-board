@@ -1,0 +1,27 @@
+/* =====================================================================
+  -> FONTS
+===================================================================== */
+/* JOST FAMILY */
+@font-face {
+  font-family: 'jost_regular';
+  font-display: swap;
+  src: url('./fonts/jost-regular.woff2') format('woff2'),
+    url('./fonts/jost-regular.woff') format('woff'),
+    url('./fonts/jost-regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'jost_semibold';
+  font-display: swap;
+  src: url('./fonts/jost-semibold.woff2') format('woff2'),
+    url('./fonts/jost-semibold.woff') format('woff'),
+    url('./fonts/jost-semibold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'jost_bold';
+  font-display: swap;
+  src: url('./fonts/jost-bold.woff2') format('woff2'),
+    url('./fonts/jost-bold.woff') format('woff'),
+    url('./fonts/jost-bold.ttf') format('truetype');
+}
