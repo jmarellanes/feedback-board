@@ -1,20 +1,18 @@
-import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
-function Category({ category, children, isActive }) {
-  const params = useParams();
-  const categoryParam = !params.categoryParam ? 'all' : params.categoryParam;
-  category = category.toLowerCase();
+function Category({ category, isActive }) {
+  const { categoryParam } = useParams();
+  const cat = category.toLowerCase();
 
   return (
     <li className='category__item'>
       <Link
-        to={category}
+        to={cat}
         className={`category__link ${
-          categoryParam === category ? 'category__link--active' : ''
+          categoryParam === cat ? 'category__link--active' : ''
         } ${!isActive ? 'isInactive' : ''}`}
       >
-        {children}
+        {cat}
       </Link>
     </li>
   );
