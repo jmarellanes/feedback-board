@@ -1,4 +1,23 @@
 // Select Options
+export const sortByOptions = [
+  {
+    label: 'Most Upvotes',
+    value: 'most-upvotes',
+  },
+  {
+    label: 'Least Upvotes',
+    value: 'least-upvotes',
+  },
+  {
+    label: 'Most Comments',
+    value: 'most-comments',
+  },
+  {
+    label: 'Least Comments',
+    value: 'least-comments',
+  },
+];
+
 export const categoryOptions = [
   {
     label: 'Feature',

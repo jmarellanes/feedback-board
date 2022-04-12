@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
 
 import { CSSTransition } from 'react-transition-group';
@@ -21,8 +21,9 @@ function Home() {
   const [categories, setCategories] = useState([]);
   const [status, setStatus] = useState([]);
 
+  const updateSortByLabelRef = useRef();
+
   const [loading, setLoading] = useState(false);
-  const [sortValue, setSortValue] = useState('Most Upvotes');
   const [showModal, setShowModal] = useState(false);
   const [createdFeedback, setCreatedFeedback] = useState(false);
 
@@ -35,59 +36,39 @@ function Home() {
       ? 'most-upvotes'
       : queryComponent.parse(search).sortby;
 
-  const updateSortLabelOnLoad = () => {
-    const sortLabel = {
-      'Most Upvotes': 'most-upvotes',
-      'Least Upvotes': 'least-upvotes',
-      'Most Comments': 'most-comments',
-      'Least Comments': 'least-comments',
-    };
-
-    const updateLabel = Object.keys(sortLabel).find(
-      (key) => sortLabel[key] === queryString
-    );
-
-    setSortValue(updateLabel);
-  };
-
-  const handleChange = (newSortOrder) => {
-    setSortValue(newSortOrder);
-    sortFeedbackWithDropdown(newSortOrder, feedback);
-    updateQueryString(newSortOrder);
-  };
-
-  const sortFeedbackWithDropdown = (type, data) => {
-    const sortedFeedback = [...data].sort((a, b) => {
-      if (type === sortValue) return null;
-      switch (type) {
-        case 'Least Upvotes':
-          return a.fields.TotalUpvotes - b.fields.TotalUpvotes;
-        case 'Most Comments':
-          return b.fields.TotalComments - a.fields.TotalComments;
-        case 'Least Comments':
-          return a.fields.TotalComments - b.fields.TotalComments;
-        default:
-          return b.fields.TotalUpvotes - a.fields.TotalUpvotes;
-      }
-    });
-
-    setFeedback(sortedFeedback);
-  };
-
-  const updateQueryString = (query) => {
-    history.push(`?sortby=${query.replace(/\s+/g, '-').toLowerCase()}`);
-  };
-
+  // Redirect to '/' if category doesn't exists.
   const categoryFormatted = () => {
     let data = categoriesData.find((category) => category === categoryParam);
     return !data ? history.push('/') : data;
   };
 
-  const loadFeedback = async (abortCont) => {
-    // Close modal after Create feedback
-    if (showModal) setShowModal(false);
+  // Run loadFeedback after adding new feedback
+  const feedbackAdded = () => {
+    setCreatedFeedback(!createdFeedback);
+  };
 
-    updateSortLabelOnLoad();
+  const closeModal = (e) => {
+    if (e.target.parentNode.hasAttribute('data-operation-running')) return;
+    setShowModal(!showModal);
+  };
+
+  const openModal = (
+    <Modal onClose={closeModal} isOpen='modal__is-open'>
+      <CreateFeedback feedbackAdded={feedbackAdded} closeModal={closeModal} />
+    </Modal>
+  );
+
+  // Update "Sort By" dropdown label. This fn is called when category is changed.
+  const updateSortByLabel = () => {
+    if (queryComponent.parse(search).sortby === undefined) {
+      updateSortByLabelRef.current.updateSort();
+    }
+  };
+
+  const loadFeedback = async (abortCont) => {
+    // Close modal after adding new feedback
+    if (showModal) setShowModal(false);
+    updateSortByLabel();
 
     try {
       setLoading(true);
@@ -119,22 +100,6 @@ function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryParam, createdFeedback]);
 
-  const closeModal = (e) => {
-    if (e.target.parentNode.hasAttribute('data-operation-running')) return;
-
-    setShowModal(!showModal);
-  };
-
-  const feedbackAdded = () => {
-    setCreatedFeedback(!createdFeedback);
-  };
-
-  const openModal = (
-    <Modal onClose={closeModal} isOpen='modal__is-open'>
-      <CreateFeedback feedbackAdded={feedbackAdded} closeModal={closeModal} />
-    </Modal>
-  );
-
   return (
     <>
       <div id='home-page__wrapper'>
@@ -148,7 +113,11 @@ function Home() {
                 feedback.length > 1 ? 'Suggestions' : 'Suggestion'
               }`}
             </div>
-            <SortBy value={sortValue} onChange={handleChange} />
+            <SortBy
+              feedback={feedback}
+              setFeedback={setFeedback}
+              ref={updateSortByLabelRef}
+            />
             <Button
               typeAttribute='button'
               buttonStyle='button--primary'
