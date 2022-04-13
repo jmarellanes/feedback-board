@@ -6,6 +6,13 @@
   top: 0;
   z-index: 10;
 
+  display: flex;
+  align-items: center;
+
+  @include respond-to('medium--height') {
+    display: block;
+  }
+
   overflow-y: scroll;
   overflow-x: hidden;
 
@@ -28,6 +35,7 @@
 
     width: 100%;
     max-width: 34rem;
+    height: min-content;
     margin: 0 auto;
     padding: var(--spacer__40);
     padding-top: var(--spacer__48);
