@@ -20,6 +20,7 @@ button {
   background-color: var(--accent__color);
   border-radius: var(--rounded-corners);
   padding: var(--spacer__12) var(--spacer__24);
+  overflow: hidden;
 
   transition: all var(--duration__250) var(--easing__s);
   transition-property: color, background-color;
