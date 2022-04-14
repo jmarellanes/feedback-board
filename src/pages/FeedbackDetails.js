@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 
+import { useUser } from '../context/UserContext';
 import FeedbackItem from '../components/FeedbackItem';
 import FeedbackComments from '../components/FeedbackComments';
 import CreateComment from '../components/CreateComment';
@@ -15,6 +16,9 @@ function FeedbackDetails() {
   const [allComments, setComments] = useState([]);
   const [topLevelComments, setTopLevel] = useState([]);
   const [showModal, setShowModal] = useState(false);
+
+  const [user] = useUser();
+  const { UserID: FeedbackAuthor } = feedback;
 
   const { id } = useParams();
   const history = useHistory();
@@ -111,13 +115,15 @@ function FeedbackDetails() {
                 >
                   Go Back
                 </Button>
-                <Button
-                  typeAttribute='button'
-                  buttonStyle='button--secondary'
-                  onClick={() => setShowModal(!showModal)}
-                >
-                  Edit Feedback
-                </Button>
+                {String(FeedbackAuthor) === user.userID ? (
+                  <Button
+                    typeAttribute='button'
+                    buttonStyle='button--secondary'
+                    onClick={() => setShowModal(!showModal)}
+                  >
+                    Edit Feedback
+                  </Button>
+                ) : null}
               </div>
             </header>
 

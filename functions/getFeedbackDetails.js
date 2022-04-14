@@ -10,6 +10,7 @@ exports.handler = async (event) => {
         fields: [
           'Title',
           'FeedbackId',
+          'UserID',
           'Description',
           'UpvotedBy',
           'TotalUpvotes',
