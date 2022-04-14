@@ -18,7 +18,7 @@ function FeedbackDetails() {
   const [showModal, setShowModal] = useState(false);
 
   const [user] = useUser();
-  const { UserID: FeedbackAuthor } = feedback;
+  const { UserID: feedbackAuthor } = feedback;
 
   const { id } = useParams();
   const history = useHistory();
@@ -115,7 +115,7 @@ function FeedbackDetails() {
                 >
                   Go Back
                 </Button>
-                {String(FeedbackAuthor) === user.userID ? (
+                {String(feedbackAuthor) === user.userID ? (
                   <Button
                     typeAttribute='button'
                     buttonStyle='button--secondary'
