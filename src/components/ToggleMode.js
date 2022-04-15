@@ -16,13 +16,16 @@ function ToggleMode() {
         <button
           type='button'
           data-action='aria-switch'
-          aria-labelledby='toggle_label'
+          aria-labelledby='toggle-label'
           aria-checked={isDark}
           role='switch'
           className='toggle-button__button'
           onClick={changeTheme}
         >
           <span></span>
+          <span id='toggle-label' hidden>
+            Toggle Color Scheme
+          </span>
         </button>
       </div>
     </div>
