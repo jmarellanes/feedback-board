@@ -94,6 +94,7 @@ function FeedbackDetails() {
         category={feedback.Category}
         status={feedback.Status}
         id={feedback.FeedbackId}
+        feedbackComments={allComments}
       />
     </Modal>
   );

@@ -24,6 +24,7 @@ function EditFeedback({
   comment,
   id,
   feedbackUpdated,
+  feedbackComments,
 }) {
   const MAX_CHARS = 250;
   const charsLeft = MAX_CHARS - comment.length;
@@ -136,11 +137,17 @@ function EditFeedback({
     );
     setStatusDeleteMessage(destroy.running);
 
+    const comments =
+      feedbackComments.length === 0
+        ? 'No Comments'
+        : feedbackComments.map((comment) => comment.fields.CommentID);
+
     try {
       const res = await fetch('/api/deleteFeedback', {
         method: 'DELETE',
         body: JSON.stringify({
           id,
+          comments,
         }),
       });
 
