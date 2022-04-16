@@ -125,6 +125,7 @@ function Header({ categories, status }) {
       aria-labelledby='menu-label'
       aria-expanded={isOpen}
       onClick={() => setOpenMenu(!openMenu)}
+      type='button'
     >
       <span id='menu-label' hidden>
         Main menu

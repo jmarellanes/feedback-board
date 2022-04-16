@@ -65,7 +65,10 @@ function FeedbackComments({
         className={`feedback-comment__container ${isOpen ? 'isOpen' : ''}`}
       >
         <header className='feedback-comment__info'>
-          <p className='feedback-comment__name h4'>{name}</p>
+          <h3 className='feedback-comment__name h4'>
+            <span className='visually-hidden'>Comment from </span>
+            {name}
+          </h3>
           <p className='feedback-comment__username'>{`@${username}`}</p>
         </header>
         <div className='feedback-comment__author-image'>

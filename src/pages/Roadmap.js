@@ -84,6 +84,7 @@ function Roadmap() {
               aria-setsize='3'
               aria-posinset={index + 1}
               onClick={handleClick}
+              type='button'
             >
               <span className='h3'>
                 {status['Status']} ({feedback[index].length})

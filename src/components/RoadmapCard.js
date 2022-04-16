@@ -14,12 +14,12 @@ function RoadmapCard({ statusList }) {
         <caption className='visually-hidden'>List of feedback status</caption>
         <thead>
           <tr>
-            <th aria-labelledby='table-status'>
+            <th aria-labelledby='table-status' scope='col'>
               <span id='table-status' hidden>
                 Status
               </span>
             </th>
-            <th aria-labelledby='table-quantity'>
+            <th aria-labelledby='table-quantity' scope='col'>
               <span id='table-quantity' hidden>
                 Quantity
               </span>

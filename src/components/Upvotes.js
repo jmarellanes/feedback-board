@@ -95,6 +95,7 @@ function Upvotes({ upvotedBy, id, totalUpvotesFromParent }) {
       onClick={handleClick}
       onBlur={() => setStatusMessage('')}
       data-operation-running={operationRunning}
+      type='button'
     >
       <span className='upvotes__icon'>
         <ChevronUp />
