@@ -103,9 +103,17 @@
 
       & > form {
         display: flex;
+
+        @include respond-to(medium--s) {
+          display: block;
+        }
       }
 
       & .form__group {
+        @include respond-to(medium--s) {
+          margin-bottom: var(--spacer__16);
+        }
+
         &:first-child {
           flex-grow: 1;
         }
@@ -115,6 +123,10 @@
           flex-direction: column;
           margin-left: var(--spacer__16);
           margin-top: 0;
+
+          @include respond-to(medium--s) {
+            margin: 0;
+          }
         }
 
         & .button {
