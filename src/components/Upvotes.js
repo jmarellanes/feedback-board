@@ -16,9 +16,41 @@ function Upvotes({ upvotedBy, id, totalUpvotesFromParent }) {
   const [statusMessage, setStatusMessage] = useState('');
   const [operationRunning, setOperationRunning] = useState(false);
 
+  const [runGetEffect, setRunGetEffect] = useState(false);
+  const [runUpdateEffect, setRunUpdateEffect] = useState(false);
+
   const { upvoteAdd, upvoteRemove } = operationStatus;
 
+  const handleClick = () => {
+    if (isUpvotingRef.current) return;
+    isUpvotingRef.current = true;
+
+    setStatusMessage(isUpvoted ? upvoteRemove.running : upvoteAdd.running);
+    setIsUpvoted(!isUpvoted);
+    setOperationRunning(!operationRunning);
+
+    setRunGetEffect(true);
+  };
+
+  const getUpdatedUpvotes = async () => {
+    if (!runGetEffect) return;
+
+    try {
+      const res = await fetch(`/api/getUpvotes/?id=${id}`);
+      const upvotesList = await res.json();
+      const formattedUpvotes = upvotesList[0];
+
+      setUserUpvotesList(formattedUpvotes || []);
+    } catch (error) {
+      console.log(error);
+    }
+
+    setRunUpdateEffect(true);
+  };
+
   const updateUpvotesDB = async (arr) => {
+    if (!runUpdateEffect) return;
+
     setTotalUpvotes(arr.length);
 
     try {
@@ -31,6 +63,8 @@ function Upvotes({ upvotedBy, id, totalUpvotesFromParent }) {
       });
 
       setOperationRunning(!operationRunning);
+      setRunGetEffect(false);
+      setRunUpdateEffect(false);
       isUpvotingRef.current = false;
 
       if (res.status !== 200) {
@@ -49,45 +83,32 @@ function Upvotes({ upvotedBy, id, totalUpvotesFromParent }) {
     }
   };
 
-  const handleClick = async () => {
-    if (isUpvotingRef.current) return;
-    isUpvotingRef.current = true;
-
-    setIsUpvoted(!isUpvoted);
-    setOperationRunning(!operationRunning);
-
-    setStatusMessage(isUpvoted ? upvoteRemove.running : upvoteAdd.running);
-
-    try {
-      const res = await fetch(`/api/getUpvotes/?id=${id}`);
-      const upvotesList = await res.json();
-      const formattedUpvotes = upvotesList[0];
-
-      setUserUpvotesList(formattedUpvotes || []);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const prevOpenRef = useRef(true);
   useEffect(() => {
     // Not run effect on initial render
     if (prevOpenRef.current) return (prevOpenRef.current = false);
 
-    const addUpvote = userUpvotesList
-      ? [user.userID, ...userUpvotesList]
-      : [user.userID];
+    getUpdatedUpvotes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [runGetEffect]);
+
+  useEffect(() => {
+    if (!runUpdateEffect) return;
+
+    if (isUpvoted) {
+      const addUpvote = userUpvotesList
+        ? [user.userID, ...userUpvotesList]
+        : [user.userID];
+
+      return updateUpvotesDB(addUpvote);
+    }
 
     const filteredUpvotes = userUpvotesList.filter(
       (upvotes) => upvotes !== user.userID
     );
-
-    if (isUpvoted) {
-      return updateUpvotesDB(addUpvote);
-    }
     return updateUpvotesDB(filteredUpvotes);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userUpvotesList]);
+  }, [runUpdateEffect]);
 
   return (
     <button
