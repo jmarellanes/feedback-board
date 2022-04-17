@@ -27,6 +27,14 @@
   background-color: var(--color__bg--container);
   border-radius: var(--rounded-corners);
   padding: var(--spacer__32);
+
+  @include respond-to('medium--s') {
+    padding: var(--spacer__24);
+  }
+
+  @include respond-to('small--m') {
+    padding: var(--spacer__20);
+  }
 }
 
 @mixin fb_header-container {

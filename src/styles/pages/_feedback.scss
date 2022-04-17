@@ -1,8 +1,9 @@
 #feedback-page__wrapper {
-  max-width: 46rem;
+  max-width: 70ch;
 
-  @include respond-to('medium--m') {
-    padding: var(--spacer__32) var(--spacer__24) 0;
+  @include respond-to('medium--s') {
+    padding-left: var(--spacer__24);
+    padding-right: var(--spacer__24);
   }
 
   > header {

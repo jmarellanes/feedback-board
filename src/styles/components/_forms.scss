@@ -100,6 +100,10 @@ legend {
 
     textarea {
       resize: vertical;
+
+      @include respond-to(medium--s) {
+        width: calc(100% - 4px);
+      }
     }
 
     &-title {

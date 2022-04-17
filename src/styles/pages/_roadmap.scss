@@ -18,6 +18,16 @@
         margin-right: 0;
       }
     }
+
+    @include respond-to('medium--s') {
+      &:not(:last-child) {
+        margin-bottom: 0;
+      }
+
+      &:first-child {
+        margin-bottom: var(--spacer__40);
+      }
+    }
   }
 
   &__feedback-header {
