@@ -140,7 +140,6 @@ function Home() {
             setLoading={setLoading}
             feedback={feedback}
           >
-            {console.log(feedback[0]?.fields)}
             {feedback[0]?.fields === null ? (
               <NoFeedback />
             ) : (
