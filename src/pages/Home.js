@@ -13,6 +13,7 @@ import FeedbackTopBar from '../components/FeedbackTopBar';
 import Modal from '../components/Modal';
 import CreateFeedback from '../components/CreateFeedback';
 import FeedbackItem from '../components/FeedbackItem';
+import NoFeedback from '../components/NoFeedback';
 
 import { categoriesData } from '../utils/data';
 
@@ -26,6 +27,8 @@ function Home() {
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [createdFeedback, setCreatedFeedback] = useState(false);
+
+  const [fadeOutFeedback, setFadeOutFeedback] = useState(false);
 
   const { categoryParam } = useParams();
   const { search } = useLocation();
@@ -68,10 +71,12 @@ function Home() {
   const loadFeedback = async (abortCont) => {
     // Close modal after adding new feedback
     if (showModal) setShowModal(false);
+    // Hide <No Feedback> component on first load
+    if (feedback.length === 0) setLoading(true);
     updateSortByLabel();
 
     try {
-      setLoading(true);
+      setFadeOutFeedback(true);
 
       const res = await fetch(
         `/api/getFeedbackList/?categoryParam=${categoryFormatted()}&sortBy=${queryString}`,
@@ -85,6 +90,8 @@ function Home() {
     } catch (error) {
       console.log(error);
     }
+
+    setFadeOutFeedback(false);
 
     if (!abortCont.signal.aborted) setLoading(false);
   };
@@ -127,25 +134,35 @@ function Home() {
               Add Feedback
             </Button>
           </FeedbackTopBar>
-          <FeedbackList loading={loading}>
-            {feedback.map((data) => {
-              const fb = data.fields;
+          <FeedbackList
+            loading={loading}
+            fadeOutFeedback={fadeOutFeedback}
+            setLoading={setLoading}
+            feedback={feedback}
+          >
+            {console.log(feedback[0]?.fields)}
+            {feedback[0]?.fields === null ? (
+              <NoFeedback />
+            ) : (
+              feedback.map((data) => {
+                const fb = data.fields;
 
-              return (
-                <FeedbackItem
-                  title={fb.Title}
-                  description={fb.Description}
-                  category={fb.Category}
-                  comments={fb.TotalComments}
-                  key={fb.FeedbackId}
-                  id={fb.FeedbackId}
-                  upvotedBy={fb.UpvotedBy ? fb.UpvotedBy : []}
-                  totalUpvotes={fb.TotalUpvotes}
-                  link
-                  categoryActive
-                />
-              );
-            })}
+                return (
+                  <FeedbackItem
+                    title={fb.Title}
+                    description={fb.Description}
+                    category={fb.Category}
+                    comments={fb.TotalComments}
+                    key={fb.FeedbackId}
+                    id={fb.FeedbackId}
+                    upvotedBy={fb.UpvotedBy ? fb.UpvotedBy : []}
+                    totalUpvotes={fb.TotalUpvotes}
+                    link
+                    categoryActive
+                  />
+                );
+              })
+            )}
           </FeedbackList>
         </main>
       </div>

@@ -56,9 +56,11 @@ exports.handler = async (event) => {
       .all();
 
     // Formatting Data
-    const feedbackList = feedbackRecords.map((feedback) => ({
-      fields: feedback.fields,
-    }));
+    const feedbackList = !feedbackRecords.length
+      ? [{ fields: null }]
+      : feedbackRecords.map((feedback) => ({
+          fields: feedback.fields,
+        }));
 
     /* Remove duplicates with filter and indexOf methods
     const categories = ['a', 'b', 'a']

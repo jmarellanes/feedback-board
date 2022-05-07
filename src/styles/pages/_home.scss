@@ -33,6 +33,12 @@
       position: relative;
       z-index: 1;
 
+      animation: fade-in 500ms var(--easing__s);
+
+      &.fading {
+        animation: fade-out 350ms var(--easing__s);
+      }
+
       & > article:not(:last-child) {
         margin-bottom: var(--spacer__24);
       }
@@ -70,5 +76,23 @@
     @include respond-to('medium--m') {
       padding-top: var(--spacer__72);
     }
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
