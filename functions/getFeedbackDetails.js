@@ -22,10 +22,10 @@ exports.handler = async (event) => {
       })
       .all();
     const formattedFeedbackList = !feedbackList.length
-      ? [{ fields: {} }]
-      : feedbackList.map((feedback) => ({
-          fields: feedback.fields,
-        }));
+      ? [{}]
+      : feedbackList.map((feedback) => {
+          return feedback.fields;
+        });
 
     return {
       statusCode: 200,

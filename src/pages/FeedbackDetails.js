@@ -27,11 +27,9 @@ function FeedbackDetails() {
   const loadFeedbackDetails = async () => {
     try {
       const res = await fetch(`/api/getFeedbackDetails?id=${id}`);
-      const feedbackList = await res.json();
-      const [rawData] = feedbackList;
-      const formattedFeedback = rawData.fields;
+      const [feedbackList] = await res.json();
 
-      if (isMounted.current) setFeedback(formattedFeedback);
+      if (isMounted.current) setFeedback(feedbackList);
     } catch (error) {
       console.log(error);
     }
@@ -102,7 +100,7 @@ function FeedbackDetails() {
   return (
     <>
       <div id='feedback-page__wrapper'>
-        {!Object.keys(feedback).length ? (
+        {Object.keys(feedback).length === 0 ? (
           <Loader type='feedback-details' />
         ) : (
           <>
