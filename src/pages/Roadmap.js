@@ -26,7 +26,7 @@ function Roadmap() {
       return (
         <FeedbackListRoadmap
           status={statusList[index]['Status']}
-          desc={statusList[index]['Descrition']}
+          desc={statusList[index]['Description']}
           length={data.length}
           key={statusList[index]['Order']}
           activeTab={activeTab}
