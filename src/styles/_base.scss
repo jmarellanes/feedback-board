@@ -97,6 +97,10 @@ body {
   margin: 0 auto;
   padding-top: var(--spacer__40);
   padding-bottom: var(--spacer__64);
+
+  @include fade-animation(fade-in, 0, 1);
+  @include fade-animation(fade-out, 1, 0);
+  animation: fade-in var(--duration__500) var(--easing__s);
 }
 
 #home-page__wrapper,

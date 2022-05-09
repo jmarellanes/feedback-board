@@ -43,6 +43,17 @@
   padding: var(--spacer__24);
 }
 
+@mixin fade-animation($name, $startValue, $endValue) {
+  @keyframes #{$name} {
+    0% {
+      opacity: $startValue;
+    }
+    100% {
+      opacity: $endValue;
+    }
+  }
+}
+
 /* =====================================================================
   -> FUNCTIONS
 ===================================================================== */

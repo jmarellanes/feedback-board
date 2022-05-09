@@ -89,6 +89,7 @@ $breakpoint__medium: map-get($breakpoints, 'medium--m');
   --easing__s: cubic-bezier(0.5, 0.7, 0.4, 1);
   --duration__250: 250ms;
   --duration__350: 350ms;
+  --duration__500: 500ms;
 
   /* =====================================================================
     -> BREAKPOINTS FOR JS USE
