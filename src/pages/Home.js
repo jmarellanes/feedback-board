@@ -115,10 +115,9 @@ function Home() {
         <main className='home-page__feedback'>
           <FeedbackTopBar>
             <div className='h3 feedback-topbar__title'>
-              <Bulb />{' '}
-              {`${feedback.length} ${
-                feedback.length > 1 ? 'Suggestions' : 'Suggestion'
-              }`}
+              <Bulb />
+              {feedback[0]?.fields === null ? '0' : feedback.length}{' '}
+              {feedback.length > 1 ? 'Suggestions' : 'Suggestion'}
             </div>
             <SortBy
               feedback={feedback}
