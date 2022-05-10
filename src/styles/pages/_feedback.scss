@@ -13,6 +13,10 @@
 
 .feedback-page {
   &__content {
+    > * {
+      animation: fade-in 1s var(--easing__s);
+    }
+
     & > section:not(:last-child) {
       margin-bottom: var(--spacer__24);
     }

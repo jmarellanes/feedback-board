@@ -35,6 +35,14 @@
   }
 
   &__feedback {
+    &-planned,
+    &-in-progress,
+    &-live {
+      animation: fade-in var(--duration__500) var(--easing__s);
+    }
+  }
+
+  &__feedback {
     &-planned {
       --accent__color: var(--color__comp--1);
     }

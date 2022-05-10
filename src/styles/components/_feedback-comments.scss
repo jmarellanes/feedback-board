@@ -43,11 +43,10 @@
 
       height: calc(var(--closeCommentHeight) * 1px);
 
-      // Animation
       transition: height var(--duration__250) var(--easing__s);
       overflow-y: hidden;
+      // Animation after adding comment
       animation: openComment var(--duration__250) var(--easing__s);
-      // animation-play-state: paused;
 
       padding-bottom: var(--spacer__32);
 
