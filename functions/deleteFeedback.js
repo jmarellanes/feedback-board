@@ -14,6 +14,9 @@ exports.handler = async (event) => {
   }
 
   try {
+    // No Delete example feeback!!
+    if (id === 'recHCLDVqqxozJ2P4') return { statusCode: 200 };
+
     const deleteFeedback = await feedbackTable.destroy(id);
 
     if (Array.isArray(comments)) {
