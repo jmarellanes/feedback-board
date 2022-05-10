@@ -12,9 +12,14 @@
       margin-right: var(--spacer__32);
     }
 
-    @include respond-to('medium--m') {
+    @include respond-to('large--s') {
       &:not(:last-child) {
         margin-bottom: var(--spacer__40);
+      }
+    }
+
+    @include respond-to('medium--m') {
+      &:not(:last-child) {
         margin-right: 0;
       }
     }
