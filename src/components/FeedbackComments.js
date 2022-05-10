@@ -25,7 +25,10 @@ function FeedbackComments({
   const commentRef = useRef();
   const replyRef = useRef();
 
+  // This fn calculate height values and assign them to two CSS Custom properties
+  // for play a slide up and slide down animation when opening and closing the reply form
   const getHeight = (comment, reply) => {
+    if (reply === null) return;
     const collapsedCommentHeight = comment.scrollHeight;
     comment.style.setProperty('--closeCommentHeight', collapsedCommentHeight);
 
@@ -33,12 +36,14 @@ function FeedbackComments({
     let totalHeight = collapsedCommentHeight + replyFormHeight + 16; // 16 = 1rem from Grid Gap
     comment.style.setProperty('--openCommentHeight', totalHeight);
 
+    // Hide <CreateComment> component after getting values
     setTriggerAnimation(!triggerAnimation);
   };
 
   useEffect(() => {
     getHeight(commentRef.current, replyRef.current);
-    const timer = setTimeout(() => setIsHidden((isHidden) => !isHidden), 600);
+    // Remove "get-size-hidden" class after getting height values.
+    const timer = setTimeout(() => setIsHidden((isHidden) => !isHidden), 400);
 
     return () => {
       clearTimeout(timer);
