@@ -29,7 +29,7 @@ This is a solution to the following [Guru Frontend Mentor challenge](https://www
 
 ### Screenshot
 
-[Feedbackto - Feedback Board](https://postimg.cc/zyyRvR2W)
+![Feedbackto - Feedback Board](./src/assets/images/cover.png)
 
 ### Links
 
