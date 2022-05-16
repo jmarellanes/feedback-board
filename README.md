@@ -41,12 +41,12 @@ This is a solution to the following [Guru Frontend Mentor challenge](https://www
 
 - Semantic HTML5 markup
 - Accessible features
-- CSS with BEM methodology
-- Sass
-- Flexbox
-- CSS Grid
+- CSS (Grid and Flexbox for layout) with BEM methodology
+- Sass 
 - React
-- Serverless functions
+- react-select
+- React Hook form
+- Serverless functions with Airtable as DB
 
 ## Author
 
