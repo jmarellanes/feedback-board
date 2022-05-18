@@ -35,7 +35,7 @@ This is a solution to the following [Guru Frontend Mentor challenge](https://www
 
 - Repository URL: [Github repository](https://github.com/jmarellanes/feedback-board)
 - Live Site URL: [FeedbackTo - Feedback Board](https://feedbackto.josearellanes.me/)
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: [Frontend Mentor](https://www.frontendmentor.io/solutions/feedbackto-react-and-serverles-functions-with-airtable-as-db-O9kNxtDHJR)
 
 ### Built with
 
